@@ -1,0 +1,140 @@
+from sqlalchemy import create_engine, Column, Integer, String, Text, Boolean, DateTime, JSON, ForeignKey, Float
+from sqlalchemy.orm import declarative_base, relationship
+from datetime import datetime, timezone
+
+Base = declarative_base()
+
+
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    username = Column(String(50), unique=True, nullable=False, index=True)
+    email = Column(String(120), unique=True, nullable=False)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+    progress = relationship("UserProgress", back_populates="user", cascade="all, delete-orphan")
+    dreams = relationship("Dream", back_populates="user", cascade="all, delete-orphan")
+    reflections = relationship("Reflection", back_populates="user", cascade="all, delete-orphan")
+    insights = relationship("Insight", back_populates="user", cascade="all, delete-orphan")
+
+
+class Course(Base):
+    __tablename__ = "courses"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    title = Column(String(200), nullable=False)
+    description = Column(Text, nullable=False)
+    category = Column(String(20), nullable=False, index=True)  # freud, jung, modern, eastern
+    difficulty = Column(String(20), default="beginner")
+    image_url = Column(String(500), default="")
+    content = Column(JSON, default=list)  # list of chapters: [{title, body, order}]
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+    progress = relationship("UserProgress", back_populates="course", cascade="all, delete-orphan")
+
+
+class UserProgress(Base):
+    __tablename__ = "user_progress"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    course_id = Column(Integer, ForeignKey("courses.id", ondelete="CASCADE"), nullable=False, index=True)
+    chapter_index = Column(Integer, default=0)
+    completed = Column(Boolean, default=False)
+    updated_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
+
+    user = relationship("User", back_populates="progress")
+    course = relationship("Course", back_populates="progress")
+
+
+class Dream(Base):
+    __tablename__ = "dreams"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    title = Column(String(200), nullable=False)
+    content = Column(Text, nullable=False)
+    emotions = Column(JSON, default=list)
+    elements = Column(JSON, default=list)
+    dream_date = Column(DateTime, nullable=True)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+    user = relationship("User", back_populates="dreams")
+    analyses = relationship("DreamAnalysis", back_populates="dream", cascade="all, delete-orphan")
+    reflections = relationship("Reflection", back_populates="linked_dream")
+
+
+class DreamAnalysis(Base):
+    __tablename__ = "dream_analyses"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    dream_id = Column(Integer, ForeignKey("dreams.id", ondelete="CASCADE"), nullable=False, unique=True, index=True)
+    freud_perspective = Column(Text, default="")
+    jung_perspective = Column(Text, default="")
+    modern_perspective = Column(Text, default="")
+    eastern_perspective = Column(Text, default="")
+    summary = Column(Text, default="")
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+    dream = relationship("Dream", back_populates="analyses")
+
+
+class Reflection(Base):
+    __tablename__ = "reflections"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    title = Column(String(200), nullable=False)
+    content = Column(Text, nullable=False)
+    mood_score = Column(Integer, default=5)  # 1-10
+    linked_dream_id = Column(Integer, ForeignKey("dreams.id", ondelete="SET NULL"), nullable=True, index=True)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+    user = relationship("User", back_populates="reflections")
+    linked_dream = relationship("Dream", back_populates="reflections")
+
+
+class Insight(Base):
+    __tablename__ = "insights"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    title = Column(String(200), nullable=False)
+    content = Column(Text, nullable=False)
+    period = Column(String(20), default="weekly")  # weekly, monthly
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+    user = relationship("User", back_populates="insights")
+
+
+# ===== 千与千寻游戏 =====
+class SpiritedProgress(Base):
+    """玩家在千寻游戏中的进度"""
+    __tablename__ = "spirited_progress"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True, unique=True)
+    current_floor = Column(Integer, default=1)  # 1-5F
+    forget_name_count = Column(Integer, default=0)  # 忘记名字的次数
+    shadows_met = Column(JSON, default=list)  # 遇到的阴影角色列表
+    keys_collected = Column(JSON, default=list)  # 收集到的钥匙 [{floor, name, type}]
+    title_earned = Column(String(50), default="")  # 获得的称号
+    story_flags = Column(JSON, default=dict)  # 剧情开关 {flag_name: bool/value}
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    updated_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
+
+
+class SpiritedDialogue(Base):
+    """各层 NPC 对话树"""
+    __tablename__ = "spirited_dialogues"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    floor = Column(Integer, nullable=False, index=True)  # 1-5
+    npc_name = Column(String(50), nullable=False)  # 汤婆婆/无脸男/河神/白龙等
+    dialogue_key = Column(String(50), nullable=False)  # 对话节点 key
+    npc_text = Column(Text, nullable=False)  # NPC 台词
+    player_choices = Column(JSON, default=list)  # [{text, next_key, flag_required, effect}]
+    next_dialogue = Column(String(50), default="")  # 默认下一段
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+

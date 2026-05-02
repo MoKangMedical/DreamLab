@@ -1,0 +1,27 @@
+{
+  "name": "DreamLab·千与千寻",
+  "short_name": "DreamLab",
+  "description": "油屋梦境探索 — AI驱动的深度解梦与心理学学习平台",
+  "start_url": "/DreamLab/",
+  "scope": "/DreamLab/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#0a0a14",
+  "background_color": "#0a0a14",
+  "icons": [
+    {
+      "src": "/DreamLab/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/DreamLab/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "lifestyle", "utilities"],
+  "lang": "zh-CN"
+}

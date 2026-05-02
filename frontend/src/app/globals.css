@@ -1,0 +1,393 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── 纪念碑谷 × 千与千寻 梦境设计系统 ── */
+
+:root {
+  /* 深邃背景 */
+  --bg-deep: #0d0d1f;
+  --bg-mid: #141428;
+  --bg-surface: #1a1a2e;
+  --bg-card: rgba(26, 26, 46, 0.7);
+
+  /* 几何色块 — 纪念碑谷调色板 */
+  --geo-coral: #E8A598;
+  --geo-mint: #B8D4C8;
+  --geo-sand: #E8D5B7;
+  --geo-lavender: #C4B5D4;
+  --geo-gold: #F0C060;
+
+  /* 强调色 */
+  --accent-coral: #FF8A7A;
+  --accent-purple: #9B7ED8;
+
+  /* 文字 */
+  --text-white: #FFFFFF;
+  --text-soft: #B0B0C0;
+  --text-muted: #707090;
+
+  /* 渐变 */
+  --gradient-bg: linear-gradient(180deg, #0d0d1f 0%, #141428 40%, #1a1a2e 70%, #141428 100%);
+  --gradient-coral: linear-gradient(135deg, #E8A598 0%, #FF8A7A 100%);
+  --gradient-mint: linear-gradient(135deg, #B8D4C8 0%, #89B5A0 100%);
+  --gradient-lavender: linear-gradient(135deg, #C4B5D4 0%, #9B7ED8 100%);
+  --gradient-gold: linear-gradient(135deg, #F0C060 0%, #E8A598 100%);
+  --gradient-sand: linear-gradient(135deg, #E8D5B7 0%, #D4B896 100%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+  touch-action: manipulation;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--gradient-bg);
+  color: var(--text-soft);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ── 几何背景网格纹理 ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  background-position: center center;
+  mask-image: radial-gradient(ellipse at 50% 50%, black 30%, transparent 70%);
+}
+
+/* ── 几何装饰角标 ── */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 200px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.06;
+  background:
+    linear-gradient(135deg, transparent 40%, var(--geo-coral) 40%, var(--geo-coral) 42%, transparent 42%),
+    linear-gradient(225deg, transparent 40%, var(--geo-lavender) 40%, var(--geo-lavender) 42%, transparent 42%);
+}
+
+/* ── 页面过渡 ── */
+.page-transition > * {
+  animation: pageEnter 0.4s ease-out;
+}
+
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── 核心动画轨道 ── */
+
+/* 缓慢漂浮 (6-10s 周期) */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  25%      { transform: translateY(-6px); }
+  75%      { transform: translateY(4px); }
+}
+
+@keyframes float-slower {
+  0%, 100% { transform: translateY(0px); }
+  33%      { transform: translateY(-10px); }
+  66%      { transform: translateY(5px); }
+}
+
+/* 等距旋转漂浮 */
+@keyframes float-isometric {
+  0%, 100% { transform: translateY(0px) rotateX(1deg); }
+  50%      { transform: translateY(-12px) rotateX(-1deg); }
+}
+
+/* 几何光晕呼吸 */
+@keyframes glow-breathe {
+  0%, 100% { box-shadow: 0 0 15px rgba(155,126,216,0.15), 0 0 30px rgba(155,126,216,0.05); }
+  50%      { box-shadow: 0 0 25px rgba(155,126,216,0.3), 0 0 50px rgba(155,126,216,0.1); }
+}
+
+/* 几何光标闪烁 */
+@keyframes geo-blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.2; transform: scaleY(0.6); }
+}
+
+/* 星星闪烁 */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50%      { opacity: 0.6; transform: scale(1.8); }
+}
+
+/* 卡片入场 */
+@keyframes card-rise {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 渐变漂移 */
+@keyframes gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ── 工具类 ── */
+
+.animate-float-slow   { animation: float-slow 8s ease-in-out infinite; }
+.animate-float-slower { animation: float-slower 10s ease-in-out infinite; }
+.animate-float-iso    { animation: float-isometric 7s ease-in-out infinite; }
+.animate-glow         { animation: glow-breathe 4s ease-in-out infinite; }
+.animate-geo-blink    { animation: geo-blink 0.8s ease-in-out infinite; }
+.animate-card-rise    { animation: card-rise 0.6s ease-out backwards; }
+
+/* ── 彩色阴影 ── */
+
+.shadow-coral     { box-shadow: 0 8px 32px rgba(232,165,152,0.15); }
+.shadow-mint      { box-shadow: 0 8px 32px rgba(184,212,200,0.15); }
+.shadow-lavender  { box-shadow: 0 8px 32px rgba(196,181,212,0.15); }
+.shadow-gold      { box-shadow: 0 8px 32px rgba(240,192,96,0.15); }
+.shadow-sand      { box-shadow: 0 8px 32px rgba(232,213,183,0.15); }
+
+/* ── 组件层 ── */
+
+@layer components {
+
+  /* 纪念碑谷卡片 — 浮动的几何平台 */
+  .glass-card, .geo-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .glass-card:hover, .geo-card:hover {
+    border-color: rgba(155,126,216,0.25);
+    box-shadow: 0 12px 48px rgba(155,126,216,0.12), 0 4px 16px rgba(0,0,0,0.3);
+    transform: translateY(-4px);
+  }
+
+  .glass-card:active, .geo-card:active {
+    transform: scale(0.98) translateY(-2px);
+  }
+
+  /* 毛玻璃面板 */
+  .frost-panel {
+    background: rgba(20, 20, 40, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  /* 主按钮 — 几何浮雕效果 */
+  .btn-primary, .btn-geo {
+    background: var(--gradient-coral);
+    color: var(--bg-deep);
+    font-weight: 600;
+    padding: 12px 28px;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    font-size: 15px;
+    touch-action: manipulation;
+    box-shadow: 0 4px 16px rgba(255,138,122,0.3);
+    position: relative;
+  }
+
+  .btn-primary::after, .btn-geo::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.2);
+    pointer-events: none;
+  }
+
+  .btn-primary:hover, .btn-geo:hover {
+    box-shadow: 0 6px 24px rgba(255,138,122,0.45);
+    transform: translateY(-2px);
+  }
+
+  .btn-primary:active, .btn-geo:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 8px rgba(255,138,122,0.3);
+  }
+
+  .btn-primary:disabled, .btn-geo:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* 副按钮 */
+  .btn-ghost, .btn-geo-ghost {
+    background: transparent;
+    color: var(--text-soft);
+    padding: 10px 24px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    touch-action: manipulation;
+    font-size: 14px;
+  }
+
+  .btn-ghost:hover, .btn-geo-ghost:hover {
+    background: rgba(155,126,216,0.1);
+    border-color: rgba(155,126,216,0.3);
+    color: var(--text-white);
+  }
+
+  .btn-ghost:active, .btn-geo-ghost:active {
+    transform: scale(0.95);
+  }
+
+  /* 输入框 */
+  .input-field, .input-geo {
+    width: 100%;
+    background: rgba(26, 26, 46, 0.6);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 14px 18px;
+    color: var(--text-white);
+    font-size: 16px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+  }
+
+  .input-field:focus, .input-geo:focus {
+    outline: none;
+    border-color: var(--accent-purple);
+    box-shadow: 0 0 0 3px rgba(155,126,216,0.12);
+  }
+
+  .input-field::placeholder, .input-geo::placeholder {
+    color: var(--text-muted);
+  }
+
+  /* Tag */
+  .tag, .tag-geo {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(26,26,46,0.6);
+    color: var(--text-muted);
+    touch-action: manipulation;
+  }
+
+  .tag:hover, .tag-geo:hover {
+    border-color: var(--accent-purple);
+    color: var(--text-white);
+  }
+
+  .tag:active, .tag-geo:active { transform: scale(0.95); }
+
+  .tag.active, .tag-geo.active {
+    background: rgba(155,126,216,0.12);
+    border-color: var(--accent-purple);
+    color: var(--accent-purple);
+  }
+
+  /* Badge 系统 */
+  .badge, .badge-geo {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .badge-coral, .badge-freud     { background: rgba(232,165,152,0.12); color: var(--geo-coral); border: 1px solid rgba(232,165,152,0.2); }
+  .badge-mint, .badge-modern     { background: rgba(184,212,200,0.12); color: var(--geo-mint); border: 1px solid rgba(184,212,200,0.2); }
+  .badge-lavender, .badge-jung   { background: rgba(196,181,212,0.12); color: var(--geo-lavender); border: 1px solid rgba(196,181,212,0.2); }
+  .badge-gold                    { background: rgba(240,192,96,0.12); color: var(--geo-gold); border: 1px solid rgba(240,192,96,0.2); }
+  .badge-sand, .badge-eastern    { background: rgba(232,213,183,0.12); color: var(--geo-sand); border: 1px solid rgba(232,213,183,0.2); }
+
+  /* 渐变文字 */
+  .gradient-text, .text-geo-gradient {
+    background: linear-gradient(135deg, var(--geo-coral), var(--geo-lavender), var(--geo-gold));
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 6s ease infinite;
+  }
+
+  .animate-float { animation: float-slow 8s ease-in-out infinite; }
+}
+
+/* ── 移动端优化 ── */
+
+@media (max-width: 767px) {
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+}
+
+a, button, [role="button"] {
+  touch-action: manipulation;
+}
+
+a:active, button:active, [role="button"]:active {
+  transform: scale(0.97);
+  transition: transform 0.1s ease;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+@media (max-width: 767px) {
+  ::-webkit-scrollbar { width: 0px; height: 0px; }
+}
+
+@media (min-width: 768px) {
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg-deep); }
+  ::-webkit-scrollbar-thumb { background: rgba(155,126,216,0.3); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(155,126,216,0.5); }
+}
+
+/* ── 旧动画保留（扩展而非替换）── */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-pulse-glow { animation: glow-breathe 2s ease-in-out infinite; }
+.animate-fade-in    { animation: fadeIn 0.6s ease-out; }
+.animate-fade-in-up { animation: fadeInUp 0.6s ease-out; }
