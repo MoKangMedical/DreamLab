@@ -1,5 +1,5 @@
 // 客户端 API 封装 + 静态导出 Mock 数据层
-const API_BASE = typeof window !== 'undefined' ? (process.env.NEXT_PUBLIC_API_URL || 'http://43.134.3.158:8002') : '';
+const API_BASE = typeof window !== 'undefined' ? (process.env.NEXT_PUBLIC_API_URL || '') : '';
 
 // 静态导出时的 Mock 数据（构建阶段使用）
 const MOCK_COURSES = [
@@ -7,7 +7,6 @@ const MOCK_COURSES = [
   { id: 2, title: '荣格分析心理学与梦', description: '探索集体无意识、原型与梦的象征意义', category: 'jung', difficulty: 'intermediate', content: [] },
   { id: 3, title: '现代睡眠科学与梦境研究', description: '从神经科学角度理解睡眠阶段与梦境产生机制', category: 'modern', difficulty: 'intermediate', content: [] },
   { id: 4, title: '东方解梦文化探秘', description: '周易、周公解梦与东方文化中的梦学智慧', category: 'eastern', difficulty: 'beginner', content: [] },
-  { id: 5, title: '康波周期理论：经济长波与人生机遇', description: '尼古拉·康德拉季耶夫的长波理论，理解50-60年经济周期', category: 'modern', difficulty: 'advanced', content: [] },
 ];
 
 const MOCK_DREAMS: any[] = [];

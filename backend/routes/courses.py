@@ -12,6 +12,8 @@ from ..database import get_db
 router = APIRouter(prefix="/api/courses", tags=["courses"])
 
 
+from datetime import datetime, timezone
+
 def _course_to_listitem(course: Course) -> CourseListItem:
     return CourseListItem(
         id=course.id,
@@ -21,7 +23,7 @@ def _course_to_listitem(course: Course) -> CourseListItem:
         difficulty=course.difficulty,
         image_url=course.image_url,
         chapter_count=len(course.content) if course.content else 0,
-        created_at=course.created_at,
+        created_at=course.created_at or datetime.now(timezone.utc),
     )
 
 

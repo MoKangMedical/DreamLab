@@ -8,7 +8,7 @@ from typing import Optional
 
 
 MIMO_ENDPOINT = "https://api.deepseek.com/v1"
-MIMO_API_KEY = "sk-2989a4f388484aa9a6ab880f28012182"
+MIMO_API_KEY = os.environ.get("DEEPSEEK_API_KEY", "")
 MIMO_MODEL = "deepseek-v4-pro"
 TIMEOUT_SECONDS = 60
 MAX_RETRIES = 2
