@@ -1,0 +1,6 @@
+1:"$Sreact.fragment"
+2:I[22016,["/DreamLab/_next/static/chunks/08ud36ph.lgt7.js","/DreamLab/_next/static/chunks/0d3shmwh5_nmn.js","/DreamLab/_next/static/chunks/0ga6adkjs5mav.js"],""]
+3:I[97367,["/DreamLab/_next/static/chunks/08ud36ph.lgt7.js","/DreamLab/_next/static/chunks/0d3shmwh5_nmn.js"],"OutletBoundary"]
+4:"$Sreact.suspense"
+0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"max-w-4xl mx-auto px-6 py-20 text-center","children":[["$","span",null,{"className":"text-5xl block mb-4","children":"📭"}],["$","p",null,{"className":"text-[#B0B0C0] mb-4","children":"课程未找到"}],["$","$L2",null,{"href":"/courses","className":"btn-primary","children":"返回课程列表"}]]}],[["$","script","script-0",{"src":"/DreamLab/_next/static/chunks/0ga6adkjs5mav.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"mYol4FQQJmyYduIXScQR1"}
+5:null
