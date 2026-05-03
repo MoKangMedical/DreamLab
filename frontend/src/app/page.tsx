@@ -66,6 +66,17 @@ export default function HomePage() {
 
   const entries = [
     {
+      href: '/assessments',
+      icon: '🪞',
+      title: '心理测评',
+      sub: '契约之镜',
+      desc: 'SAS·SDS·大五人格·SCL-90 · 6大标准量表',
+      colors: { from: 'var(--geo-sand)', to: '#D4B896', glow: '#E8D5B7' },
+      badge: '科学',
+      badgeClass: 'badge-sand',
+      delay: 0,
+    },
+    {
       href: '/spirited',
       icon: '◇',
       title: '油屋探险',
@@ -74,7 +85,7 @@ export default function HomePage() {
       colors: { from: 'var(--geo-coral)', to: 'var(--accent-coral)', glow: '#E8A598' },
       badge: '冒险',
       badgeClass: 'badge-coral',
-      delay: 0,
+      delay: 0.1,
     },
     {
       href: '/courses',
@@ -85,7 +96,7 @@ export default function HomePage() {
       colors: { from: 'var(--geo-mint)', to: 'var(--geo-mint)', glow: '#B8D4C8' },
       badge: '学习',
       badgeClass: 'badge-mint',
-      delay: 0.1,
+      delay: 0.2,
     },
     {
       href: '/dream',
@@ -96,7 +107,7 @@ export default function HomePage() {
       colors: { from: 'var(--geo-lavender)', to: 'var(--accent-purple)', glow: '#C4B5D4' },
       badge: '创造',
       badgeClass: 'badge-lavender',
-      delay: 0.2,
+      delay: 0.3,
     },
   ];
 
@@ -228,7 +239,7 @@ export default function HomePage() {
         </div>
 
         {/* ── 三大入口 — 浮动的几何平台 ── */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-16">
           {entries.map((card, i) => (
             <Link
               key={card.href}
@@ -312,20 +323,20 @@ export default function HomePage() {
               <div className="w-6 h-px bg-[#ffffff]/10" />
             </div>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-5">
-              每一场梦，都是千寻的一次成长
+              在油屋的每一层，找到被遗忘的自己
             </h2>
             <p className="text-[#B0B0C0] max-w-2xl mx-auto leading-relaxed text-sm">
-              在油屋的每一层，藏着一种心理学的智慧。汤婆婆教会我们面对阴影，无脸男揭示欲望的本质，
-              河神净化被遗忘的创伤，白龙引领我们找回真正的名字。在这里，解梦不是冷冰冰的分析，
-              而是一场温暖的自我重逢。
+              汤婆婆的契约之镜映照真实的内心，无脸男对话倾诉未说的情绪，
+              河神净化疲惫的心灵，白龙引领找回最初的自己。六种专业量表 + AI 深度解读，
+              让解梦成为一场温暖的自我重逢。
             </p>
             <div className="flex justify-center gap-4 mt-8">
               <Link
-                href="/spirited"
+                href="/assessments"
                 className="btn-geo px-7 py-3 text-sm font-semibold"
-                style={{ background: 'linear-gradient(135deg, var(--geo-coral), var(--accent-purple))', color: 'white' }}
+                style={{ background: 'linear-gradient(135deg, var(--geo-sand), var(--geo-gold))', color: 'var(--bg-deep)' }}
               >
-                进入油屋 →
+                🪞 开始测评 →
               </Link>
               <Link
                 href="/courses"

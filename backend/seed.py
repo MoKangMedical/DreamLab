@@ -186,6 +186,293 @@ COURSES = [
 ]
 
 
+# ===== 心理测评量表种子数据 =====
+# 所有量表均为国际标准量表的中文简化版
+# SAS/SDS/SCL-90简版/大五BFI-20/PSQI简版/CD-RISC简版
+
+def _qs(items):
+    """Helper: 构建标准4点量表题目 [{id, text, options, reversed}]"""
+    opts = [
+        {"score": 1, "label": "没有/很少"},
+        {"score": 2, "label": "有时"},
+        {"score": 3, "label": "经常"},
+        {"score": 4, "label": "总是/持续"},
+    ]
+    return [
+        {"id": i+1, "text": t, "options": opts, "reversed": bool(r)}
+        for i, (t, r) in enumerate(items)
+    ]
+
+def _qs_bigfive(items):
+    """Helper: 大五5点量表"""
+    opts = [
+        {"score": 1, "label": "非常不同意"},
+        {"score": 2, "label": "不同意"},
+        {"score": 3, "label": "中立"},
+        {"score": 4, "label": "同意"},
+        {"score": 5, "label": "非常同意"},
+    ]
+    return [
+        {"id": i+1, "text": t, "options": opts, "reversed": bool(r), "factor": f}
+        for i, (t, r, f) in enumerate(items)
+    ]
+
+ASSESSMENTS = [
+    {
+        "name": "SAS 焦虑自评量表",
+        "category": "anxiety",
+        "description": "焦虑自评量表（Self-Rating Anxiety Scale）由 Zung 于 1971 年编制，用于评估焦虑程度的主观感受。本量表包含 20 个条目，从躯体症状到心理紧张，全面测量焦虑水平。",
+        "instructions": "请根据您最近一周的实际感受作答，不要花太多时间思考每个问题。",
+        "icon": "🌊",
+        "disclaimer": "⚠️ 本测评仅为心理健康参考工具，SAS标准分≥50建议寻求专业评估。不能替代临床诊断。",
+        "questions": _qs([
+            ("我感到比平时更容易紧张和着急", False),
+            ("我无缘无故地感到害怕", False),
+            ("我容易心烦意乱或觉得恐慌", False),
+            ("我觉得我可能将要发疯", False),
+            ("我觉得一切都很好，不会发生不幸", True),
+            ("我的手脚发抖打颤", False),
+            ("我因为头痛、颈痛和背痛而苦恼", False),
+            ("我感觉容易衰弱和疲乏", False),
+            ("我觉得心平气和，并且容易安静坐着", True),
+            ("我觉得心跳得很快", False),
+            ("我因为一阵阵头晕而苦恼", False),
+            ("我有晕倒发作，或觉得要晕倒似的", False),
+            ("我吸气呼气都感到很容易", True),
+            ("我的手脚麻木和刺痛", False),
+            ("我因为胃痛和消化不良而苦恼", False),
+            ("我常常要小便", False),
+            ("我的手脚常常是干燥温暖的", True),
+            ("我脸红发热", False),
+            ("我容易入睡并且一夜睡得很好", True),
+            ("我做噩梦", False),
+        ]),
+        "scoring_rules": {
+            "multiplier": 1.25,
+            "levels": [
+                {"range": [25, 49], "label": "正常", "description": "焦虑水平在正常范围内，请继续保持良好的心理状态。", "color": "#B8D4C8"},
+                {"range": [50, 59], "label": "轻度焦虑", "description": "存在轻度焦虑症状，建议尝试放松练习，关注情绪变化。", "color": "#F0C060"},
+                {"range": [60, 69], "label": "中度焦虑", "description": "焦虑症状较明显，可能影响日常生活，建议寻求心理咨询。", "color": "#E8A598"},
+                {"range": [70, 100], "label": "重度焦虑", "description": "焦虑症状严重，强烈建议尽快就医，寻求专业精神科帮助。", "color": "#FF8A7A"},
+            ]
+        },
+    },
+    {
+        "name": "SDS 抑郁自评量表",
+        "category": "depression",
+        "description": "抑郁自评量表（Self-Rating Depression Scale）由 Zung 于 1965 年编制，用于评估抑郁程度。量表包含 20 个条目，涵盖情感、躯体、精神运动和心理四个维度。",
+        "instructions": "请根据您最近一周的实际感受作答。",
+        "icon": "🌧️",
+        "disclaimer": "⚠️ 本测评仅为心理健康参考工具，如SDS指数≥0.5并持续两周以上，建议寻求专业帮助。",
+        "questions": _qs([
+            ("我觉得闷闷不乐，情绪低沉", False),
+            ("我觉得一天之中早晨最好", True),
+            ("我一阵阵哭出来或觉得想哭", False),
+            ("我晚上睡眠不好", False),
+            ("我吃得跟平常一样多", True),
+            ("我与异性密切接触时和以往一样感到愉快", True),
+            ("我发觉我的体重在下降", False),
+            ("我有便秘的苦恼", False),
+            ("我心跳比平时快", False),
+            ("我无缘无故地感到疲乏", False),
+            ("我的头脑跟平常一样清楚", True),
+            ("我觉得经常做的事情并没有困难", True),
+            ("我觉得不安而平静不下来", False),
+            ("我对将来抱有希望", True),
+            ("我比平常容易生气激动", False),
+            ("我觉得做出决定是容易的", True),
+            ("我觉得自己是个有用的人，有人需要我", True),
+            ("我的生活过得很有意思", True),
+            ("我认为如果我死了别人会生活得好些", False),
+            ("平常感兴趣的事我仍然照样感兴趣", True),
+        ]),
+        "scoring_rules": {
+            "divisor": 80,
+            "levels": [
+                {"range": [0.25, 0.49], "label": "正常", "description": "情绪状态良好，请继续保持积极的生活方式。", "color": "#B8D4C8"},
+                {"range": [0.50, 0.59], "label": "轻度抑郁", "description": "可能有轻度抑郁情绪，建议增加户外活动和社交，关注心情变化。", "color": "#F0C060"},
+                {"range": [0.60, 0.69], "label": "中度抑郁", "description": "抑郁症状较明显，可能需要专业心理支持，建议寻求心理咨询。", "color": "#E8A598"},
+                {"range": [0.70, 1.0], "label": "重度抑郁", "description": "抑郁症状严重，请立即寻求精神科医生的帮助。你并不孤单。", "color": "#FF8A7A"},
+            ]
+        },
+    },
+    {
+        "name": "大五人格简版 (BFI-20)",
+        "category": "personality",
+        "description": "大五人格模型是心理学界最广泛接受的人格理论之一，包含五大维度：开放性、尽责性、外向性、宜人性、神经质。本简版量表（BFI-20）仅需20题，快速了解你的性格画像。",
+        "instructions": "请根据您日常行为的一般倾向作答，没有对错之分。",
+        "icon": "🎭",
+        "disclaimer": "⚠️ 本测评反映人格倾向而非病理诊断。人格特质无好坏之分，了解自己是为了更好地成长。",
+        "questions": _qs_bigfive([
+            ("我善于言辞，喜欢与人交谈", False, "E"),
+            ("我倾向于发现别人的缺点", True, "A"),
+            ("我做事情认真负责，有条理", False, "C"),
+            ("我经常感到忧郁、沮丧", False, "N"),
+            ("我对新事物充满好奇心", False, "O"),
+            ("我性格外向，善于社交", False, "E"),
+            ("我待人友善，愿意帮助别人", False, "A"),
+            ("我做事有始有终，值得信赖", False, "C"),
+            ("我容易紧张和焦虑", False, "N"),
+            ("我有丰富的想象力和创造力", False, "O"),
+            ("在人群中我通常是安静的", True, "E"),
+            ("我有时对别人冷漠和疏远", True, "A"),
+            ("我有时比较粗心大意", True, "C"),
+            ("我情绪稳定，不容易烦恼", True, "N"),
+            ("我喜欢常规和熟悉的事物", True, "O"),
+            ("我充满能量，总是积极主动", False, "E"),
+            ("我愿意与人合作而非竞争", False, "A"),
+            ("我制定计划并能坚持执行", False, "C"),
+            ("我经常情绪波动", False, "N"),
+            ("我喜欢艺术和美的体验", False, "O"),
+        ]),
+        "scoring_rules": {
+            "levels": [
+                {"range": [1, 5], "label": "人格画像", "description": "您的五大人格维度得分。每项得分越高，表示该特质越突出。请查看各维度的详细分析。", "color": "#C4B5D4"},
+            ]
+        },
+    },
+    {
+        "name": "匹兹堡睡眠质量指数 (简版)",
+        "category": "sleep",
+        "description": "匹兹堡睡眠质量指数（PSQI）是评估睡眠质量的金标准工具。本简版包含7个核心问题，涵盖睡眠时长、入睡时间、睡眠效率和日间功能。",
+        "instructions": "请根据您最近一个月的睡眠情况作答。",
+        "icon": "🌙",
+        "disclaimer": "⚠️ 本测评仅评估睡眠质量，如长期失眠请咨询睡眠专科医生。",
+        "questions": [
+            {"id": 1, "text": "过去一个月，您每晚实际睡眠时间大约是多少？", "options": [
+                {"score": 0, "label": ">7小时"},
+                {"score": 1, "label": "6-7小时"},
+                {"score": 2, "label": "5-6小时"},
+                {"score": 3, "label": "<5小时"},
+            ], "reversed": False},
+            {"id": 2, "text": "过去一个月，您每晚需要多长时间才能入睡？", "options": [
+                {"score": 0, "label": "≤15分钟"},
+                {"score": 1, "label": "16-30分钟"},
+                {"score": 2, "label": "31-60分钟"},
+                {"score": 3, "label": ">60分钟"},
+            ], "reversed": False},
+            {"id": 3, "text": "过去一个月，您夜间或清晨容易醒来吗？", "options": [
+                {"score": 0, "label": "从未"},
+                {"score": 1, "label": "<1次/周"},
+                {"score": 2, "label": "1-2次/周"},
+                {"score": 3, "label": "≥3次/周"},
+            ], "reversed": False},
+            {"id": 4, "text": "过去一个月，您觉得自己睡眠质量如何？", "options": [
+                {"score": 0, "label": "很好"},
+                {"score": 1, "label": "较好"},
+                {"score": 2, "label": "较差"},
+                {"score": 3, "label": "很差"},
+            ], "reversed": False},
+            {"id": 5, "text": "过去一个月，您需要使用药物才能入睡吗？", "options": [
+                {"score": 0, "label": "从未"},
+                {"score": 1, "label": "<1次/周"},
+                {"score": 2, "label": "1-2次/周"},
+                {"score": 3, "label": "≥3次/周"},
+            ], "reversed": False},
+            {"id": 6, "text": "过去一个月，您白天感到困倦吗？", "options": [
+                {"score": 0, "label": "从未"},
+                {"score": 1, "label": "偶尔"},
+                {"score": 2, "label": "经常"},
+                {"score": 3, "label": "总是"},
+            ], "reversed": False},
+            {"id": 7, "text": "过去一个月，您做事情的精力如何？", "options": [
+                {"score": 0, "label": "精力充沛"},
+                {"score": 1, "label": "精力一般"},
+                {"score": 2, "label": "精力不足"},
+                {"score": 3, "label": "非常疲倦"},
+            ], "reversed": False},
+        ],
+        "scoring_rules": {
+            "levels": [
+                {"range": [0, 7], "label": "良好", "description": "睡眠质量良好，请继续保持健康的睡眠习惯。", "color": "#B8D4C8"},
+                {"range": [8, 14], "label": "一般", "description": "睡眠质量一般，可以尝试改善睡眠环境和作息规律。", "color": "#F0C060"},
+                {"range": [15, 21], "label": "较差", "description": "睡眠质量较差，建议关注睡眠卫生，如持续请咨询医生。", "color": "#FF8A7A"},
+            ]
+        },
+    },
+    {
+        "name": "心理弹性量表 (CD-RISC 简版)",
+        "category": "resilience",
+        "description": "心理弹性量表（Connor-Davidson Resilience Scale）测量个体面对逆境时的恢复能力。心理弹性不是天生的，而是可以培养的心理肌肉。本简版包含10个条目。",
+        "instructions": "请根据您过去一个月的实际情况作答。",
+        "icon": "🌱",
+        "disclaimer": "⚠️ 心理弹性是动态变化的，低分不代表脆弱，而是提醒我们可以有意识地锻炼心理韧性。",
+        "questions": _qs([
+            ("当事情发生变化时，我能够适应", True),
+            ("无论发生什么我都能应付", True),
+            ("我能看到事情幽默的一面", True),
+            ("应对压力使我感到有力量", True),
+            ("在生病或困难之后，我能够恢复过来", True),
+            ("纵然有障碍，我也能实现目标", True),
+            ("在压力下我能够集中注意力并清晰思考", True),
+            ("我不会因失败而气馁", True),
+            ("我认为自己是个坚强的人", True),
+            ("我能够处理不愉快的情绪", True),
+        ]),
+        "scoring_rules": {
+            "levels": [
+                {"range": [10, 20], "label": "有待提升", "description": "当前心理弹性较低，可以通过正念练习、社会支持和心理教育来增强。", "color": "#E8A598"},
+                {"range": [21, 30], "label": "中等", "description": "心理弹性处于中等水平，在多数情况下能够良好应对。", "color": "#F0C060"},
+                {"range": [31, 40], "label": "良好", "description": "心理弹性良好，在面对挑战时展现出较强的适应能力。", "color": "#B8D4C8"},
+            ]
+        },
+    },
+    {
+        "name": "SCL-90 症状自评 (简版)",
+        "category": "symptom",
+        "description": "SCL-90是评估心理健康症状的综合性量表。本简版包含36个条目，覆盖9个维度：躯体化、强迫、人际敏感、抑郁、焦虑、敌对、恐怖、偏执、精神病性。",
+        "instructions": "请根据您最近一周的实际情况作答，不要遗漏任何问题。",
+        "icon": "📋",
+        "disclaimer": "⚠️ 本测评提供多维度心理健康参考，如有明显异常请咨询精神科医生。本量表不能替代临床诊断。",
+        "questions": _qs([
+            ("头痛或头部不适", False),
+            ("神经过敏，心中不踏实", False),
+            ("头脑中有不必要的想法盘旋", False),
+            ("头晕或昏倒感", False),
+            ("对异性的兴趣减退", False),
+            ("感到别人能控制您的思想", False),
+            ("责怪别人制造麻烦", False),
+            ("容易忘记事情", False),
+            ("担心自己的衣饰和仪态", False),
+            ("容易烦恼和激动", False),
+            ("胸痛", False),
+            ("害怕空旷的场所或街道", False),
+            ("感到自己的精力下降、活动减慢", False),
+            ("想结束自己的生命", False),
+            ("听到旁人听不到的声音", False),
+            ("发抖", False),
+            ("感到大多数人都不可信任", False),
+            ("胃口不好", False),
+            ("容易哭泣", False),
+            ("感到孤独", False),
+            ("感到苦闷", False),
+            ("对事物过分担忧", False),
+            ("对事物不感兴趣", False),
+            ("感到害怕", False),
+            ("我的感情容易受到伤害", False),
+            ("感觉到旁人能知道您的私下想法", False),
+            ("感到别人不理解您、不同情您", False),
+            ("感到人们对您不友好、不喜欢您", False),
+            ("做事必须很慢以保证正确", False),
+            ("心跳得很厉害", False),
+            ("恶心或胃部不舒服", False),
+            ("感到比不上他人", False),
+            ("肌肉酸痛", False),
+            ("感到有人在监视您谈论您", False),
+            ("难以入睡", False),
+            ("做事必须反复检查", False),
+        ]),
+        "scoring_rules": {
+            "levels": [
+                {"range": [36, 71], "label": "健康", "description": "各项心理指标在正常范围内，心理健康状况良好。", "color": "#B8D4C8"},
+                {"range": [72, 107], "label": "轻度异常", "description": "部分心理症状得分偏高，建议关注相应维度并适当调整。", "color": "#F0C060"},
+                {"range": [108, 144], "label": "中度异常", "description": "多项心理症状较明显，建议寻求心理咨询进行深入评估。", "color": "#E8A598"},
+            ]
+        },
+    },
+]
+
+
 async def seed(echo=True):
     """Seed database with initial data."""
     from backend.models import User
@@ -198,44 +485,56 @@ async def seed(echo=True):
         print("✅ Tables created")
     
     async with async_session() as session:
-        # Check if already seeded
+        # Check if already seeded (only check courses; assessments may be new)
         from sqlalchemy import select
         result = await session.execute(select(User).where(User.username == "dreamer"))
         existing = result.scalar_one_or_none()
         
-        if existing:
+        if not existing:
+            # Create default user
+            user = User(username="dreamer", email="dreamer@dreamlab.com")
+            session.add(user)
+            await session.flush()
             if echo:
-                print("⚠️  Database already seeded. Skipping.")
-            return
+                print(f"✅ Created user: dreamer (id={user.id})")
+            
+            # Create courses
+            from backend.models import Course
+            for course_data in COURSES:
+                course = Course(
+                    title=course_data["title"],
+                    description=course_data["description"],
+                    category=course_data["category"],
+                    difficulty=course_data["difficulty"],
+                    image_url=course_data.get("image_url", ""),
+                    content=course_data["content"],
+                )
+                session.add(course)
         
-        # Create default user
-        user = User(username="dreamer", email="dreamer@dreamlab.com")
-        session.add(user)
-        await session.flush()
-        if echo:
-            print(f"✅ Created user: dreamer (id={user.id})")
+        # Create assessments (idempotent — skip if already exist)
+        from backend.models import Assessment
+        check = await session.execute(select(Assessment).limit(1))
+        if check.scalar_one_or_none() is None:
+            for a_data in ASSESSMENTS:
+                assessment = Assessment(
+                    name=a_data["name"],
+                    category=a_data["category"],
+                    description=a_data["description"],
+                    instructions=a_data.get("instructions", ""),
+                    questions=a_data["questions"],
+                    scoring_rules=a_data["scoring_rules"],
+                    disclaimer=a_data.get("disclaimer", ""),
+                    icon=a_data.get("icon", "🪞"),
+                )
+                session.add(assessment)
         
-        # Create courses
-        from backend.models import Course
-        for course_data in COURSES:
-            course = Course(
-                title=course_data["title"],
-                description=course_data["description"],
-                category=course_data["category"],
-                difficulty=course_data["difficulty"],
-                image_url=course_data.get("image_url", ""),
-                content=course_data["content"],
-            )
-            session.add(course)
         await session.commit()
         if echo:
-            print(f"✅ Created {len(COURSES)} courses")
-        
-        if echo:
-            print("\n🎉 Seed complete! Courses ready:\n")
-            for c in COURSES:
-                chapters = len(c["content"])
-                print(f"  📚 {c['title']} ({c['difficulty']}) - {chapters} chapters")
+            # Count what we have
+            from backend.models import Course
+            course_count = (await session.execute(select(Course))).scalars().all()
+            assessment_count = (await session.execute(select(Assessment))).scalars().all()
+            print(f"\n🎉 Seed complete! {len(course_count)} courses, {len(assessment_count)} assessments\n")
 
 
 if __name__ == "__main__":

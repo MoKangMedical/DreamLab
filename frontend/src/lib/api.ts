@@ -12,6 +12,15 @@ const MOCK_COURSES = [
 const MOCK_DREAMS: any[] = [];
 const MOCK_REFLECTIONS: any[] = [];
 
+const MOCK_ASSESSMENTS = [
+  { id: 1, name: 'SAS 焦虑自评量表', category: 'anxiety', description: '焦虑自评量表（Self-Rating Anxiety Scale）由 Zung 编制，评估主观焦虑程度。', question_count: 20, icon: '🌊', disclaimer: '⚠️ 本测评仅供参考，不能替代专业诊断。' },
+  { id: 2, name: 'SDS 抑郁自评量表', category: 'depression', description: '抑郁自评量表（Self-Rating Depression Scale），评估情感、躯体、精神运动四个维度。', question_count: 20, icon: '🌧️', disclaimer: '⚠️ 本测评仅供参考，不能替代专业诊断。' },
+  { id: 3, name: '大五人格简版 (BFI-20)', category: 'personality', description: '五大维度：开放性、尽责性、外向性、宜人性、神经质。了解你的性格画像。', question_count: 20, icon: '🎭', disclaimer: '⚠️ 人格无好坏之分，了解自己是成长的开始。' },
+  { id: 4, name: '匹兹堡睡眠质量指数 (简版)', category: 'sleep', description: '评估睡眠质量的黄金标准工具。涵盖时长、效率与日间功能。', question_count: 7, icon: '🌙', disclaimer: '⚠️ 长期失眠请咨询睡眠专科医生。' },
+  { id: 5, name: '心理弹性量表 (CD-RISC 简版)', category: 'resilience', description: '测量面对逆境的恢复能力。心理弹性是可以培养的心理肌肉。', question_count: 10, icon: '🌱', disclaimer: '⚠️ 低分提醒我们有意识锻炼心理韧性。' },
+  { id: 6, name: 'SCL-90 症状自评 (简版)', category: 'symptom', description: '综合评估9个心理健康维度：躯体化、强迫、人际敏感、抑郁、焦虑等。', question_count: 36, icon: '📋', disclaimer: '⚠️ 本测评提供多维度参考，不能替代临床诊断。' },
+];
+
 async function request<T>(endpoint: string, options?: RequestInit): Promise<T> {
   if (typeof window === 'undefined') {
     // SSR / 构建阶段：返回 mock 数据
@@ -25,6 +34,14 @@ async function request<T>(endpoint: string, options?: RequestInit): Promise<T> {
     if (endpoint.startsWith('/api/dreams')) return [] as T;
     if (endpoint.startsWith('/api/reflections')) return [] as T;
     if (endpoint.startsWith('/api/users')) return [] as T;
+    if (endpoint.startsWith('/api/assessments')) {
+      if (endpoint.match(/\/api\/assessments\/\d+$/)) {
+        const id = Number(endpoint.split('/').pop());
+        return (MOCK_ASSESSMENTS.find(a => a.id === id) || null) as T;
+      }
+      if (endpoint.includes('/results/')) return [] as T;
+      return MOCK_ASSESSMENTS as T;
+    }
     return {} as T;
   }
   // 浏览器环境：正常调后端
@@ -101,4 +118,20 @@ export const getSpiritedDialogues = async (floor: number, npc?: string) => {
 export const seedSpiritedDialogues = async () => {
   if (typeof window === 'undefined') return null;
   return request<any>('/spirited/seed-dialogues', { method: 'POST' });
+};
+
+// ===== Assessments (心理测评) =====
+export const getAssessments = async () => {
+  if (typeof window === 'undefined') return MOCK_ASSESSMENTS;
+  return request<any[]>('/api/assessments');
+};
+export const getAssessment = async (id: number) => {
+  if (typeof window === 'undefined') return MOCK_ASSESSMENTS.find(a => a.id === id) || null;
+  return request<any>(`/api/assessments/${id}`);
+};
+export const submitAssessment = async (id: number, data: { user_id: number; answers: { question_id: number; score: number }[] }) => {
+  return request<any>(`/api/assessments/${id}/submit`, { method: 'POST', body: JSON.stringify(data) });
+};
+export const getAssessmentTrends = async (userId = 1) => {
+  return request<any[]>(`/api/assessments/results/${userId}`);
 };

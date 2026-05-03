@@ -3,6 +3,7 @@ Mimo API async client for AI-powered dream analysis.
 """
 import json
 import asyncio
+import os
 import httpx
 from typing import Optional
 

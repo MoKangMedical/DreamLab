@@ -138,3 +138,35 @@ class SpiritedDialogue(Base):
     next_dialogue = Column(String(50), default="")  # 默认下一段
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
+
+# ===== 专业心理测评 =====
+class Assessment(Base):
+    """心理量表定义"""
+    __tablename__ = "assessments"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(100), nullable=False, unique=True)  # 量表名称
+    category = Column(String(30), nullable=False, index=True)  # anxiety/depression/personality/sleep/resilience/symptom
+    description = Column(Text, nullable=False)
+    instructions = Column(Text, default="")  # 指导语
+    questions = Column(JSON, nullable=False)  # [{id, text, options: [{score, label}], reversed}]
+    scoring_rules = Column(JSON, nullable=False)  # {levels: [{range:[min,max], label, description, color}]}
+    disclaimer = Column(Text, default="⚠️ 本测评仅为心理健康参考工具，不能替代专业诊断。如有需要请咨询心理医生。")
+    icon = Column(String(10), default="🪞")
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+
+class AssessmentResult(Base):
+    """用户测评结果"""
+    __tablename__ = "assessment_results"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    assessment_id = Column(Integer, ForeignKey("assessments.id", ondelete="CASCADE"), nullable=False, index=True)
+    answers = Column(JSON, nullable=False)  # [{question_id, score}]
+    raw_score = Column(Float, default=0)
+    standard_score = Column(Float, default=0)
+    level = Column(String(30), default="")  # normal/mild/moderate/severe
+    interpretation = Column(Text, default="")  # AI-generated
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+
