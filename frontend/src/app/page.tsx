@@ -199,6 +199,75 @@ export default function HomePage() {
         ))}
       </div>
 
+      {/* ════════════════ 浮动灵体汉字 ════════════════ */}
+      <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 2 }}>
+        {['夢', '油', '屋', '千', '尋', '霊'].map((char, i) => (
+          <div key={char} className="absolute font-bold"
+            style={{
+              left: `${10 + i * 15}%`,
+              top: `${20 + (i % 3) * 25}%`,
+              fontSize: `${24 + i * 8}px`,
+              color: ['#e2b64f', '#7eb8da', '#c47868', '#9b8ab8', '#8aaf9d', '#ffffff'][i],
+              opacity: 0.06 + i * 0.02,
+              fontFamily: "'Noto Serif SC', serif",
+              animation: `float-kanji ${6 + i * 1.5}s ease-in-out infinite ${i * 0.8}s`,
+              filter: 'blur(0.5px)',
+            }}>
+            {char}
+          </div>
+        ))}
+      </div>
+
+      {/* ════════════════ 周期性灵光爆发 ════════════════ */}
+      <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 2 }}>
+        {Array.from({{ length: 8 }}).map((_, i) => (
+          <div key={`burst-${{i}}`} className="absolute rounded-full"
+            style={{
+              left: `${{15 + Math.random() * 70}}%`,
+              top: `${{10 + Math.random() * 80}}%`,
+              width: 0, height: 0,
+              backgroundColor: ['#e2b64f', '#7eb8da', '#c47868'][i % 3],
+              animation: `sparkle-burst ${{3 + Math.random() * 4}}s ease-out infinite ${{Math.random() * 5}}s`,
+            }} />
+        ))}
+      </div>
+
+      {/* ════════════════ 水面涟漪 ════════════════ */}
+      <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 1 }}>
+        {[0, 1, 2].map(i => (
+          <div key={`ripple-${{i}}`} className="absolute rounded-full"
+            style={{
+              left: `${30 + i * 20}%`,
+              bottom: `${5 + i * 8}%`,
+              width: 0, height: 0,
+              border: '1px solid rgba(226,182,79,0.2)',
+              animation: `water-ripple ${{4 + i * 2}}s ease-out infinite ${{i * 1.5}}s`,
+            }} />
+        ))}
+      </div>
+
+      {/* ════════════════ 几何轨道旋转 ════════════════ */}
+      <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 1 }}>
+        {[0, 1, 2].map(i => (
+          <div key={`orbit-${{i}}`}
+            style={{
+              position: 'absolute',
+              left: '50%', top: '50%',
+              width: 0, height: 0,
+            }}>
+            <div style={{
+              position: 'absolute',
+              width: `${8 + i * 6}px`, height: `${8 + i * 6}px`,
+              border: '1px solid rgba(226,182,79,0.1)',
+              transform: 'rotate(45deg)',
+              animation: `geo-orbit ${{10 + i * 4}}s linear infinite ${{i * 2}}s`,
+              transformOrigin: `${-100 - i * 40}px ${-100 - i * 40}px`,
+            }} />
+          </div>
+        ))}
+      </div>
+
+
       {/* ════════════════ HERO — 100vh 电影级开场 ════════════════ */}
       <div ref={heroRef} className="relative flex flex-col items-center justify-center"
         style={{ minHeight: '100vh', zIndex: 10, opacity: heroOpacity }}>
