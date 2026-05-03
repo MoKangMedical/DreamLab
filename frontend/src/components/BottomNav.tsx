@@ -24,8 +24,8 @@ export default function BottomNav() {
       className="md:hidden fixed bottom-0 left-0 right-0 z-[100] pb-[env(safe-area-inset-bottom,0px)]"
       style={{ touchAction: 'manipulation' }}
     >
-      <div className="absolute inset-0 frost-panel border-t border-[#ffffff]/06 rounded-t-2xl"
-        style={{ background: 'rgba(10,22,40,0.9)', backdropFilter: 'blur(24px) saturate(180%)' }} />
+      <div className="absolute inset-0 frost-panel rounded-t"
+        style={{ background: 'rgba(9,9,11,0.94)', borderTop: '1px solid rgba(255,255,255,0.05)' }} />
 
       <div className="relative flex items-center justify-around h-14 px-1">
         {TABS.map((tab) => {
@@ -39,30 +39,30 @@ export default function BottomNav() {
             >
               {active && (
                 <>
-                  <div className="absolute top-1 left-1/2 -translate-x-1/2 w-8 h-1 rounded-full"
-                    style={{ background: 'linear-gradient(90deg, var(--bathhouse-gold), var(--geo-coral))' }} />
-                  <div className="absolute inset-0 rounded-xl opacity-15"
-                    style={{ background: 'radial-gradient(ellipse at 50% 30%, var(--accent-ocean), transparent 70%)' }} />
+                  <div className="absolute top-1 left-1/2 -translate-x-1/2 w-8 h-0.5"
+                    style={{ background: 'var(--accent-gold)' }} />
+                  <div className="absolute inset-0 opacity-8"
+                    style={{ background: 'radial-gradient(ellipse at 50% 30%, var(--accent-gold), transparent 70%)' }} />
                 </>
               )}
 
               <span
                 className={`text-lg transition-all duration-300 ${
-                  active ? 'scale-110' : 'text-[#3A5A78] group-active:scale-110'
+                  active ? 'scale-110' : 'text-[#52525b] group-active:scale-110'
                 }`}
                 style={active ? {
-                  color: 'var(--bathhouse-gold)',
-                  filter: 'drop-shadow(0 0 6px rgba(240,192,96,0.4))',
+                  color: 'var(--accent-gold)',
+                  filter: 'drop-shadow(0 0 4px rgba(226,182,79,0.3))',
                 } : {}}>
                 {tab.icon}
               </span>
 
               <span
                 className={`text-[10px] mt-0.5 font-medium transition-all duration-300 ${
-                  active ? 'opacity-100' : 'text-[#3A5A78] opacity-60'
+                  active ? 'opacity-100' : 'text-[#52525b] opacity-70'
                 }`}
                 style={active ? {
-                  background: 'linear-gradient(135deg, var(--bathhouse-gold), var(--accent-ocean))',
+                  background: 'linear-gradient(135deg, var(--accent-gold), #f0d078)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                 } : {}}>

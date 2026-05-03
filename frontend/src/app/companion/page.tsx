@@ -79,7 +79,7 @@ export default function CompanionPage() {
 
   return (
     <div className="min-h-screen flex flex-col" style={{
-      background: 'linear-gradient(180deg, #0a1628 0%, #0f2b45 40%, #162d48 100%)',
+      background: 'linear-gradient(180deg, #09090b 0%, #131316 40%, #1c1c21 100%)',
     }}>
       {/* 星空粒子 */}
       <div className="fixed inset-0 pointer-events-none z-0">
