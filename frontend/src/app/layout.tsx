@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import BottomNav from "@/components/BottomNav";
+import { SpiritedInteractions } from "@/components/SpiritedInteractions";
 
 export const metadata: Metadata = {
   title: "DreamLab - 千と千尋の夢の解析",
@@ -75,9 +76,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {/* ── 内容区 ── */}
         <main className="min-h-screen md:pt-14 relative z-10">
+          <SpiritedInteractions>
           <div className="page-transition">
             {children}
           </div>
+          </SpiritedInteractions>
         </main>
 
         {/* ── 移动端底部导航 ── */}

@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { getAssessment, submitAssessment } from '@/lib/api';
+import { showBathToken, showShikigami } from '@/components/SpiritedInteractions';
 
 type Phase = 'loading' | 'taking' | 'submitting' | 'result';
 
@@ -50,6 +51,11 @@ export default function AssessmentTakeClient() {
       const res = await submitAssessment(id, { user_id: 1, answers: ansArray });
       setResult(res);
       setPhase('result');
+      // 🎴 浴牌奖励
+      setTimeout(() => {
+        showBathToken('契约之镜已映照', '🪞', `${assessment?.name || '测评'} · ${res.level}`);
+        showShikigami('汤婆婆收下了你的契约，镜中映出新的自己', 'success');
+      }, 500);
     } catch {
       setError('提交失败，请重试');
       setPhase('taking');
