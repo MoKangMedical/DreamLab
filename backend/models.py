@@ -170,3 +170,32 @@ class AssessmentResult(Base):
     interpretation = Column(Text, default="")  # AI-generated
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
+
+# ===== AI心灵陪伴 =====
+class CompanionSession(Base):
+    """对话会话"""
+    __tablename__ = "companion_sessions"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    title = Column(String(200), default="新的对话")
+    mood = Column(String(30), default="")  # 当前情绪标签
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    updated_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
+
+    messages = relationship("CompanionMessage", back_populates="session", cascade="all, delete-orphan")
+
+
+class CompanionMessage(Base):
+    """对话消息"""
+    __tablename__ = "companion_messages"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    session_id = Column(Integer, ForeignKey("companion_sessions.id", ondelete="CASCADE"), nullable=False, index=True)
+    role = Column(String(20), nullable=False)  # user / assistant / system
+    content = Column(Text, nullable=False)
+    crisis_detected = Column(Boolean, default=False)  # 是否检测到危机关键词
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+    session = relationship("CompanionSession", back_populates="messages")
+

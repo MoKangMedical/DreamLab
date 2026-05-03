@@ -109,6 +109,17 @@ export default function HomePage() {
       badgeClass: 'badge-lavender',
       delay: 0.3,
     },
+    {
+      href: '/companion',
+      icon: '👤',
+      title: '心灵陪伴',
+      sub: '无脸男的倾听',
+      desc: 'CBT共情对话 · 安静陪伴 · 危机支持',
+      colors: { from: 'var(--accent-purple)', to: '#6a5acd', glow: '#9B7ED8' },
+      badge: '温暖',
+      badgeClass: 'badge-lavender',
+      delay: 0.4,
+    },
   ];
 
   return (
@@ -239,7 +250,7 @@ export default function HomePage() {
         </div>
 
         {/* ── 三大入口 — 浮动的几何平台 ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {entries.map((card, i) => (
             <Link
               key={card.href}
