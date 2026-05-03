@@ -58,6 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 { href: "/dream", label: "梦境工坊", icon: "🌙" },
                 { href: "/assessments", label: "心理测评", icon: "🪞" },
                 { href: "/companion", label: "心灵陪伴", icon: "👤" },
+                { href: "/wellness", label: "健康工具", icon: "♨️" },
                 { href: "/profile", label: "我的", icon: "👤" },
               ].map((item) => (
                 <a

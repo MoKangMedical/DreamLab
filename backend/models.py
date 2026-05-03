@@ -199,3 +199,20 @@ class CompanionMessage(Base):
 
     session = relationship("CompanionSession", back_populates="messages")
 
+
+# ===== 心智健康工具箱 =====
+class WellnessLog(Base):
+    """健康日志 — 感恩日记 / 情绪记录 / 睡眠日志"""
+    __tablename__ = "wellness_logs"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    log_type = Column(String(20), nullable=False, index=True)  # gratitude / mood / sleep / meditation
+    title = Column(String(200), default="")
+    content = Column(Text, default="")
+    mood_score = Column(Integer, default=5)  # 1-10
+    sleep_hours = Column(Float, default=0)
+    sleep_quality = Column(Integer, default=3)  # 1-5
+    tags = Column(JSON, default=list)  # ["感恩", "家庭"]
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+

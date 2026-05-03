@@ -120,6 +120,17 @@ export default function HomePage() {
       badgeClass: 'badge-lavender',
       delay: 0.4,
     },
+    {
+      href: '/wellness',
+      icon: '♨️',
+      title: '净化汤',
+      sub: '心智健康工具箱',
+      desc: '引导冥想 · 呼吸训练 · 情绪仪表盘 · 感恩日记',
+      colors: { from: 'var(--geo-mint)', to: 'var(--accent-purple)', glow: '#B8D4C8' },
+      badge: '疗愈',
+      badgeClass: 'badge-mint',
+      delay: 0.5,
+    },
   ];
 
   return (
