@@ -220,14 +220,14 @@ export default function HomePage() {
 
       {/* ════════════════ 周期性灵光爆发 ════════════════ */}
       <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 2 }}>
-        {Array.from({{ length: 8 }}).map((_, i) => (
-          <div key={`burst-${{i}}`} className="absolute rounded-full"
+        {Array.from({ length: 8 }).map((_, i) => (
+          <div key={`burst-${i}`} className="absolute rounded-full"
             style={{
-              left: `${{15 + Math.random() * 70}}%`,
-              top: `${{10 + Math.random() * 80}}%`,
+              left: `${15 + Math.random() * 70}%`,
+              top: `${10 + Math.random() * 80}%`,
               width: 0, height: 0,
               backgroundColor: ['#e2b64f', '#7eb8da', '#c47868'][i % 3],
-              animation: `sparkle-burst ${{3 + Math.random() * 4}}s ease-out infinite ${{Math.random() * 5}}s`,
+              animation: `sparkle-burst ${3 + Math.random() * 4}s ease-out infinite ${Math.random() * 5}s`,
             }} />
         ))}
       </div>
@@ -235,13 +235,13 @@ export default function HomePage() {
       {/* ════════════════ 水面涟漪 ════════════════ */}
       <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 1 }}>
         {[0, 1, 2].map(i => (
-          <div key={`ripple-${{i}}`} className="absolute rounded-full"
+          <div key={`ripple-${i}`} className="absolute rounded-full"
             style={{
               left: `${30 + i * 20}%`,
               bottom: `${5 + i * 8}%`,
               width: 0, height: 0,
               border: '1px solid rgba(226,182,79,0.2)',
-              animation: `water-ripple ${{4 + i * 2}}s ease-out infinite ${{i * 1.5}}s`,
+              animation: `water-ripple ${4 + i * 2}s ease-out infinite ${i * 1.5}s`,
             }} />
         ))}
       </div>
@@ -249,7 +249,7 @@ export default function HomePage() {
       {/* ════════════════ 几何轨道旋转 ════════════════ */}
       <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 1 }}>
         {[0, 1, 2].map(i => (
-          <div key={`orbit-${{i}}`}
+          <div key={`orbit-${i}`}
             style={{
               position: 'absolute',
               left: '50%', top: '50%',
@@ -260,7 +260,7 @@ export default function HomePage() {
               width: `${8 + i * 6}px`, height: `${8 + i * 6}px`,
               border: '1px solid rgba(226,182,79,0.1)',
               transform: 'rotate(45deg)',
-              animation: `geo-orbit ${{10 + i * 4}}s linear infinite ${{i * 2}}s`,
+              animation: `geo-orbit ${10 + i * 4}s linear infinite ${i * 2}s`,
               transformOrigin: `${-100 - i * 40}px ${-100 - i * 40}px`,
             }} />
           </div>
