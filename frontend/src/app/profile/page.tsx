@@ -1,98 +1,124 @@
-import { getDreams, getReflections } from '@/lib/api';
+'use client';
 
-export default async function ProfilePage() {
-  const [dreams, reflections] = await Promise.all([
-    getDreams(),
-    getReflections(),
-  ]);
+import { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 
-  const totalDreams = dreams.length;
-  const totalReflections = reflections.length;
-  const avgMood = reflections.length > 0
-    ? Math.round(reflections.reduce((sum: number, r: any) => sum + (r.mood_score || 5), 0) / reflections.length)
-    : 0;
+function useInView(ref: React.RefObject<HTMLElement | null>) {
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = ref.current; if (!el) return;
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setInView(true); obs.unobserve(el); } }, { threshold: 0.1 });
+    obs.observe(el); return () => obs.disconnect();
+  }, [ref]);
+  return inView;
+}
 
-  // Emotion distribution
-  const emotionCounts: Record<string, number> = {};
-  dreams.forEach((d: any) => {
-    (d.emotions || []).forEach((e: string) => {
-      emotionCounts[e] = (emotionCounts[e] || 0) + 1;
-    });
-  });
-  const sortedEmotions = Object.entries(emotionCounts)
-    .sort((a, b) => (b[1] as number) - (a[1] as number))
-    .slice(0, 8);
-  const maxCount = sortedEmotions.length > 0 ? Math.max(...sortedEmotions.map((e) => e[1] as number)) : 1;
+// ── 统计数据 ──
+const STATS = [
+  { label: '梦境记录', value: 12, icon: '🌙', color: '#e2b64f' },
+  { label: '测评完成', value: 3, icon: '🪞', color: '#c47868' },
+  { label: '课程学习', value: 8, icon: '📜', color: '#7eb8da' },
+  { label: '陪伴对话', value: 24, icon: '👤', color: '#9b8ab8' },
+  { label: '冥想次数', value: 5, icon: '🧘', color: '#8aaf9d' },
+  { label: '感恩日记', value: 7, icon: '💝', color: '#e2b64f' },
+];
+
+// ── 最近活动 ──
+const ACTIVITIES = [
+  { type: 'assessment', text: '完成了 SAS 焦虑自评量表', result: '正常', time: '2 小时前', icon: '🪞', color: '#c47868' },
+  { type: 'dream', text: '记录了一个梦境：飞翔在城市上空', result: '', time: '昨天', icon: '🌙', color: '#e2b64f' },
+  { type: 'gratitude', text: '写下感恩日记：今天阳光很好', result: '', time: '昨天', icon: '💝', color: '#8aaf9d' },
+  { type: 'companion', text: '与无脸男对话 15 分钟', result: '', time: '2 天前', icon: '👤', color: '#9b8ab8' },
+  { type: 'course', text: '学习了荣格：集体无意识与原型', result: '完成 40%', time: '3 天前', icon: '📜', color: '#7eb8da' },
+  { type: 'meditation', text: '完成了「河神的净化」3分钟冥想', result: '', time: '3 天前', icon: '🧘', color: '#8aaf9d' },
+];
+
+// ── 快捷入口 ──
+const QUICK_ACTIONS = [
+  { href: '/assessments', label: '心理测评', icon: '🪞', desc: '了解自己的心理状态', color: '#c47868' },
+  { href: '/companion', label: '找无脸男聊聊', icon: '👤', desc: '有时候只是需要被倾听', color: '#7eb8da' },
+  { href: '/wellness', label: '5分钟冥想', icon: '🧘', desc: '河神的净化汤，洗去疲惫', color: '#8aaf9d' },
+  { href: '/dream', label: '记录梦境', icon: '🌙', desc: '每一个梦都是潜意识的信', color: '#e2b64f' },
+  { href: '/wellness', label: '写感恩日记', icon: '💝', desc: '三件小事，改变看世界的方式', color: '#9b8ab8' },
+  { href: '/courses', label: '继续学习', icon: '📜', desc: '荣格分析心理学待完成', color: '#e2b64f' },
+];
+
+export default function ProfilePage() {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => { setTimeout(() => setVisible(true), 100); }, []);
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-10 animate-fade-in">
-      <div className="text-center mb-10">
-        <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#9B7ED8] to-[#FF8A7A] flex items-center justify-center text-3xl mx-auto mb-4">
-          🌙
-        </div>
-        <h1 className="text-3xl font-bold text-white mb-2">Dreamer</h1>
-        <p className="text-[#B0B0C0]">你的梦境探索之旅</p>
-      </div>
-
-      <div className="grid grid-cols-3 gap-4 mb-8">
-        {[
-          { value: totalDreams, label: '记录梦境', icon: '🌙', color: 'from-[#9B7ED8]/20' },
-          { value: totalReflections, label: '反思记录', icon: '🌱', color: 'from-[#00d2ff]/20' },
-          { value: avgMood, label: '平均心情', icon: '💫', color: 'from-[#e94560]/20' },
-        ].map((stat) => (
-          <div key={stat.label} className="glass-card p-4 text-center">
-            <span className="text-3xl font-bold gradient-text block">{stat.value}</span>
-            <span className="text-xs text-[#B0B0C0] mt-1 block">{stat.label}</span>
+    <div style={{ background: '#09090b', minHeight: '100vh' }}>
+      <div className="max-w-5xl mx-auto px-4 md:px-6 pt-20 md:pt-28 pb-32">
+        
+        {/* ── 头部 ── */}
+        <div className={`text-center mb-16 transition-all duration-1000 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="inline-flex items-center justify-center w-20 h-20 mb-5"
+            style={{ background: '#131316', border: '1px solid #27272a', borderRadius: '50%' }}>
+            <span className="text-3xl">👤</span>
           </div>
-        ))}
-      </div>
+          <h1 className="text-3xl font-bold mb-2" style={{ fontFamily: "'Noto Serif SC', serif", color: '#fafafa' }}>
+            千寻
+          </h1>
+          <p className="text-sm" style={{ color: '#71717a' }}>
+            油屋的见习生 · 正在找回自己的名字
+          </p>
+        </div>
 
-      {sortedEmotions.length > 0 && (
-        <div className="glass-card p-6 mb-8">
-          <h3 className="text-white font-bold mb-4">😶 梦境情绪分布</h3>
-          <div className="space-y-3">
-            {sortedEmotions.map(([emotion, count]) => (
-              <div key={emotion} className="flex items-center gap-3">
-                <span className="text-sm text-[#B0B0C0] w-16 text-right flex-shrink-0">{emotion}</span>
-                <div className="flex-1 h-6 bg-[#ffffff]/5 rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-gradient-to-r from-[#9B7ED8] to-[#FF8A7A] rounded-full transition-all duration-1000"
-                    style={{ width: `${(Number(count) / maxCount) * 100}%` }}
-                  />
+        {/* ── 数据统计 ── */}
+        <div className="grid grid-cols-3 md:grid-cols-6 gap-3 mb-16">
+          {STATS.map((s, i) => (
+            <div key={s.label} className={`text-center p-4 transition-all duration-800 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+              style={{ transitionDelay: `${0.1 + i * 0.06}s`, background: '#0c0c0e', border: '1px solid #1c1c1f', borderRadius: 2 }}>
+              <div className="text-2xl mb-2">{s.icon}</div>
+              <div className="text-2xl font-bold mb-1" style={{ color: s.color }}>{s.value}</div>
+              <div className="text-xs" style={{ color: '#52525b' }}>{s.label}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* ── 快捷操作 ── */}
+        <div className="mb-16">
+          <h2 className="text-lg font-bold mb-6" style={{ fontFamily: "'Noto Serif SC', serif", color: '#fafafa' }}>
+            今天想做些什么？
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            {QUICK_ACTIONS.map((a, i) => (
+              <Link key={a.label} href={a.href}
+                className="group p-5 transition-all duration-400 hover:scale-[1.02]"
+                style={{ background: '#0c0c0e', border: '1px solid #1c1c1f', borderRadius: 2 }}>
+                <div className="text-2xl mb-3">{a.icon}</div>
+                <div className="text-sm font-bold mb-1 transition-colors group-hover:text-[#fafafa]" style={{ color: '#a1a1aa' }}>{a.label}</div>
+                <div className="text-xs" style={{ color: '#52525b' }}>{a.desc}</div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* ── 最近活动 ── */}
+        <div>
+          <h2 className="text-lg font-bold mb-6" style={{ fontFamily: "'Noto Serif SC', serif", color: '#fafafa' }}>
+            最近动态
+          </h2>
+          <div className="space-y-1">
+            {ACTIVITIES.map((a, i) => (
+              <div key={i} className="flex items-center gap-4 p-4"
+                style={{ background: '#0c0c0e', border: '1px solid #1c1c1f', borderRadius: 2 }}>
+                <span className="text-xl">{a.icon}</span>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm truncate" style={{ color: '#a1a1aa' }}>{a.text}</p>
                 </div>
-                <span className="text-sm text-[var(--accent-purple)] font-medium w-8">{String(count)}</span>
+                {a.result && (
+                  <span className="text-xs px-2 py-1" style={{ background: `${a.color}15`, color: a.color, borderRadius: 2 }}>
+                    {a.result}
+                  </span>
+                )}
+                <span className="text-xs shrink-0" style={{ color: '#52525b' }}>{a.time}</span>
               </div>
             ))}
           </div>
         </div>
-      )}
 
-      <div className="glass-card p-6">
-        <h3 className="text-white font-bold mb-4">📋 最近活动</h3>
-        {totalDreams === 0 && totalReflections === 0 ? (
-          <p className="text-center text-[#B0B0C0] py-8">还没有任何记录，开始你的探索之旅吧！</p>
-        ) : (
-          <div className="space-y-2">
-            {dreams.slice(0, 5).map((d: any) => (
-              <div key={`d-${d.id}`} className="flex items-center gap-3 py-2 text-sm">
-                <span>🌙</span>
-                <span className="text-[#B0B0C0] flex-shrink-0">
-                  {new Date(d.created_at).toLocaleDateString('zh-CN')}
-                </span>
-                <span className="text-white truncate">记录了梦境「{d.title}」</span>
-              </div>
-            ))}
-            {reflections.slice(0, 5).map((r: any) => (
-              <div key={`r-${r.id}`} className="flex items-center gap-3 py-2 text-sm">
-                <span>✍️</span>
-                <span className="text-[#B0B0C0] flex-shrink-0">
-                  {new Date(r.created_at).toLocaleDateString('zh-CN')}
-                </span>
-                <span className="text-white truncate">写了反思「{r.title}」</span>
-              </div>
-            ))}
-          </div>
-        )}
       </div>
     </div>
   );

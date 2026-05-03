@@ -441,6 +441,34 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* ════════════════ 价值主张 — 三列 ════════════════ */}
+      <div className="relative max-w-7xl mx-auto px-4 md:px-8 py-24 md:py-32" style={{ zIndex: 10 }}>
+        <div className="text-center mb-16">
+          <h2 style={{
+            fontFamily: "'Noto Serif SC', serif",
+            fontSize: 'clamp(28px, 4vw, 48px)',
+            color: '#fafafa',
+            lineHeight: 1.3,
+          }}>
+            为什么需要<br/>探索内心世界？
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            { icon: '🔬', title: '科学依据', desc: '所有量表基于国际标准心理学工具，经过数十年学术验证。不是星座测试，不是娱乐 quiz，而是真正被全球精神科和心理咨询师使用的评估工具。', color: '#e2b64f' },
+            { icon: '🤖', title: 'AI 深度解读', desc: 'DeepSeek 大模型提供个性化解读，不仅仅给你一个分数，而是帮你理解分数背后的你——为什么会有这些感受，可以怎么做。', color: '#7eb8da' },
+            { icon: '🏯', title: '温暖的体验', desc: '以千与千寻为叙事框架，将心理学探索变成一场冒险。你不需要正襟危坐面对白大褂，只需要在油屋里，与无脸男聊聊，照照契约之镜。', color: '#c47868' },
+          ].map((item, i) => (
+            <div key={i} className="p-8" style={{ background: '#0c0c0e', border: '1px solid #1c1c1f', borderRadius: 2 }}>
+              <div className="text-3xl mb-4">{item.icon}</div>
+              <h3 className="text-lg font-bold mb-3" style={{ fontFamily: "'Noto Serif SC', serif", color: item.color }}>{item.title}</h3>
+              <p className="text-sm leading-relaxed" style={{ color: '#71717a', lineHeight: 1.8 }}>{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+
       {/* ════════════════ CTA区块 — 全宽 ════════════════ */}
       <div className="relative py-32 md:py-48" style={{ zIndex: 10, background: '#0c0c0e' }}>
         <div className="max-w-3xl mx-auto px-6 text-center">
