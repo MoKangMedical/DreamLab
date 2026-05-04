@@ -3,14 +3,13 @@ import "./globals.css";
 import BottomNav from "@/components/BottomNav";
 import InteractiveGhibli from "@/components/InteractiveGhibli";
 import { SpiritedInteractions } from "@/components/SpiritedInteractions";
-import MarginDecor from "@/components/MarginDecor";
 import GlobalExploreMore from "@/components/GlobalExploreMore";
 import GhibliMusic from "@/components/GhibliMusic";
 import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 
 export const metadata: Metadata = {
-  title: "DreamLab — Evidence-Based Psychology Platform",
-  description: "Understand your inner world. Standardized assessments, AI-powered interpretation, evidence-based knowledge.",
+  title: "DreamLab — Evidence-Based Psychology",
+  description: "Standardized assessments, AI-powered insight, evidence-based knowledge. Understand your inner world.",
   manifest: "/DreamLab/manifest.json",
   appleWebApp: {
     capable: true,
@@ -19,64 +18,74 @@ export const metadata: Metadata = {
   },
 };
 
-const DESKTOP_NAV = [
-  { href: "/", label: "Home", icon: "" },
-  { href: "/assessments", label: "Assessments", icon: "" },
-  { href: "/companion", label: "Companion", icon: "" },
-  { href: "/dream", label: "Dreams", icon: "" },
-  { href: "/knowledge", label: "Knowledge", icon: "" },
-  { href: "/courses", label: "Courses", icon: "" },
-  { href: "/wellness", label: "Wellness", icon: "" },
+const NAV_LINKS = [
+  { href: "/", label: "Home" },
+  { href: "/assessments", label: "Assessments" },
+  { href: "/companion", label: "Companion" },
+  { href: "/dream", label: "Dreams" },
+  { href: "/knowledge", label: "Knowledge" },
+  { href: "/wellness", label: "Wellness" },
 ];
 
-const FOOTER_LINKS = {
+const FOOTER_COLUMNS = {
   Platform: [
     { label: "Assessments", href: "/assessments" },
     { label: "AI Companion", href: "/companion" },
     { label: "Dream Analysis", href: "/dream" },
     { label: "Wellness Toolkit", href: "/wellness" },
+    { label: "Community", href: "/community" },
   ],
   Learn: [
     { label: "Knowledge Base", href: "/knowledge" },
     { label: "Courses", href: "/courses" },
-    { label: "Spirited Away Journey", href: "/spirited" },
+    { label: "Spirited Journey", href: "/spirited" },
+    { label: "Bathhouse", href: "/bathhouse" },
   ],
   About: [
     { label: "Evidence & Sources", href: "/knowledge" },
-    { label: "Scientific Advisory", href: "/knowledge" },
     { label: "Privacy & Ethics", href: "/" },
+    { label: "GitHub", href: "https://github.com/MoKangMedical/DreamLab" },
   ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="overscroll-none">
+    <html lang="zh-CN" className="overscroll-none">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap"
+          rel="stylesheet"
+        />
         <link rel="manifest" href="/DreamLab/manifest.json" />
-        <meta name="theme-color" content="#060f18" />
+        <meta name="theme-color" content="#0a0a0c" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
       </head>
 
-      <body className="overscroll-none" style={{ background: '#060f18' }}>
-        {/* Atmosphere layer */}
+      <body className="overscroll-none" style={{ background: '#0a0a0c' }}>
+        {/* Atmosphere */}
         <InteractiveGhibli />
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex fixed top-0 w-full z-50 frost-panel">
-          <div className="max-w-[1100px] mx-auto px-6 h-14 flex items-center justify-between w-full">
-            <a href="/" className="flex items-center gap-3 group">
-              <span className="font-bold text-white text-lg tracking-tight" style={{ fontFamily: "'Noto Serif SC', serif" }}>
+        {/* Desktop Navigation — Glass */}
+        <nav className="hidden md:block glass-nav">
+          <div className="max-w-[1100px] mx-auto px-6 h-14 flex items-center justify-between">
+            <a href="/" className="flex items-center gap-2 group">
+              <span
+                className="font-bold text-lg tracking-tight"
+                style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}
+              >
                 DreamLab
               </span>
             </a>
-            <div className="flex items-center gap-0">
-              {DESKTOP_NAV.map(item => (
-                <a key={item.href} href={item.href}
-                  className="px-3 py-2 text-xs font-medium transition-colors duration-200 hover:text-[#f5efe0]"
-                  style={{ color: '#7a7062', fontFamily: 'Inter, sans-serif' }}>
+            <div className="flex items-center gap-1">
+              {NAV_LINKS.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="px-3 py-2 text-[13px] font-medium transition-colors duration-200 hover:text-[#f4f4f6]"
+                  style={{ color: '#71717a', fontFamily: 'Inter, sans-serif' }}
+                >
                   {item.label}
                 </a>
               ))}
@@ -84,61 +93,111 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
         </nav>
 
-        {/* Three-column grid (desktop) / centered (mobile) */}
+        {/* Layout Grid */}
         <div className="app-grid">
-          <MarginDecor side="left" />
+          {/* Left margin — desktop decorations */}
+          <div className="margin-col">
+            <MarginDecorations side="left" />
+          </div>
+
+          {/* Content */}
           <div className="content-col">
             <main style={{ minHeight: '100dvh', paddingTop: '56px', paddingBottom: '80px' }}>
               <SpiritedInteractions>
-                <div className="page-transition">
-                  {children}
-                </div>
+                <div className="page-enter">{children}</div>
               </SpiritedInteractions>
             </main>
 
-            {/* Global Explore More — hidden on mobile (bottom nav covers navigation) */}
+            {/* Desktop: Global Explore More */}
             <div className="hidden md:block">
               <GlobalExploreMore />
             </div>
 
-            {/* Professional Footer — hidden on mobile */}
-            <footer className="hidden md:block" style={{ background: '#0a1620', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
-              <div className="max-w-6xl mx-auto px-6 py-20">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
+            {/* Desktop Footer */}
+            <footer
+              className="hidden md:block"
+              style={{
+                background: '#0a0a0c',
+                borderTop: '1px solid rgba(255,255,255,0.04)',
+              }}
+            >
+              <div className="max-w-6xl mx-auto px-6 py-24">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-16">
+                  {/* Brand */}
                   <div className="col-span-2 md:col-span-1">
-                    <a href="/" className="text-lg font-bold mb-4 block" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f5efe0' }}>
+                    <a
+                      href="/"
+                      className="text-lg font-bold mb-6 block"
+                      style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}
+                    >
                       DreamLab
                     </a>
-                    <p className="text-xs leading-relaxed mb-6" style={{ color: '#5a5246', lineHeight: 1.8 }}>
-                      Evidence-based psychology platform.<br/>Understand your inner world.
+                    <p
+                      className="text-sm leading-relaxed mb-8"
+                      style={{ color: '#71717a', lineHeight: 1.8 }}
+                    >
+                      Evidence-based psychology platform.
+                      <br />
+                      Understand your inner world.
                     </p>
-                    <span className="text-xs tracking-wider" style={{ color: '#e8a820' }}>MoKangMedical · 2026</span>
+                    <span
+                      className="text-xs tracking-wider"
+                      style={{ color: '#d4a853' }}
+                    >
+                      MoKangMedical · 2026
+                    </span>
                   </div>
-                  {Object.entries(FOOTER_LINKS).map(([category, links]) => (
+                  {Object.entries(FOOTER_COLUMNS).map(([category, links]) => (
                     <div key={category}>
-                      <h4 className="text-xs font-semibold tracking-wider uppercase mb-5" style={{ color: '#f5efe0' }}>{category}</h4>
+                      <h4
+                        className="text-xs font-semibold tracking-wider uppercase mb-6"
+                        style={{ color: '#f4f4f6' }}
+                      >
+                        {category}
+                      </h4>
                       <ul className="space-y-3">
-                        {links.map(link => (
+                        {links.map((link) => (
                           <li key={link.label}>
-                            <a href={link.href} className="text-xs transition-colors duration-200 hover:text-[#b8ad9a]" style={{ color: '#5a5246' }}>{link.label}</a>
+                            <a
+                              href={link.href}
+                              className="text-sm transition-colors duration-200 hover:text-[#a1a1aa]"
+                              style={{ color: '#71717a' }}
+                            >
+                              {link.label}
+                            </a>
                           </li>
                         ))}
                       </ul>
                     </div>
                   ))}
                 </div>
-                <div className="mt-16 pt-8 flex flex-col md:flex-row items-center justify-between gap-4" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
-                  <p className="text-xs" style={{ color: '#3a352e' }}>© 2026 DreamLab by MoKangMedical.</p>
+                <div
+                  className="mt-20 pt-8 flex flex-col md:flex-row items-center justify-between gap-4"
+                  style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}
+                >
+                  <p className="text-xs" style={{ color: '#52525b' }}>
+                    © 2026 DreamLab by MoKangMedical. All assessments are for reference only and do not constitute clinical diagnosis.
+                  </p>
                   <div className="flex gap-6">
-                    <a href="/" className="text-xs" style={{ color: '#3a352e' }}>Privacy</a>
-                    <a href="/" className="text-xs" style={{ color: '#3a352e' }}>Terms</a>
-                    <a href="/" className="text-xs" style={{ color: '#3a352e' }}>Ethics</a>
+                    <a href="/" className="text-xs" style={{ color: '#52525b' }}>
+                      Privacy
+                    </a>
+                    <a href="/" className="text-xs" style={{ color: '#52525b' }}>
+                      Terms
+                    </a>
+                    <a href="/" className="text-xs" style={{ color: '#52525b' }}>
+                      Ethics
+                    </a>
                   </div>
                 </div>
               </div>
             </footer>
           </div>
-          <MarginDecor side="right" />
+
+          {/* Right margin — desktop decorations */}
+          <div className="margin-col">
+            <MarginDecorations side="right" />
+          </div>
         </div>
 
         <BottomNav />
@@ -146,5 +205,64 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <GhibliMusic />
       </body>
     </html>
+  );
+}
+
+/* ── Margin Decorations — Subtle Ghibli atmosphere in side columns ── */
+function MarginDecorations({ side }: { side: 'left' | 'right' }) {
+  const isLeft = side === 'left';
+  const kanji = isLeft ? ['夢', '心', '風'] : ['光', '祈', '霊'];
+  const fireflyCount = 4;
+
+  // Generate stable fireflies
+  const fireflies = Array.from({ length: fireflyCount }, (_, i) => ({
+    id: `${side}-f-${i}`,
+    top: `${15 + i * 20 + (isLeft ? 5 : 0)}%`,
+    delay: `${i * 1.5 + (isLeft ? 0 : 0.5)}s`,
+    duration: `${7 + i * 2}s`,
+    size: 3 + (i % 2),
+    drift: (isLeft ? 1 : -1) * (10 + i * 5),
+  }));
+
+  return (
+    <div style={{ position: 'sticky', top: 0, height: '100vh' }}>
+      {/* Floating kanji */}
+      {kanji.map((char, i) => (
+        <div
+          key={char}
+          className="absolute font-bold pointer-events-none"
+          style={{
+            left: `${30 + i * 26}%`,
+            top: `${20 + i * 28}%`,
+            fontSize: `${20 + i * 10}px`,
+            color: '#d4a853',
+            opacity: 0.04 + i * 0.02,
+            fontFamily: "'Noto Serif SC', serif",
+            animation: `float-kanji ${7 + i * 2}s ease-in-out infinite ${i * 1.2}s`,
+            filter: 'blur(0.5px)',
+          }}
+        >
+          {char}
+        </div>
+      ))}
+
+      {/* Fireflies */}
+      {fireflies.map((f) => (
+        <div
+          key={f.id}
+          className="absolute rounded-full pointer-events-none"
+          style={{
+            left: `${40 + (f.id.charCodeAt(0) % 30)}%`,
+            top: f.top,
+            width: f.size,
+            height: f.size,
+            background: 'radial-gradient(circle at 40% 40%, #fef9e7, #d4a853)',
+            boxShadow: `0 0 ${f.size * 3}px rgba(212,168,83,0.2)`,
+            animation: `firefly-drift ${f.duration}s ${f.delay} infinite ease-in-out`,
+            '--drift': `${f.drift}px`,
+          } as React.CSSProperties}
+        />
+      ))}
+    </div>
   );
 }

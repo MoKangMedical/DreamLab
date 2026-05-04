@@ -47,7 +47,7 @@ export default function DreamHistoryClient() {
   );
 
   return (
-    <div style={{ background: '#060f18', minHeight: '100vh' }}>
+    <div style={{ background: '#0a0a0c', minHeight: '100vh' }}>
       <div className="max-w-4xl mx-auto px-4 md:px-6 pt-14 md:pt-20 pb-32">
         
         {/* ════════════════ Hero ════════════════ */}
@@ -56,11 +56,11 @@ export default function DreamHistoryClient() {
           <h1 className="font-bold mb-3" style={{
             fontFamily: "'Noto Serif SC', serif",
             fontSize: 'clamp(32px, 5vw, 52px)',
-            color: '#f5efe0',
+            color: '#f4f4f6',
           }}>
             你的梦境之书
           </h1>
-          <p className="max-w-md mx-auto text-sm leading-relaxed" style={{ color: '#7a7062' }}>
+          <p className="max-w-md mx-auto text-sm leading-relaxed" style={{ color: '#71717a' }}>
             每一个记录下来的梦，都是你与自己的一次深度对话。
             翻看往日的梦境，发现潜意识在对你说了什么。
           </p>
@@ -70,36 +70,36 @@ export default function DreamHistoryClient() {
         {dreams.length > 0 && (
           <div className="mb-12">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
-              <div className="p-4 text-center" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
-                <div className="text-3xl font-bold mb-1" style={{ color: '#e8a820' }}>{totalDreams}</div>
-                <div className="text-xs" style={{ color: '#5a5246' }}>梦境总数</div>
+              <div className="p-4 text-center" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+                <div className="text-3xl font-bold mb-1" style={{ color: '#d4a853' }}>{totalDreams}</div>
+                <div className="text-xs" style={{ color: '#52525b' }}>梦境总数</div>
               </div>
-              <div className="p-4 text-center" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
-                <div className="text-3xl font-bold mb-1" style={{ color: '#8b7ab8' }}>{new Set(allEmotions).size}</div>
-                <div className="text-xs" style={{ color: '#5a5246' }}>不同情绪</div>
+              <div className="p-4 text-center" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+                <div className="text-3xl font-bold mb-1" style={{ color: '#6b5b8a' }}>{new Set(allEmotions).size}</div>
+                <div className="text-xs" style={{ color: '#52525b' }}>不同情绪</div>
               </div>
-              <div className="p-4 text-center" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
-                <div className="text-3xl font-bold mb-1" style={{ color: '#4a90b8' }}>{detectedSymbols.length}</div>
-                <div className="text-xs" style={{ color: '#5a5246' }}>识别符号</div>
+              <div className="p-4 text-center" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+                <div className="text-3xl font-bold mb-1" style={{ color: '#5a7d9a' }}>{detectedSymbols.length}</div>
+                <div className="text-xs" style={{ color: '#52525b' }}>识别符号</div>
               </div>
-              <div className="p-4 text-center" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+              <div className="p-4 text-center" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
                 <Link href="/dream" className="inline-block w-full h-full">
-                  <div className="text-3xl font-bold mb-1" style={{ color: '#6b9e7a' }}>+</div>
-                  <div className="text-xs" style={{ color: '#6b9e7a' }}>记录新梦</div>
+                  <div className="text-3xl font-bold mb-1" style={{ color: '#3b8b7a' }}>+</div>
+                  <div className="text-xs" style={{ color: '#3b8b7a' }}>记录新梦</div>
                 </Link>
               </div>
             </div>
 
             {/* 情绪分布 */}
             {topEmotions.length > 0 && (
-              <div className="p-5 mb-6" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
-                <h3 className="text-sm font-bold mb-3" style={{ color: '#f5efe0' }}>😌 最常见的情绪</h3>
+              <div className="p-5 mb-6" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+                <h3 className="text-sm font-bold mb-3" style={{ color: '#f4f4f6' }}>😌 最常见的情绪</h3>
                 <div className="flex flex-wrap gap-2">
                   {topEmotions.map(([emotion, count]) => (
                     <span key={emotion} className="text-xs px-3 py-1.5" style={{
-                      background: 'rgba(232,168,32,0.08)',
-                      border: '1px solid rgba(232,168,32,0.15)',
-                      color: '#e8a820',
+                      background: 'rgba(212,168,83,0.08)',
+                      border: '1px solid rgba(212,168,83,0.15)',
+                      color: '#d4a853',
                       borderRadius: 2,
                     }}>
                       {emotion} × {count}
@@ -111,13 +111,13 @@ export default function DreamHistoryClient() {
 
             {/* 识别到常见符号 */}
             {detectedSymbols.length > 0 && (
-              <div className="p-5" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
-                <h3 className="text-sm font-bold mb-3" style={{ color: '#f5efe0' }}>🔍 在你的梦境中识别到</h3>
+              <div className="p-5" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+                <h3 className="text-sm font-bold mb-3" style={{ color: '#f4f4f6' }}>🔍 在你的梦境中识别到</h3>
                 <div className="space-y-3">
                   {detectedSymbols.slice(0, 5).map(([key, meaning]) => (
-                    <div key={key} className="p-3" style={{ background: '#060f18', borderRadius: 2 }}>
-                      <div className="text-xs font-bold mb-1" style={{ color: '#4a90b8' }}>「{key}」</div>
-                      <div className="text-xs leading-relaxed" style={{ color: '#7a7062' }}>{meaning}</div>
+                    <div key={key} className="p-3" style={{ background: '#0a0a0c', borderRadius: 2 }}>
+                      <div className="text-xs font-bold mb-1" style={{ color: '#5a7d9a' }}>「{key}」</div>
+                      <div className="text-xs leading-relaxed" style={{ color: '#71717a' }}>{meaning}</div>
                     </div>
                   ))}
                 </div>
@@ -130,7 +130,7 @@ export default function DreamHistoryClient() {
         <div>
           <div className="flex items-center gap-3 mb-6">
             <div style={{ width: 32, height: 1, background: 'rgba(255,255,255,0.06)' }} />
-            <span className="text-xs tracking-[0.2em] uppercase" style={{ color: 'rgba(232,168,32,0.5)' }}>
+            <span className="text-xs tracking-[0.2em] uppercase" style={{ color: 'rgba(212,168,83,0.5)' }}>
               {dreams.length > 0 ? `全部梦境 (${totalDreams})` : '梦境记录'}
             </span>
           </div>
@@ -138,7 +138,7 @@ export default function DreamHistoryClient() {
           {loading ? (
             <div className="space-y-3">
               {[1, 2, 3].map(i => (
-                <div key={i} className="p-5 animate-pulse" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+                <div key={i} className="p-5 animate-pulse" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
                   <div className="h-5 w-1/3 mb-3" style={{ background: '#ffffff05', borderRadius: 1 }} />
                   <div className="h-4 w-full mb-2" style={{ background: '#ffffff05', borderRadius: 1 }} />
                   <div className="h-4 w-2/3" style={{ background: '#ffffff05', borderRadius: 1 }} />
@@ -148,13 +148,13 @@ export default function DreamHistoryClient() {
           ) : dreams.length === 0 ? (
             <div className="text-center py-16">
               <span className="text-6xl block mb-4">🌙</span>
-              <p className="text-sm mb-2" style={{ color: '#7a7062' }}>梦境之书还是空白的</p>
-              <p className="text-xs mb-6" style={{ color: '#5a5246' }}>
+              <p className="text-sm mb-2" style={{ color: '#71717a' }}>梦境之书还是空白的</p>
+              <p className="text-xs mb-6" style={{ color: '#52525b' }}>
                 梦是潜意识的信使——醒来后越早记录，能抓住的细节越多
               </p>
               <Link href="/dream"
                 className="inline-block px-8 py-3 text-sm font-semibold transition-all hover:scale-105"
-                style={{ background: '#e8a820', color: '#060f18', borderRadius: 2 }}>
+                style={{ background: '#d4a853', color: '#0a0a0c', borderRadius: 2 }}>
                 🌙 记录第一个梦
               </Link>
             </div>
@@ -163,16 +163,16 @@ export default function DreamHistoryClient() {
               {dreams.map((d: any) => (
                 <Link key={d.id} href={`/dream/history/${d.id}`}
                   className="block p-5 transition-all hover:translate-x-1"
-                  style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+                  style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
                   <div className="flex items-start justify-between mb-2">
-                    <h3 className="text-lg font-bold" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f5efe0' }}>
+                    <h3 className="text-lg font-bold" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>
                       {d.title}
                     </h3>
-                    <span className="text-xs shrink-0 ml-4" style={{ color: '#5a5246' }}>
+                    <span className="text-xs shrink-0 ml-4" style={{ color: '#52525b' }}>
                       {new Date(d.created_at || d.dream_date).toLocaleDateString('zh-CN')}
                     </span>
                   </div>
-                  <p className="text-sm leading-relaxed mb-3 line-clamp-2" style={{ color: '#b8ad9a', lineHeight: 1.7 }}>
+                  <p className="text-sm leading-relaxed mb-3 line-clamp-2" style={{ color: '#a1a1aa', lineHeight: 1.7 }}>
                     {d.content}
                   </p>
                   {d.emotions?.length > 0 && (
@@ -180,9 +180,9 @@ export default function DreamHistoryClient() {
                       {d.emotions.map((e: string) => (
                         <span key={e} className="text-xs px-2 py-0.5"
                           style={{
-                            background: 'rgba(74,144,184,0.08)',
-                            border: '1px solid rgba(74,144,184,0.15)',
-                            color: '#4a90b8',
+                            background: 'rgba(90,125,154,0.08)',
+                            border: '1px solid rgba(90,125,154,0.15)',
+                            color: '#5a7d9a',
                             borderRadius: 2,
                           }}>
                           {e}

@@ -4,129 +4,318 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
 const FEATURES = [
-  { title: '心理测评', desc: '6大国际标准量表，AI深度解读', href: '/assessments', icon: '🪞', color: '#e8a820' },
-  { title: 'AI陪伴', desc: '无脸男安静倾听每一份情绪', href: '/companion', icon: '👤', color: '#4a90b8' },
-  { title: '梦境解析', desc: '四重视角，探索潜意识', href: '/dream', icon: '🌙', color: '#8b7ab8' },
-  { title: '互助社区', desc: '匿名分享，彼此温暖', href: '/community', icon: '🏮', color: '#c0392b' },
-  { title: '知识库', desc: '12篇同行评审科普', href: '/knowledge', icon: '📚', color: '#6b9e7a' },
-  { title: '健康工具', desc: '冥想·呼吸·感恩日记', href: '/wellness', icon: '🧘', color: '#1e8568' },
+  {
+    href: '/assessments',
+    title: 'Psychological Assessments',
+    desc: '6 standardized clinical scales with AI-powered interpretation.',
+    accent: '#c4554d',
+    metric: '6',
+    metricLabel: 'Scales',
+  },
+  {
+    href: '/companion',
+    title: 'AI Companion',
+    desc: 'CBT-informed empathetic dialogue. Talk without judgment.',
+    accent: '#6b5b8a',
+    metric: '24/7',
+    metricLabel: 'Available',
+  },
+  {
+    href: '/dream',
+    title: 'Dream Analysis',
+    desc: 'Four theoretical perspectives to decode your subconscious.',
+    accent: '#d4a853',
+    metric: '4',
+    metricLabel: 'Lenses',
+  },
+  {
+    href: '/knowledge',
+    title: 'Knowledge Base',
+    desc: 'Peer-reviewed psychology articles with interactive quizzes.',
+    accent: '#3b8b7a',
+    metric: '12',
+    metricLabel: 'Articles',
+  },
+  {
+    href: '/wellness',
+    title: 'Wellness Toolkit',
+    desc: 'Guided meditation, breathing exercises, gratitude journaling.',
+    accent: '#5a7d9a',
+    metric: '5',
+    metricLabel: 'Tools',
+  },
+  {
+    href: '/community',
+    title: 'Community',
+    desc: 'Anonymous sharing in a warm, supportive space.',
+    accent: '#c4554d',
+    metric: '100+',
+    metricLabel: 'Members',
+  },
+];
+
+const VALUE_PROPS = [
+  {
+    title: 'Science-Backed',
+    desc: 'Every scale is a validated clinical instrument with decades of peer-reviewed research behind it. No pseudoscience, no horoscopes — just rigorous psychometrics.',
+    accent: '#d4a853',
+  },
+  {
+    title: 'AI-Powered Insight',
+    desc: 'DeepSeek provides personalized interpretations that go beyond raw scores. We help you understand not just what the numbers say, but what they mean for you.',
+    accent: '#3b8b7a',
+  },
+  {
+    title: 'Designed for Humans',
+    desc: 'Psychology doesn\'t have to feel clinical. We\'ve wrapped evidence-based tools in the warmth of Spirited Away\'s bathhouse — because healing should feel like coming home.',
+    accent: '#6b5b8a',
+  },
 ];
 
 export default function HomePage() {
-  const [loaded, setLoaded] = useState(false);
-  useEffect(() => { setLoaded(true); }, []);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => { setVisible(true); }, []);
 
   return (
-    <div style={{ background: '#060f18' }}>
+    <div style={{ background: '#0a0a0c' }}>
+      {/* ════════════════ HERO ════════════════ */}
+      <section
+        className={`section-lg transition-all duration-700 ${visible ? 'opacity-100' : 'opacity-0'}`}
+        style={{ paddingTop: 48, paddingBottom: 64 }}
+      >
+        {/* Ambient glow */}
+        <div
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-80 h-80 rounded-full pointer-events-none"
+          style={{
+            background: 'radial-gradient(circle, rgba(212,168,83,0.06), transparent 70%)',
+            filter: 'blur(80px)',
+            zIndex: 0,
+          }}
+        />
 
-      {/* ═══════════════ HERO ═══════════════ */}
-      <section className={`m-section transition-all duration-1000 ${loaded ? 'opacity-100' : 'opacity-0'}`}
-        style={{ paddingTop: 40, paddingBottom: 48 }}>
-
-        {/* Ambient glows */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-72 rounded-full pointer-events-none"
-          style={{ background: 'radial-gradient(circle, rgba(232,168,32,0.06), transparent 70%)', filter: 'blur(60px)', zIndex: 0 }} />
-
-        <div className="relative z-10 text-center">
+        <div className="relative z-10 text-center px-4">
           {/* Label */}
-          <div className="m-label mb-4" style={{ color: 'rgba(232,168,32,0.5)' }}>
-            油屋 · 夢の解析
-          </div>
-
-          {/* Title */}
-          <h1 className="m-title mb-3" style={{ fontSize: 36, letterSpacing: '-0.02em' }}>
-            DreamLab
-          </h1>
-          <p className="m-body mb-10" style={{ color: 'var(--text-muted)', fontSize: 15, maxWidth: 320, margin: '0 auto 40px' }}>
-            基于标准化评估与AI深度解读<br/>探索你内心世界的建筑学
+          <p
+            className="mb-4"
+            style={{
+              fontFamily: 'Inter, sans-serif',
+              fontSize: 11,
+              fontWeight: 500,
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase',
+              color: 'rgba(212,168,83,0.5)',
+            }}
+          >
+            Evidence-Based · AI-Powered · Clinically Informed
           </p>
 
-          {/* CTA */}
-          <Link href="/assessments"
-            className="m-btn m-btn-primary"
-            style={{ display: 'inline-flex', padding: '16px 40px', fontSize: 16, borderRadius: 14 }}>
-            开始第一次测评 →
-          </Link>
+          {/* Headline */}
+          <h1
+            className="mb-2"
+            style={{
+              fontFamily: "'Noto Serif SC', serif",
+              fontWeight: 700,
+              fontSize: 'clamp(44px, 11vw, 80px)',
+              lineHeight: 1.04,
+              letterSpacing: '-0.035em',
+              color: '#f4f4f6',
+            }}
+          >
+            Understand Your
+            <br />
+            <span style={{ color: '#d4a853' }}>Inner World</span>
+          </h1>
 
-          {/* Trust badges */}
-          <div className="flex justify-center gap-8 mt-10 pt-8" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+          {/* Subtitle */}
+          <p
+            className="mb-10 max-w-md mx-auto"
+            style={{
+              fontFamily: 'Inter, sans-serif',
+              fontSize: 16,
+              lineHeight: 1.7,
+              color: '#a1a1aa',
+            }}
+          >
+            A psychology platform built on standardized assessments,
+            AI-powered interpretation, and evidence-based knowledge.
+          </p>
+
+          {/* CTAs */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-16">
+            <Link href="/assessments" className="btn btn-primary" style={{ padding: '16px 36px', fontSize: 16 }}>
+              Start Assessment →
+            </Link>
+            <Link href="/bathhouse" className="btn btn-ghost">
+              Explore Bathhouse
+            </Link>
+          </div>
+
+          {/* Trust indicators */}
+          <div
+            className="inline-flex items-center gap-12 px-10 py-6"
+            style={{
+              background: 'rgba(24,24,27,0.5)',
+              border: '1px solid rgba(255,255,255,0.04)',
+              borderRadius: 16,
+            }}
+          >
             {[
-              { value: '6', label: '标准量表' },
-              { value: '12', label: '同行评审' },
-              { value: '4', label: '理论视角' },
-            ].map(s => (
+              { value: '6', label: 'Clinical Scales' },
+              { value: '12', label: 'Articles' },
+              { value: '4', label: 'Theoretical Lenses' },
+            ].map((s) => (
               <div key={s.label} className="text-center">
-                <div className="m-subtitle" style={{ color: '#f5efe0', fontSize: 22 }}>{s.value}</div>
-                <div className="m-caption mt-1" style={{ color: 'rgba(232,168,32,0.5)', fontSize: 10 }}>{s.label}</div>
+                <div style={{ fontFamily: "'Noto Serif SC', serif", fontSize: 28, fontWeight: 700, color: '#d4a853' }}>
+                  {s.value}
+                </div>
+                <div style={{ fontFamily: 'Inter, sans-serif', fontSize: 10, fontWeight: 500, color: '#71717a', letterSpacing: '0.03em', textTransform: 'uppercase' }}>
+                  {s.label}
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ═══════════════ FEATURES ═══════════════ */}
-      <section className="m-section">
-        <div className="flex items-center gap-3 mb-6">
-          <div style={{ width: 20, height: 1, background: 'rgba(232,168,32,0.15)' }} />
-          <span className="m-label" style={{ color: 'rgba(232,168,32,0.5)' }}>平台功能</span>
-        </div>
+      {/* ════════════════ FEATURES ════════════════ */}
+      <section className="section" style={{ paddingTop: 0 }}>
+        <div className="max-w-6xl mx-auto px-4">
+          {/* Section label */}
+          <div className="flex items-center gap-3 mb-10">
+            <div style={{ width: 24, height: 1, background: 'rgba(212,168,83,0.15)' }} />
+            <span className="t-label">Platform Features</span>
+          </div>
 
-        <div className="grid grid-cols-2 gap-3">
-          {FEATURES.map((f, i) => (
-            <Link key={f.href} href={f.href}
-              className="m-card m-card-interactive flex flex-col items-center text-center"
-              style={{ animation: `card-rise 0.4s ease-out ${i * 0.06}s both` }}>
-              <span style={{ fontSize: 32, marginBottom: 12, lineHeight: 1 }}>{f.icon}</span>
-              <h3 className="m-subtitle mb-1" style={{ fontSize: 15 }}>{f.title}</h3>
-              <p className="m-caption" style={{ fontSize: 11 }}>{f.desc}</p>
-            </Link>
-          ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {FEATURES.map((f, i) => (
+              <Link
+                key={f.href}
+                href={f.href}
+                className="card card-interactive group"
+                style={{ animation: `fade-up 0.4s ease-out ${i * 0.05}s both` }}
+              >
+                {/* Accent line */}
+                <div
+                  className="mb-5 transition-all duration-300"
+                  style={{ width: 28, height: 3, background: f.accent, borderRadius: 2 }}
+                />
+
+                {/* Title */}
+                <h3
+                  className="mb-2"
+                  style={{
+                    fontFamily: "'Noto Serif SC', serif",
+                    fontSize: 18,
+                    fontWeight: 700,
+                    color: '#f4f4f6',
+                  }}
+                >
+                  {f.title}
+                </h3>
+
+                {/* Description */}
+                <p
+                  className="mb-5 text-sm leading-relaxed"
+                  style={{ color: '#71717a' }}
+                >
+                  {f.desc}
+                </p>
+
+                {/* Metric */}
+                <div className="flex items-baseline gap-2 mt-auto">
+                  <span style={{ fontFamily: "'Noto Serif SC', serif", fontSize: 22, fontWeight: 700, color: f.accent }}>
+                    {f.metric}
+                  </span>
+                  <span className="t-caption">{f.metricLabel}</span>
+                </div>
+
+                {/* Arrow on hover */}
+                <div
+                  className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-300"
+                  style={{ color: f.accent, fontSize: 18 }}
+                >
+                  →
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ═══════════════ VALUE PROPS ═══════════════ */}
-      <section className="m-section">
-        <h2 className="m-title mb-2" style={{ fontSize: 20 }}>为什么选择 DreamLab</h2>
-        <p className="m-body mb-6" style={{ fontSize: 14, color: 'var(--text-muted)' }}>
-          科学严谨，人文温暖——我们不只给你分数，更帮你理解分数背后的意义。
-        </p>
-        <div className="space-y-3">
-          {[
-            { title: '科学基础', desc: '每项量表都是经过数十年同行评审验证的临床工具', accent: '#e8a820' },
-            { title: 'AI深度解读', desc: 'DeepSeek驱动，不仅告诉你数字，更告诉你这些数字对你意味着什么', accent: '#4a90b8' },
-            { title: '为人而设计', desc: '我们不认为心理学就该冷冰冰——疗愈应该感觉温暖', accent: '#c0392b' },
-          ].map((item, i) => (
-            <div key={i} className="m-card" style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
-              <div style={{ width: 4, height: 32, background: item.accent, borderRadius: 2, marginTop: 4, flexShrink: 0 }} />
-              <div>
-                <h3 className="m-subtitle mb-1" style={{ fontSize: 15 }}>{item.title}</h3>
-                <p className="m-caption" style={{ fontSize: 13 }}>{item.desc}</p>
+      {/* ════════════════ VALUE PROPS ════════════════ */}
+      <section className="section-lg">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="flex items-center gap-3 mb-4">
+            <div style={{ width: 24, height: 1, background: 'rgba(212,168,83,0.15)' }} />
+            <span className="t-label">Why DreamLab</span>
+          </div>
+          <h2 className="t-display mb-3">Science meets warmth</h2>
+          <p className="t-body mb-10 max-w-lg">
+            We don&apos;t just give you scores — we help you understand what they mean for your life.
+          </p>
+
+          <div className="space-y-3">
+            {VALUE_PROPS.map((vp, i) => (
+              <div
+                key={i}
+                className="card"
+                style={{
+                  display: 'flex',
+                  gap: 20,
+                  alignItems: 'flex-start',
+                  animation: `fade-up 0.4s ease-out ${i * 0.08}s both`,
+                }}
+              >
+                <div
+                  style={{
+                    width: 4,
+                    height: 40,
+                    background: vp.accent,
+                    borderRadius: 2,
+                    marginTop: 4,
+                    flexShrink: 0,
+                  }}
+                />
+                <div>
+                  <h3 className="t-subtitle mb-1">{vp.title}</h3>
+                  <p className="t-caption" style={{ lineHeight: 1.7 }}>{vp.desc}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ═══════════════ EXPLORE LINKS ═══════════════ */}
-      <section className="m-section" style={{ paddingBottom: 48 }}>
-        <div className="flex items-center gap-3 mb-5">
-          <div style={{ width: 20, height: 1, background: 'rgba(232,168,32,0.15)' }} />
-          <span className="m-label" style={{ color: 'rgba(232,168,32,0.5)' }}>继续探索</span>
-        </div>
-        <div className="grid grid-cols-2 gap-2">
-          {[
-            { href: '/bathhouse', label: '油屋大厅', icon: '🏯' },
-            { href: '/spirited', label: '千寻之旅', icon: '🐉' },
-            { href: '/courses', label: '系统课程', icon: '📜' },
-            { href: '/profile/milestones', label: '成长记录', icon: '✨' },
-          ].map(item => (
-            <Link key={item.href} href={item.href}
-              className="m-card m-card-interactive flex items-center gap-3"
-              style={{ padding: '16px 20px' }}>
-              <span style={{ fontSize: 22 }}>{item.icon}</span>
-              <span className="m-subtitle" style={{ fontSize: 14 }}>{item.label}</span>
-            </Link>
-          ))}
+      {/* ════════════════ EXPLORE ════════════════ */}
+      <section className="section" style={{ paddingBottom: 48 }}>
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="flex items-center gap-3 mb-6">
+            <div style={{ width: 24, height: 1, background: 'rgba(212,168,83,0.15)' }} />
+            <span className="t-label">Continue Exploring</span>
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            {[
+              { href: '/bathhouse', label: 'Bathhouse', desc: 'Spirited Away', accent: '#c4554d' },
+              { href: '/spirited', label: 'Spirited Journey', desc: '5-floor adventure', accent: '#d4a853' },
+              { href: '/courses', label: 'Courses', desc: 'Freud · Jung · Science', accent: '#6b5b8a' },
+              { href: '/profile/milestones', label: 'Growth', desc: 'Track your progress', accent: '#3b8b7a' },
+            ].map((item, i) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="card card-interactive"
+                style={{ padding: '18px 20px', animation: `fade-up 0.4s ease-out ${i * 0.06 + 0.3}s both` }}
+              >
+                <div className="flex items-center gap-3">
+                  <div style={{ width: 4, height: 4, background: item.accent, borderRadius: '50%' }} />
+                  <div>
+                    <p className="t-subtitle" style={{ fontSize: 14 }}>{item.label}</p>
+                    <p className="t-caption" style={{ fontSize: 11 }}>{item.desc}</p>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
     </div>

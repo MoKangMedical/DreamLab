@@ -79,8 +79,8 @@ export default function GhibliAtmosphere() {
             width: f.size,
             height: f.size,
             borderRadius: '50%',
-            background: `radial-gradient(circle at 40% 40%, #fef3c7, #e8a820)`,
-            boxShadow: `0 0 ${f.size * 3}px rgba(232,168,32,${f.glow}), 0 0 ${f.size * 6}px rgba(232,168,32,${f.glow * 0.5})`,
+            background: `radial-gradient(circle at 40% 40%, #fef3c7, #d4a853)`,
+            boxShadow: `0 0 ${f.size * 3}px rgba(212,168,83,${f.glow}), 0 0 ${f.size * 6}px rgba(212,168,83,${f.glow * 0.5})`,
             opacity: 0,
             animation: `firefly-float ${f.duration} ${f.delay} infinite ease-in-out`,
             // @ts-ignore

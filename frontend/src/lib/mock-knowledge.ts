@@ -2,12 +2,12 @@
 // Uses template literals for article content (clean, no escaping issues)
 
 export const MOCK_KNOWLEDGE_CATEGORIES = [
-  { id: 1, name: 'CBT 认知行为', slug: 'cbt', description: '认知行为疗法——改变思维，改变感受', icon: '\u{1F9E0}', color: '#e8a820' },
-  { id: 2, name: '正念与冥想', slug: 'mindfulness', description: '当下的力量——注意力的科学', icon: '\u{1F9D8}', color: '#6b9e7a' },
-  { id: 3, name: '依恋理论', slug: 'attachment', description: '从摇篮到坟墓——关系如何塑造我们', icon: '\u{1F49E}', color: '#c0392b' },
-  { id: 4, name: '神经科学', slug: 'neuroscience', description: '大脑如何塑造心智', icon: '\u{1F52C}', color: '#4a90b8' },
-  { id: 5, name: '积极心理学', slug: 'positive', description: '不只是修复问题——发现什么让人生值得活', icon: '\u2728', color: '#8b7ab8' },
-  { id: 6, name: '睡眠科学', slug: 'sleep', description: '理解睡眠，理解心理健康', icon: '\u{1F319}', color: '#1e8568' },
+  { id: 1, name: 'CBT 认知行为', slug: 'cbt', description: '认知行为疗法——改变思维，改变感受', icon: '\u{1F9E0}', color: '#d4a853' },
+  { id: 2, name: '正念与冥想', slug: 'mindfulness', description: '当下的力量——注意力的科学', icon: '\u{1F9D8}', color: '#3b8b7a' },
+  { id: 3, name: '依恋理论', slug: 'attachment', description: '从摇篮到坟墓——关系如何塑造我们', icon: '\u{1F49E}', color: '#c4554d' },
+  { id: 4, name: '神经科学', slug: 'neuroscience', description: '大脑如何塑造心智', icon: '\u{1F52C}', color: '#5a7d9a' },
+  { id: 5, name: '积极心理学', slug: 'positive', description: '不只是修复问题——发现什么让人生值得活', icon: '\u2728', color: '#6b5b8a' },
+  { id: 6, name: '睡眠科学', slug: 'sleep', description: '理解睡眠，理解心理健康', icon: '\u{1F319}', color: '#3b8b7a' },
 ];
 
 export const MOCK_KNOWLEDGE_ARTICLES = [

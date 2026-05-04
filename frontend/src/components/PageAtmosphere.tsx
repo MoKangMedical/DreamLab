@@ -9,9 +9,9 @@ export default function PageAtmosphere() {
     <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 0 }}>
       {/* 灯笼柔光 — 3个大圆，模拟油屋灯光 */}
       {[
-        { color: 'rgba(232,168,32,0.03)', top: '8%', left: '15%', size: 350 },
-        { color: 'rgba(192,57,43,0.02)', top: '55%', left: '80%', size: 280 },
-        { color: 'rgba(30,133,104,0.02)', top: '75%', left: '25%', size: 300 },
+        { color: 'rgba(212,168,83,0.03)', top: '8%', left: '15%', size: 350 },
+        { color: 'rgba(196,85,77,0.02)', top: '55%', left: '80%', size: 280 },
+        { color: 'rgba(59,139,122,0.02)', top: '75%', left: '25%', size: 300 },
       ].map((p, i) => (
         <div
           key={`atmo-${i}`}

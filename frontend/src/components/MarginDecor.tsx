@@ -83,7 +83,7 @@ export default function MarginDecor({ side }: { side: 'left' | 'right' }) {
           width: f.size * 8, height: f.size * 8,
           marginLeft: -(f.size * 4), marginTop: -(f.size * 4),
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(232,168,32,0.04) 0%, transparent 60%)',
+          background: 'radial-gradient(circle, rgba(212,168,83,0.04) 0%, transparent 60%)',
           filter: 'blur(4px)',
         }} />
         <div style={{
@@ -91,7 +91,7 @@ export default function MarginDecor({ side }: { side: 'left' | 'right' }) {
           width: f.size * 4, height: f.size * 4,
           marginLeft: -(f.size * 2), marginTop: -(f.size * 2),
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(232,168,32,0.10) 0%, rgba(232,168,32,0.03) 50%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(212,168,83,0.10) 0%, rgba(212,168,83,0.03) 50%, transparent 70%)',
           filter: isHovered ? 'blur(1px)' : 'blur(3px)',
           transition: 'filter 0.4s',
         }} />
@@ -100,9 +100,9 @@ export default function MarginDecor({ side }: { side: 'left' | 'right' }) {
           width: f.size * 0.5, height: f.size * 0.5,
           marginLeft: -(f.size * 0.25), marginTop: -(f.size * 0.25),
           borderRadius: '50%',
-          background: 'radial-gradient(circle, #fffef8 0%, #e8a820 100%)',
+          background: 'radial-gradient(circle, #fffef8 0%, #d4a853 100%)',
           boxShadow: isHovered
-            ? `0 0 ${f.size * 2}px #fef7d4, 0 0 ${f.size * 4}px rgba(232,168,32,0.5)`
+            ? `0 0 ${f.size * 2}px #fef7d4, 0 0 ${f.size * 4}px rgba(212,168,83,0.5)`
             : `0 0 ${f.size * 0.8}px rgba(254,249,195,0.25)`,
           transition: 'box-shadow 0.4s',
         }} />
@@ -137,13 +137,13 @@ export default function MarginDecor({ side }: { side: 'left' | 'right' }) {
             fontFamily: "'Noto Serif SC', serif",
             fontWeight: 900,
             color: 'transparent',
-            background: 'linear-gradient(180deg, rgba(232,168,32,0.06) 0%, rgba(232,168,32,0.02) 100%)',
+            background: 'linear-gradient(180deg, rgba(212,168,83,0.06) 0%, rgba(212,168,83,0.02) 100%)',
             WebkitBackgroundClip: 'text',
             backgroundClip: 'text',
             animation: `float-kanji 14s ${i * 4}s infinite ease-in-out`,
             userSelect: 'none',
             filter: 'blur(0.5px)',
-            textShadow: '0 0 30px rgba(232,168,32,0.03)',
+            textShadow: '0 0 30px rgba(212,168,83,0.03)',
           }}
         >
           {k}
@@ -185,7 +185,7 @@ export default function MarginDecor({ side }: { side: 'left' | 'right' }) {
         }}>
           <div style={{
             width: 12, height: 12, borderRadius: '50%',
-            background: 'radial-gradient(circle at 35% 35%, #5a5246 0%, #18181b 60%, #060f18 100%)',
+            background: 'radial-gradient(circle at 35% 35%, #52525b 0%, #18181b 60%, #0a0a0c 100%)',
             boxShadow: '0 0 3px rgba(0,0,0,0.5)',
           }} />
           <div style={{
@@ -201,25 +201,25 @@ export default function MarginDecor({ side }: { side: 'left' | 'right' }) {
         <div style={{
           position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
           zIndex: 400, maxWidth: 260, pointerEvents: 'auto',
-          background: 'rgba(9,9,11,0.96)', border: '1px solid rgba(232,168,32,0.18)',
+          background: 'rgba(9,9,11,0.96)', border: '1px solid rgba(212,168,83,0.18)',
           borderRadius: 1, padding: '16px 20px',
-          boxShadow: '0 8px 40px rgba(0,0,0,0.6), 0 0 30px rgba(232,168,32,0.04)',
+          boxShadow: '0 8px 40px rgba(0,0,0,0.6), 0 0 30px rgba(212,168,83,0.04)',
           animation: 'bubble-rise 0.5s ease-out',
         }}>
-          <p style={{ fontSize: 13, color: '#e8a820', lineHeight: 2, fontFamily: "'Noto Serif SC', serif", margin: '0 0 10px', whiteSpace: 'pre-line', letterSpacing: '0.02em' }}>
+          <p style={{ fontSize: 13, color: '#d4a853', lineHeight: 2, fontFamily: "'Noto Serif SC', serif", margin: '0 0 10px', whiteSpace: 'pre-line', letterSpacing: '0.02em' }}>
             {whisper.haiku}
           </p>
-          <div style={{ width: 24, height: 1, background: 'linear-gradient(90deg, rgba(232,168,32,0.3), transparent)', marginBottom: 8 }} />
-          <p style={{ fontSize: 12, color: '#b8ad9a', lineHeight: 1.7, margin: 0 }}>
+          <div style={{ width: 24, height: 1, background: 'linear-gradient(90deg, rgba(212,168,83,0.3), transparent)', marginBottom: 8 }} />
+          <p style={{ fontSize: 12, color: '#a1a1aa', lineHeight: 1.7, margin: 0 }}>
             {whisper.message}
           </p>
           <div style={{ marginTop: 10, display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span style={{ fontSize: 10, padding: '1px 10px', background: 'rgba(232,168,32,0.08)', color: '#e8a820', borderRadius: 1, letterSpacing: '0.05em' }}>
+            <span style={{ fontSize: 10, padding: '1px 10px', background: 'rgba(212,168,83,0.08)', color: '#d4a853', borderRadius: 1, letterSpacing: '0.05em' }}>
               {whisper.feeling}
             </span>
           </div>
           <button onClick={() => setWhisper(null)}
-            style={{ position: 'absolute', top: 8, right: 10, background: 'none', border: 'none', color: '#5a5246', cursor: 'pointer', fontSize: 11, padding: 2 }}>
+            style={{ position: 'absolute', top: 8, right: 10, background: 'none', border: 'none', color: '#52525b', cursor: 'pointer', fontSize: 11, padding: 2 }}>
             ✕
           </button>
         </div>
@@ -228,8 +228,8 @@ export default function MarginDecor({ side }: { side: 'left' | 'right' }) {
         <div style={{
           position: 'fixed', bottom: 40, left: '50%', transform: 'translateX(-50%)',
           zIndex: 400, padding: '10px 20px',
-          background: 'rgba(9,9,11,0.92)', border: '1px solid rgba(232,168,32,0.12)', borderRadius: 1,
-          fontSize: 12, color: '#e8a820', fontFamily: "'Noto Serif SC', serif",
+          background: 'rgba(9,9,11,0.92)', border: '1px solid rgba(212,168,83,0.12)', borderRadius: 1,
+          fontSize: 12, color: '#d4a853', fontFamily: "'Noto Serif SC', serif",
           display: 'flex', alignItems: 'center', gap: 10,
         }}>
           <span style={{ display: 'inline-block', animation: 'twinkle 0.8s infinite' }}>✦</span>

@@ -35,7 +35,7 @@ export default function SpiritedFloorMap() {
       <div className="text-center py-16">
         <div className="inline-block w-8 h-8 rotate-45 rounded-sm animate-pulse"
           style={{ background: 'linear-gradient(135deg, var(--geo-coral), var(--accent-purple))', opacity: 0.5 }} />
-        <p className="text-[#7a7062] mt-4 text-sm">探索中...</p>
+        <p className="text-[#71717a] mt-4 text-sm">探索中...</p>
       </div>
     );
   }
@@ -155,7 +155,7 @@ export default function SpiritedFloorMap() {
                         {f.name}
                       </h3>
                     </div>
-                    <p className="text-xs text-[#7a7062]">{f.desc} · {FLOOR_THEMES[i]}</p>
+                    <p className="text-xs text-[#71717a]">{f.desc} · {FLOOR_THEMES[i]}</p>
                   </div>
 
                   {/* 状态徽章 */}
@@ -193,7 +193,7 @@ export default function SpiritedFloorMap() {
                           background: `linear-gradient(90deg, ${f.colorFrom}, ${f.colorTo})`,
                         }} />
                     </div>
-                    <p className="text-[10px] text-[#7a7062] mt-1.5">探索进度：{currentFloor} / 5 层</p>
+                    <p className="text-[10px] text-[#71717a] mt-1.5">探索进度：{currentFloor} / 5 层</p>
                   </div>
                 )}
               </div>

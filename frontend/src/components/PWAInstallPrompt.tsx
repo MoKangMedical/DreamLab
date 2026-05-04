@@ -42,18 +42,18 @@ export default function PWAInstallPrompt() {
       <div
         className="p-4 flex items-center gap-3 shadow-2xl"
         style={{
-          background: '#0d1a28',
-          border: '1px solid rgba(232,168,32,0.2)',
+          background: '#18181b',
+          border: '1px solid rgba(212,168,83,0.2)',
           borderRadius: 14,
           backdropFilter: 'blur(20px)',
         }}
       >
         <span style={{ fontSize: 28 }}>📲</span>
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-medium" style={{ color: '#f5efe0' }}>
+          <p className="text-sm font-medium" style={{ color: '#f4f4f6' }}>
             添加到桌面
           </p>
-          <p className="text-xs" style={{ color: '#7a7062' }}>
+          <p className="text-xs" style={{ color: '#71717a' }}>
             离线可用 · 如原生App般流畅
           </p>
         </div>
@@ -61,8 +61,8 @@ export default function PWAInstallPrompt() {
           onClick={handleInstall}
           className="shrink-0 px-4 py-2 text-xs font-semibold transition-all hover:scale-105"
           style={{
-            background: '#e8a820',
-            color: '#060f18',
+            background: '#d4a853',
+            color: '#0a0a0c',
             borderRadius: 10,
             border: 'none',
             cursor: 'pointer',
@@ -74,7 +74,7 @@ export default function PWAInstallPrompt() {
           onClick={() => setShowPrompt(false)}
           className="shrink-0 text-xs transition-colors"
           style={{
-            color: '#5a5246',
+            color: '#52525b',
             background: 'none',
             border: 'none',
             cursor: 'pointer',

@@ -23,10 +23,10 @@ interface ArticleDetail extends Article {
 
 // ════════════════ 学科标签 ════════════════
 const EVIDENCE_BADGES: Record<string, { label: string; color: string }> = {
-  '强': { label: '强证据', color: '#6b9e7a' },
-  '中等': { label: '中等证据', color: '#e8a820' },
-  '初步': { label: '初步证据', color: '#c0392b' },
-  '理论': { label: '理论', color: '#8b7ab8' },
+  '强': { label: '强证据', color: '#3b8b7a' },
+  '中等': { label: '中等证据', color: '#d4a853' },
+  '初步': { label: '初步证据', color: '#c4554d' },
+  '理论': { label: '理论', color: '#6b5b8a' },
 };
 
 export default function KnowledgePage() {
@@ -147,10 +147,10 @@ export default function KnowledgePage() {
   // ═══════════════════════════════════════════════
   if (detail) {
     return (
-      <div style={{ background: '#060f18', minHeight: '100vh' }}>
+      <div style={{ background: '#0a0a0c', minHeight: '100vh' }}>
         <div className="max-w-4xl mx-auto px-4 md:px-6 pt-14 md:pt-20 pb-32">
           <button onClick={() => setDetail(null)}
-            className="text-xs mb-8 transition-colors" style={{ color: '#5a5246', background: 'none', border: 'none', cursor: 'pointer' }}>
+            className="text-xs mb-8 transition-colors" style={{ color: '#52525b', background: 'none', border: 'none', cursor: 'pointer' }}>
             ← 返回知识库
           </button>
 
@@ -167,38 +167,38 @@ export default function KnowledgePage() {
                     {EVIDENCE_BADGES[detail.evidence_level].label}
                   </span>
                 )}
-                <span className="text-xs" style={{ color: '#5a5246' }}>{detail.reading_time} 分钟</span>
+                <span className="text-xs" style={{ color: '#52525b' }}>{detail.reading_time} 分钟</span>
               </div>
             )}
-            <h1 className="font-bold mb-3" style={{ fontFamily: "'Noto Serif SC', serif", fontSize: 'clamp(24px, 4vw, 42px)', color: '#f5efe0', lineHeight: 1.3 }}>
+            <h1 className="font-bold mb-3" style={{ fontFamily: "'Noto Serif SC', serif", fontSize: 'clamp(24px, 4vw, 42px)', color: '#f4f4f6', lineHeight: 1.3 }}>
               {detail.title}
             </h1>
             {detail.key_concepts?.length > 0 && (
               <div className="flex flex-wrap gap-1.5 mb-4">
                 {detail.key_concepts.map((k: string) => (
-                  <span key={k} className="text-xs px-2 py-1" style={{ background: 'rgba(232,168,32,0.06)', border: '1px solid rgba(232,168,32,0.12)', color: '#e8a820', borderRadius: 2 }}>
+                  <span key={k} className="text-xs px-2 py-1" style={{ background: 'rgba(212,168,83,0.06)', border: '1px solid rgba(212,168,83,0.12)', color: '#d4a853', borderRadius: 2 }}>
                     {k}
                   </span>
                 ))}
               </div>
             )}
             {detail.source && (
-              <p className="text-xs leading-relaxed" style={{ color: '#5a5246' }}>
+              <p className="text-xs leading-relaxed" style={{ color: '#52525b' }}>
                 📚 {detail.source}
               </p>
             )}
           </div>
 
           {/* 文章正文 (简易Markdown渲染) */}
-          <div className="p-6 md:p-8 mb-8" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
-            <div className="prose prose-invert max-w-none text-sm leading-relaxed" style={{ color: '#b8ad9a', lineHeight: 2 }}
+          <div className="p-6 md:p-8 mb-8" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+            <div className="prose prose-invert max-w-none text-sm leading-relaxed" style={{ color: '#a1a1aa', lineHeight: 2 }}
               dangerouslySetInnerHTML={{
                 __html: detail.content
-                  .replace(/^### (.+)$/gm, '<h3 style="color:#f5efe0;font-size:16px;font-weight:700;margin:24px 0 8px">$1</h3>')
-                  .replace(/^## (.+)$/gm, '<h2 style="color:#f5efe0;font-size:20px;font-weight:700;margin:32px 0 12px;font-family:\'Noto Serif SC\',serif">$1</h2>')
-                  .replace(/^# (.+)$/gm, '<h1 style="color:#f5efe0;font-size:26px;font-weight:700;margin:0 0 20px;font-family:\'Noto Serif SC\',serif">$1</h1>')
-                  .replace(/^- (.+)$/gm, '<li style="margin-left:16px;color:#b8ad9a">$1</li>')
-                  .replace(/\*\*(.+?)\*\*/g, '<strong style="color:#f5efe0">$1</strong>')
+                  .replace(/^### (.+)$/gm, '<h3 style="color:#f4f4f6;font-size:16px;font-weight:700;margin:24px 0 8px">$1</h3>')
+                  .replace(/^## (.+)$/gm, '<h2 style="color:#f4f4f6;font-size:20px;font-weight:700;margin:32px 0 12px;font-family:\'Noto Serif SC\',serif">$1</h2>')
+                  .replace(/^# (.+)$/gm, '<h1 style="color:#f4f4f6;font-size:26px;font-weight:700;margin:0 0 20px;font-family:\'Noto Serif SC\',serif">$1</h1>')
+                  .replace(/^- (.+)$/gm, '<li style="margin-left:16px;color:#a1a1aa">$1</li>')
+                  .replace(/\*\*(.+?)\*\*/g, '<strong style="color:#f4f4f6">$1</strong>')
                   .replace(/\*(.+?)\*/g, '<em>$1</em>')
                   .replace(/\n\n/g, '<br/><br/>')
                   .replace(/\n/g, '<br/>')
@@ -208,27 +208,27 @@ export default function KnowledgePage() {
 
           {/* 测验区 */}
           {detail.quiz?.length > 0 && (
-            <div className="p-6 md:p-8 mb-8" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
-              <h2 className="font-bold text-xl mb-6" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f5efe0' }}>
+            <div className="p-6 md:p-8 mb-8" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+              <h2 className="font-bold text-xl mb-6" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>
                 📝 知识自测
               </h2>
 
               {!quizState ? (
                 <div>
-                  <p className="text-sm mb-4" style={{ color: '#7a7062' }}>
+                  <p className="text-sm mb-4" style={{ color: '#71717a' }}>
                     共 {detail.quiz.length} 题，测试你对文章内容的理解
                   </p>
                   <button onClick={() => setQuizState({ answers: new Array(detail.quiz.length).fill(-1), submitted: false, result: null })}
                     className="px-6 py-3 text-sm font-semibold transition-all"
-                    style={{ background: '#e8a820', color: '#060f18', borderRadius: 2, border: 'none', cursor: 'pointer' }}>
+                    style={{ background: '#d4a853', color: '#0a0a0c', borderRadius: 2, border: 'none', cursor: 'pointer' }}>
                     开始测验 →
                   </button>
                 </div>
               ) : (
                 <div className="space-y-6">
                   {detail.quiz.map((q: any, qi: number) => (
-                    <div key={qi} className="p-4" style={{ background: '#060f18', borderRadius: 2 }}>
-                      <p className="text-sm font-bold mb-3" style={{ color: '#f5efe0' }}>
+                    <div key={qi} className="p-4" style={{ background: '#0a0a0c', borderRadius: 2 }}>
+                      <p className="text-sm font-bold mb-3" style={{ color: '#f4f4f6' }}>
                         {qi + 1}. {q.question}
                       </p>
                       <div className="space-y-2">
@@ -246,9 +246,9 @@ export default function KnowledgePage() {
                               }}
                               className="w-full text-left text-sm px-4 py-2.5 transition-all"
                               style={{
-                                background: isCorrect ? 'rgba(107,158,122,0.12)' : isWrongSelected ? 'rgba(192,57,43,0.12)' : isSelected ? 'rgba(232,168,32,0.08)' : 'transparent',
-                                border: `1px solid ${isCorrect ? 'rgba(107,158,122,0.3)' : isWrongSelected ? 'rgba(192,57,43,0.3)' : isSelected ? 'rgba(232,168,32,0.25)' : 'rgba(255,255,255,0.06)'}`,
-                                color: isCorrect ? '#6b9e7a' : isWrongSelected ? '#c0392b' : isSelected ? '#e8a820' : '#b8ad9a',
+                                background: isCorrect ? 'rgba(59,139,122,0.12)' : isWrongSelected ? 'rgba(196,85,77,0.12)' : isSelected ? 'rgba(212,168,83,0.08)' : 'transparent',
+                                border: `1px solid ${isCorrect ? 'rgba(59,139,122,0.3)' : isWrongSelected ? 'rgba(196,85,77,0.3)' : isSelected ? 'rgba(212,168,83,0.25)' : 'rgba(255,255,255,0.06)'}`,
+                                color: isCorrect ? '#3b8b7a' : isWrongSelected ? '#c4554d' : isSelected ? '#d4a853' : '#a1a1aa',
                                 borderRadius: 2,
                                 cursor: quizState.submitted ? 'default' : 'pointer',
                               }}>
@@ -260,7 +260,7 @@ export default function KnowledgePage() {
                         })}
                       </div>
                       {quizState.submitted && quizState.result?.details?.[qi] && (
-                        <p className="text-xs mt-2" style={{ color: '#7a7062' }}>
+                        <p className="text-xs mt-2" style={{ color: '#71717a' }}>
                           {q.explanation}
                         </p>
                       )}
@@ -270,20 +270,20 @@ export default function KnowledgePage() {
                   {!quizState.submitted && quizState.answers.every((a: number) => a >= 0) && (
                     <button onClick={submitQuiz}
                       className="w-full py-3 text-sm font-semibold transition-all"
-                      style={{ background: '#e8a820', color: '#060f18', borderRadius: 2, border: 'none', cursor: 'pointer' }}>
+                      style={{ background: '#d4a853', color: '#0a0a0c', borderRadius: 2, border: 'none', cursor: 'pointer' }}>
                       提交答案
                     </button>
                   )}
 
                   {quizState.submitted && quizState.result && (
-                    <div className="p-5 text-center" style={{ background: '#060f18', borderRadius: 2 }}>
+                    <div className="p-5 text-center" style={{ background: '#0a0a0c', borderRadius: 2 }}>
                       <div className="text-4xl mb-2">
                         {quizState.result.percentage >= 80 ? '🎉' : quizState.result.percentage >= 50 ? '👍' : '📚'}
                       </div>
-                      <p className="text-lg font-bold mb-1" style={{ color: '#f5efe0' }}>
+                      <p className="text-lg font-bold mb-1" style={{ color: '#f4f4f6' }}>
                         {quizState.result.score} / {quizState.result.total} 正确
                       </p>
-                      <p className="text-sm" style={{ color: '#7a7062' }}>
+                      <p className="text-sm" style={{ color: '#71717a' }}>
                         正确率 {quizState.result.percentage}%
                       </p>
                     </div>
@@ -301,7 +301,7 @@ export default function KnowledgePage() {
   // 主列表视图
   // ═══════════════════════════════════════════════
   return (
-    <div style={{ background: '#060f18', minHeight: '100vh' }}>
+    <div style={{ background: '#0a0a0c', minHeight: '100vh' }}>
       <div className="max-w-6xl mx-auto px-4 md:px-6 pt-14 md:pt-20 pb-32">
         
         {/* Hero */}
@@ -310,12 +310,12 @@ export default function KnowledgePage() {
           <h1 className="font-bold mb-4" style={{
             fontFamily: "'Noto Serif SC', serif",
             fontSize: 'clamp(32px, 5vw, 56px)',
-            color: '#f5efe0',
+            color: '#f4f4f6',
             lineHeight: 1.1,
           }}>
             证据级知识库
           </h1>
-          <p className="max-w-lg mx-auto text-sm leading-relaxed" style={{ color: '#7a7062' }}>
+          <p className="max-w-lg mx-auto text-sm leading-relaxed" style={{ color: '#71717a' }}>
             从焦虑到睡眠、从CBT到正念——每篇文章都有同行评审来源。
             不只是科普，每一句话都有据可查。
           </p>
@@ -331,8 +331,8 @@ export default function KnowledgePage() {
             placeholder="搜索文章...（如：焦虑、CBT、睡眠）"
             className="w-full text-sm px-5 py-3"
             style={{
-              background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2,
-              color: '#b8ad9a', outline: 'none',
+              background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2,
+              color: '#a1a1aa', outline: 'none',
             }}
           />
         </div>
@@ -344,9 +344,9 @@ export default function KnowledgePage() {
               onClick={() => { setSelectedCat(null); fetchArticles(null, search); }}
               className="text-xs px-4 py-2 transition-all"
               style={{
-                background: !selectedCat ? 'rgba(232,168,32,0.08)' : 'transparent',
-                border: `1px solid ${!selectedCat ? 'rgba(232,168,32,0.2)' : 'rgba(255,255,255,0.06)'}`,
-                color: !selectedCat ? '#e8a820' : '#5a5246',
+                background: !selectedCat ? 'rgba(212,168,83,0.08)' : 'transparent',
+                border: `1px solid ${!selectedCat ? 'rgba(212,168,83,0.2)' : 'rgba(255,255,255,0.06)'}`,
+                color: !selectedCat ? '#d4a853' : '#52525b',
                 borderRadius: 2, cursor: 'pointer',
               }}>
               全部
@@ -358,7 +358,7 @@ export default function KnowledgePage() {
                 style={{
                   background: selectedCat === cat.slug ? cat.color + '12' : 'transparent',
                   border: `1px solid ${selectedCat === cat.slug ? cat.color + '30' : 'rgba(255,255,255,0.06)'}`,
-                  color: selectedCat === cat.slug ? cat.color : '#5a5246',
+                  color: selectedCat === cat.slug ? cat.color : '#52525b',
                   borderRadius: 2, cursor: 'pointer',
                 }}>
                 <span>{cat.icon}</span> {cat.name}
@@ -372,7 +372,7 @@ export default function KnowledgePage() {
           <div className="mb-16">
             <div className="flex items-center gap-3 mb-6">
               <div style={{ width: 32, height: 1, background: 'rgba(255,255,255,0.06)' }} />
-              <span className="text-xs tracking-[0.2em] uppercase" style={{ color: 'rgba(232,168,32,0.5)' }}>精选推荐</span>
+              <span className="text-xs tracking-[0.2em] uppercase" style={{ color: 'rgba(212,168,83,0.5)' }}>精选推荐</span>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {featured.map(a => (
@@ -386,7 +386,7 @@ export default function KnowledgePage() {
         <div>
           <div className="flex items-center gap-3 mb-6">
             <div style={{ width: 32, height: 1, background: 'rgba(255,255,255,0.06)' }} />
-            <span className="text-xs tracking-[0.2em] uppercase" style={{ color: 'rgba(232,168,32,0.5)' }}>
+            <span className="text-xs tracking-[0.2em] uppercase" style={{ color: 'rgba(212,168,83,0.5)' }}>
               {selectedCat ? categories.find(c => c.slug === selectedCat)?.name : '全部文章'}
               {articles.length > 0 && ` (${articles.length})`}
             </span>
@@ -394,7 +394,7 @@ export default function KnowledgePage() {
           {loading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {[1,2,3,4].map(i => (
-                <div key={i} className="p-6 animate-pulse" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+                <div key={i} className="p-6 animate-pulse" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
                   <div className="h-5 w-2/3 mb-3" style={{ background: '#ffffff05', borderRadius: 1 }} />
                   <div className="h-4 w-full mb-2" style={{ background: '#ffffff05', borderRadius: 1 }} />
                   <div className="h-4 w-1/2" style={{ background: '#ffffff05', borderRadius: 1 }} />
@@ -404,7 +404,7 @@ export default function KnowledgePage() {
           ) : articles.length === 0 ? (
             <div className="text-center py-16">
               <div className="text-5xl mb-4">📭</div>
-              <p className="text-sm" style={{ color: '#7a7062' }}>
+              <p className="text-sm" style={{ color: '#71717a' }}>
                 {search ? '没有找到匹配的文章' : '暂无文章'}
               </p>
             </div>
@@ -426,7 +426,7 @@ function ArticleCard({ article, onClick }: { article: Article; onClick: () => vo
   return (
     <div onClick={onClick}
       className="p-6 cursor-pointer transition-all hover:translate-y-[-2px]"
-      style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+      style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
       <div className="flex items-center gap-2 mb-3">
         {article.category && <span>{article.category.icon}</span>}
         {badge && (
@@ -434,23 +434,23 @@ function ArticleCard({ article, onClick }: { article: Article; onClick: () => vo
             {badge.label}
           </span>
         )}
-        <span className="text-xs" style={{ color: '#5a5246' }}>{article.reading_time} 分钟</span>
+        <span className="text-xs" style={{ color: '#52525b' }}>{article.reading_time} 分钟</span>
       </div>
-      <h3 className="font-bold mb-2" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f5efe0', fontSize: 16 }}>
+      <h3 className="font-bold mb-2" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6', fontSize: 16 }}>
         {article.title}
       </h3>
-      <p className="text-sm leading-relaxed mb-3" style={{ color: '#7a7062', lineHeight: 1.7 }}>
+      <p className="text-sm leading-relaxed mb-3" style={{ color: '#71717a', lineHeight: 1.7 }}>
         {article.summary}
       </p>
       {article.key_concepts?.length > 0 && (
         <div className="flex flex-wrap gap-1">
           {article.key_concepts.slice(0, 3).map(k => (
-            <span key={k} className="text-xs px-2 py-0.5" style={{ background: 'rgba(255,255,255,0.03)', color: '#5a5246', borderRadius: 1 }}>
+            <span key={k} className="text-xs px-2 py-0.5" style={{ background: 'rgba(255,255,255,0.03)', color: '#52525b', borderRadius: 1 }}>
               {k}
             </span>
           ))}
           {article.key_concepts.length > 3 && (
-            <span className="text-xs px-2 py-0.5" style={{ color: '#5a5246' }}>+{article.key_concepts.length - 3}</span>
+            <span className="text-xs px-2 py-0.5" style={{ color: '#52525b' }}>+{article.key_concepts.length - 3}</span>
           )}
         </div>
       )}

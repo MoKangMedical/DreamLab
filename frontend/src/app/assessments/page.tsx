@@ -4,12 +4,12 @@ import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 
 const CATEGORIES: Record<string, { name: string; desc: string; icon: string; color: string }> = {
-  anxiety: { name: '焦虑评估', desc: '了解你的紧张与不安从何而来', icon: '🌊', color: '#c0392b' },
-  depression: { name: '抑郁评估', desc: '正视情绪的低谷，是疗愈的第一步', icon: '🌧️', color: '#8b7ab8' },
-  personality: { name: '人格探索', desc: '没有好坏，只有独一无二的你', icon: '🎭', color: '#e8a820' },
-  sleep: { name: '睡眠健康', desc: '每一个梦境，都需要安稳的港湾', icon: '🌙', color: '#4a90b8' },
-  resilience: { name: '心理韧性', desc: '像竹子一样，被压弯却不断裂', icon: '🌱', color: '#6b9e7a' },
-  symptom: { name: '综合筛查', desc: '360°扫描，看清心灵的全貌', icon: '📋', color: '#e8a820' },
+  anxiety: { name: '焦虑评估', desc: '了解你的紧张与不安从何而来', icon: '🌊', color: '#c4554d' },
+  depression: { name: '抑郁评估', desc: '正视情绪的低谷，是疗愈的第一步', icon: '🌧️', color: '#6b5b8a' },
+  personality: { name: '人格探索', desc: '没有好坏，只有独一无二的你', icon: '🎭', color: '#d4a853' },
+  sleep: { name: '睡眠健康', desc: '每一个梦境，都需要安稳的港湾', icon: '🌙', color: '#5a7d9a' },
+  resilience: { name: '心理韧性', desc: '像竹子一样，被压弯却不断裂', icon: '🌱', color: '#3b8b7a' },
+  symptom: { name: '综合筛查', desc: '360°扫描，看清心灵的全貌', icon: '📋', color: '#d4a853' },
 };
 
 const ASSESSMENTS = [
@@ -81,16 +81,16 @@ function AssessmentCard({ a, index }: { a: typeof ASSESSMENTS[0]; index: number 
   return (
     <div ref={ref} className={`transition-all duration-800 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'}`}
       style={{ transitionDelay: `${index * 0.08}s` }}>
-      <div className="p-8 md:p-10 mb-2" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+      <div className="p-8 md:p-10 mb-2" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
         {/* 头部 */}
         <div className="flex items-start justify-between mb-6">
           <div className="flex items-center gap-4">
             <span className="text-4xl">{a.icon}</span>
             <div>
-              <h3 className="text-xl font-bold mb-1" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f5efe0' }}>
+              <h3 className="text-xl font-bold mb-1" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>
                 {a.name}
               </h3>
-              <div className="flex items-center gap-3 text-xs" style={{ color: '#7a7062' }}>
+              <div className="flex items-center gap-3 text-xs" style={{ color: '#71717a' }}>
                 <span>{a.questions} 题</span>
                 <span>·</span>
                 <span>{a.time}</span>
@@ -103,7 +103,7 @@ function AssessmentCard({ a, index }: { a: typeof ASSESSMENTS[0]; index: number 
             className="shrink-0 transition-all duration-300 hover:scale-105"
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 6,
-              padding: '12px 28px', background: cat.color, color: '#060f18',
+              padding: '12px 28px', background: cat.color, color: '#0a0a0c',
               fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: 13,
               borderRadius: 2, letterSpacing: '0.03em',
             }}>
@@ -112,28 +112,28 @@ function AssessmentCard({ a, index }: { a: typeof ASSESSMENTS[0]; index: number 
         </div>
 
         {/* 量表介绍 */}
-        <p className="text-sm leading-relaxed mb-6" style={{ color: '#b8ad9a', lineHeight: 1.8 }}>
+        <p className="text-sm leading-relaxed mb-6" style={{ color: '#a1a1aa', lineHeight: 1.8 }}>
           {a.intro}
         </p>
 
         {/* 详细信息 */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div style={{ background: '#060f18', padding: '14px 16px', borderRadius: 2 }}>
-            <div className="text-xs mb-1" style={{ color: '#5a5246' }}>适合人群</div>
-            <div className="text-xs leading-relaxed" style={{ color: '#b8ad9a' }}>{a.suitable}</div>
+          <div style={{ background: '#0a0a0c', padding: '14px 16px', borderRadius: 2 }}>
+            <div className="text-xs mb-1" style={{ color: '#52525b' }}>适合人群</div>
+            <div className="text-xs leading-relaxed" style={{ color: '#a1a1aa' }}>{a.suitable}</div>
           </div>
-          <div style={{ background: '#060f18', padding: '14px 16px', borderRadius: 2 }}>
-            <div className="text-xs mb-1" style={{ color: '#5a5246' }}>评分方式</div>
-            <div className="text-xs leading-relaxed" style={{ color: '#b8ad9a' }}>{a.scoring}</div>
+          <div style={{ background: '#0a0a0c', padding: '14px 16px', borderRadius: 2 }}>
+            <div className="text-xs mb-1" style={{ color: '#52525b' }}>评分方式</div>
+            <div className="text-xs leading-relaxed" style={{ color: '#a1a1aa' }}>{a.scoring}</div>
           </div>
-          <div style={{ background: '#060f18', padding: '14px 16px', borderRadius: 2 }}>
-            <div className="text-xs mb-1" style={{ color: '#5a5246' }}>学术来源</div>
-            <div className="text-xs leading-relaxed" style={{ color: '#7a7062', fontStyle: 'italic' }}>{a.source}</div>
+          <div style={{ background: '#0a0a0c', padding: '14px 16px', borderRadius: 2 }}>
+            <div className="text-xs mb-1" style={{ color: '#52525b' }}>学术来源</div>
+            <div className="text-xs leading-relaxed" style={{ color: '#71717a', fontStyle: 'italic' }}>{a.source}</div>
           </div>
         </div>
 
         {/* 免责声明 */}
-        <p className="text-xs" style={{ color: '#4a4038' }}>
+        <p className="text-xs" style={{ color: '#52525b' }}>
           ⚠️ 本测评仅为心理健康参考工具，不能替代专业诊断。如有需要请咨询心理医生。
         </p>
       </div>
@@ -146,7 +146,7 @@ export default function AssessmentsPage() {
   useEffect(() => { setTimeout(() => setVisible(true), 100); }, []);
 
   return (
-    <div style={{ background: '#060f18', minHeight: '100vh' }}>
+    <div style={{ background: '#0a0a0c', minHeight: '100vh' }}>
       {/* Hero */}
       <div className="relative pt-14 md:pt-20 pb-16 md:pb-24">
         <div className="max-w-5xl mx-auto px-6 text-center">
@@ -155,15 +155,15 @@ export default function AssessmentsPage() {
             <h1 className="font-bold mb-4" style={{
               fontFamily: "'Noto Serif SC', serif",
               fontSize: 'clamp(36px, 6vw, 64px)',
-              color: '#f5efe0',
+              color: '#f4f4f6',
               lineHeight: 1.1,
             }}>
               汤婆婆の契约之镜
             </h1>
-            <p className="text-lg mb-2" style={{ color: '#b8ad9a' }}>
+            <p className="text-lg mb-2" style={{ color: '#a1a1aa' }}>
               六把钥匙，开启内心深处的六扇门
             </p>
-            <p className="max-w-lg mx-auto text-sm leading-relaxed" style={{ color: '#7a7062' }}>
+            <p className="max-w-lg mx-auto text-sm leading-relaxed" style={{ color: '#71717a' }}>
               所有量表均基于国际标准心理学工具，经过数十年临床验证。
               AI 深度解读帮助你将数据转化为对自己的理解。
             </p>

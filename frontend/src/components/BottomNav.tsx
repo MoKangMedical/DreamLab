@@ -4,11 +4,11 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
 const TABS = [
-  { href: '/', label: '首页', icon: '🏠' },
-  { href: '/assessments', label: '测评', icon: '🪞' },
-  { href: '/companion', label: '陪伴', icon: '👤' },
-  { href: '/community', label: '社区', icon: '🏮' },
-  { href: '/profile', label: '我的', icon: '🐉' },
+  { href: '/', label: 'Home', icon: '⌂' },
+  { href: '/assessments', label: 'Assess', icon: '◎' },
+  { href: '/companion', label: 'Talk', icon: '◉' },
+  { href: '/community', label: 'Community', icon: '◇' },
+  { href: '/profile', label: 'Profile', icon: '○' },
 ];
 
 export default function BottomNav() {
@@ -20,7 +20,7 @@ export default function BottomNav() {
   };
 
   return (
-    <nav className="md:hidden m-bottom-nav">
+    <nav className="md:hidden glass-bottom-nav">
       <div className="flex items-center justify-around">
         {TABS.map((tab) => {
           const active = isActive(tab.href);
@@ -28,11 +28,23 @@ export default function BottomNav() {
             <Link
               key={tab.href}
               href={tab.href}
-              className={`m-nav-item ${active ? 'm-nav-active' : ''}`}
+              className={`nav-item ${active ? 'nav-item-active' : ''}`}
             >
-              {active && <div className="m-nav-pill" />}
-              <span className="m-nav-icon">{tab.icon}</span>
-              <span className="m-nav-label" style={{ color: active ? '#f5efe0' : '#5a5246' }}>
+              {active && <div className="nav-pill" />}
+              <span
+                className="nav-item-icon"
+                style={{
+                  color: active ? '#d4a853' : '#52525b',
+                  fontSize: 18,
+                  fontFamily: 'Inter, sans-serif',
+                }}
+              >
+                {tab.icon}
+              </span>
+              <span
+                className="nav-item-label"
+                style={{ color: active ? '#f4f4f6' : '#52525b' }}
+              >
                 {tab.label}
               </span>
             </Link>

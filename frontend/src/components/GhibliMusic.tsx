@@ -63,13 +63,13 @@ export default function GhibliMusic() {
           right: 'clamp(16px, 4vw, 32px)',
           width: 44,
           height: 44,
-          background: playing ? 'rgba(232,168,32,0.12)' : 'rgba(9,9,11,0.8)',
-          border: playing ? '1px solid rgba(232,168,32,0.3)' : '1px solid rgba(255,255,255,0.08)',
+          background: playing ? 'rgba(212,168,83,0.12)' : 'rgba(9,9,11,0.8)',
+          border: playing ? '1px solid rgba(212,168,83,0.3)' : '1px solid rgba(255,255,255,0.08)',
           backdropFilter: 'blur(12px)',
-          color: playing ? '#e8a820' : '#7a7062',
+          color: playing ? '#d4a853' : '#71717a',
           fontSize: 20,
           cursor: 'pointer',
-          boxShadow: playing ? '0 0 20px rgba(232,168,32,0.1)' : 'none',
+          boxShadow: playing ? '0 0 20px rgba(212,168,83,0.1)' : 'none',
         }}
         title={playing ? '暂停音乐' : '播放宫崎骏音乐 🎵'}
       >
@@ -85,7 +85,7 @@ export default function GhibliMusic() {
             right: 'clamp(16px, 4vw, 32px)',
             width: 260,
             background: 'rgba(9,9,11,0.94)',
-            border: '1px solid rgba(232,168,32,0.12)',
+            border: '1px solid rgba(212,168,83,0.12)',
             borderRadius: 2,
             backdropFilter: 'blur(20px)',
             padding: '12px 14px',
@@ -96,7 +96,7 @@ export default function GhibliMusic() {
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
               <span style={{ fontSize: 14 }}>{playing ? '🎶' : '🎵'}</span>
-              <span style={{ fontSize: 11, color: '#b8ad9a', fontWeight: 500 }}>
+              <span style={{ fontSize: 11, color: '#a1a1aa', fontWeight: 500 }}>
                 いつも何度でも
               </span>
             </div>
@@ -105,7 +105,7 @@ export default function GhibliMusic() {
               style={{
                 background: 'none',
                 border: 'none',
-                color: '#5a5246',
+                color: '#52525b',
                 cursor: 'pointer',
                 fontSize: 14,
                 padding: 0,
@@ -129,9 +129,9 @@ export default function GhibliMusic() {
               onClick={togglePlay}
               style={{
                 background: 'none',
-                border: '1px solid rgba(232,168,32,0.2)',
+                border: '1px solid rgba(212,168,83,0.2)',
                 borderRadius: 2,
-                color: '#e8a820',
+                color: '#d4a853',
                 cursor: 'pointer',
                 fontSize: 16,
                 width: 32,
@@ -146,7 +146,7 @@ export default function GhibliMusic() {
             
             {/* 音量滑条 */}
             <div className="flex-1 flex items-center gap-2">
-              <span style={{ fontSize: 12, color: '#5a5246' }}>🔈</span>
+              <span style={{ fontSize: 12, color: '#52525b' }}>🔈</span>
               <input
                 type="range"
                 min={0}
@@ -157,7 +157,7 @@ export default function GhibliMusic() {
                   flex: 1,
                   height: 3,
                   appearance: 'none' as any,
-                  background: `linear-gradient(90deg, #e8a820 ${volume}%, rgba(255,255,255,0.06) ${volume}%)`,
+                  background: `linear-gradient(90deg, #d4a853 ${volume}%, rgba(255,255,255,0.06) ${volume}%)`,
                   borderRadius: 2,
                   cursor: 'pointer',
                 }}
@@ -165,7 +165,7 @@ export default function GhibliMusic() {
             </div>
           </div>
 
-          <p style={{ fontSize: 10, color: '#4a4038', marginTop: 8, textAlign: 'center' }}>
+          <p style={{ fontSize: 10, color: '#52525b', marginTop: 8, textAlign: 'center' }}>
             久石譲 · 千と千尋の神隠し
           </p>
         </div>

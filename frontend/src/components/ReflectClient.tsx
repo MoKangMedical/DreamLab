@@ -67,7 +67,7 @@ export default function ReflectClient() {
   const moodEmojis = ['😢', '😟', '😐', '🙂', '😊'];
 
   return (
-    <div style={{ background: '#060f18', minHeight: '100vh' }}>
+    <div style={{ background: '#0a0a0c', minHeight: '100vh' }}>
       <div className="max-w-5xl mx-auto px-4 md:px-6 pt-14 md:pt-20 pb-32">
 
         {/* ════════════════ Hero ════════════════ */}
@@ -76,15 +76,15 @@ export default function ReflectClient() {
           <h1 className="font-bold mb-4" style={{
             fontFamily: "'Noto Serif SC', serif",
             fontSize: 'clamp(32px, 5vw, 56px)',
-            color: '#f5efe0',
+            color: '#f4f4f6',
             lineHeight: 1.1,
           }}>
             梦后的思考
           </h1>
-          <p className="max-w-lg mx-auto text-sm leading-relaxed mb-2" style={{ color: '#b8ad9a' }}>
+          <p className="max-w-lg mx-auto text-sm leading-relaxed mb-2" style={{ color: '#a1a1aa' }}>
             记录梦只是第一步——理解梦才是真正的工作
           </p>
-          <p className="max-w-md mx-auto text-sm leading-relaxed" style={{ color: '#7a7062' }}>
+          <p className="max-w-md mx-auto text-sm leading-relaxed" style={{ color: '#71717a' }}>
             每一次反思，都是在梦与现实之间搭建一座桥。
             日积月累，你会看到自己心灵的地图渐渐成形。
           </p>
@@ -94,33 +94,33 @@ export default function ReflectClient() {
         <div className="mb-16">
           <div className="flex items-center gap-3 mb-2">
             <div style={{ width: 32, height: 1, background: 'rgba(255,255,255,0.06)' }} />
-            <span className="text-xs tracking-[0.2em] uppercase" style={{ color: 'rgba(232,168,32,0.5)' }}>四步法</span>
+            <span className="text-xs tracking-[0.2em] uppercase" style={{ color: 'rgba(212,168,83,0.5)' }}>四步法</span>
           </div>
           <h2 className="font-bold mb-2" style={{
             fontFamily: "'Noto Serif SC', serif",
             fontSize: 'clamp(22px, 3vw, 32px)',
-            color: '#f5efe0',
+            color: '#f4f4f6',
           }}>
             如何深度反思一个梦
           </h2>
-          <p className="text-sm mb-6" style={{ color: '#7a7062' }}>
+          <p className="text-sm mb-6" style={{ color: '#71717a' }}>
             这是从梦到智慧的四个步骤，每一步都比上一步更深入
           </p>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {STAGES.map((s, i) => (
-              <div key={s.title} className="p-5" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+              <div key={s.title} className="p-5" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
                 <div className="flex items-center gap-2 mb-3">
                   <span className="inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold"
-                    style={{ background: '#e8a82018', color: '#e8a820' }}>
+                    style={{ background: '#d4a85318', color: '#d4a853' }}>
                     {i + 1}
                   </span>
                   <span className="text-lg">{s.icon}</span>
                 </div>
-                <h3 className="text-sm font-bold mb-1" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f5efe0' }}>
+                <h3 className="text-sm font-bold mb-1" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>
                   {s.title}
                 </h3>
-                <p className="text-xs leading-relaxed" style={{ color: '#7a7062' }}>
+                <p className="text-xs leading-relaxed" style={{ color: '#71717a' }}>
                   {s.desc}
                 </p>
               </div>
@@ -132,27 +132,27 @@ export default function ReflectClient() {
         <div className="mb-16">
           <div className="flex items-center gap-3 mb-2">
             <div style={{ width: 32, height: 1, background: 'rgba(255,255,255,0.06)' }} />
-            <span className="text-xs tracking-[0.2em] uppercase" style={{ color: 'rgba(232,168,32,0.5)' }}>引导问题</span>
+            <span className="text-xs tracking-[0.2em] uppercase" style={{ color: 'rgba(212,168,83,0.5)' }}>引导问题</span>
           </div>
           <h2 className="font-bold mb-6" style={{
             fontFamily: "'Noto Serif SC', serif",
             fontSize: 'clamp(22px, 3vw, 32px)',
-            color: '#f5efe0',
+            color: '#f4f4f6',
           }}>
             不知怎么开始？试试这些问题
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {REFLECT_PROMPTS.map((p, i) => (
-              <div key={i} className="p-5 cursor-pointer transition-all hover:border-[#e8a82020]"
-                style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}
+              <div key={i} className="p-5 cursor-pointer transition-all hover:border-[#d4a85320]"
+                style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}
                 onClick={() => {
                   setContent(prev => prev + (prev ? '\n\n' : '') + '💭 ' + p.q + '\n');
                   setShowForm(true);
                   setTimeout(() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }), 100);
                 }}>
-                <p className="text-sm font-medium mb-1" style={{ color: '#b8ad9a' }}>{p.q}</p>
-                <p className="text-xs" style={{ color: '#5a5246' }}>{p.hint}</p>
+                <p className="text-sm font-medium mb-1" style={{ color: '#a1a1aa' }}>{p.q}</p>
+                <p className="text-xs" style={{ color: '#52525b' }}>{p.hint}</p>
               </div>
             ))}
           </div>
@@ -164,12 +164,12 @@ export default function ReflectClient() {
             <div>
               <div className="flex items-center gap-3 mb-2">
                 <div style={{ width: 32, height: 1, background: 'rgba(255,255,255,0.06)' }} />
-                <span className="text-xs tracking-[0.2em] uppercase" style={{ color: 'rgba(232,168,32,0.5)' }}>我的反思</span>
+                <span className="text-xs tracking-[0.2em] uppercase" style={{ color: 'rgba(212,168,83,0.5)' }}>我的反思</span>
               </div>
               <h2 className="font-bold" style={{
                 fontFamily: "'Noto Serif SC', serif",
                 fontSize: 'clamp(22px, 3vw, 32px)',
-                color: '#f5efe0',
+                color: '#f4f4f6',
               }}>
                 写下你的思考
               </h2>
@@ -177,7 +177,7 @@ export default function ReflectClient() {
             <button onClick={() => setShowForm(!showForm)}
               className="transition-all duration-300 hover:scale-105"
               style={{
-                padding: '12px 28px', background: '#e8a820', color: '#060f18',
+                padding: '12px 28px', background: '#d4a853', color: '#0a0a0c',
                 fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: 13,
                 borderRadius: 2, border: 'none', cursor: 'pointer',
               }}>
@@ -186,10 +186,10 @@ export default function ReflectClient() {
           </div>
 
           {showForm && (
-            <div className="p-6 mb-8" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+            <div className="p-6 mb-8" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
               <div className="space-y-5">
                 <div>
-                  <label className="block text-xs mb-2 font-medium" style={{ color: '#7a7062' }}>标题</label>
+                  <label className="block text-xs mb-2 font-medium" style={{ color: '#71717a' }}>标题</label>
                   <input
                     type="text"
                     value={title}
@@ -197,13 +197,13 @@ export default function ReflectClient() {
                     placeholder="给这段思考起个名字..."
                     className="w-full text-sm"
                     style={{
-                      background: '#060f18', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2,
-                      padding: '12px 16px', color: '#f5efe0', outline: 'none',
+                      background: '#0a0a0c', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2,
+                      padding: '12px 16px', color: '#f4f4f6', outline: 'none',
                     }}
                   />
                 </div>
                 <div>
-                  <label className="block text-xs mb-2 font-medium" style={{ color: '#7a7062' }}>内容</label>
+                  <label className="block text-xs mb-2 font-medium" style={{ color: '#71717a' }}>内容</label>
                   <textarea
                     value={content}
                     onChange={e => setContent(e.target.value)}
@@ -211,13 +211,13 @@ export default function ReflectClient() {
                     rows={6}
                     className="w-full resize-none text-sm leading-relaxed"
                     style={{
-                      background: '#060f18', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2,
-                      padding: '16px', color: '#b8ad9a', outline: 'none', lineHeight: 1.8,
+                      background: '#0a0a0c', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2,
+                      padding: '16px', color: '#a1a1aa', outline: 'none', lineHeight: 1.8,
                     }}
                   />
                 </div>
                 <div>
-                  <label className="block text-xs mb-2 font-medium" style={{ color: '#7a7062' }}>心情</label>
+                  <label className="block text-xs mb-2 font-medium" style={{ color: '#71717a' }}>心情</label>
                   <div className="flex gap-3">
                     {moodEmojis.map((emoji, i) => (
                       <button
@@ -227,8 +227,8 @@ export default function ReflectClient() {
                         className="text-3xl p-2 transition-all"
                         style={{
                           borderRadius: 2,
-                          background: moodScore === i + 1 ? '#e8a82012' : 'transparent',
-                          border: moodScore === i + 1 ? '1px solid #e8a82030' : '1px solid transparent',
+                          background: moodScore === i + 1 ? '#d4a85312' : 'transparent',
+                          border: moodScore === i + 1 ? '1px solid #d4a85330' : '1px solid transparent',
                           transform: moodScore === i + 1 ? 'scale(1.15)' : 'scale(1)',
                         }}>
                         {emoji}
@@ -238,14 +238,14 @@ export default function ReflectClient() {
                 </div>
                 {dreams.length > 0 && (
                   <div>
-                    <label className="block text-xs mb-2 font-medium" style={{ color: '#7a7062' }}>关联梦境（可选）</label>
+                    <label className="block text-xs mb-2 font-medium" style={{ color: '#71717a' }}>关联梦境（可选）</label>
                     <select
                       value={linkedDreamId || ''}
                       onChange={e => setLinkedDreamId(e.target.value ? Number(e.target.value) : null)}
                       className="w-full text-sm"
                       style={{
-                        background: '#060f18', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2,
-                        padding: '12px 16px', color: '#b8ad9a', outline: 'none',
+                        background: '#0a0a0c', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2,
+                        padding: '12px 16px', color: '#a1a1aa', outline: 'none',
                       }}>
                       <option value="">不关联</option>
                       {dreams.map((d: any) => (
@@ -259,7 +259,7 @@ export default function ReflectClient() {
                   disabled={!title.trim() || !content.trim()}
                   className="w-full transition-all duration-300 disabled:opacity-30"
                   style={{
-                    padding: '14px', background: '#e8a820', color: '#060f18',
+                    padding: '14px', background: '#d4a853', color: '#0a0a0c',
                     fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: 14,
                     borderRadius: 2, border: 'none', cursor: 'pointer',
                   }}>
@@ -274,7 +274,7 @@ export default function ReflectClient() {
         {loading ? (
           <div className="space-y-3">
             {[1, 2, 3].map(i => (
-              <div key={i} className="p-5 animate-pulse" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+              <div key={i} className="p-5 animate-pulse" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
                 <div className="h-5 w-1/3 mb-3" style={{ background: '#ffffff05', borderRadius: 1 }} />
                 <div className="h-4 w-full mb-2" style={{ background: '#ffffff05', borderRadius: 1 }} />
                 <div className="h-4 w-2/3" style={{ background: '#ffffff05', borderRadius: 1 }} />
@@ -284,14 +284,14 @@ export default function ReflectClient() {
         ) : reflections.length === 0 ? (
           <div className="text-center py-16">
             <span className="text-5xl block mb-4">🌱</span>
-            <p className="text-sm mb-4" style={{ color: '#7a7062' }}>还没有反思记录</p>
-            <p className="text-xs mb-6" style={{ color: '#5a5246' }}>
+            <p className="text-sm mb-4" style={{ color: '#71717a' }}>还没有反思记录</p>
+            <p className="text-xs mb-6" style={{ color: '#52525b' }}>
               每一次反思，都是一次与自己的深度对话
             </p>
             <button onClick={() => setShowForm(true)}
               className="transition-all duration-300 hover:scale-105"
               style={{
-                padding: '12px 32px', background: '#e8a820', color: '#060f18',
+                padding: '12px 32px', background: '#d4a853', color: '#0a0a0c',
                 fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: 13,
                 borderRadius: 2, border: 'none', cursor: 'pointer',
               }}>
@@ -302,20 +302,20 @@ export default function ReflectClient() {
           <div className="space-y-3">
             {reflections.map((r: any) => (
               <div key={r.id} className="p-5 md:p-6 transition-all"
-                style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+                style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
                 <div className="flex items-start justify-between mb-3">
-                  <h3 className="text-lg font-bold" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f5efe0' }}>
+                  <h3 className="text-lg font-bold" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>
                     {r.title}
                   </h3>
-                  <span className="text-xs shrink-0 ml-4" style={{ color: '#5a5246' }}>
+                  <span className="text-xs shrink-0 ml-4" style={{ color: '#52525b' }}>
                     {new Date(r.created_at).toLocaleDateString('zh-CN')}
                   </span>
                 </div>
-                <p className="text-sm leading-relaxed mb-3" style={{ color: '#b8ad9a', lineHeight: 1.8 }}>
+                <p className="text-sm leading-relaxed mb-3" style={{ color: '#a1a1aa', lineHeight: 1.8 }}>
                   {r.content}
                 </p>
                 {r.mood_score && (
-                  <div className="text-xs" style={{ color: '#5a5246' }}>
+                  <div className="text-xs" style={{ color: '#52525b' }}>
                     心情：{moodEmojis[r.mood_score - 1] || '😐'}
                   </div>
                 )}

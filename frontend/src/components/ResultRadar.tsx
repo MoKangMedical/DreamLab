@@ -17,7 +17,7 @@ interface ResultRadarProps {
   color?: string;
 }
 
-export default function ResultRadar({ data, size = 240, color = '#e8a820' }: ResultRadarProps) {
+export default function ResultRadar({ data, size = 240, color = '#d4a853' }: ResultRadarProps) {
   const cx = size / 2;
   const cy = size / 2;
   const radius = size * 0.38;
@@ -104,7 +104,7 @@ export default function ResultRadar({ data, size = 240, color = '#e8a820' }: Res
       {/* Labels */}
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '4px 12px', maxWidth: size + 40 }}>
         {data.map((d, i) => (
-          <span key={d.label} className="text-xs" style={{ color: '#7a7062', whiteSpace: 'nowrap' }}>
+          <span key={d.label} className="text-xs" style={{ color: '#71717a', whiteSpace: 'nowrap' }}>
             <span style={{ color, marginRight: 4 }}>●</span>
             {d.label}: {d.value}
           </span>

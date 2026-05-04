@@ -82,7 +82,7 @@ export default function CompanionPage() {
 
   return (
     <div className="min-h-screen flex flex-col" style={{
-      background: 'linear-gradient(180deg, #060f18 0%, #0d1a28 40%, #13212f 100%)',
+      background: 'linear-gradient(180deg, #0a0a0c 0%, #18181b 40%, #1f1f23 100%)',
     }}>
       {/* 星空粒子 */}
       <div className="fixed inset-0 pointer-events-none z-0">
@@ -102,7 +102,7 @@ export default function CompanionPage() {
       {/* 顶栏 */}
       <header className="relative z-10 frost-panel border-b border-[#ffffff]/06">
         <div className="max-w-3xl mx-auto px-4 h-14 flex items-center justify-between">
-          <Link href="/" className="text-[#5a5246] hover:text-white transition-colors text-sm">
+          <Link href="/" className="text-[#52525b] hover:text-white transition-colors text-sm">
             ← 返回
           </Link>
           <div className="flex items-center gap-2">
@@ -124,7 +124,7 @@ export default function CompanionPage() {
             >
               {msg.role === 'assistant' && (
                 <div className="w-8 h-8 rounded-full mr-2 shrink-0 flex items-center justify-center text-sm mt-1"
-                  style={{ background: 'linear-gradient(135deg, rgba(123,94,168,0.3), rgba(139,122,184,0.2))' }}>
+                  style={{ background: 'linear-gradient(135deg, rgba(107,91,138,0.3), rgba(107,91,138,0.2))' }}>
                   👤
                 </div>
               )}
@@ -137,8 +137,8 @@ export default function CompanionPage() {
                     : 'text-[#d8d0c8]'
                 }`}
                 style={msg.role === 'user' ? {
-                  background: 'linear-gradient(135deg, rgba(123,94,168,0.25), rgba(192,57,43,0.15))',
-                  border: '1px solid rgba(139,122,184,0.15)',
+                  background: 'linear-gradient(135deg, rgba(107,91,138,0.25), rgba(196,85,77,0.15))',
+                  border: '1px solid rgba(107,91,138,0.15)',
                   borderBottomRightRadius: '6px',
                 } : {
                   background: 'rgba(19,19,22,0.8)',
@@ -171,9 +171,9 @@ export default function CompanionPage() {
                 onClick={() => { setInput(s.text); }}
                 className="shrink-0 px-3 py-1.5 text-xs transition-all duration-200 whitespace-nowrap"
                 style={{
-                  background: 'rgba(232,168,32,0.04)',
+                  background: 'rgba(212,168,83,0.04)',
                   border: '1px solid rgba(255,255,255,0.04)',
-                  color: '#7a7062',
+                  color: '#71717a',
                   cursor: 'pointer',
                   fontFamily: 'Inter, sans-serif',
                 }}
@@ -210,8 +210,8 @@ export default function CompanionPage() {
               {loading ? '...' : '发送'}
             </button>
           </div>
-          <p className="text-[10px] text-[#5a5246] text-center mt-2">
-            🫂 无脸男是你安静的朋友 · 倾听不评判 · 紧急情况请拨打 <span className="text-[#7a7062]">400-161-9995</span>
+          <p className="text-[10px] text-[#52525b] text-center mt-2">
+            🫂 无脸男是你安静的朋友 · 倾听不评判 · 紧急情况请拨打 <span className="text-[#71717a]">400-161-9995</span>
           </p>
         </div>
       </div>

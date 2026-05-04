@@ -4,27 +4,27 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
 const STATS = [
-  { label: '梦境', value: 12, icon: '🌙', color: '#e8a820' },
-  { label: '测评', value: 3, icon: '🪞', color: '#c0392b' },
-  { label: '课程', value: 8, icon: '📜', color: '#4a90b8' },
-  { label: '陪伴', value: 24, icon: '👤', color: '#8b7ab8' },
-  { label: '冥想', value: 5, icon: '🧘', color: '#6b9e7a' },
-  { label: '日记', value: 7, icon: '💝', color: '#e8a820' },
+  { label: '梦境', value: 12, icon: '🌙', color: '#d4a853' },
+  { label: '测评', value: 3, icon: '🪞', color: '#c4554d' },
+  { label: '课程', value: 8, icon: '📜', color: '#5a7d9a' },
+  { label: '陪伴', value: 24, icon: '👤', color: '#6b5b8a' },
+  { label: '冥想', value: 5, icon: '🧘', color: '#3b8b7a' },
+  { label: '日记', value: 7, icon: '💝', color: '#d4a853' },
 ];
 
 const ACTIVITIES = [
-  { text: '完成 SAS 焦虑自评量表 · 正常', time: '2小时前', icon: '🪞', color: '#c0392b' },
-  { text: '记录梦境：飞翔在城市上空', time: '昨天', icon: '🌙', color: '#e8a820' },
-  { text: '与无脸男对话 15 分钟', time: '2天前', icon: '👤', color: '#8b7ab8' },
-  { text: '学习荣格：集体无意识与原型', time: '3天前', icon: '📜', color: '#4a90b8' },
+  { text: '完成 SAS 焦虑自评量表 · 正常', time: '2小时前', icon: '🪞', color: '#c4554d' },
+  { text: '记录梦境：飞翔在城市上空', time: '昨天', icon: '🌙', color: '#d4a853' },
+  { text: '与无脸男对话 15 分钟', time: '2天前', icon: '👤', color: '#6b5b8a' },
+  { text: '学习荣格：集体无意识与原型', time: '3天前', icon: '📜', color: '#5a7d9a' },
 ];
 
 const MILESTONES = [
-  { name: '穿越遗忘之桥', desc: '面对阴影', done: true, color: '#c0392b' },
-  { name: '汤婆婆的锅炉房', desc: '识别欲望', done: true, color: '#e8a820' },
-  { name: '无脸男的浴场', desc: '接纳孤独', done: true, color: '#8b7ab8' },
-  { name: '河神的净化', desc: '释放淤积', done: false, color: '#6b9e7a' },
-  { name: '白龙的天空', desc: '找回名字', done: false, color: '#4a90b8' },
+  { name: '穿越遗忘之桥', desc: '面对阴影', done: true, color: '#c4554d' },
+  { name: '汤婆婆的锅炉房', desc: '识别欲望', done: true, color: '#d4a853' },
+  { name: '无脸男的浴场', desc: '接纳孤独', done: true, color: '#6b5b8a' },
+  { name: '河神的净化', desc: '释放淤积', done: false, color: '#3b8b7a' },
+  { name: '白龙的天空', desc: '找回名字', done: false, color: '#5a7d9a' },
 ];
 
 export default function ProfilePage() {
@@ -34,7 +34,7 @@ export default function ProfilePage() {
   const journeyProgress = (MILESTONES.filter(m => m.done).length / MILESTONES.length) * 100;
 
   return (
-    <div className={`animate-fade-in`} style={{ background: '#060f18' }}>
+    <div className={`animate-fade-in`} style={{ background: '#0a0a0c' }}>
       {/* Stats Grid */}
       <div className="grid grid-cols-3 gap-2 mb-6" style={{ paddingTop: 4 }}>
         {STATS.map((s, i) => (
@@ -50,10 +50,10 @@ export default function ProfilePage() {
       <div className="m-card mb-4" style={{ padding: 18 }}>
         <div className="flex items-center justify-between mb-3">
           <h3 className="m-subtitle" style={{ fontSize: 14 }}>千寻之旅</h3>
-          <span style={{ fontSize: 11, color: '#e8a820' }}>{MILESTONES.filter(m => m.done).length}/{MILESTONES.length}</span>
+          <span style={{ fontSize: 11, color: '#d4a853' }}>{MILESTONES.filter(m => m.done).length}/{MILESTONES.length}</span>
         </div>
         <div className="h-1.5 rounded-full mb-4" style={{ background: 'rgba(255,255,255,0.05)' }}>
-          <div className="h-full rounded-full transition-all duration-1000" style={{ width: `${journeyProgress}%`, background: 'linear-gradient(90deg, #c0392b, #e8a820, #4a90b8)' }} />
+          <div className="h-full rounded-full transition-all duration-1000" style={{ width: `${journeyProgress}%`, background: 'linear-gradient(90deg, #c4554d, #d4a853, #5a7d9a)' }} />
         </div>
         <div className="flex justify-between">
           {MILESTONES.map((m, i) => (
@@ -63,11 +63,11 @@ export default function ProfilePage() {
                 display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12,
                 background: m.done ? m.color + '15' : 'rgba(255,255,255,0.03)',
                 border: `1px solid ${m.done ? m.color + '30' : 'rgba(255,255,255,0.06)'}`,
-                color: m.done ? m.color : '#5a5246',
+                color: m.done ? m.color : '#52525b',
               }}>
                 {m.done ? '✓' : i + 1}
               </div>
-              <div className="m-caption" style={{ fontSize: 9, color: m.done ? '#b8ad9a' : '#5a5246' }}>{m.name}</div>
+              <div className="m-caption" style={{ fontSize: 9, color: m.done ? '#a1a1aa' : '#52525b' }}>{m.name}</div>
             </div>
           ))}
         </div>
@@ -76,10 +76,10 @@ export default function ProfilePage() {
       {/* Quick Actions */}
       <div className="grid grid-cols-2 gap-2 mb-4">
         {[
-          { href: '/assessments', label: '心理测评', icon: '🪞', color: '#c0392b' },
-          { href: '/companion', label: '找无脸男聊聊', icon: '👤', color: '#4a90b8' },
-          { href: '/wellness', label: '5分钟冥想', icon: '🧘', color: '#6b9e7a' },
-          { href: '/dream', label: '记录梦境', icon: '🌙', color: '#e8a820' },
+          { href: '/assessments', label: '心理测评', icon: '🪞', color: '#c4554d' },
+          { href: '/companion', label: '找无脸男聊聊', icon: '👤', color: '#5a7d9a' },
+          { href: '/wellness', label: '5分钟冥想', icon: '🧘', color: '#3b8b7a' },
+          { href: '/dream', label: '记录梦境', icon: '🌙', color: '#d4a853' },
         ].map(item => (
           <Link key={item.href} href={item.href}
             className="m-card m-card-interactive flex items-center gap-3"
@@ -112,12 +112,12 @@ export default function ProfilePage() {
           className="flex items-center justify-between py-2"
           style={{ borderBottom: '1px solid rgba(255,255,255,0.03)', textDecoration: 'none' }}>
           <span className="m-subtitle" style={{ fontSize: 14 }}>✨ 查看完整成长记录</span>
-          <span style={{ color: '#5a5246' }}>→</span>
+          <span style={{ color: '#52525b' }}>→</span>
         </Link>
         <Link href="/bathhouse"
           className="flex items-center justify-between py-2" style={{ textDecoration: 'none' }}>
           <span className="m-subtitle" style={{ fontSize: 14 }}>🏯 前往油屋大厅</span>
-          <span style={{ color: '#5a5246' }}>→</span>
+          <span style={{ color: '#52525b' }}>→</span>
         </Link>
       </div>
 

@@ -12,11 +12,11 @@ interface Post {
 }
 
 const CATEGORIES = [
-  { key: 'all', name: '全部', icon: '🏮', color: '#e8a820' },
-  { key: 'mood', name: '心情', icon: '🌸', color: '#c0392b' },
-  { key: 'dream', name: '梦境', icon: '🌙', color: '#8b7ab8' },
-  { key: 'growth', name: '成长', icon: '🌱', color: '#6b9e7a' },
-  { key: 'help', name: '互助', icon: '🤝', color: '#4a90b8' },
+  { key: 'all', name: '全部', icon: '🏮', color: '#d4a853' },
+  { key: 'mood', name: '心情', icon: '🌸', color: '#c4554d' },
+  { key: 'dream', name: '梦境', icon: '🌙', color: '#6b5b8a' },
+  { key: 'growth', name: '成长', icon: '🌱', color: '#3b8b7a' },
+  { key: 'help', name: '互助', icon: '🤝', color: '#5a7d9a' },
 ];
 
 const GHIBLI_NAMES = ['千寻', '白龙', '无脸男', '锅炉爷爷', '小玲', '坊宝宝', '钱婆婆'];
@@ -101,7 +101,7 @@ export default function CommunityPage() {
   };
 
   return (
-    <div style={{ background: '#060f18' }}>
+    <div style={{ background: '#0a0a0c' }}>
       <section className={`m-section animate-fade-in`} style={{ paddingTop: 8 }}>
         {/* Header */}
         <div className="m-page-header">
@@ -125,7 +125,7 @@ export default function CommunityPage() {
               style={{
                 background: activeCat === cat.key ? cat.color + '18' : 'transparent',
                 border: `1px solid ${activeCat === cat.key ? cat.color + '30' : 'rgba(255,255,255,0.06)'}`,
-                color: activeCat === cat.key ? cat.color : '#7a7062',
+                color: activeCat === cat.key ? cat.color : '#71717a',
               }}>
               {cat.icon} {cat.name}
             </button>
@@ -150,7 +150,7 @@ export default function CommunityPage() {
                     style={{
                       background: newCat === cat.key ? cat.color + '15' : 'transparent',
                       border: `1px solid ${newCat === cat.key ? cat.color + '25' : 'transparent'}`,
-                      color: newCat === cat.key ? cat.color : '#5a5246',
+                      color: newCat === cat.key ? cat.color : '#52525b',
                     }}>{cat.icon}</button>
                 ))}
               </div>
@@ -195,17 +195,17 @@ export default function CommunityPage() {
                 {/* Actions */}
                 <div className="flex items-center gap-4 mt-3">
                   <button onClick={(e) => { e.stopPropagation(); handleLike(post.id); }}
-                    style={{ background: 'none', border: 'none', padding: 0, fontSize: 12, color: '#7a7062', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4 }}>
+                    style={{ background: 'none', border: 'none', padding: 0, fontSize: 12, color: '#71717a', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4 }}>
                     💛 {post.likes}
                   </button>
-                  <span style={{ fontSize: 12, color: '#5a5246' }}>💬 {post.comments.length}</span>
+                  <span style={{ fontSize: 12, color: '#52525b' }}>💬 {post.comments.length}</span>
                 </div>
                 {/* Comments */}
                 {isExpanded && (
                   <div className="mt-3 pt-3" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
                     {post.comments.map(c => (
-                      <div key={c.id} className="mb-2 pl-3" style={{ borderLeft: '1px solid rgba(232,168,32,0.1)' }}>
-                        <span className="m-caption" style={{ color: '#e8a820', fontSize: 11, fontWeight: 600 }}>{c.author}</span>
+                      <div key={c.id} className="mb-2 pl-3" style={{ borderLeft: '1px solid rgba(212,168,83,0.1)' }}>
+                        <span className="m-caption" style={{ color: '#d4a853', fontSize: 11, fontWeight: 600 }}>{c.author}</span>
                         <span className="m-caption" style={{ color: 'var(--text-deep)', fontSize: 10, marginLeft: 8 }}>{c.time}</span>
                         <p className="m-caption" style={{ fontSize: 12, marginTop: 2 }}>{c.content}</p>
                       </div>
@@ -229,8 +229,8 @@ export default function CommunityPage() {
         {/* Counselor Directory */}
         <div className="m-section-sm" style={{ marginTop: 32 }}>
           <div className="flex items-center gap-3 mb-4">
-            <div style={{ width: 16, height: 1, background: 'rgba(232,168,32,0.15)' }} />
-            <span className="m-label" style={{ color: 'rgba(232,168,32,0.5)', fontSize: 10 }}>咨询师黄页</span>
+            <div style={{ width: 16, height: 1, background: 'rgba(212,168,83,0.15)' }} />
+            <span className="m-label" style={{ color: 'rgba(212,168,83,0.5)', fontSize: 10 }}>咨询师黄页</span>
           </div>
           <div className="space-y-2">
             {[
@@ -244,8 +244,8 @@ export default function CommunityPage() {
                   <div className="flex items-center gap-2">
                     <span className="m-subtitle" style={{ fontSize: 14 }}>{c.name}</span>
                     <span style={{ fontSize: 10, padding: '1px 6px', borderRadius: 4,
-                      background: c.available ? 'rgba(30,133,104,0.1)' : 'rgba(122,112,98,0.1)',
-                      color: c.available ? '#1e8568' : '#5a5246' }}>
+                      background: c.available ? 'rgba(59,139,122,0.1)' : 'rgba(122,112,98,0.1)',
+                      color: c.available ? '#3b8b7a' : '#52525b' }}>
                       {c.available ? '可约' : '已满'}
                     </span>
                   </div>

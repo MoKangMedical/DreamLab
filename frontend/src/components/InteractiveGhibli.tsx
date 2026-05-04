@@ -75,9 +75,9 @@ export default function InteractiveGhibli() {
       <div style={{
         position: 'absolute', inset: 0,
         background: `
-          radial-gradient(ellipse 80% 60% at 70% 30%, rgba(232,168,32,0.025) 0%, transparent 60%),
-          radial-gradient(ellipse 60% 50% at 20% 70%, rgba(192,57,43,0.015) 0%, transparent 50%),
-          radial-gradient(ellipse 50% 40% at 50% 90%, rgba(232,168,32,0.03) 0%, transparent 40%)
+          radial-gradient(ellipse 80% 60% at 70% 30%, rgba(212,168,83,0.025) 0%, transparent 60%),
+          radial-gradient(ellipse 60% 50% at 20% 70%, rgba(196,85,77,0.015) 0%, transparent 50%),
+          radial-gradient(ellipse 50% 40% at 50% 90%, rgba(212,168,83,0.03) 0%, transparent 40%)
         `,
         animation: 'warm-breathe 12s ease-in-out infinite',
       }} />
@@ -98,7 +98,7 @@ export default function InteractiveGhibli() {
           left: `${20 + i * 25}%`,
           width: '2px',
           height: '50vh',
-          background: `linear-gradient(180deg, rgba(232,168,32,${0.03 + i * 0.015}) 0%, transparent 100%)`,
+          background: `linear-gradient(180deg, rgba(212,168,83,${0.03 + i * 0.015}) 0%, transparent 100%)`,
           transform: `rotate(${-10 + i * 10}deg)`,
           transformOrigin: 'top center',
           animation: `godray-sway ${14 + i * 3}s ease-in-out infinite`,
@@ -114,7 +114,7 @@ export default function InteractiveGhibli() {
           position: 'absolute', left: d.left, top: d.top,
           width: d.size, height: d.size, borderRadius: '50%',
           background: `radial-gradient(circle, rgba(254,249,195,${d.opacity * 1.4}), transparent)`,
-          boxShadow: `0 0 ${d.size * 2}px rgba(232,168,32,${d.opacity})`,
+          boxShadow: `0 0 ${d.size * 2}px rgba(212,168,83,${d.opacity})`,
           animation: `golddust-float ${d.duration} ${d.delay} infinite ease-in-out`,
           opacity: 0,
         }} />
@@ -134,7 +134,7 @@ export default function InteractiveGhibli() {
             width: f.size * 4, height: f.size * 4,
             marginLeft: -(f.size * 2), marginTop: -(f.size * 2),
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(232,168,32,0.04) 0%, rgba(232,168,32,0.01) 40%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(212,168,83,0.04) 0%, rgba(212,168,83,0.01) 40%, transparent 70%)',
             filter: 'blur(3px)',
           }} />
           <div style={{
@@ -142,7 +142,7 @@ export default function InteractiveGhibli() {
             width: f.size * 0.5, height: f.size * 0.5,
             marginLeft: -(f.size * 0.25), marginTop: -(f.size * 0.25),
             borderRadius: '50%',
-            background: 'radial-gradient(circle, #fffef8 0%, #e8a820 80%)',
+            background: 'radial-gradient(circle, #fffef8 0%, #d4a853 80%)',
             boxShadow: `0 0 ${f.size}px rgba(254,249,195,0.2)`,
           }} />
         </div>
@@ -156,29 +156,29 @@ export default function InteractiveGhibli() {
           top: Math.max(w.y - 130, 20),
           zIndex: 300, maxWidth: 260, pointerEvents: 'auto',
           background: 'rgba(9,9,11,0.96)',
-          border: '1px solid rgba(232,168,32,0.18)',
+          border: '1px solid rgba(212,168,83,0.18)',
           borderRadius: 1,
           padding: '16px 20px',
           animation: `bubble-rise 0.5s ease-out${w.fading ? ', fade-out 0.7s ease-in forwards' : ''}`,
-          boxShadow: '0 8px 40px rgba(0,0,0,0.6), 0 0 30px rgba(232,168,32,0.04), inset 0 1px 0 rgba(255,255,255,0.02)',
+          boxShadow: '0 8px 40px rgba(0,0,0,0.6), 0 0 30px rgba(212,168,83,0.04), inset 0 1px 0 rgba(255,255,255,0.02)',
         }}>
-          <p style={{ fontSize: 13, color: '#e8a820', lineHeight: 2, fontFamily: "'Noto Serif SC', serif", margin: '0 0 10px', whiteSpace: 'pre-line', letterSpacing: '0.02em' }}>
+          <p style={{ fontSize: 13, color: '#d4a853', lineHeight: 2, fontFamily: "'Noto Serif SC', serif", margin: '0 0 10px', whiteSpace: 'pre-line', letterSpacing: '0.02em' }}>
             {w.haiku}
           </p>
-          <div style={{ width: 24, height: 1, background: 'linear-gradient(90deg, rgba(232,168,32,0.3), transparent)', marginBottom: 8 }} />
-          <p style={{ fontSize: 12, color: '#b8ad9a', lineHeight: 1.7, margin: 0 }}>
+          <div style={{ width: 24, height: 1, background: 'linear-gradient(90deg, rgba(212,168,83,0.3), transparent)', marginBottom: 8 }} />
+          <p style={{ fontSize: 12, color: '#a1a1aa', lineHeight: 1.7, margin: 0 }}>
             {w.message}
           </p>
           <div style={{ marginTop: 10, display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span style={{ fontSize: 10, padding: '1px 10px', background: 'rgba(232,168,32,0.08)', color: '#e8a820', borderRadius: 1, letterSpacing: '0.05em' }}>
+            <span style={{ fontSize: 10, padding: '1px 10px', background: 'rgba(212,168,83,0.08)', color: '#d4a853', borderRadius: 1, letterSpacing: '0.05em' }}>
               {w.feeling}
             </span>
-            <span style={{ fontSize: 10, color: '#4a4038' }}>
+            <span style={{ fontSize: 10, color: '#52525b' }}>
               {w.element_type === 'firefly' ? '蛍' : w.element_type === 'cloud' ? '雲' : w.element_type === 'kanji' ? '夢' : '煤'}
             </span>
           </div>
           <button onClick={() => setWhispers(prev => prev.filter(ws => ws.id !== w.id))}
-            style={{ position: 'absolute', top: 8, right: 10, background: 'none', border: 'none', color: '#5a5246', cursor: 'pointer', fontSize: 11, padding: 2 }}>
+            style={{ position: 'absolute', top: 8, right: 10, background: 'none', border: 'none', color: '#52525b', cursor: 'pointer', fontSize: 11, padding: 2 }}>
             ✕
           </button>
         </div>
@@ -189,8 +189,8 @@ export default function InteractiveGhibli() {
         <div style={{
           position: 'fixed', bottom: 40, left: '50%', transform: 'translateX(-50%)',
           zIndex: 300, padding: '10px 20px',
-          background: 'rgba(9,9,11,0.92)', border: '1px solid rgba(232,168,32,0.12)', borderRadius: 1,
-          fontSize: 12, color: '#e8a820', fontFamily: "'Noto Serif SC', serif",
+          background: 'rgba(9,9,11,0.92)', border: '1px solid rgba(212,168,83,0.12)', borderRadius: 1,
+          fontSize: 12, color: '#d4a853', fontFamily: "'Noto Serif SC', serif",
           display: 'flex', alignItems: 'center', gap: 10,
           animation: 'warm-breathe 2s ease-in-out infinite',
         }}>

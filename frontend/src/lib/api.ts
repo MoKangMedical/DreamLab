@@ -51,7 +51,7 @@ function getMockData<T>(endpoint: string): T {
       return {
         level: '正常范围',
         standard_score: 45,
-        level_info: { color: '#e8a820', description: '你的得分在正常范围内，目前没有明显的问题信号。继续保持！' },
+        level_info: { color: '#d4a853', description: '你的得分在正常范围内，目前没有明显的问题信号。继续保持！' },
         interpretation: '从你的回答来看，目前的心理状态处于健康水平。生活中偶尔的焦虑和低落是正常的——重要的是你愿意倾听自己的内心。\n\n如果未来感到压力增大，记得油屋永远为你敞开。无脸男在安静地等着你。',
       } as T;
     }

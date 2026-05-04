@@ -84,15 +84,15 @@ export default function AssessmentTakeClient() {
       <div className="min-h-screen" style={{ background: 'var(--gradient-bg)' }}>
         <div className="max-w-2xl mx-auto px-4 pt-16 pb-28">
           <div className="mb-8">
-            <Link href="/assessments" className="text-[#7a7062] text-sm hover:text-white transition-colors mb-4 inline-block">
+            <Link href="/assessments" className="text-[#71717a] text-sm hover:text-white transition-colors mb-4 inline-block">
               ← 返回列表
             </Link>
             <h1 className="text-2xl font-bold text-white mb-2">{assessment.name}</h1>
-            <p className="text-xs text-[#7a7062]">{assessment.instructions}</p>
+            <p className="text-xs text-[#71717a]">{assessment.instructions}</p>
           </div>
 
           <div className="mb-8">
-            <div className="flex justify-between text-xs text-[#7a7062] mb-2">
+            <div className="flex justify-between text-xs text-[#71717a] mb-2">
               <span>第 {currentQ + 1} / {totalQuestions} 题</span>
               <span>{progress}%</span>
             </div>
@@ -104,7 +104,7 @@ export default function AssessmentTakeClient() {
 
           <div className="geo-card p-8 mb-6 animate-card-rise" key={q.id}>
             <div className="flex items-start gap-3 mb-6">
-              <span className="text-sm font-bold text-[#7a7062] shrink-0 mt-0.5">Q{q.id}</span>
+              <span className="text-sm font-bold text-[#71717a] shrink-0 mt-0.5">Q{q.id}</span>
               <p className="text-white text-lg leading-relaxed">{q.text}</p>
             </div>
             <div className="space-y-3">
@@ -180,7 +180,7 @@ export default function AssessmentTakeClient() {
         <div className="text-center">
           <div className="text-4xl mb-4 animate-glow">🔮</div>
           <p className="text-[#B0B0C0] mb-2">契约之镜正在映照...</p>
-          <p className="text-xs text-[#7a7062]">AI 正在解读你的内心世界</p>
+          <p className="text-xs text-[#71717a]">AI 正在解读你的内心世界</p>
         </div>
       </div>
     );
@@ -207,7 +207,7 @@ export default function AssessmentTakeClient() {
                   <div className="text-3xl font-bold" style={{ color: li?.color || '#C4B5D4' }}>
                     {result.standard_score}
                   </div>
-                  <div className="text-xs text-[#7a7062] mt-1">标准分</div>
+                  <div className="text-xs text-[#71717a] mt-1">标准分</div>
                 </div>
               </div>
             </div>
@@ -233,7 +233,7 @@ export default function AssessmentTakeClient() {
                   { label: '宜人性', value: 70 },
                   { label: '神经质', value: 82 },
                 ]}
-                color="#e8a820"
+                color="#d4a853"
               />
             </div>
           )}
@@ -252,7 +252,7 @@ export default function AssessmentTakeClient() {
                   { label: '精神病性', value: 18 },
                 ]}
                 size={280}
-                color="#4a90b8"
+                color="#5a7d9a"
               />
             </div>
           )}

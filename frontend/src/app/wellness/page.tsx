@@ -84,7 +84,7 @@ export default function WellnessPage() {
   useEffect(() => { setVisible(true); }, []);
 
   return (
-    <div style={{ background: '#060f18', minHeight: '100vh' }}>
+    <div style={{ background: '#0a0a0c', minHeight: '100vh' }}>
       <div className={`max-w-4xl mx-auto px-4 pt-14 pb-28 transition-all duration-1000 ${visible ? 'opacity-100' : 'opacity-0'}`}>
         {/* ════════════════ Hero ════════════════ */}
         <div className="text-center mb-8">
@@ -92,11 +92,11 @@ export default function WellnessPage() {
           <h1 className="font-bold mb-3" style={{
             fontFamily: "'Noto Serif SC', serif",
             fontSize: 'clamp(32px, 5vw, 48px)',
-            color: '#f5efe0',
+            color: '#f4f4f6',
           }}>
             河神的净化汤
           </h1>
-          <p className="max-w-md mx-auto text-sm leading-relaxed" style={{ color: '#7a7062' }}>
+          <p className="max-w-md mx-auto text-sm leading-relaxed" style={{ color: '#71717a' }}>
             心智健康不是没有问题，而是拥有应对问题的工具。
             这里是你每日的心灵澡堂。
           </p>
@@ -110,12 +110,12 @@ export default function WellnessPage() {
               onClick={() => setTab(t.key)}
               className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium transition-all whitespace-nowrap ${
                 tab === t.key
-                  ? 'text-[#f5efe0] border-[#e8a82030]'
-                  : 'text-[#5a5246] hover:text-[#b8ad9a]'
+                  ? 'text-[#f4f4f6] border-[#d4a85330]'
+                  : 'text-[#52525b] hover:text-[#a1a1aa]'
               }`}
               style={{
-                background: tab === t.key ? 'rgba(232,168,32,0.08)' : 'transparent',
-                border: tab === t.key ? '1px solid rgba(232,168,32,0.2)' : '1px solid transparent',
+                background: tab === t.key ? 'rgba(212,168,83,0.08)' : 'transparent',
+                border: tab === t.key ? '1px solid rgba(212,168,83,0.2)' : '1px solid transparent',
                 borderRadius: 2,
               }}>
               <span>{t.icon}</span>
@@ -125,7 +125,7 @@ export default function WellnessPage() {
         </div>
 
         {/* 标签描述 */}
-        <p className="text-xs text-center mb-8 leading-relaxed" style={{ color: '#5a5246' }}>
+        <p className="text-xs text-center mb-8 leading-relaxed" style={{ color: '#52525b' }}>
           {TABS.find(t => t.key === tab)?.desc}
         </p>
 
@@ -180,12 +180,12 @@ function MeditationTab() {
     const isOut = s?.type === 'breathe_out';
 
     return (
-      <div className="p-8 text-center" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+      <div className="p-8 text-center" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
         <div className="text-5xl mb-4">{active.icon}</div>
-        <h3 className="text-xl font-bold mb-1" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f5efe0' }}>
+        <h3 className="text-xl font-bold mb-1" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>
           {active.title}
         </h3>
-        <p className="text-xs mb-6" style={{ color: '#5a5246' }}>
+        <p className="text-xs mb-6" style={{ color: '#52525b' }}>
           步骤 {step + 1} / {active.steps.length} · {active.duration} 分钟
         </p>
 
@@ -194,26 +194,26 @@ function MeditationTab() {
           <div className={`w-28 h-28 rounded-full transition-all duration-[2000ms] flex items-center justify-center ${
             isIn ? 'scale-125' : isOut ? 'scale-75' : 'scale-100'
           }`} style={{
-            background: isIn ? 'radial-gradient(circle, rgba(232,168,32,0.15), rgba(19,19,22,0.5))'
-              : isOut ? 'radial-gradient(circle, rgba(74,144,184,0.15), rgba(19,19,22,0.5))'
-              : 'radial-gradient(circle, rgba(107,158,122,0.15), rgba(19,19,22,0.5))',
-            border: `2px solid ${isIn ? 'rgba(232,168,32,0.3)' : isOut ? 'rgba(74,144,184,0.3)' : 'rgba(107,158,122,0.3)'}`,
+            background: isIn ? 'radial-gradient(circle, rgba(212,168,83,0.15), rgba(19,19,22,0.5))'
+              : isOut ? 'radial-gradient(circle, rgba(90,125,154,0.15), rgba(19,19,22,0.5))'
+              : 'radial-gradient(circle, rgba(59,139,122,0.15), rgba(19,19,22,0.5))',
+            border: `2px solid ${isIn ? 'rgba(212,168,83,0.3)' : isOut ? 'rgba(90,125,154,0.3)' : 'rgba(59,139,122,0.3)'}`,
           }}>
             <span className="text-3xl">{isIn ? '🫁' : isOut ? '💨' : '✨'}</span>
           </div>
         </div>
 
-        <p className="text-lg mb-2" style={{ color: '#f5efe0' }}>{s?.text}</p>
-        <p className="text-xs" style={{ color: '#7a7062' }}>{s?.seconds}秒</p>
+        <p className="text-lg mb-2" style={{ color: '#f4f4f6' }}>{s?.text}</p>
+        <p className="text-xs" style={{ color: '#71717a' }}>{s?.seconds}秒</p>
 
         {/* 进度条 */}
         <div className="mt-6 h-1 rounded-full overflow-hidden" style={{ background: '#ffffff08' }}>
           <div className="h-full rounded-full transition-all duration-1000"
-            style={{ width: `${progress}%`, background: 'linear-gradient(90deg, #6b9e7a, #e8a820)' }} />
+            style={{ width: `${progress}%`, background: 'linear-gradient(90deg, #3b8b7a, #d4a853)' }} />
         </div>
 
         <button onClick={stop} className="mt-6 px-6 py-2 text-sm transition-all"
-          style={{ background: 'transparent', border: '1px solid rgba(255,255,255,0.06)', color: '#b8ad9a', borderRadius: 2, cursor: 'pointer' }}>
+          style={{ background: 'transparent', border: '1px solid rgba(255,255,255,0.06)', color: '#a1a1aa', borderRadius: 2, cursor: 'pointer' }}>
           结束冥想
         </button>
       </div>
@@ -223,10 +223,10 @@ function MeditationTab() {
   return (
     <div className="space-y-6">
       {/* 冥想科普 */}
-      <div className="p-6" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+      <div className="p-6" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xl">🧘</span>
-          <h3 className="font-bold" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f5efe0' }}>
+          <h3 className="font-bold" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>
             为什么冥想？
           </h3>
         </div>
@@ -236,10 +236,10 @@ function MeditationTab() {
             { label: '提升专注', desc: '每次"走神-拉回"都是注意力肌肉的锻炼', icon: '🎯' },
             { label: '改善睡眠', desc: '入睡前冥想激活副交感神经，帮助身体进入休息模式', icon: '😴' },
           ].map(item => (
-            <div key={item.label} className="p-3" style={{ background: '#060f18', borderRadius: 2 }}>
+            <div key={item.label} className="p-3" style={{ background: '#0a0a0c', borderRadius: 2 }}>
               <div className="text-lg mb-1">{item.icon}</div>
-              <div className="text-xs font-bold mb-1" style={{ color: '#f5efe0' }}>{item.label}</div>
-              <div className="text-xs leading-relaxed" style={{ color: '#7a7062' }}>{item.desc}</div>
+              <div className="text-xs font-bold mb-1" style={{ color: '#f4f4f6' }}>{item.label}</div>
+              <div className="text-xs leading-relaxed" style={{ color: '#71717a' }}>{item.desc}</div>
             </div>
           ))}
         </div>
@@ -249,18 +249,18 @@ function MeditationTab() {
       <div className="space-y-3">
         {MEDITATION_PRESETS.map(m => (
           <div key={m.id} className="p-5 cursor-pointer transition-all hover:translate-x-1"
-            style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}
+            style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}
             onClick={() => start(m)}>
             <div className="flex items-center gap-4">
               <div className="text-3xl">{m.icon}</div>
               <div className="flex-1 min-w-0">
-                <h3 className="font-bold text-sm mb-1" style={{ color: '#f5efe0' }}>{m.title}</h3>
-                <p className="text-xs mb-1" style={{ color: '#7a7062' }}>{m.description}</p>
-                <p className="text-xs" style={{ color: '#4a4038' }}>
+                <h3 className="font-bold text-sm mb-1" style={{ color: '#f4f4f6' }}>{m.title}</h3>
+                <p className="text-xs mb-1" style={{ color: '#71717a' }}>{m.description}</p>
+                <p className="text-xs" style={{ color: '#52525b' }}>
                   {m.duration} 分钟 · {m.steps.length} 步
                 </p>
               </div>
-              <div className="text-xs shrink-0" style={{ color: '#e8a820' }}>▶ 开始</div>
+              <div className="text-xs shrink-0" style={{ color: '#d4a853' }}>▶ 开始</div>
             </div>
           </div>
         ))}
@@ -323,29 +323,29 @@ function BreathingTab() {
   return (
     <div>
       {running && activeEx ? (
-        <div className="p-8 text-center" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+        <div className="p-8 text-center" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
           <div className="text-5xl mb-4">{activeEx.icon}</div>
-          <h3 className="text-lg font-bold mb-2" style={{ color: '#f5efe0' }}>{activeEx.title}</h3>
+          <h3 className="text-lg font-bold mb-2" style={{ color: '#f4f4f6' }}>{activeEx.title}</h3>
 
           <div className="flex justify-center my-8">
             <div className={`w-36 h-36 rounded-full transition-all duration-[4000ms] flex items-center justify-center ${
               phase === 'in' ? 'scale-125' : phase === 'out' ? 'scale-75' : 'scale-100'
             }`} style={{
-              background: phase === 'in' ? 'radial-gradient(circle, rgba(107,158,122,0.2), rgba(19,19,22,0.5))'
-                : phase === 'out' ? 'radial-gradient(circle, rgba(74,144,184,0.2), rgba(19,19,22,0.5))'
-                : 'radial-gradient(circle, rgba(232,168,32,0.2), rgba(19,19,22,0.5))',
-              border: `2px solid ${phase === 'in' ? 'rgba(107,158,122,0.3)' : phase === 'out' ? 'rgba(74,144,184,0.3)' : 'rgba(232,168,32,0.3)'}`,
+              background: phase === 'in' ? 'radial-gradient(circle, rgba(59,139,122,0.2), rgba(19,19,22,0.5))'
+                : phase === 'out' ? 'radial-gradient(circle, rgba(90,125,154,0.2), rgba(19,19,22,0.5))'
+                : 'radial-gradient(circle, rgba(212,168,83,0.2), rgba(19,19,22,0.5))',
+              border: `2px solid ${phase === 'in' ? 'rgba(59,139,122,0.3)' : phase === 'out' ? 'rgba(90,125,154,0.3)' : 'rgba(212,168,83,0.3)'}`,
             }}>
-              <span className="text-3xl font-bold" style={{ color: '#f5efe0' }}>{count}</span>
+              <span className="text-3xl font-bold" style={{ color: '#f4f4f6' }}>{count}</span>
             </div>
           </div>
 
-          <p className="text-sm" style={{ color: '#b8ad9a' }}>
+          <p className="text-sm" style={{ color: '#a1a1aa' }}>
             {phase && phaseLabel[phase]} · 第 {cycle + 1} / 5 轮
           </p>
 
           <button onClick={stopBreathing} className="mt-6 px-6 py-2 text-sm"
-            style={{ background: 'transparent', border: '1px solid rgba(255,255,255,0.06)', color: '#b8ad9a', borderRadius: 2, cursor: 'pointer' }}>
+            style={{ background: 'transparent', border: '1px solid rgba(255,255,255,0.06)', color: '#a1a1aa', borderRadius: 2, cursor: 'pointer' }}>
             停止
           </button>
         </div>
@@ -353,26 +353,26 @@ function BreathingTab() {
         <div className="space-y-4">
           {BREATHING_EXERCISES.map(ex => (
             <div key={ex.id} className="p-5 transition-all"
-              style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+              style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
               <div className="flex items-center gap-4">
                 <div className="text-3xl">{ex.icon}</div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-bold text-sm mb-1" style={{ color: '#f5efe0' }}>{ex.title}</h3>
-                  <p className="text-xs" style={{ color: '#7a7062' }}>{ex.desc}</p>
+                  <h3 className="font-bold text-sm mb-1" style={{ color: '#f4f4f6' }}>{ex.title}</h3>
+                  <p className="text-xs" style={{ color: '#71717a' }}>{ex.desc}</p>
                   {showScience === ex.id && (
-                    <p className="text-xs mt-2 leading-relaxed" style={{ color: '#5a5246' }}>
+                    <p className="text-xs mt-2 leading-relaxed" style={{ color: '#52525b' }}>
                       {ex.science}
                     </p>
                   )}
                 </div>
                 <div className="flex items-center gap-2">
                   <button onClick={(e) => { e.stopPropagation(); setShowScience(showScience === ex.id ? null : ex.id); }}
-                    className="text-xs transition-colors" style={{ color: showScience === ex.id ? '#e8a820' : '#5a5246' }}>
+                    className="text-xs transition-colors" style={{ color: showScience === ex.id ? '#d4a853' : '#52525b' }}>
                     {showScience === ex.id ? '收起' : '原理'}
                   </button>
                   <button onClick={() => run(ex, 'start', 0)}
                     className="text-xs px-3 py-1.5 transition-all"
-                    style={{ background: '#e8a820', color: '#060f18', borderRadius: 2, border: 'none', fontWeight: 600, cursor: 'pointer' }}>
+                    style={{ background: '#d4a853', color: '#0a0a0c', borderRadius: 2, border: 'none', fontWeight: 600, cursor: 'pointer' }}>
                     ▶ 开始
                   </button>
                 </div>
@@ -395,8 +395,8 @@ function DashboardTab() {
   if (!data) return (
     <div className="text-center py-16">
       <div className="text-4xl mb-4">📊</div>
-      <p className="text-sm" style={{ color: '#7a7062' }}>正在加载你的仪表盘...</p>
-      <p className="text-xs mt-2" style={{ color: '#5a5246' }}>需要更多数据才能生成趋势（请先记录情绪、睡眠和感恩日记）</p>
+      <p className="text-sm" style={{ color: '#71717a' }}>正在加载你的仪表盘...</p>
+      <p className="text-xs mt-2" style={{ color: '#52525b' }}>需要更多数据才能生成趋势（请先记录情绪、睡眠和感恩日记）</p>
     </div>
   );
 
@@ -407,33 +407,33 @@ function DashboardTab() {
       {/* 概览卡片 */}
       <div className="grid grid-cols-2 gap-4">
         {[
-          { label: '平均情绪', value: data.avg_mood || '--', unit: '/10', color: '#e8a820', tip: '情绪是内心的晴雨表——没有"好"或"坏"的情绪，每一种都在告诉你一些重要的信息' },
-          { label: '感恩日记', value: data.gratitude_count || 0, unit: '篇', color: '#c0392b', tip: '感恩是一项可以锻炼的心理技能，而非天生的性格特质' },
-          { label: '冥想次数', value: data.meditation_count || 0, unit: '次', color: '#8b7ab8', tip: '冥想不在于"想什么"，而在于"觉察什么"' },
-          { label: '统计天数', value: data.days, unit: '天', color: '#6b9e7a', tip: '坚持是唯一的捷径——21天足以养成一个新习惯' },
+          { label: '平均情绪', value: data.avg_mood || '--', unit: '/10', color: '#d4a853', tip: '情绪是内心的晴雨表——没有"好"或"坏"的情绪，每一种都在告诉你一些重要的信息' },
+          { label: '感恩日记', value: data.gratitude_count || 0, unit: '篇', color: '#c4554d', tip: '感恩是一项可以锻炼的心理技能，而非天生的性格特质' },
+          { label: '冥想次数', value: data.meditation_count || 0, unit: '次', color: '#6b5b8a', tip: '冥想不在于"想什么"，而在于"觉察什么"' },
+          { label: '统计天数', value: data.days, unit: '天', color: '#3b8b7a', tip: '坚持是唯一的捷径——21天足以养成一个新习惯' },
         ].map((card, i) => (
-          <div key={i} className="p-4 text-center" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+          <div key={i} className="p-4 text-center" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
             <div className="text-3xl font-bold mb-1" style={{ color: card.color }}>{card.value}</div>
-            <div className="text-xs mb-2" style={{ color: '#5a5246' }}>{card.label}{card.unit}</div>
-            <div className="text-xs leading-relaxed" style={{ color: '#4a4038' }}>{card.tip}</div>
+            <div className="text-xs mb-2" style={{ color: '#52525b' }}>{card.label}{card.unit}</div>
+            <div className="text-xs leading-relaxed" style={{ color: '#52525b' }}>{card.tip}</div>
           </div>
         ))}
       </div>
 
       {/* 情绪趋势 */}
       {data.mood_trend?.length > 0 && (
-        <div className="p-6" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
-          <h3 className="text-sm font-bold mb-4" style={{ color: '#f5efe0' }}>📈 情绪趋势</h3>
+        <div className="p-6" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+          <h3 className="text-sm font-bold mb-4" style={{ color: '#f4f4f6' }}>📈 情绪趋势</h3>
           <div className="flex items-end gap-1 h-24">
             {data.mood_trend.map((d: any, i: number) => (
               <div key={i} className="flex-1 flex flex-col items-center gap-1">
                 <div className="w-full rounded-t transition-all"
                   style={{
                     height: `${(d.score / moodMax) * 80}px`,
-                    background: `linear-gradient(180deg, #c0392b, #e8a820)`,
+                    background: `linear-gradient(180deg, #c4554d, #d4a853)`,
                     opacity: 0.6 + (d.score / moodMax) * 0.4,
                   }} />
-                <span className="text-xs" style={{ color: '#5a5246' }}>{d.date.slice(3)}</span>
+                <span className="text-xs" style={{ color: '#52525b' }}>{d.date.slice(3)}</span>
               </div>
             ))}
           </div>
@@ -442,20 +442,20 @@ function DashboardTab() {
 
       {/* 睡眠趋势 */}
       {data.sleep_trend?.length > 0 && (
-        <div className="p-6" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
-          <h3 className="text-sm font-bold mb-4" style={{ color: '#f5efe0' }}>😴 睡眠趋势</h3>
+        <div className="p-6" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+          <h3 className="text-sm font-bold mb-4" style={{ color: '#f4f4f6' }}>😴 睡眠趋势</h3>
           <div className="space-y-2">
             {data.sleep_trend.slice(-7).map((d: any, i: number) => (
               <div key={i} className="flex items-center gap-3 text-xs">
-                <span className="w-10" style={{ color: '#5a5246' }}>{d.date.slice(3)}</span>
+                <span className="w-10" style={{ color: '#52525b' }}>{d.date.slice(3)}</span>
                 <div className="flex-1 h-4 rounded-full overflow-hidden" style={{ background: '#ffffff05' }}>
                   <div className="h-full rounded-full transition-all"
                     style={{
                       width: `${(d.hours / 10) * 100}%`,
-                      background: d.hours >= 7 ? 'linear-gradient(90deg, #4a90b8, #6b9e7a)' : 'linear-gradient(90deg, #c0392b, #e8a820)',
+                      background: d.hours >= 7 ? 'linear-gradient(90deg, #5a7d9a, #3b8b7a)' : 'linear-gradient(90deg, #c4554d, #d4a853)',
                     }} />
                 </div>
-                <span className="w-12 text-right" style={{ color: '#b8ad9a' }}>{d.hours}h</span>
+                <span className="w-12 text-right" style={{ color: '#a1a1aa' }}>{d.hours}h</span>
               </div>
             ))}
           </div>
@@ -501,38 +501,38 @@ function GratitudeTab() {
   return (
     <div className="space-y-5">
       {/* 科普 */}
-      <div className="p-5" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+      <div className="p-5" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xl">💝</span>
-          <h3 className="font-bold text-sm" style={{ color: '#f5efe0' }}>感恩的科学</h3>
+          <h3 className="font-bold text-sm" style={{ color: '#f4f4f6' }}>感恩的科学</h3>
         </div>
-        <p className="text-xs leading-relaxed" style={{ color: '#7a7062', lineHeight: 1.8 }}>
+        <p className="text-xs leading-relaxed" style={{ color: '#71717a', lineHeight: 1.8 }}>
           2003年，Emmons & McCullough 的经典实验发现：连续10周每周写下5件感恩事件的小组，比"写烦恼"和"写日常"的小组表现出+25%的幸福感提升和更少的身体不适。感恩不是否认困难，而是在困难中训练自己看见光亮的能力。
         </p>
       </div>
 
       {/* 写作区 */}
-      <div className="p-6" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
-        <h3 className="text-sm font-bold mb-3" style={{ color: '#f5efe0' }}>今天，你感恩什么？</h3>
+      <div className="p-6" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+        <h3 className="text-sm font-bold mb-3" style={{ color: '#f4f4f6' }}>今天，你感恩什么？</h3>
         <textarea
           value={content}
           onChange={e => setContent(e.target.value)}
           placeholder="写下三件让你感恩的小事...可以是清晨的咖啡、朋友的消息、一阵凉风。"
           className="w-full resize-none text-sm mb-3 p-4"
           style={{
-            background: '#060f18', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2,
-            color: '#b8ad9a', outline: 'none', minHeight: '80px', lineHeight: 1.8,
+            background: '#0a0a0c', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2,
+            color: '#a1a1aa', outline: 'none', minHeight: '80px', lineHeight: 1.8,
           }}
           rows={3}
         />
         <div className="flex items-center justify-between">
           <button onClick={() => setShowPrompts(!showPrompts)} className="text-xs"
-            style={{ color: '#5a5246', textDecoration: 'underline', background: 'none', border: 'none', cursor: 'pointer' }}>
+            style={{ color: '#52525b', textDecoration: 'underline', background: 'none', border: 'none', cursor: 'pointer' }}>
             {showPrompts ? '收起提示' : '需要灵感？'}
           </button>
           <button onClick={submit} disabled={!content.trim()}
             className="px-6 py-2.5 text-sm font-semibold transition-all disabled:opacity-30"
-            style={{ background: '#e8a820', color: '#060f18', borderRadius: 2, border: 'none', cursor: 'pointer' }}>
+            style={{ background: '#d4a853', color: '#0a0a0c', borderRadius: 2, border: 'none', cursor: 'pointer' }}>
             记录感恩
           </button>
         </div>
@@ -540,10 +540,10 @@ function GratitudeTab() {
         {showPrompts && (
           <div className="mt-4 space-y-2">
             {PROMPTS.map((p, i) => (
-              <div key={i} className="p-3 cursor-pointer text-xs transition-all hover:border-[#e8a82020]"
-                style={{ background: '#060f18', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}
+              <div key={i} className="p-3 cursor-pointer text-xs transition-all hover:border-[#d4a85320]"
+                style={{ background: '#0a0a0c', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}
                 onClick={() => setContent(prev => prev + (prev ? '\n' : '') + p + ' ')}>
-                <span style={{ color: '#b8ad9a' }}>{p}</span>
+                <span style={{ color: '#a1a1aa' }}>{p}</span>
               </div>
             ))}
           </div>
@@ -553,9 +553,9 @@ function GratitudeTab() {
       {/* 记录列表 */}
       {logs.map((log: any) => (
         <div key={log.id} className="p-4 text-sm"
-          style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
-          <p className="leading-relaxed mb-2" style={{ color: '#b8ad9a' }}>{log.content}</p>
-          <span className="text-xs" style={{ color: '#5a5246' }}>
+          style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+          <p className="leading-relaxed mb-2" style={{ color: '#a1a1aa' }}>{log.content}</p>
+          <span className="text-xs" style={{ color: '#52525b' }}>
             {new Date(log.created_at).toLocaleDateString('zh-CN')}
           </span>
         </div>
@@ -606,14 +606,14 @@ function SleepTab() {
   return (
     <div className="space-y-5">
       {/* 睡眠卫生 */}
-      <div className="p-5" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+      <div className="p-5" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xl">🌙</span>
-          <h3 className="font-bold text-sm" style={{ color: '#f5efe0' }}>睡眠卫生小贴士</h3>
+          <h3 className="font-bold text-sm" style={{ color: '#f4f4f6' }}>睡眠卫生小贴士</h3>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           {HYGIENE_TIPS.map((tip, i) => (
-            <div key={i} className="text-xs leading-relaxed" style={{ color: '#7a7062' }}>
+            <div key={i} className="text-xs leading-relaxed" style={{ color: '#71717a' }}>
               {tip}
             </div>
           ))}
@@ -621,38 +621,38 @@ function SleepTab() {
       </div>
 
       {/* 记录表单 */}
-      <div className="p-6" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
-        <h3 className="text-sm font-bold mb-4" style={{ color: '#f5efe0' }}>记录昨晚的睡眠</h3>
+      <div className="p-6" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+        <h3 className="text-sm font-bold mb-4" style={{ color: '#f4f4f6' }}>记录昨晚的睡眠</h3>
 
-        <label className="text-xs mb-2 block font-medium" style={{ color: '#7a7062' }}>
+        <label className="text-xs mb-2 block font-medium" style={{ color: '#71717a' }}>
           睡眠时长: {hours} 小时
         </label>
         <input
           type="range" min={0} max={14} step={0.5} value={hours}
           onChange={e => setHours(parseFloat(e.target.value))}
           className="w-full mb-4"
-          style={{ accentColor: '#e8a820' }}
+          style={{ accentColor: '#d4a853' }}
         />
 
-        <label className="text-xs mb-2 block font-medium" style={{ color: '#7a7062' }}>睡眠质量</label>
+        <label className="text-xs mb-2 block font-medium" style={{ color: '#71717a' }}>睡眠质量</label>
         <div className="flex gap-2 mb-4">
           {[1, 2, 3, 4, 5].map(q => (
             <button key={q} onClick={() => setQuality(q)}
               className="w-10 h-10 text-lg transition-all"
               style={{
-                background: quality >= q ? 'rgba(232,168,32,0.1)' : '#060f18',
-                border: quality >= q ? '1px solid rgba(232,168,32,0.3)' : '1px solid rgba(255,255,255,0.06)',
+                background: quality >= q ? 'rgba(212,168,83,0.1)' : '#0a0a0c',
+                border: quality >= q ? '1px solid rgba(212,168,83,0.3)' : '1px solid rgba(255,255,255,0.06)',
                 borderRadius: 2,
-                color: quality >= q ? '#e8a820' : '#5a5246',
+                color: quality >= q ? '#d4a853' : '#52525b',
               }}>
               {q <= 3 ? '😴' : q === 4 ? '😊' : '✨'}
             </button>
           ))}
         </div>
 
-        <label className="flex items-center gap-2 mb-4 text-xs" style={{ color: '#7a7062', cursor: 'pointer' }}>
+        <label className="flex items-center gap-2 mb-4 text-xs" style={{ color: '#71717a', cursor: 'pointer' }}>
           <input type="checkbox" checked={dreamRecall} onChange={e => setDreamRecall(e.target.checked)}
-            style={{ accentColor: '#e8a820' }} />
+            style={{ accentColor: '#d4a853' }} />
           记得昨晚的梦
         </label>
 
@@ -663,14 +663,14 @@ function SleepTab() {
           rows={2}
           className="w-full resize-none text-xs mb-4 p-3"
           style={{
-            background: '#060f18', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2,
-            color: '#b8ad9a', outline: 'none', lineHeight: 1.7,
+            background: '#0a0a0c', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2,
+            color: '#a1a1aa', outline: 'none', lineHeight: 1.7,
           }}
         />
 
         <button onClick={submit}
           className="px-6 py-2.5 text-sm font-semibold transition-all"
-          style={{ background: '#e8a820', color: '#060f18', borderRadius: 2, border: 'none', cursor: 'pointer' }}>
+          style={{ background: '#d4a853', color: '#0a0a0c', borderRadius: 2, border: 'none', cursor: 'pointer' }}>
           记录睡眠
         </button>
       </div>
@@ -678,12 +678,12 @@ function SleepTab() {
       {/* 记录列表 */}
       {logs.map((log: any) => (
         <div key={log.id} className="p-4 flex items-center justify-between text-sm"
-          style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+          style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
           <div>
-            <span className="font-bold mr-2" style={{ color: '#f5efe0' }}>{log.sleep_hours}h</span>
-            <span style={{ color: '#5a5246' }}>品质 {log.sleep_quality}/5</span>
+            <span className="font-bold mr-2" style={{ color: '#f4f4f6' }}>{log.sleep_hours}h</span>
+            <span style={{ color: '#52525b' }}>品质 {log.sleep_quality}/5</span>
           </div>
-          <span className="text-xs" style={{ color: '#5a5246' }}>
+          <span className="text-xs" style={{ color: '#52525b' }}>
             {new Date(log.created_at).toLocaleDateString('zh-CN')}
           </span>
         </div>
