@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { MOCK_KNOWLEDGE_CATEGORIES, MOCK_KNOWLEDGE_ARTICLES, MOCK_KNOWLEDGE_FEATURED, MOCK_QUIZ_RESULT } from '@/lib/mock-knowledge';
 
 const API_BASE = typeof window !== 'undefined' ? (process.env.NEXT_PUBLIC_API_URL || '') : '';
 
@@ -47,10 +48,26 @@ export default function KnowledgePage() {
         fetch(`${API_BASE}/api/knowledge/categories`),
         fetch(`${API_BASE}/api/knowledge/featured`),
       ]);
+      if (!catRes.ok || !featRes.ok) throw new Error('API unavailable');
       setCategories(await catRes.json());
       setFeatured(await featRes.json());
       await fetchArticles(null, '');
-    } catch { setLoading(false); }
+    } catch {
+      // Offline: fall back to mock data
+      setCategories(MOCK_KNOWLEDGE_CATEGORIES);
+      setFeatured(MOCK_KNOWLEDGE_FEATURED.map(a => ({
+        ...a,
+        category: MOCK_KNOWLEDGE_CATEGORIES.find(c => c.slug === a.category_slug) || null,
+        created_at: '2026-04-15T08:00:00Z',
+      })));
+      const allArticles = MOCK_KNOWLEDGE_ARTICLES.map(a => ({
+        ...a,
+        category: MOCK_KNOWLEDGE_CATEGORIES.find(c => c.slug === a.category_slug) || null,
+        created_at: '2026-04-15T08:00:00Z',
+      }));
+      setArticles(allArticles);
+      setLoading(false);
+    }
   };
 
   const fetchArticles = async (cat: string | null, q: string) => {
@@ -60,21 +77,45 @@ export default function KnowledgePage() {
       if (cat) params.set('category', cat);
       if (q) params.set('search', q);
       const res = await fetch(`${API_BASE}/api/knowledge?${params}`);
+      if (!res.ok) throw new Error('API unavailable');
       const data = await res.json();
       setArticles(data.items || []);
-    } catch {} finally { setLoading(false); }
+    } catch {
+      // Offline: filter mock data
+      let filtered = MOCK_KNOWLEDGE_ARTICLES.map(a => ({
+        ...a,
+        category: MOCK_KNOWLEDGE_CATEGORIES.find(c => c.slug === a.category_slug) || null,
+        created_at: '2026-04-15T08:00:00Z',
+      }));
+      if (cat) filtered = filtered.filter(a => a.category_slug === cat);
+      if (q) {
+        const lower = q.toLowerCase();
+        filtered = filtered.filter(a => a.title.toLowerCase().includes(lower) || a.summary.toLowerCase().includes(lower));
+      }
+      setArticles(filtered);
+    } finally { setLoading(false); }
   };
 
   const fetchDetail = async (slug: string) => {
     try {
       const res = await fetch(`${API_BASE}/api/knowledge/${slug}`);
+      if (!res.ok) throw new Error('API unavailable');
       const data = await res.json();
       if (!data.error) {
         setDetail(data);
         setQuizState(null);
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
-    } catch {}
+    } catch {
+      // Offline: find in mock data
+      const article = MOCK_KNOWLEDGE_ARTICLES.find(a => a.slug === slug);
+      if (article) {
+        const category = MOCK_KNOWLEDGE_CATEGORIES.find(c => c.slug === article.category_slug) || null;
+        setDetail({ ...article, category, created_at: '2026-04-15T08:00:00Z', source: '学术来源 · 同行评审' } as ArticleDetail);
+        setQuizState(null);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
   };
 
   const submitQuiz = async () => {
@@ -89,9 +130,16 @@ export default function KnowledgePage() {
           answers: quizState.answers.map((selected, i) => ({ question_index: i, selected })),
         }),
       });
+      if (!res.ok) throw new Error('API unavailable');
       const result = await res.json();
       setQuizState({ ...quizState, submitted: true, result });
-    } catch {}
+    } catch {
+      // Offline: compute quiz result locally
+      const total = detail.quiz?.length || 0;
+      const correct = quizState.answers.filter((a, i) => a === detail.quiz[i]?.answer).length;
+      const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
+      setQuizState({ ...quizState, submitted: true, result: { score: correct, total, percentage: pct } });
+    }
   };
 
   // ═══════════════════════════════════════════════

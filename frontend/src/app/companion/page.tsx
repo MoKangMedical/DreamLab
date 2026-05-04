@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { MOCK_COMPANION_REPLIES } from '@/lib/mock-data';
 
 const API_BASE = typeof window !== 'undefined' ? (process.env.NEXT_PUBLIC_API_URL || '') : '';
 
@@ -67,10 +68,12 @@ export default function CompanionPage() {
         content: data.reply,
       }));
     } catch {
+      // Offline: use diverse empathetic replies
+      const i = Math.floor(Math.random() * MOCK_COMPANION_REPLIES.length);
       setMessages(prev => prev.filter(m => m.id !== typingId).concat({
         id: Date.now(),
         role: 'assistant',
-        content: '🫂 嗯...我还在。有时候不说话也没关系。',
+        content: MOCK_COMPANION_REPLIES[i],
       }));
     } finally {
       setLoading(false);

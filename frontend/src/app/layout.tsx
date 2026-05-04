@@ -6,6 +6,7 @@ import { SpiritedInteractions } from "@/components/SpiritedInteractions";
 import MarginDecor from "@/components/MarginDecor";
 import GlobalExploreMore from "@/components/GlobalExploreMore";
 import GhibliMusic from "@/components/GhibliMusic";
+import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 
 export const metadata: Metadata = {
   title: "DreamLab — Evidence-Based Psychology Platform",
@@ -141,6 +142,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </div>
 
         <BottomNav />
+        <PWAInstallPrompt />
         <GhibliMusic />
       </body>
     </html>
