@@ -3,324 +3,132 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
-/* ═══════════════════════════════════════════════════
-   DreamLab — Professional International Platform
-   Clean · Confident · Spacious
-   ═══════════════════════════════════════════════════ */
-
-const STATS = [
-  { value: '6', label: 'Standardized Scales', sub: 'SAS · SDS · BFI · PSQI · CD-RISC · SCL-90' },
-  { value: '12', label: 'Peer-Reviewed Articles', sub: 'Evidence-based knowledge base' },
-  { value: '4', label: 'Theoretical Lenses', sub: 'Freud · Jung · Neuroscience · Eastern' },
-];
-
 const FEATURES = [
-  {
-    title: 'Psychological Assessment',
-    desc: 'Six internationally recognized scales with AI-powered interpretation. Not quizzes — clinical-grade tools used by professionals worldwide.',
-    href: '/assessments',
-    color: '#e8a820',
-  },
-  {
-    title: 'AI Companion',
-    desc: 'CBT-informed empathetic dialogue. Your silent listener — always present, never judging. Powered by DeepSeek.',
-    href: '/companion',
-    color: '#4a90b8',
-  },
-  {
-    title: 'Dream Analysis',
-    desc: 'Record and decode your dreams through four theoretical perspectives. Understand the language of your subconscious.',
-    href: '/dream',
-    color: '#7b5ea8',
-  },
-  {
-    title: 'Evidence Knowledge Base',
-    desc: '12 peer-reviewed articles on CBT, mindfulness, attachment theory, and neuroscience. Every claim backed by research.',
-    href: '/knowledge',
-    color: '#c0392b',
-  },
-  {
-    title: 'Wellness Toolkit',
-    desc: 'Guided meditation, breathing exercises, gratitude journaling, and sleep tracking — your daily mental hygiene routine.',
-    href: '/wellness',
-    color: '#1e8568',
-  },
-  {
-    title: 'Systematic Courses',
-    desc: 'Structured learning path from Freud to modern neuroscience. Earn your Dream Analyst certification.',
-    href: '/courses',
-    color: '#6b4fa0',
-  },
+  { title: '心理测评', desc: '6大国际标准量表，AI深度解读', href: '/assessments', icon: '🪞', color: '#e8a820' },
+  { title: 'AI陪伴', desc: '无脸男安静倾听每一份情绪', href: '/companion', icon: '👤', color: '#4a90b8' },
+  { title: '梦境解析', desc: '四重视角，探索潜意识', href: '/dream', icon: '🌙', color: '#8b7ab8' },
+  { title: '互助社区', desc: '匿名分享，彼此温暖', href: '/community', icon: '🏮', color: '#c0392b' },
+  { title: '知识库', desc: '12篇同行评审科普', href: '/knowledge', icon: '📚', color: '#6b9e7a' },
+  { title: '健康工具', desc: '冥想·呼吸·感恩日记', href: '/wellness', icon: '🧘', color: '#1e8568' },
 ];
 
 export default function HomePage() {
   const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    setLoaded(true);
-  }, []);
+  useEffect(() => { setLoaded(true); }, []);
 
   return (
-    <div style={{ background: '#060f18', minHeight: '100vh' }}>
+    <div style={{ background: '#060f18' }}>
 
-      {/* ════════════════════════════════════════════
-          HERO — Full Viewport
-          ════════════════════════════════════════════ */}
-      <section className="relative flex items-center justify-center overflow-hidden"
-        style={{ minHeight: '100dvh' }}>
+      {/* ═══════════════ HERO ═══════════════ */}
+      <section className={`m-section transition-all duration-1000 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+        style={{ paddingTop: 40, paddingBottom: 48 }}>
 
-        {/* ── Subtle geometric backdrop ── */}
-        <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 0 }}>
-          <div className="absolute top-1/4 -left-32 w-96 h-96 rounded-full opacity-[0.03]"
-            style={{ background: 'radial-gradient(circle, #e8a820, transparent 70%)', filter: 'blur(80px)' }} />
-          <div className="absolute bottom-1/3 -right-32 w-80 h-80 rounded-full opacity-[0.02]"
-            style={{ background: 'radial-gradient(circle, #4a90b8, transparent 70%)', filter: 'blur(80px)' }} />
-        </div>
+        {/* Ambient glows */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-72 rounded-full pointer-events-none"
+          style={{ background: 'radial-gradient(circle, rgba(232,168,32,0.06), transparent 70%)', filter: 'blur(60px)', zIndex: 0 }} />
 
-        {/* ── Content ── */}
-        <div className={`relative z-10 text-center max-w-4xl mx-auto px-6 transition-all duration-1200 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          
+        <div className="relative z-10 text-center">
           {/* Label */}
-          <div className="mb-8">
-            <span className="text-xs tracking-[0.3em] uppercase"
-              style={{ color: 'rgba(232,168,32,0.6)', fontFamily: 'Inter, sans-serif' }}>
-              Evidence-Based · AI-Powered · Clinically Informed
-            </span>
+          <div className="m-label mb-4" style={{ color: 'rgba(232,168,32,0.5)' }}>
+            油屋 · 夢の解析
           </div>
 
-          {/* Main Heading */}
-          <h1 className="font-bold leading-none mb-6 tracking-tight"
-            style={{
-              fontFamily: "'Noto Serif SC', serif",
-              fontSize: 'clamp(48px, 9vw, 96px)',
-              color: '#f5efe0',
-              lineHeight: 1.05,
-            }}>
-            Understand Your<br/>
-            <span style={{ color: '#e8a820' }}>Inner World</span>
+          {/* Title */}
+          <h1 className="m-title mb-3" style={{ fontSize: 36, letterSpacing: '-0.02em' }}>
+            DreamLab
           </h1>
-
-          {/* Subtitle */}
-          <p className="max-w-xl mx-auto text-base md:text-lg leading-relaxed mb-10"
-            style={{ color: '#7a7062', fontFamily: 'Inter, sans-serif', lineHeight: 1.7 }}>
-            A psychology platform built on standardized assessments, 
-            AI-powered interpretation, and evidence-based knowledge — 
-            designed to help you explore the architecture of your mind.
+          <p className="m-body mb-10" style={{ color: 'var(--text-muted)', fontSize: 15, maxWidth: 320, margin: '0 auto 40px' }}>
+            基于标准化评估与AI深度解读<br/>探索你内心世界的建筑学
           </p>
 
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-            <Link href="/assessments"
-              className="group relative inline-flex items-center gap-2 px-8 py-4 text-sm font-semibold transition-all duration-300"
-              style={{
-                background: '#e8a820', color: '#060f18',
-                fontFamily: 'Inter, sans-serif',
-                letterSpacing: '0.03em',
-              }}>
-              Start Assessment
-              <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-            </Link>
-            <Link href="/knowledge"
-              className="inline-flex items-center gap-2 px-8 py-4 text-sm font-medium transition-all duration-300"
-              style={{
-                background: 'transparent', color: '#b8ad9a',
-                border: '1px solid rgba(255,255,255,0.1)',
-                fontFamily: 'Inter, sans-serif',
-                letterSpacing: '0.03em',
-              }}>
-              Explore Knowledge Base
-            </Link>
-          </div>
-
-          {/* Trust indicators */}
-          <div className="flex flex-wrap justify-center gap-x-12 gap-y-4">
-            {STATS.map(s => (
-              <div key={s.label} className="text-center">
-                <div className="text-2xl font-bold mb-1" style={{ color: '#f5efe0', fontFamily: 'Inter, sans-serif' }}>
-                  {s.value}
-                </div>
-                <div className="text-xs tracking-wide uppercase mb-1" style={{ color: '#e8a820' }}>
-                  {s.label}
-                </div>
-                <div className="text-xs" style={{ color: '#5a5246' }}>
-                  {s.sub}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* ── Scroll indicator ── */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4" style={{ zIndex: 10 }}>
-          <Link href="/bathhouse"
-            className="text-[10px] tracking-[0.2em] transition-colors duration-300"
-            style={{ color: '#5a5246', fontFamily: 'Inter, sans-serif' }}>
-            油屋へ · Enter the Bathhouse
-          </Link>
-          <div className="w-px h-8 mx-auto" style={{ background: 'linear-gradient(180deg, rgba(232,168,32,0.3), transparent)' }} />
-          <span className="text-[10px] tracking-[0.3em]" style={{ color: '#3a352e' }}>SCROLL</span>
-        </div>
-      </section>
-
-
-      {/* ════════════════════════════════════════════
-          FEATURES — Professional Card Grid
-          ════════════════════════════════════════════ */}
-      <section className="relative py-20 md:py-40">
-        <div className="max-w-6xl mx-auto px-6">
-          
-          {/* Section Header */}
-          <div className="mb-20">
-            <div className="flex items-center gap-4 mb-6">
-              <div style={{ width: 40, height: 1, background: 'rgba(232,168,32,0.2)' }} />
-              <span className="text-xs tracking-[0.2em] uppercase" style={{ color: 'rgba(232,168,32,0.6)' }}>
-                Platform Capabilities
-              </span>
-            </div>
-            <h2 className="font-bold mb-6" style={{
-              fontFamily: "'Noto Serif SC', serif",
-              fontSize: 'clamp(28px, 4vw, 48px)',
-              color: '#f5efe0',
-              lineHeight: 1.2,
-            }}>
-              Everything you need to explore<br/>the architecture of your mind
-            </h2>
-            <p className="max-w-2xl text-base leading-relaxed" style={{ color: '#7a7062', lineHeight: 1.7 }}>
-              From clinical-grade assessments to AI-powered dream interpretation — 
-              a complete toolkit grounded in decades of psychological research.
-            </p>
-          </div>
-
-          {/* Feature Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px"
-            style={{ background: 'rgba(255,255,255,0.04)' }}>
-            {FEATURES.map((f, i) => (
-              <Link
-                key={f.href}
-                href={f.href}
-                className="group block p-6 md:p-10 transition-all duration-500"
-                style={{
-                  background: '#0a1620',
-                  border: 'none',
-                }}
-              >
-                {/* Accent line */}
-                <div className="mb-8 transition-all duration-500"
-                  style={{
-                    width: 24, height: 2,
-                    background: f.color,
-                    opacity: 0.6,
-                  }}
-                />
-
-                <h3 className="text-lg font-bold mb-3 transition-colors duration-300"
-                  style={{
-                    fontFamily: "'Noto Serif SC', serif",
-                    color: '#f5efe0',
-                    fontSize: 20,
-                  }}>
-                  {f.title}
-                </h3>
-
-                <p className="text-sm leading-relaxed mb-6"
-                  style={{ color: '#7a7062', lineHeight: 1.8 }}>
-                  {f.desc}
-                </p>
-
-                <span className="inline-flex items-center gap-1 text-xs font-medium transition-all duration-300 group-hover:gap-2"
-                  style={{ color: f.color, letterSpacing: '0.05em' }}>
-                  EXPLORE <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-
-      {/* ════════════════════════════════════════════
-          VALUE PROPS — Three Pillars
-          ════════════════════════════════════════════ */}
-      <section className="relative py-32 md:py-40" style={{ background: '#0a1620' }}>
-        <div className="max-w-6xl mx-auto px-6">
-          
-          <div className="mb-20">
-            <h2 className="font-bold mb-6" style={{
-              fontFamily: "'Noto Serif SC', serif",
-              fontSize: 'clamp(28px, 4vw, 48px)',
-              color: '#f5efe0',
-              lineHeight: 1.2,
-            }}>
-              Why DreamLab exists
-            </h2>
-            <p className="max-w-2xl text-base leading-relaxed" style={{ color: '#7a7062', lineHeight: 1.7 }}>
-              Mental health tools should be accessible, scientifically grounded, and beautifully designed. 
-              We built DreamLab to bridge the gap between clinical rigor and human warmth.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-1" style={{ background: 'rgba(255,255,255,0.03)' }}>
-            {[
-              {
-                title: 'Scientific Foundation',
-                desc: 'Every assessment is a validated instrument with decades of peer-reviewed research behind it. SAS, SDS, BFI, PSQI, CD-RISC, SCL-90 — these are the same tools used in clinical settings worldwide.',
-                accent: '#e8a820',
-              },
-              {
-                title: 'AI-Powered Depth',
-                desc: 'Traditional assessments give you a score. Our DeepSeek-powered engine provides personalized interpretation — helping you understand not just what the numbers mean, but what they mean for you.',
-                accent: '#4a90b8',
-              },
-              {
-                title: 'Designed for Humans',
-                desc: 'Psychology doesn\'t have to feel clinical. We\'ve wrapped evidence-based tools in an experience that feels warm, inviting, and safe — because that\'s how healing should feel.',
-                accent: '#c0392b',
-              },
-            ].map((item, i) => (
-              <div key={i} className="p-6 md:p-10" style={{ background: '#060f18' }}>
-                <div className="w-8 h-0.5 mb-8" style={{ background: item.accent }} />
-                <h3 className="text-xl font-bold mb-4" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f5efe0' }}>
-                  {item.title}
-                </h3>
-                <p className="text-sm leading-relaxed" style={{ color: '#7a7062', lineHeight: 1.9 }}>
-                  {item.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-
-      {/* ════════════════════════════════════════════
-          CTA — Final Conversion
-          ════════════════════════════════════════════ */}
-      <section className="relative py-24 md:py-48 text-center">
-        <div className="max-w-3xl mx-auto px-6">
-          <h2 className="font-bold mb-6" style={{
-            fontFamily: "'Noto Serif SC', serif",
-            fontSize: 'clamp(28px, 5vw, 56px)',
-            color: '#f5efe0',
-            lineHeight: 1.15,
-          }}>
-            Begin your journey<br/>of self-discovery
-          </h2>
-          <p className="max-w-lg mx-auto text-base leading-relaxed mb-10" style={{ color: '#7a7062', lineHeight: 1.7 }}>
-            Six standardized scales. AI-powered interpretation. 
-            Evidence-based knowledge. All in one place.
-          </p>
+          {/* CTA */}
           <Link href="/assessments"
-            className="inline-flex items-center gap-2 px-10 py-5 text-base font-semibold transition-all duration-300 hover:scale-[1.02]"
-            style={{
-              background: '#e8a820', color: '#060f18',
-              fontFamily: 'Inter, sans-serif',
-              letterSpacing: '0.03em',
-            }}>
-            Start Your First Assessment →
+            className="m-btn m-btn-primary"
+            style={{ display: 'inline-flex', padding: '16px 40px', fontSize: 16, borderRadius: 14 }}>
+            开始第一次测评 →
           </Link>
+
+          {/* Trust badges */}
+          <div className="flex justify-center gap-8 mt-10 pt-8" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+            {[
+              { value: '6', label: '标准量表' },
+              { value: '12', label: '同行评审' },
+              { value: '4', label: '理论视角' },
+            ].map(s => (
+              <div key={s.label} className="text-center">
+                <div className="m-subtitle" style={{ color: '#f5efe0', fontSize: 22 }}>{s.value}</div>
+                <div className="m-caption mt-1" style={{ color: 'rgba(232,168,32,0.5)', fontSize: 10 }}>{s.label}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
+      {/* ═══════════════ FEATURES ═══════════════ */}
+      <section className="m-section">
+        <div className="flex items-center gap-3 mb-6">
+          <div style={{ width: 20, height: 1, background: 'rgba(232,168,32,0.15)' }} />
+          <span className="m-label" style={{ color: 'rgba(232,168,32,0.5)' }}>平台功能</span>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3">
+          {FEATURES.map((f, i) => (
+            <Link key={f.href} href={f.href}
+              className="m-card m-card-interactive flex flex-col items-center text-center"
+              style={{ animation: `card-rise 0.4s ease-out ${i * 0.06}s both` }}>
+              <span style={{ fontSize: 32, marginBottom: 12, lineHeight: 1 }}>{f.icon}</span>
+              <h3 className="m-subtitle mb-1" style={{ fontSize: 15 }}>{f.title}</h3>
+              <p className="m-caption" style={{ fontSize: 11 }}>{f.desc}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* ═══════════════ VALUE PROPS ═══════════════ */}
+      <section className="m-section">
+        <h2 className="m-title mb-2" style={{ fontSize: 20 }}>为什么选择 DreamLab</h2>
+        <p className="m-body mb-6" style={{ fontSize: 14, color: 'var(--text-muted)' }}>
+          科学严谨，人文温暖——我们不只给你分数，更帮你理解分数背后的意义。
+        </p>
+        <div className="space-y-3">
+          {[
+            { title: '科学基础', desc: '每项量表都是经过数十年同行评审验证的临床工具', accent: '#e8a820' },
+            { title: 'AI深度解读', desc: 'DeepSeek驱动，不仅告诉你数字，更告诉你这些数字对你意味着什么', accent: '#4a90b8' },
+            { title: '为人而设计', desc: '我们不认为心理学就该冷冰冰——疗愈应该感觉温暖', accent: '#c0392b' },
+          ].map((item, i) => (
+            <div key={i} className="m-card" style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
+              <div style={{ width: 4, height: 32, background: item.accent, borderRadius: 2, marginTop: 4, flexShrink: 0 }} />
+              <div>
+                <h3 className="m-subtitle mb-1" style={{ fontSize: 15 }}>{item.title}</h3>
+                <p className="m-caption" style={{ fontSize: 13 }}>{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ═══════════════ EXPLORE LINKS ═══════════════ */}
+      <section className="m-section" style={{ paddingBottom: 48 }}>
+        <div className="flex items-center gap-3 mb-5">
+          <div style={{ width: 20, height: 1, background: 'rgba(232,168,32,0.15)' }} />
+          <span className="m-label" style={{ color: 'rgba(232,168,32,0.5)' }}>继续探索</span>
+        </div>
+        <div className="grid grid-cols-2 gap-2">
+          {[
+            { href: '/bathhouse', label: '油屋大厅', icon: '🏯' },
+            { href: '/spirited', label: '千寻之旅', icon: '🐉' },
+            { href: '/courses', label: '系统课程', icon: '📜' },
+            { href: '/profile/milestones', label: '成长记录', icon: '✨' },
+          ].map(item => (
+            <Link key={item.href} href={item.href}
+              className="m-card m-card-interactive flex items-center gap-3"
+              style={{ padding: '16px 20px' }}>
+              <span style={{ fontSize: 22 }}>{item.icon}</span>
+              <span className="m-subtitle" style={{ fontSize: 14 }}>{item.label}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
