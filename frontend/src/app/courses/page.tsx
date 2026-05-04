@@ -77,7 +77,7 @@ export default async function CoursesPage() {
     <div style={{ background: '#060f18', minHeight: '100vh' }}>
       <PageAtmosphere />
       <div className="relative z-10">{/* ════════════════ Hero ════════════════ */}
-      <div className="relative pt-24 md:pt-32 pb-16 md:pb-24">
+      <div className="relative pt-14 md:pt-20 pb-16 md:pb-24">
         <div className="max-w-5xl mx-auto px-6 text-center">
           <div className="inline-flex items-center gap-2 mb-6 text-xs tracking-[0.2em] uppercase"
             style={{ color: 'rgba(232,168,32,0.5)', fontFamily: 'Inter, sans-serif' }}>

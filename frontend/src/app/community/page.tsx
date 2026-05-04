@@ -165,7 +165,7 @@ export default function CommunityPage() {
 
   return (
     <div style={{ background: '#060f18', minHeight: '100vh' }}>
-      <div className="max-w-4xl mx-auto px-4 md:px-6 pt-24 md:pt-32 pb-32">
+      <div className="max-w-4xl mx-auto px-4 md:px-6 pt-14 md:pt-20 pb-32">
 
         {/* ── Header ── */}
         <div className={`mb-12 transition-all duration-1000 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>

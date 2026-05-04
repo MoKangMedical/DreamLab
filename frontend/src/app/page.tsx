@@ -67,7 +67,7 @@ export default function HomePage() {
           HERO — Full Viewport
           ════════════════════════════════════════════ */}
       <section className="relative flex items-center justify-center overflow-hidden"
-        style={{ minHeight: '100vh' }}>
+        style={{ minHeight: '100dvh' }}>
 
         {/* ── Subtle geometric backdrop ── */}
         <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 0 }}>
@@ -166,7 +166,7 @@ export default function HomePage() {
       {/* ════════════════════════════════════════════
           FEATURES — Professional Card Grid
           ════════════════════════════════════════════ */}
-      <section className="relative py-32 md:py-40">
+      <section className="relative py-20 md:py-40">
         <div className="max-w-6xl mx-auto px-6">
           
           {/* Section Header */}
@@ -198,7 +198,7 @@ export default function HomePage() {
               <Link
                 key={f.href}
                 href={f.href}
-                className="group block p-10 transition-all duration-500"
+                className="group block p-6 md:p-10 transition-all duration-500"
                 style={{
                   background: '#0a1620',
                   border: 'none',
@@ -277,7 +277,7 @@ export default function HomePage() {
                 accent: '#c0392b',
               },
             ].map((item, i) => (
-              <div key={i} className="p-10" style={{ background: '#060f18' }}>
+              <div key={i} className="p-6 md:p-10" style={{ background: '#060f18' }}>
                 <div className="w-8 h-0.5 mb-8" style={{ background: item.accent }} />
                 <h3 className="text-xl font-bold mb-4" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f5efe0' }}>
                   {item.title}
@@ -295,7 +295,7 @@ export default function HomePage() {
       {/* ════════════════════════════════════════════
           CTA — Final Conversion
           ════════════════════════════════════════════ */}
-      <section className="relative py-40 md:py-48 text-center">
+      <section className="relative py-24 md:py-48 text-center">
         <div className="max-w-3xl mx-auto px-6">
           <h2 className="font-bold mb-6" style={{
             fontFamily: "'Noto Serif SC', serif",

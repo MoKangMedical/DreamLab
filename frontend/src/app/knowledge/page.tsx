@@ -100,7 +100,7 @@ export default function KnowledgePage() {
   if (detail) {
     return (
       <div style={{ background: '#060f18', minHeight: '100vh' }}>
-        <div className="max-w-4xl mx-auto px-4 md:px-6 pt-20 md:pt-28 pb-32">
+        <div className="max-w-4xl mx-auto px-4 md:px-6 pt-14 md:pt-20 pb-32">
           <button onClick={() => setDetail(null)}
             className="text-xs mb-8 transition-colors" style={{ color: '#5a5246', background: 'none', border: 'none', cursor: 'pointer' }}>
             ← 返回知识库
@@ -254,7 +254,7 @@ export default function KnowledgePage() {
   // ═══════════════════════════════════════════════
   return (
     <div style={{ background: '#060f18', minHeight: '100vh' }}>
-      <div className="max-w-6xl mx-auto px-4 md:px-6 pt-20 md:pt-28 pb-32">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 pt-14 md:pt-20 pb-32">
         
         {/* Hero */}
         <div className={`text-center mb-12 transition-all duration-1000 ${visible ? 'opacity-100' : 'opacity-0'}`}>

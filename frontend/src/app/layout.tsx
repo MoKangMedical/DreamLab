@@ -88,11 +88,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </nav>
 
         {/* Three-column grid */}
-        <div className="app-grid" style={{ paddingTop: '3.5rem' }}>
+        <div className="app-grid" style={{ paddingTop: '0' }}>
           <MarginDecor side="left" />
           
-          <div className="content-col">
-            <main className="min-h-screen">
+          <div className="content-col" style={{ padding: '0 16px' }}>
+            <main className="min-h-screen pt-14 md:pt-16">
               <SpiritedInteractions>
               <div className="page-transition">
                 {children}

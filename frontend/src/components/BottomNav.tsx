@@ -4,11 +4,11 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
 const TABS = [
-  { href: '/', label: 'Home' },
-  { href: '/assessments', label: 'Tests' },
-  { href: '/companion', label: 'Chat' },
-  { href: '/dream', label: 'Dreams' },
-  { href: '/knowledge', label: 'Learn' },
+  { href: '/', label: '首页', icon: '🏠' },
+  { href: '/assessments', label: '测评', icon: '🪞' },
+  { href: '/companion', label: '陪伴', icon: '👤' },
+  { href: '/community', label: '社区', icon: '🏮' },
+  { href: '/profile', label: '我的', icon: '🐉' },
 ];
 
 export default function BottomNav() {
@@ -25,7 +25,7 @@ export default function BottomNav() {
       style={{ touchAction: 'manipulation' }}
     >
       <div className="absolute inset-0"
-        style={{ background: 'rgba(6,15,24,0.96)', backdropFilter: 'blur(16px)', borderTop: '1px solid rgba(255,255,255,0.05)' }} />
+        style={{ background: 'rgba(6,15,24,0.96)', backdropFilter: 'blur(20px)', borderTop: '1px solid rgba(255,255,255,0.06)' }} />
 
       <div className="relative flex items-center justify-around h-14 px-1">
         {TABS.map((tab) => {
@@ -34,20 +34,23 @@ export default function BottomNav() {
             <Link
               key={tab.href}
               href={tab.href}
-              className="relative flex items-center justify-center flex-1 h-full transition-all duration-200"
+              className="relative flex flex-col items-center justify-center flex-1 h-full gap-0.5 transition-all duration-200"
               style={{ touchAction: 'manipulation' }}
             >
               {active && (
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-0.5"
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-6 h-0.5 rounded-full"
                   style={{ background: '#e8a820' }} />
               )}
-              <span className={`text-xs font-medium transition-colors duration-200 ${
-                active ? '' : ''
-              }`}
-                style={{
-                  color: active ? '#f5efe0' : '#5a5246',
-                  fontFamily: 'Inter, sans-serif',
-                }}>
+              <span style={{ fontSize: 18, lineHeight: 1, opacity: active ? 1 : 0.5, transition: 'opacity 0.2s' }}>
+                {tab.icon}
+              </span>
+              <span style={{
+                fontSize: 10,
+                color: active ? '#f5efe0' : '#5a5246',
+                fontFamily: 'Inter, sans-serif',
+                fontWeight: active ? 600 : 400,
+                transition: 'color 0.2s',
+              }}>
                 {tab.label}
               </span>
             </Link>

@@ -148,7 +148,7 @@ export default function AssessmentsPage() {
   return (
     <div style={{ background: '#060f18', minHeight: '100vh' }}>
       {/* Hero */}
-      <div className="relative pt-24 md:pt-32 pb-16 md:pb-24">
+      <div className="relative pt-14 md:pt-20 pb-16 md:pb-24">
         <div className="max-w-5xl mx-auto px-6 text-center">
           <div className={`transition-all duration-1000 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="text-5xl md:text-7xl mb-6">🪞</div>

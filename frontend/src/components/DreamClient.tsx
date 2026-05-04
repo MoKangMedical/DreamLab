@@ -54,7 +54,7 @@ export default function DreamClient() {
 
   return (
     <div style={{ background: '#060f18', minHeight: '100vh' }}>
-      <div className="max-w-5xl mx-auto px-4 md:px-6 pt-20 md:pt-28 pb-32">
+      <div className="max-w-5xl mx-auto px-4 md:px-6 pt-14 md:pt-20 pb-32">
         
         {/* Hero */}
         <div className="text-center mb-12">

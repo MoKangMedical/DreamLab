@@ -142,7 +142,7 @@ export default function SpiritedFloorPage({ params }: { params: { floor: string 
       </div>
 
       {/* 楼层标题 */}
-      <div className="pt-20 pb-8 text-center relative z-10">
+      <div className="pt-14 pb-8 text-center relative z-10">
         <div className="text-5xl mb-3" style={{ animation: 'fadeIn 0.5s ease-out' }}>
           {floor === 1 && '🌉'}{floor === 2 && '🔥'}{floor === 3 && '👤'}{floor === 4 && '🏞️'}{floor === 5 && '🐉'}
         </div>
