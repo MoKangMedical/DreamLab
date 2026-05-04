@@ -528,6 +528,47 @@ async def seed(echo=True):
                 )
                 session.add(assessment)
         
+        # Create knowledge base (idempotent)
+        from backend.models import KnowledgeCategory, KnowledgeArticle
+        from backend.seed_knowledge import KNOWLEDGE_CATEGORIES, KNOWLEDGE_ARTICLES
+        
+        # Categories
+        check_cat = await session.execute(select(KnowledgeCategory).limit(1))
+        if check_cat.scalar_one_or_none() is None:
+            cat_map = {}
+            for cat_data in KNOWLEDGE_CATEGORIES:
+                cat = KnowledgeCategory(
+                    name=cat_data["name"],
+                    slug=cat_data["slug"],
+                    description=cat_data["description"],
+                    icon=cat_data["icon"],
+                    color=cat_data["color"],
+                    sort_order=cat_data["sort_order"],
+                )
+                session.add(cat)
+                cat_map[cat_data["slug"]] = cat
+            await session.flush()
+            
+            # Articles
+            for article_data in KNOWLEDGE_ARTICLES:
+                cat = cat_map.get(article_data["category_slug"])
+                article = KnowledgeArticle(
+                    category_id=cat.id if cat else None,
+                    title=article_data["title"],
+                    slug=article_data["slug"],
+                    summary=article_data["summary"],
+                    content=article_data["content"],
+                    key_concepts=article_data["key_concepts"],
+                    evidence_level=article_data["evidence_level"],
+                    source=article_data["source"],
+                    reading_time=article_data["reading_time"],
+                    is_featured=article_data["is_featured"],
+                    quiz=article_data["quiz"],
+                )
+                session.add(article)
+            if echo:
+                print(f"✅ Seeded {len(KNOWLEDGE_CATEGORIES)} categories, {len(KNOWLEDGE_ARTICLES)} articles")
+        
         await session.commit()
         if echo:
             # Count what we have

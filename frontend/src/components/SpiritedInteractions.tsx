@@ -225,9 +225,9 @@ export function WelcomeCeremony({ onEnter }: { onEnter: () => void }) {
   const handleSubmit = () => {
     if (!name.trim()) return;
     setWritten(true);
-    setTimeout(() => setPhase('bridge'), 800);
-    setTimeout(() => setPhase('enter'), 2200);
-    setTimeout(() => { setPhase('done'); onEnter(); }, 3200);
+    setTimeout(() => setPhase('bridge'), 500);
+    setTimeout(() => setPhase('enter'), 1200);
+    setTimeout(() => { setPhase('done'); onEnter(); }, 1800);
   };
 
   if (phase === 'done') return null;
@@ -296,7 +296,7 @@ export function WelcomeCeremony({ onEnter }: { onEnter: () => void }) {
             {name}、いらっしゃい
           </p>
           <p className="text-[#8aa8c0] text-sm">欢迎来到油屋...</p>
-          <p className="text-[#6A8AA8] text-xs mt-2 animate-pulse">正在走过红桥</p>
+          <p className="text-[#5a8aa8] text-xs mt-2 animate-pulse">正在走过红桥</p>
         </div>
       )}
 
@@ -313,31 +313,13 @@ export function WelcomeCeremony({ onEnter }: { onEnter: () => void }) {
   );
 }
 
-// ==================== 全局交互容器 ====================
+// ==================== 全局交互容器 (精简版 — 无阻塞入场) ====================
 export function SpiritedInteractions({ children }: { children: React.ReactNode }) {
-  const [showWelcome, setShowWelcome] = useState(false);
-  const [welcomed, setWelcomed] = useState(false);
-
-  useEffect(() => {
-    // 检查是否是第一次使用（简单用 sessionStorage）
-    const visited = sessionStorage.getItem('dreamlab_visited');
-    if (!visited) {
-      setTimeout(() => setShowWelcome(true), 600);
-    }
-  }, []);
-
-  const handleEnter = () => {
-    sessionStorage.setItem('dreamlab_visited', '1');
-    setWelcomed(true);
-    showShikigami('欢迎回来，千寻', 'warm');
-  };
-
   return (
     <>
       <SootSprites />
       <BathTokenOverlay />
       <ShikigamiToast />
-      {showWelcome && !welcomed && <WelcomeCeremony onEnter={handleEnter} />}
       {children}
     </>
   );

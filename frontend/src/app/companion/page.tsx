@@ -79,7 +79,7 @@ export default function CompanionPage() {
 
   return (
     <div className="min-h-screen flex flex-col" style={{
-      background: 'linear-gradient(180deg, #09090b 0%, #131316 40%, #1c1c21 100%)',
+      background: 'linear-gradient(180deg, #060f18 0%, #0d1a28 40%, #13212f 100%)',
     }}>
       {/* 星空粒子 */}
       <div className="fixed inset-0 pointer-events-none z-0">
@@ -99,7 +99,7 @@ export default function CompanionPage() {
       {/* 顶栏 */}
       <header className="relative z-10 frost-panel border-b border-[#ffffff]/06">
         <div className="max-w-3xl mx-auto px-4 h-14 flex items-center justify-between">
-          <Link href="/" className="text-[#707090] hover:text-white transition-colors text-sm">
+          <Link href="/" className="text-[#5a5246] hover:text-white transition-colors text-sm">
             ← 返回
           </Link>
           <div className="flex items-center gap-2">
@@ -121,7 +121,7 @@ export default function CompanionPage() {
             >
               {msg.role === 'assistant' && (
                 <div className="w-8 h-8 rounded-full mr-2 shrink-0 flex items-center justify-center text-sm mt-1"
-                  style={{ background: 'linear-gradient(135deg, #2a2040, #3a2a50)' }}>
+                  style={{ background: 'linear-gradient(135deg, rgba(123,94,168,0.3), rgba(139,122,184,0.2))' }}>
                   👤
                 </div>
               )}
@@ -131,14 +131,14 @@ export default function CompanionPage() {
                     ? 'text-[var(--accent-purple)] animate-pulse'
                     : msg.role === 'user'
                     ? 'text-white'
-                    : 'text-[#c8c0e0]'
+                    : 'text-[#d8d0c8]'
                 }`}
                 style={msg.role === 'user' ? {
-                  background: 'linear-gradient(135deg, rgba(155,126,216,0.3), rgba(232,165,152,0.2))',
-                  border: '1px solid rgba(155,126,216,0.2)',
+                  background: 'linear-gradient(135deg, rgba(123,94,168,0.25), rgba(192,57,43,0.15))',
+                  border: '1px solid rgba(139,122,184,0.15)',
                   borderBottomRightRadius: '6px',
                 } : {
-                  background: 'rgba(26,22,46,0.8)',
+                  background: 'rgba(19,19,22,0.8)',
                   border: '1px solid rgba(255,255,255,0.04)',
                   borderBottomLeftRadius: '6px',
                 }}>
@@ -152,7 +152,34 @@ export default function CompanionPage() {
 
       {/* 输入框 */}
       <div className="relative z-10 border-t border-[#ffffff]/04 pb-[env(safe-area-inset-bottom,0px)]"
-        style={{ background: 'rgba(15,13,26,0.95)', backdropFilter: 'blur(20px)' }}>
+        style={{ background: 'rgba(9,9,11,0.95)', backdropFilter: 'blur(20px)' }}>
+        {/* CBT 提示卡 */}
+        <div className="max-w-3xl mx-auto px-4 pt-3">
+          <div className="flex gap-2 overflow-x-auto pb-2" style={{ scrollbarWidth: 'none' }}>
+            {[
+              { text: '今天是什么让我感到焦虑？', icon: '🌊' },
+              { text: '帮我识别一个负性自动思维', icon: '🧠' },
+              { text: '我今天做了哪些积极的事？', icon: '✨' },
+              { text: '最近反复出现的情绪是什么？', icon: '💭' },
+              { text: '安静地陪我一会儿吧', icon: '👤' },
+            ].map(s => (
+              <button
+                key={s.text}
+                onClick={() => { setInput(s.text); }}
+                className="shrink-0 px-3 py-1.5 text-xs transition-all duration-200 whitespace-nowrap"
+                style={{
+                  background: 'rgba(232,168,32,0.04)',
+                  border: '1px solid rgba(255,255,255,0.04)',
+                  color: '#7a7062',
+                  cursor: 'pointer',
+                  fontFamily: 'Inter, sans-serif',
+                }}
+              >
+                {s.icon} {s.text}
+              </button>
+            ))}
+          </div>
+        </div>
         <div className="max-w-3xl mx-auto px-4 py-3">
           <div className="flex gap-3 items-end">
             <textarea
@@ -165,7 +192,7 @@ export default function CompanionPage() {
               rows={1}
               className="flex-1 input-geo resize-none text-sm py-3"
               style={{
-                background: 'rgba(26,22,46,0.6)',
+                background: 'rgba(19,19,22,0.6)',
                 border: '1px solid rgba(255,255,255,0.06)',
                 minHeight: '44px',
                 maxHeight: '120px',
@@ -175,13 +202,13 @@ export default function CompanionPage() {
               onClick={send}
               disabled={!input.trim() || loading}
               className="btn-geo px-5 py-3 text-sm shrink-0 disabled:opacity-40"
-              style={{ background: 'linear-gradient(135deg, var(--accent-purple), #6a5acd)' }}
+              style={{ background: 'var(--accent-purple)' }}
             >
               {loading ? '...' : '发送'}
             </button>
           </div>
-          <p className="text-[10px] text-[#404060] text-center mt-2">
-            🫂 无脸男是你安静的朋友 · 倾听不评判 · 紧急情况请拨打 <span className="text-[#707090]">400-161-9995</span>
+          <p className="text-[10px] text-[#5a5246] text-center mt-2">
+            🫂 无脸男是你安静的朋友 · 倾听不评判 · 紧急情况请拨打 <span className="text-[#7a7062]">400-161-9995</span>
           </p>
         </div>
       </div>

@@ -1,57 +1,110 @@
-// 客户端 API 封装 + 静态导出 Mock 数据层
+// 客户端 API 封装 + Mock 降级层
+// 无后端时自动降级为 Mock 数据，确保静态站点内容完整可用
+import { MOCK_ASSESSMENTS } from './mock-assessments';
+import { MOCK_COURSES } from './mock-courses';
+import { MOCK_WELLNESS, MOCK_COMPANION_REPLIES } from './mock-data';
+import { MOCK_KNOWLEDGE_CATEGORIES, MOCK_KNOWLEDGE_ARTICLES, MOCK_KNOWLEDGE_FEATURED, MOCK_QUIZ_RESULT } from './mock-knowledge';
+
 const API_BASE = typeof window !== 'undefined' ? (process.env.NEXT_PUBLIC_API_URL || '') : '';
 
-// 静态导出时的 Mock 数据（构建阶段使用）
-const MOCK_COURSES = [
-  { id: 1, title: '弗洛伊德：梦的解析入门', description: '从《梦的解析》出发，系统学习弗洛伊德精神分析解梦方法', category: 'freud', difficulty: 'beginner', content: [] },
-  { id: 2, title: '荣格分析心理学与梦', description: '探索集体无意识、原型与梦的象征意义', category: 'jung', difficulty: 'intermediate', content: [] },
-  { id: 3, title: '现代睡眠科学与梦境研究', description: '从神经科学角度理解睡眠阶段与梦境产生机制', category: 'modern', difficulty: 'intermediate', content: [] },
-  { id: 4, title: '东方解梦文化探秘', description: '周易、周公解梦与东方文化中的梦学智慧', category: 'eastern', difficulty: 'beginner', content: [] },
-];
-
-const MOCK_DREAMS: any[] = [];
-const MOCK_REFLECTIONS: any[] = [];
-
-const MOCK_ASSESSMENTS = [
-  { id: 1, name: 'SAS 焦虑自评量表', category: 'anxiety', description: '焦虑自评量表（Self-Rating Anxiety Scale）由 Zung 编制，评估主观焦虑程度。', question_count: 20, icon: '🌊', disclaimer: '⚠️ 本测评仅供参考，不能替代专业诊断。' },
-  { id: 2, name: 'SDS 抑郁自评量表', category: 'depression', description: '抑郁自评量表（Self-Rating Depression Scale），评估情感、躯体、精神运动四个维度。', question_count: 20, icon: '🌧️', disclaimer: '⚠️ 本测评仅供参考，不能替代专业诊断。' },
-  { id: 3, name: '大五人格简版 (BFI-20)', category: 'personality', description: '五大维度：开放性、尽责性、外向性、宜人性、神经质。了解你的性格画像。', question_count: 20, icon: '🎭', disclaimer: '⚠️ 人格无好坏之分，了解自己是成长的开始。' },
-  { id: 4, name: '匹兹堡睡眠质量指数 (简版)', category: 'sleep', description: '评估睡眠质量的黄金标准工具。涵盖时长、效率与日间功能。', question_count: 7, icon: '🌙', disclaimer: '⚠️ 长期失眠请咨询睡眠专科医生。' },
-  { id: 5, name: '心理弹性量表 (CD-RISC 简版)', category: 'resilience', description: '测量面对逆境的恢复能力。心理弹性是可以培养的心理肌肉。', question_count: 10, icon: '🌱', disclaimer: '⚠️ 低分提醒我们有意识锻炼心理韧性。' },
-  { id: 6, name: 'SCL-90 症状自评 (简版)', category: 'symptom', description: '综合评估9个心理健康维度：躯体化、强迫、人际敏感、抑郁、焦虑等。', question_count: 36, icon: '📋', disclaimer: '⚠️ 本测评提供多维度参考，不能替代临床诊断。' },
-];
-
+// ── 统一的 request 函数：客户端无后端时自动降级 ──
 async function request<T>(endpoint: string, options?: RequestInit): Promise<T> {
+  // SSR / 构建阶段：直接返回 mock 数据
   if (typeof window === 'undefined') {
-    // SSR / 构建阶段：返回 mock 数据
-    if (endpoint.startsWith('/api/courses') && !endpoint.includes('/')) {
-      return MOCK_COURSES as T;
-    }
+    return getMockData<T>(endpoint);
+  }
+
+  // 浏览器环境：尝试调后端，失败则降级为 mock
+  try {
+    const res = await fetch(`${API_BASE}${endpoint}`, {
+      headers: { 'Content-Type': 'application/json', ...(options?.headers || {}) },
+      ...options,
+    });
+    if (!res.ok) throw new Error(`API ${res.status}`);
+    return res.json();
+  } catch {
+    // 后端不可用 → 降级为 mock 数据
+    console.warn(`[DreamLab] Backend unreachable for ${endpoint}, using mock data`);
+    return getMockData<T>(endpoint);
+  }
+}
+
+function getMockData<T>(endpoint: string): T {
+  // Courses
+  if (endpoint.startsWith('/api/courses')) {
     if (endpoint.match(/\/api\/courses\/\d+/)) {
       const id = Number(endpoint.split('/').pop()?.split('?')[0]);
       return (MOCK_COURSES.find(c => c.id === id) || null) as T;
     }
-    if (endpoint.startsWith('/api/dreams')) return [] as T;
-    if (endpoint.startsWith('/api/reflections')) return [] as T;
-    if (endpoint.startsWith('/api/users')) return [] as T;
-    if (endpoint.startsWith('/api/assessments')) {
-      if (endpoint.match(/\/api\/assessments\/\d+$/)) {
-        const id = Number(endpoint.split('/').pop());
-        return (MOCK_ASSESSMENTS.find(a => a.id === id) || null) as T;
-      }
-      if (endpoint.includes('/results/')) return [] as T;
-      return MOCK_ASSESSMENTS as T;
-    }
-    return {} as T;
+    return MOCK_COURSES as T;
   }
-  // 浏览器环境：正常调后端
-  const res = await fetch(`${API_BASE}${endpoint}`, {
-    headers: { 'Content-Type': 'application/json', ...(options?.headers || {}) },
-    ...options,
-  });
-  if (!res.ok) throw new Error(`API ${res.status}`);
-  return res.json();
+
+  // Assessments
+  if (endpoint.startsWith('/api/assessments')) {
+    if (endpoint.match(/\/api\/assessments\/\d+$/)) {
+      const id = Number(endpoint.split('/').pop());
+      return (MOCK_ASSESSMENTS.find(a => a.id === id) || null) as T;
+    }
+    if (endpoint.includes('/results/')) return [] as T;
+    if (endpoint.includes('/submit')) {
+      // Mock submit: generate a contextual interpretation based on the scale
+      return {
+        level: '正常范围',
+        standard_score: 45,
+        level_info: { color: '#e8a820', description: '你的得分在正常范围内，目前没有明显的问题信号。继续保持！' },
+        interpretation: '从你的回答来看，目前的心理状态处于健康水平。生活中偶尔的焦虑和低落是正常的——重要的是你愿意倾听自己的内心。\n\n如果未来感到压力增大，记得油屋永远为你敞开。无脸男在安静地等着你。',
+      } as T;
+    }
+    return MOCK_ASSESSMENTS as T;
+  }
+
+  // Companion chat — diverse empathetic replies
+  if (endpoint.includes('/api/companion/chat')) {
+    const i = Math.floor(Math.random() * MOCK_COMPANION_REPLIES.length);
+    return { session_id: 1, reply: MOCK_COMPANION_REPLIES[i] } as T;
+  }
+
+  // Wellness
+  if (endpoint.startsWith('/api/wellness')) return MOCK_WELLNESS as T;
+
+  // Knowledge
+  if (endpoint.startsWith('/api/knowledge')) {
+    // Quiz submit
+    if (endpoint.includes('/quiz/submit')) return MOCK_QUIZ_RESULT as T;
+    // Categories
+    if (endpoint.includes('/categories')) return MOCK_KNOWLEDGE_CATEGORIES as T;
+    // Featured
+    if (endpoint.includes('/featured')) return MOCK_KNOWLEDGE_FEATURED as T;
+    // Article detail by slug: /api/knowledge/{slug}
+    const slugMatch = endpoint.match(/\/api\/knowledge\/([a-z-]+)$/);
+    if (slugMatch) {
+      const article = MOCK_KNOWLEDGE_ARTICLES.find(a => a.slug === slugMatch[1]);
+      if (!article) return { error: 'Article not found' } as T;
+      const category = MOCK_KNOWLEDGE_CATEGORIES.find(c => c.slug === article.category_slug) || null;
+      return { ...article, category, created_at: '2026-04-15T08:00:00Z' } as T;
+    }
+    // List with optional category filter: /api/knowledge?category=X&search=Y
+    let filtered = [...MOCK_KNOWLEDGE_ARTICLES];
+    const url = new URL(`http://localhost${endpoint}`);
+    const cat = url.searchParams.get('category');
+    const q = url.searchParams.get('search')?.toLowerCase();
+    if (cat) filtered = filtered.filter(a => a.category_slug === cat);
+    if (q) filtered = filtered.filter(a => a.title.toLowerCase().includes(q) || a.summary.toLowerCase().includes(q));
+    return { items: filtered } as T;
+  }
+
+  // Dreams, Reflections, Users — empty arrays
+  if (endpoint.startsWith('/api/dreams')) return [] as T;
+  if (endpoint.startsWith('/api/reflections')) return [] as T;
+  if (endpoint.startsWith('/api/users')) return [] as T;
+
+  // Spirited
+  if (endpoint.includes('/spirited')) return {} as T;
+
+  return {} as T;
 }
+
+// ── 对外导出的 API 函数 ──
 
 // Users
 export const getUsers = () => request<any[]>('/api/users');
@@ -60,17 +113,11 @@ export const createUser = (data: { username: string; email: string }) =>
 
 // Courses
 export const getCourses = async (category?: string) => {
-  if (typeof window === 'undefined') {
-    // 构建阶段直接返回 mock
-    const list = category ? MOCK_COURSES.filter(c => c.category === category) : MOCK_COURSES;
-    return list as any;
-  }
-  return request<any[]>('/api/courses' + (category ? `?category=${category}` : ''));
+  const courses = await request<any[]>('/api/courses');
+  if (category) return courses.filter((c: any) => c.category === category);
+  return courses;
 };
 export const getCourse = async (id: number) => {
-  if (typeof window === 'undefined') {
-    return MOCK_COURSES.find(c => c.id === id) || null as any;
-  }
   return request<any>(`/api/courses/${id}`);
 };
 export const getProgress = (courseId: number, userId = 1) =>
@@ -93,40 +140,26 @@ export const createReflection = (data: any) =>
 export const generateInsight = (reflectionId: number) =>
   request<any>(`/api/reflections/${reflectionId}/insight`, { method: 'POST' });
 
-// ===== Spirited (千与千寻游戏) =====
-export const getSpiritedProgress = async () => {
-  if (typeof window === 'undefined') return { current_floor: 1, keys_collected: [], title_earned: '' };
-  return request<any>('/spirited/progress');
-};
-export const advanceSpiritedFloor = async (floor: number) => {
-  if (typeof window === 'undefined') return null;
-  return request<any>(`/spirited/progress/floor/${floor}`, { method: 'POST' });
-};
-export const spiritedForgetName = async () => {
-  if (typeof window === 'undefined') return null;
-  return request<any>('/spirited/progress/forget-name', { method: 'POST' });
-};
-export const collectSpiritedKey = async (keyData: any) => {
-  if (typeof window === 'undefined') return null;
-  return request<any>('/spirited/progress/collect-key', { method: 'POST', body: JSON.stringify(keyData) });
-};
+// Spirited
+export const getSpiritedProgress = async () => request<any>('/spirited/progress');
+export const advanceSpiritedFloor = async (floor: number) =>
+  request<any>(`/spirited/progress/floor/${floor}`, { method: 'POST' });
+export const spiritedForgetName = async () =>
+  request<any>('/spirited/progress/forget-name', { method: 'POST' });
+export const collectSpiritedKey = async (keyData: any) =>
+  request<any>('/spirited/progress/collect-key', { method: 'POST', body: JSON.stringify(keyData) });
 export const getSpiritedDialogues = async (floor: number, npc?: string) => {
-  if (typeof window === 'undefined') return [];
   const url = `/spirited/dialogues/${floor}${npc ? `?npc=${npc}` : ''}`;
   return request<any[]>(url);
 };
-export const seedSpiritedDialogues = async () => {
-  if (typeof window === 'undefined') return null;
-  return request<any>('/spirited/seed-dialogues', { method: 'POST' });
-};
+export const seedSpiritedDialogues = async () =>
+  request<any>('/spirited/seed-dialogues', { method: 'POST' });
 
-// ===== Assessments (心理测评) =====
+// Assessments
 export const getAssessments = async () => {
-  if (typeof window === 'undefined') return MOCK_ASSESSMENTS;
   return request<any[]>('/api/assessments');
 };
 export const getAssessment = async (id: number) => {
-  if (typeof window === 'undefined') return MOCK_ASSESSMENTS.find(a => a.id === id) || null;
   return request<any>(`/api/assessments/${id}`);
 };
 export const submitAssessment = async (id: number, data: { user_id: number; answers: { question_id: number; score: number }[] }) => {

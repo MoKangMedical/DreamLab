@@ -1,107 +1,165 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import BottomNav from "@/components/BottomNav";
+import InteractiveGhibli from "@/components/InteractiveGhibli";
 import { SpiritedInteractions } from "@/components/SpiritedInteractions";
+import MarginDecor from "@/components/MarginDecor";
+import GlobalExploreMore from "@/components/GlobalExploreMore";
+import GhibliMusic from "@/components/GhibliMusic";
 
 export const metadata: Metadata = {
-  title: "DreamLab - 千と千尋の夢の解析",
-  description: "油屋梦境探索 — AI驱动的深度解梦与顶级心理学平台",
+  title: "DreamLab — Evidence-Based Psychology Platform",
+  description: "Understand your inner world. Standardized assessments, AI-powered interpretation, evidence-based knowledge.",
   manifest: "/DreamLab/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "DreamLab·千与千寻",
+    title: "DreamLab",
   },
+};
+
+const DESKTOP_NAV = [
+  { href: "/", label: "Home", icon: "" },
+  { href: "/assessments", label: "Assessments", icon: "" },
+  { href: "/companion", label: "Companion", icon: "" },
+  { href: "/dream", label: "Dreams", icon: "" },
+  { href: "/knowledge", label: "Knowledge", icon: "" },
+  { href: "/courses", label: "Courses", icon: "" },
+  { href: "/wellness", label: "Wellness", icon: "" },
+];
+
+const FOOTER_LINKS = {
+  Platform: [
+    { label: "Assessments", href: "/assessments" },
+    { label: "AI Companion", href: "/companion" },
+    { label: "Dream Analysis", href: "/dream" },
+    { label: "Wellness Toolkit", href: "/wellness" },
+  ],
+  Learn: [
+    { label: "Knowledge Base", href: "/knowledge" },
+    { label: "Courses", href: "/courses" },
+    { label: "Spirited Away Journey", href: "/spirited" },
+  ],
+  About: [
+    { label: "Evidence & Sources", href: "/knowledge" },
+    { label: "Scientific Advisory", href: "/knowledge" },
+    { label: "Privacy & Ethics", href: "/" },
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="zh-CN" className="overscroll-none">
+    <html lang="en" className="overscroll-none">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet" />
         <link rel="manifest" href="/DreamLab/manifest.json" />
-        <meta name="theme-color" content="#0a1628" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="apple-mobile-web-app-title" content="DreamLab" />
-        <meta name="mobile-web-app-capable" content="yes" />
-        <link rel="apple-touch-icon" href="/DreamLab/icons/icon-192.png" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              if ('serviceWorker' in navigator) {
-                window.addEventListener('load', function() {
-                  navigator.serviceWorker.register('/DreamLab/sw.js').catch(function() {});
-                });
-              }
-            `,
-          }}
-        />
+        <meta name="theme-color" content="#060f18" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <body className="overscroll-none">
-        {/* ── 桌面端悬浮顶栏 ── */}
-        <nav className="hidden md:flex fixed top-0 w-full z-50 frost-panel"
-          style={{ background: 'rgba(9,9,11,0.92)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-          <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between w-full">
-            <a href="/" className="flex items-center gap-2 group">
-              <span className="text-xl group-hover:scale-110 transition-transform duration-300">🏯</span>
-              <span className="font-bold text-white text-lg hidden sm:inline">DreamLab</span>
-              <span className="text-[#6A8AA8] text-xs hidden md:inline">千と千尋の夢の解析</span>
+
+      <body className="overscroll-none" style={{ background: '#060f18' }}>
+        {/* Atmosphere layer */}
+        <InteractiveGhibli />
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex fixed top-0 w-full z-50"
+          style={{ background: 'rgba(6,15,24,0.92)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+          <div className="max-w-[1100px] mx-auto px-6 h-14 flex items-center justify-between w-full">
+            <a href="/" className="flex items-center gap-3 group">
+              <span className="font-bold text-white text-lg tracking-tight" style={{ fontFamily: "'Noto Serif SC', serif" }}>
+                DreamLab
+              </span>
             </a>
-            <div className="flex items-center gap-1">
-              {[
-                { href: "/", label: "首页", icon: "🏠" },
-                { href: "/assessments", label: "测评", icon: "🪞" },
-                { href: "/companion", label: "陪伴", icon: "👤" },
-                { href: "/wellness", label: "健康", icon: "♨️" },
-                { href: "/spirited", label: "油屋", icon: "👘" },
-                { href: "/courses", label: "课程", icon: "📜" },
-                { href: "/dream", label: "解梦", icon: "🌙" },
-              ].map((item) => (
+            <div className="flex items-center gap-0">
+              {DESKTOP_NAV.map(item => (
                 <a
                   key={item.href}
                   href={item.href}
-                  className="flex items-center gap-1.5 text-[#a1a1aa] hover:text-[#e2b64f] px-2.5 py-2 rounded text-xs transition-all duration-300 hover:bg-[#ffffff]/03 active:scale-95"
-                  style={{ touchAction: 'manipulation' }}
+                  className="px-3 py-2 text-xs font-medium transition-colors duration-200 hover:text-[#f5efe0]"
+                  style={{ color: '#7a7062', fontFamily: 'Inter, sans-serif' }}
                 >
-                  <span>{item.icon}</span>
-                  <span className="hidden lg:inline">{item.label}</span>
+                  {item.label}
                 </a>
               ))}
             </div>
           </div>
         </nav>
 
-        {/* ── 内容区 ── */}
-        <main className="min-h-screen md:pt-14 relative z-10">
-          <SpiritedInteractions>
-          <div className="page-transition">
-            {children}
-          </div>
-          </SpiritedInteractions>
-        </main>
+        {/* Three-column grid */}
+        <div className="app-grid" style={{ paddingTop: '3.5rem' }}>
+          <MarginDecor side="left" />
+          
+          <div className="content-col">
+            <main className="min-h-screen">
+              <SpiritedInteractions>
+              <div className="page-transition">
+                {children}
+              </div>
+              </SpiritedInteractions>
+            </main>
 
-        {/* ── 移动端底部导航 ── */}
+            <GlobalExploreMore />
+
+            {/* Professional Footer */}
+            <footer style={{ background: '#0a1620', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+              <div className="max-w-6xl mx-auto px-6 py-20">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
+                  {/* Brand column */}
+                  <div className="col-span-2 md:col-span-1">
+                    <a href="/" className="text-lg font-bold mb-4 block" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f5efe0' }}>
+                      DreamLab
+                    </a>
+                    <p className="text-xs leading-relaxed mb-6" style={{ color: '#5a5246', lineHeight: 1.8 }}>
+                      Evidence-based psychology platform.<br/>
+                      Understand your inner world.
+                    </p>
+                    <span className="text-xs tracking-wider" style={{ color: '#e8a820' }}>
+                      MoKangMedical · 2026
+                    </span>
+                  </div>
+
+                  {Object.entries(FOOTER_LINKS).map(([category, links]) => (
+                    <div key={category}>
+                      <h4 className="text-xs font-semibold tracking-wider uppercase mb-5" style={{ color: '#f5efe0' }}>
+                        {category}
+                      </h4>
+                      <ul className="space-y-3">
+                        {links.map(link => (
+                          <li key={link.label}>
+                            <a href={link.href} className="text-xs transition-colors duration-200 hover:text-[#b8ad9a]"
+                              style={{ color: '#5a5246' }}>
+                              {link.label}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-16 pt-8 flex flex-col md:flex-row items-center justify-between gap-4"
+                  style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+                  <p className="text-xs" style={{ color: '#3a352e' }}>
+                    © 2026 DreamLab by MoKangMedical. All assessments are for reference only and do not constitute clinical diagnosis.
+                  </p>
+                  <div className="flex gap-6">
+                    <a href="/" className="text-xs" style={{ color: '#3a352e' }}>Privacy</a>
+                    <a href="/" className="text-xs" style={{ color: '#3a352e' }}>Terms</a>
+                    <a href="/" className="text-xs" style={{ color: '#3a352e' }}>Ethics</a>
+                  </div>
+                </div>
+              </div>
+            </footer>
+          </div>
+
+          <MarginDecor side="right" />
+        </div>
+
         <BottomNav />
-
-        {/* ── 桌面端底部 ── */}
-        <footer className="hidden md:block relative py-6 text-center text-xs bg-[#09090b]/60"
-          style={{ borderTop: '1px solid rgba(255,255,255,0.04)', color: '#52525b' }}>
-          <div className="max-w-4xl mx-auto px-4">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <span>◇</span>
-              <span>DreamLab · 千と千尋の夢の解析</span>
-              <span>◇</span>
-            </div>
-            <p style={{ color: '#3f3f46' }}>梦是一面镜子，照见被遗忘的那个自己</p>
-            <p className="mt-4" style={{ color: '#27272a' }}>MoKangMedical · 2026</p>
-          </div>
-        </footer>
-
-        {/* 底部安全区占位 */}
         <div className="md:hidden h-16" />
+        <GhibliMusic />
       </body>
     </html>
   );

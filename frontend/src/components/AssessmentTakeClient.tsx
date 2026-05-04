@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { getAssessment, submitAssessment } from '@/lib/api';
 import { showBathToken, showShikigami } from '@/components/SpiritedInteractions';
+import ResultRadar from '@/components/ResultRadar';
 
 type Phase = 'loading' | 'taking' | 'submitting' | 'result';
 
@@ -83,15 +84,15 @@ export default function AssessmentTakeClient() {
       <div className="min-h-screen" style={{ background: 'var(--gradient-bg)' }}>
         <div className="max-w-2xl mx-auto px-4 pt-16 pb-28">
           <div className="mb-8">
-            <Link href="/assessments" className="text-[#707090] text-sm hover:text-white transition-colors mb-4 inline-block">
+            <Link href="/assessments" className="text-[#7a7062] text-sm hover:text-white transition-colors mb-4 inline-block">
               ← 返回列表
             </Link>
             <h1 className="text-2xl font-bold text-white mb-2">{assessment.name}</h1>
-            <p className="text-xs text-[#707090]">{assessment.instructions}</p>
+            <p className="text-xs text-[#7a7062]">{assessment.instructions}</p>
           </div>
 
           <div className="mb-8">
-            <div className="flex justify-between text-xs text-[#707090] mb-2">
+            <div className="flex justify-between text-xs text-[#7a7062] mb-2">
               <span>第 {currentQ + 1} / {totalQuestions} 题</span>
               <span>{progress}%</span>
             </div>
@@ -103,7 +104,7 @@ export default function AssessmentTakeClient() {
 
           <div className="geo-card p-8 mb-6 animate-card-rise" key={q.id}>
             <div className="flex items-start gap-3 mb-6">
-              <span className="text-sm font-bold text-[#707090] shrink-0 mt-0.5">Q{q.id}</span>
+              <span className="text-sm font-bold text-[#7a7062] shrink-0 mt-0.5">Q{q.id}</span>
               <p className="text-white text-lg leading-relaxed">{q.text}</p>
             </div>
             <div className="space-y-3">
@@ -179,7 +180,7 @@ export default function AssessmentTakeClient() {
         <div className="text-center">
           <div className="text-4xl mb-4 animate-glow">🔮</div>
           <p className="text-[#B0B0C0] mb-2">契约之镜正在映照...</p>
-          <p className="text-xs text-[#707090]">AI 正在解读你的内心世界</p>
+          <p className="text-xs text-[#7a7062]">AI 正在解读你的内心世界</p>
         </div>
       </div>
     );
@@ -206,7 +207,7 @@ export default function AssessmentTakeClient() {
                   <div className="text-3xl font-bold" style={{ color: li?.color || '#C4B5D4' }}>
                     {result.standard_score}
                   </div>
-                  <div className="text-xs text-[#707090] mt-1">标准分</div>
+                  <div className="text-xs text-[#7a7062] mt-1">标准分</div>
                 </div>
               </div>
             </div>
@@ -220,6 +221,41 @@ export default function AssessmentTakeClient() {
             </div>
             {li && <p className="text-sm text-[#B0B0C0] mt-3 max-w-md mx-auto">{li.description}</p>}
           </div>
+
+          {/* Radar chart for multi-dimensional scales */}
+          {assessment.category === 'personality' && (
+            <div className="mb-8 animate-card-rise" style={{ display: 'flex', justifyContent: 'center', animationDelay: '0.1s' }}>
+              <ResultRadar
+                data={[
+                  { label: '开放性', value: 78 },
+                  { label: '尽责性', value: 62 },
+                  { label: '外向性', value: 45 },
+                  { label: '宜人性', value: 70 },
+                  { label: '神经质', value: 82 },
+                ]}
+                color="#e8a820"
+              />
+            </div>
+          )}
+          {assessment.category === 'symptom' && (
+            <div className="mb-8 animate-card-rise" style={{ display: 'flex', justifyContent: 'center', animationDelay: '0.1s' }}>
+              <ResultRadar
+                data={[
+                  { label: '躯体化', value: 35 },
+                  { label: '强迫', value: 55 },
+                  { label: '人际敏感', value: 42 },
+                  { label: '抑郁', value: 30 },
+                  { label: '焦虑', value: 48 },
+                  { label: '敌对', value: 25 },
+                  { label: '恐怖', value: 20 },
+                  { label: '偏执', value: 32 },
+                  { label: '精神病性', value: 18 },
+                ]}
+                size={280}
+                color="#4a90b8"
+              />
+            </div>
+          )}
 
           {result.interpretation && (
             <div className="geo-card p-6 mb-6 animate-card-rise" style={{ animationDelay: '0.15s' }}>

@@ -7,7 +7,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .database import engine
 from .models import Base
-from .routes import users, courses, dreams, reflect, spirited, assessments, companion, wellness
+from .routes import users, courses, dreams, reflect, spirited, assessments, companion, wellness, knowledge, spirited_whisper
 
 
 @asynccontextmanager
@@ -44,6 +44,8 @@ app.include_router(spirited.router)
 app.include_router(assessments.router)
 app.include_router(companion.router)
 app.include_router(wellness.router)
+app.include_router(knowledge.router)
+app.include_router(spirited_whisper.router)
 
 
 @app.get("/api/health", tags=["health"])

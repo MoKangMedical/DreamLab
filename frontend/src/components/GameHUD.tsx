@@ -28,14 +28,14 @@ export default function GameHUD() {
       <div className="flex items-center gap-3">
         <span className="text-xl">{floorIcons[currentFloor] || '🌉'}</span>
         <div>
-          <p className="text-xs text-[#707090]">当前称号</p>
+          <p className="text-xs text-[#7a7062]">当前称号</p>
           <p className="text-sm font-bold text-white">{title || '初入油屋者'}</p>
         </div>
       </div>
 
       {/* 中：楼层进度 */}
       <div className="flex-1 mx-6 max-w-xs">
-        <div className="flex justify-between text-xs text-[#707090] mb-1">
+        <div className="flex justify-between text-xs text-[#7a7062] mb-1">
           <span>F1</span><span>F2</span><span>F3</span><span>F4</span><span>F5</span>
         </div>
         <div className="h-1.5 bg-[#ffffff]/10 rounded-full overflow-hidden">
@@ -50,7 +50,7 @@ export default function GameHUD() {
       <div className="flex items-center gap-2">
         <span className="text-[#f7b232] text-lg">🔑</span>
         <div>
-          <p className="text-xs text-[#707090]">钥匙</p>
+          <p className="text-xs text-[#7a7062]">钥匙</p>
           <p className="text-sm font-bold text-[#f7b232]">{keys.length}/5</p>
         </div>
       </div>

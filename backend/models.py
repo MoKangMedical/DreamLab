@@ -216,3 +216,54 @@ class WellnessLog(Base):
     tags = Column(JSON, default=list)  # ["感恩", "家庭"]
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
+
+# ===== 模块4: 证据级知识库 =====
+class KnowledgeCategory(Base):
+    """知识库分类"""
+    __tablename__ = "knowledge_categories"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(100), nullable=False, unique=True)
+    slug = Column(String(100), nullable=False, unique=True, index=True)
+    description = Column(Text, default="")
+    icon = Column(String(10), default="📚")
+    color = Column(String(20), default="#e2b64f")
+    sort_order = Column(Integer, default=0)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+    articles = relationship("KnowledgeArticle", back_populates="category_rel", cascade="all, delete-orphan")
+
+
+class KnowledgeArticle(Base):
+    """知识库文章 — 同行评审摘要与心理学百科"""
+    __tablename__ = "knowledge_articles"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    category_id = Column(Integer, ForeignKey("knowledge_categories.id", ondelete="SET NULL"), nullable=True, index=True)
+    title = Column(String(300), nullable=False)
+    slug = Column(String(300), nullable=False, unique=True, index=True)
+    summary = Column(Text, default="")  # 摘要
+    content = Column(Text, nullable=False)  # Markdown 正文
+    key_concepts = Column(JSON, default=list)  # ["认知行为疗法", "自动化思维"]
+    evidence_level = Column(String(30), default="中等")  # 强/中等/初步/理论
+    source = Column(Text, default="")  # 参考文献
+    reading_time = Column(Integer, default=5)  # 阅读时间（分钟）
+    is_featured = Column(Boolean, default=False)
+    quiz = Column(JSON, default=list)  # [{question, options: [str], answer: int, explanation: str}]
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+    category_rel = relationship("KnowledgeCategory", back_populates="articles")
+
+
+class QuizAttempt(Base):
+    """用户测验记录"""
+    __tablename__ = "quiz_attempts"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    article_id = Column(Integer, ForeignKey("knowledge_articles.id", ondelete="CASCADE"), nullable=False, index=True)
+    score = Column(Integer, default=0)
+    total = Column(Integer, default=0)
+    answers = Column(JSON, default=list)  # [{question_index, selected, correct}]
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+

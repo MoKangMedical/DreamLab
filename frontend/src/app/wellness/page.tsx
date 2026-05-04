@@ -6,56 +6,137 @@ const API_BASE = typeof window !== 'undefined' ? (process.env.NEXT_PUBLIC_API_UR
 
 type Tab = 'meditation' | 'breathing' | 'dashboard' | 'gratitude' | 'sleep';
 
-const TABS: { key: Tab; label: string; icon: string }[] = [
-  { key: 'meditation', label: '冥想', icon: '🧘' },
-  { key: 'breathing', label: '呼吸', icon: '🫁' },
-  { key: 'dashboard', label: '仪表盘', icon: '📊' },
-  { key: 'gratitude', label: '感恩', icon: '💝' },
-  { key: 'sleep', label: '睡眠', icon: '🌙' },
+const TABS: { key: Tab; label: string; icon: string; desc: string }[] = [
+  { key: 'meditation', label: '冥想', icon: '🧘', desc: '引导式冥想，安住在当下' },
+  { key: 'breathing', label: '呼吸', icon: '🫁', desc: '呼吸是唯一同时由自主和非自主神经控制的生理活动——它是意识与身体的桥梁' },
+  { key: 'dashboard', label: '仪表盘', icon: '📊', desc: '数据可视化你的心理状态变化' },
+  { key: 'gratitude', label: '感恩', icon: '💝', desc: '研究表明，每天写下3件感恩的事，持续21天可显著提升幸福感' },
+  { key: 'sleep', label: '睡眠', icon: '🌙', desc: '睡眠是大脑的"垃圾清理时间"——类淋巴系统在深度睡眠中清除代谢废物' },
+];
+
+// ── 预设冥想 ──
+const MEDITATION_PRESETS = [
+  {
+    id: 1, title: '河神的净化', icon: '♨️', duration: 3,
+    description: '跟随河神，想象清流冲刷身体的每一个角落，带走所有疲惫与不安。',
+    steps: [
+      { type: 'breathe_in', text: '深长吸气，想象清澈的水流入身体', seconds: 4 },
+      { type: 'hold', text: '屏息，感受水的清凉在体内停留', seconds: 2 },
+      { type: 'breathe_out', text: '缓缓呼气，水带走所有疲惫与不安', seconds: 6 },
+      { type: 'rest', text: '安静感受此刻的清澈', seconds: 3 },
+      { type: 'breathe_in', text: '再次吸气，水从头顶流向脚底', seconds: 4 },
+      { type: 'breathe_out', text: '呼出最后一丝沉闷', seconds: 6 },
+    ],
+    science: '引导式身体扫描冥想通过将注意力在身体各部位之间移动，降低杏仁核活动（焦虑中枢），增强前额叶对情绪的调控能力。',
+  },
+  {
+    id: 2, title: '千寻的勇气', icon: '🌅', duration: 5,
+    description: '像千寻一样面对未知——恐惧不是敌人，是成长的信使。',
+    steps: [
+      { type: 'breathe_in', text: '吸气，感受勇气的温暖在胸口聚集', seconds: 4 },
+      { type: 'hold', text: '屏息，面对内心的恐惧而不逃避', seconds: 3 },
+      { type: 'breathe_out', text: '呼气，让恐惧随着呼吸离开', seconds: 6 },
+      { type: 'rest', text: '安静感受勇敢的存在', seconds: 4 },
+      { type: 'breathe_in', text: '吸气——我是安全的', seconds: 4 },
+      { type: 'breathe_out', text: '呼气——我能够面对', seconds: 6 },
+      { type: 'rest', text: '勇气不需要完美，只需要一步', seconds: 5 },
+    ],
+    science: '重复积极自我肯定与深呼吸结合，可激活腹侧纹状体的奖赏回路，提升自我效能感。8周正念练习可增加前额叶灰质密度。',
+  },
+  {
+    id: 3, title: '无脸男的安宁', icon: '👤', duration: 3,
+    description: '和无脸男一起，安静地在角落里坐一会儿。不需要说话，不需要做什么。',
+    steps: [
+      { type: 'breathe_in', text: '放慢呼吸——不着急', seconds: 5 },
+      { type: 'rest', text: '只是坐着，什么都不需要做', seconds: 8 },
+      { type: 'breathe_in', text: '再慢一点', seconds: 5 },
+      { type: 'rest', text: '被接纳的感觉——就是这样', seconds: 10 },
+    ],
+    science: '"无为"冥想激活默认模式网络中的自我参照处理，同时降低后扣带回皮层的过度活跃——这正是焦虑和反刍思维的核心区域。',
+  },
+  {
+    id: 4, title: '锅炉爷爷的专注', icon: '🔥', duration: 5,
+    description: '像锅炉爷爷一样，全神贯注于当下的一件事。杂念来了又走，你只是继续手上的工作。',
+    steps: [
+      { type: 'breathe_in', text: '把注意力锚定在呼吸上', seconds: 4 },
+      { type: 'breathe_out', text: '杂念就像锅炉房的蒸汽——让它飘走', seconds: 6 },
+      { type: 'breathe_in', text: '回来，回到呼吸', seconds: 4 },
+      { type: 'breathe_out', text: '每一次回来，都是专注力的锻炼', seconds: 6 },
+      { type: 'rest', text: '专注地观察内心此刻的状态', seconds: 5 },
+    ],
+    science: '专注冥想（Focused Attention）训练背侧注意网络，每次觉察走神并"拉回"的过程，就像大脑做俯卧撑。持续练习8周可显著提升持续注意力。',
+  },
+];
+
+// ── 呼吸练习 ──
+const BREATHING_EXERCISES = [
+  { id: 'box', title: '盒式呼吸 (Navy SEALs 法)', icon: '⬜', desc: '4-4-4-4 · 稳定情绪 · 专注放松', pattern: { in: 4, hold: 4, out: 4, holdOut: 4 }, science: '激活副交感神经系统，降低心率变异性。被美国海军海豹突击队用于高压环境下的情绪调控。' },
+  { id: '478', title: '4-7-8 呼吸 (Weil 法)', icon: '🌙', desc: '吸气4·屏息7·呼气8 · 助眠', pattern: { in: 4, hold: 7, out: 8, holdOut: 0 }, science: 'Andrew Weil 博士推广的自然镇静法。延长呼气时间触发"放松反应"，是已知最快的非药物入眠诱导法之一。' },
+  { id: 'calm', title: '平静呼吸', icon: '🕯️', desc: '吸气4·呼气6 · 日常减压', pattern: { in: 4, hold: 0, out: 6, holdOut: 0 }, science: '呼气时间 > 吸气时间时，心率自然下降。每次练习5分钟，每日3次，可显著降低皮质醇水平。' },
+  { id: 'energy', title: '能量呼吸 (Kapalabhati)', icon: '⚡', desc: '快速呼气·被动吸气 · 提神醒脑', pattern: { in: 2, hold: 0, out: 1, holdOut: 0 }, science: '强力的腹式呼气刺激交感神经系统，提升警觉度。注意：高血压、心脏病、孕期慎用。' },
 ];
 
 export default function WellnessPage() {
   const [tab, setTab] = useState<Tab>('meditation');
   const [visible, setVisible] = useState(false);
+  const tabRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   useEffect(() => { setVisible(true); }, []);
 
   return (
-    <div className="min-h-screen" style={{ background: 'var(--gradient-bg)' }}>
-      <div className={`max-w-3xl mx-auto px-4 pt-14 pb-28 transition-all duration-1000 ${visible ? 'opacity-100' : 'opacity-0'}`}>
-        {/* Header */}
-        <div className="text-center mb-8 animate-card-rise">
-          <div className="text-4xl mb-3">♨️</div>
-          <h1 className="text-3xl font-bold text-white mb-2" style={{ fontFamily: "'Noto Serif SC', serif" }}>
+    <div style={{ background: '#060f18', minHeight: '100vh' }}>
+      <div className={`max-w-4xl mx-auto px-4 pt-14 pb-28 transition-all duration-1000 ${visible ? 'opacity-100' : 'opacity-0'}`}>
+        {/* ════════════════ Hero ════════════════ */}
+        <div className="text-center mb-8">
+          <div className="text-5xl mb-4">♨️</div>
+          <h1 className="font-bold mb-3" style={{
+            fontFamily: "'Noto Serif SC', serif",
+            fontSize: 'clamp(32px, 5vw, 48px)',
+            color: '#f5efe0',
+          }}>
             河神的净化汤
           </h1>
-          <p className="text-sm text-[#B0B0C0]">洗去心灵的淤泥，让清澈回归</p>
+          <p className="max-w-md mx-auto text-sm leading-relaxed" style={{ color: '#7a7062' }}>
+            心智健康不是没有问题，而是拥有应对问题的工具。
+            这里是你每日的心灵澡堂。
+          </p>
         </div>
 
-        {/* Tabs */}
-        <div className="flex justify-center gap-1 mb-8 overflow-x-auto animate-card-rise" style={{ animationDelay: '0.1s' }}>
+        {/* ════════════════ Tabs ════════════════ */}
+        <div className="flex justify-center gap-1 mb-8 overflow-x-auto">
           {TABS.map(t => (
             <button
               key={t.key}
               onClick={() => setTab(t.key)}
-              className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium transition-all whitespace-nowrap ${
+              className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium transition-all whitespace-nowrap ${
                 tab === t.key
-                  ? 'bg-[var(--accent-purple)]/20 text-white border border-[var(--accent-purple)]/30'
-                  : 'text-[#707090] hover:text-[#B0B0C0] border border-transparent'
+                  ? 'text-[#f5efe0] border-[#e8a82030]'
+                  : 'text-[#5a5246] hover:text-[#b8ad9a]'
               }`}
-            >
+              style={{
+                background: tab === t.key ? 'rgba(232,168,32,0.08)' : 'transparent',
+                border: tab === t.key ? '1px solid rgba(232,168,32,0.2)' : '1px solid transparent',
+                borderRadius: 2,
+              }}>
               <span>{t.icon}</span>
               <span className="hidden sm:inline">{t.label}</span>
             </button>
           ))}
         </div>
 
+        {/* 标签描述 */}
+        <p className="text-xs text-center mb-8 leading-relaxed" style={{ color: '#5a5246' }}>
+          {TABS.find(t => t.key === tab)?.desc}
+        </p>
+
         {/* Content */}
-        {tab === 'meditation' && <MeditationTab />}
-        {tab === 'breathing' && <BreathingTab />}
-        {tab === 'dashboard' && <DashboardTab />}
-        {tab === 'gratitude' && <GratitudeTab />}
-        {tab === 'sleep' && <SleepTab />}
+        <div ref={el => { tabRefs.current[tab] = el; }}>
+          {tab === 'meditation' && <MeditationTab />}
+          {tab === 'breathing' && <BreathingTab />}
+          {tab === 'dashboard' && <DashboardTab />}
+          {tab === 'gratitude' && <GratitudeTab />}
+          {tab === 'sleep' && <SleepTab />}
+        </div>
       </div>
     </div>
   );
@@ -63,21 +144,18 @@ export default function WellnessPage() {
 
 // ============ 冥想标签 ============
 function MeditationTab() {
-  const [meditations, setMeditations] = useState<any[]>([]);
   const [active, setActive] = useState<any>(null);
   const [step, setStep] = useState(0);
   const [playing, setPlaying] = useState(false);
+  const [showScience, setShowScience] = useState(false);
   const timerRef = useRef<any>(null);
-
-  useEffect(() => {
-    fetch(`${API_BASE}/api/wellness/meditations`).then(r => r.json()).then(setMeditations);
-  }, []);
 
   const start = (m: any) => {
     stop();
     setActive(m);
     setStep(0);
     setPlaying(true);
+    setShowScience(false);
   };
 
   const stop = () => {
@@ -102,80 +180,113 @@ function MeditationTab() {
     const isOut = s?.type === 'breathe_out';
 
     return (
-      <div className="geo-card p-8 text-center animate-card-rise">
+      <div className="p-8 text-center" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
         <div className="text-5xl mb-4">{active.icon}</div>
-        <h3 className="text-xl font-bold text-white mb-1">{active.title}</h3>
-        <p className="text-xs text-[#707090] mb-6">步骤 {step + 1} / {active.steps.length}</p>
+        <h3 className="text-xl font-bold mb-1" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f5efe0' }}>
+          {active.title}
+        </h3>
+        <p className="text-xs mb-6" style={{ color: '#5a5246' }}>
+          步骤 {step + 1} / {active.steps.length} · {active.duration} 分钟
+        </p>
 
         {/* 呼吸动画圈 */}
         <div className="flex justify-center mb-6">
-          <div className={`w-24 h-24 rounded-full transition-all duration-[2000ms] flex items-center justify-center ${
+          <div className={`w-28 h-28 rounded-full transition-all duration-[2000ms] flex items-center justify-center ${
             isIn ? 'scale-125' : isOut ? 'scale-75' : 'scale-100'
           }`} style={{
-            background: 'radial-gradient(circle, rgba(155,126,216,0.3), rgba(26,26,46,0.5))',
-            border: '2px solid rgba(155,126,216,0.3)',
+            background: isIn ? 'radial-gradient(circle, rgba(232,168,32,0.15), rgba(19,19,22,0.5))'
+              : isOut ? 'radial-gradient(circle, rgba(74,144,184,0.15), rgba(19,19,22,0.5))'
+              : 'radial-gradient(circle, rgba(107,158,122,0.15), rgba(19,19,22,0.5))',
+            border: `2px solid ${isIn ? 'rgba(232,168,32,0.3)' : isOut ? 'rgba(74,144,184,0.3)' : 'rgba(107,158,122,0.3)'}`,
           }}>
-            <span className="text-2xl">{isIn ? '🫁' : isOut ? '💨' : '✨'}</span>
+            <span className="text-3xl">{isIn ? '🫁' : isOut ? '💨' : '✨'}</span>
           </div>
         </div>
 
-        <p className="text-lg text-[#c8c0e0] mb-2">{s?.text}</p>
-        <p className="text-xs text-[#707090]">{s?.seconds}秒</p>
+        <p className="text-lg mb-2" style={{ color: '#f5efe0' }}>{s?.text}</p>
+        <p className="text-xs" style={{ color: '#7a7062' }}>{s?.seconds}秒</p>
 
         {/* 进度条 */}
-        <div className="mt-6 h-1 rounded-full bg-[#ffffff]/08 overflow-hidden">
+        <div className="mt-6 h-1 rounded-full overflow-hidden" style={{ background: '#ffffff08' }}>
           <div className="h-full rounded-full transition-all duration-1000"
-            style={{ width: `${progress}%`, background: 'linear-gradient(90deg, var(--geo-mint), var(--accent-purple))' }} />
+            style={{ width: `${progress}%`, background: 'linear-gradient(90deg, #6b9e7a, #e8a820)' }} />
         </div>
 
-        <button onClick={stop} className="btn-geo-ghost text-sm mt-6">结束冥想</button>
+        <button onClick={stop} className="mt-6 px-6 py-2 text-sm transition-all"
+          style={{ background: 'transparent', border: '1px solid rgba(255,255,255,0.06)', color: '#b8ad9a', borderRadius: 2, cursor: 'pointer' }}>
+          结束冥想
+        </button>
       </div>
     );
   }
 
   return (
-    <div className="space-y-4">
-      {meditations.map(m => (
-        <div key={m.id} className="geo-card p-5 flex items-center gap-4 cursor-pointer hover:border-[var(--accent-purple)]/30 transition-all animate-card-rise"
-          style={{ animationDelay: `${m.id * 0.1}s` }}
-          onClick={() => start(m)}>
-          <div className="text-3xl">{m.icon}</div>
-          <div className="flex-1 min-w-0">
-            <h3 className="text-white font-bold text-sm">{m.title}</h3>
-            <p className="text-xs text-[#707090]">{m.description}</p>
-          </div>
-          <div className="text-xs text-[#505060] shrink-0">{m.duration} 分钟</div>
+    <div className="space-y-6">
+      {/* 冥想科普 */}
+      <div className="p-6" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+        <div className="flex items-center gap-2 mb-3">
+          <span className="text-xl">🧘</span>
+          <h3 className="font-bold" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f5efe0' }}>
+            为什么冥想？
+          </h3>
         </div>
-      ))}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-3">
+          {[
+            { label: '降低焦虑', desc: '8周正念冥想可减少杏仁核灰质密度，降低应激反应', icon: '😌' },
+            { label: '提升专注', desc: '每次"走神-拉回"都是注意力肌肉的锻炼', icon: '🎯' },
+            { label: '改善睡眠', desc: '入睡前冥想激活副交感神经，帮助身体进入休息模式', icon: '😴' },
+          ].map(item => (
+            <div key={item.label} className="p-3" style={{ background: '#060f18', borderRadius: 2 }}>
+              <div className="text-lg mb-1">{item.icon}</div>
+              <div className="text-xs font-bold mb-1" style={{ color: '#f5efe0' }}>{item.label}</div>
+              <div className="text-xs leading-relaxed" style={{ color: '#7a7062' }}>{item.desc}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 冥想列表 */}
+      <div className="space-y-3">
+        {MEDITATION_PRESETS.map(m => (
+          <div key={m.id} className="p-5 cursor-pointer transition-all hover:translate-x-1"
+            style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}
+            onClick={() => start(m)}>
+            <div className="flex items-center gap-4">
+              <div className="text-3xl">{m.icon}</div>
+              <div className="flex-1 min-w-0">
+                <h3 className="font-bold text-sm mb-1" style={{ color: '#f5efe0' }}>{m.title}</h3>
+                <p className="text-xs mb-1" style={{ color: '#7a7062' }}>{m.description}</p>
+                <p className="text-xs" style={{ color: '#4a4038' }}>
+                  {m.duration} 分钟 · {m.steps.length} 步
+                </p>
+              </div>
+              <div className="text-xs shrink-0" style={{ color: '#e8a820' }}>▶ 开始</div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
 
 // ============ 呼吸标签 ============
 function BreathingTab() {
-  const exercises = [
-    { id: 'box', title: '盒式呼吸', icon: '⬜', desc: '4-4-4-4 · 专注镇定', pattern: { in: 4, hold: 4, out: 4, holdOut: 4 } },
-    { id: '478', title: '4-7-8 呼吸', icon: '🌙', desc: '吸气4·屏息7·呼气8', pattern: { in: 4, hold: 7, out: 8, holdOut: 0 } },
-    { id: 'calm', title: '平静呼吸', icon: '🕯️', desc: '吸气4·呼气6 · 简单放松', pattern: { in: 4, hold: 0, out: 6, holdOut: 0 } },
-  ];
   const [activeEx, setActiveEx] = useState<any>(null);
   const [phase, setPhase] = useState<'in' | 'hold' | 'out' | 'holdOut' | null>(null);
   const [count, setCount] = useState(0);
   const [cycle, setCycle] = useState(0);
   const [running, setRunning] = useState(false);
+  const [showScience, setShowScience] = useState<string | null>(null);
   const timerRef = useRef<any>(null);
 
   const run = useCallback((ex: any, ph: 'in' | 'hold' | 'out' | 'holdOut' | 'start', cy: number) => {
     if (ph === 'start') {
-      setActiveEx(ex);
-      setRunning(true);
-      setCycle(0);
+      setActiveEx(ex); setRunning(true); setCycle(0);
       run(ex, 'in', 0);
       return;
     }
     const seconds = ex.pattern[ph === 'holdOut' ? 'holdOut' : ph];
     if (seconds === 0) {
-      // 跳过零时长的阶段
       const next: Record<string, string> = { in: 'hold', hold: 'out', out: 'holdOut', holdOut: 'in' };
       const n = next[ph] as 'in' | 'hold' | 'out' | 'holdOut';
       const newCycle = n === 'in' ? cy + 1 : cy;
@@ -184,8 +295,7 @@ function BreathingTab() {
       timerRef.current = setTimeout(() => run(ex, n, newCycle), 100);
       return;
     }
-    setPhase(ph);
-    setCount(seconds);
+    setPhase(ph); setCount(seconds);
     const interval = setInterval(() => {
       setCount(c => {
         if (c <= 1) {
@@ -209,46 +319,64 @@ function BreathingTab() {
   };
 
   const phaseLabel: Record<string, string> = { in: '吸气', hold: '屏息', out: '呼气', holdOut: '屏息' };
-  const phaseScale: Record<string, number> = { in: 1.3, hold: 1.0, out: 0.7, holdOut: 1.0 };
 
   return (
     <div>
       {running && activeEx ? (
-        // 呼吸动画
-        <div className="geo-card p-8 text-center animate-card-rise">
+        <div className="p-8 text-center" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
           <div className="text-5xl mb-4">{activeEx.icon}</div>
-          <h3 className="text-lg font-bold text-white mb-2">{activeEx.title}</h3>
+          <h3 className="text-lg font-bold mb-2" style={{ color: '#f5efe0' }}>{activeEx.title}</h3>
 
           <div className="flex justify-center my-8">
-            <div className={`w-32 h-32 rounded-full transition-all duration-[4000ms] flex items-center justify-center text-2xl ${
+            <div className={`w-36 h-36 rounded-full transition-all duration-[4000ms] flex items-center justify-center ${
               phase === 'in' ? 'scale-125' : phase === 'out' ? 'scale-75' : 'scale-100'
             }`} style={{
-              background: phase === 'in' ? 'radial-gradient(circle, rgba(184,212,200,0.3), rgba(26,26,46,0.5))'
-                : phase === 'out' ? 'radial-gradient(circle, rgba(155,126,216,0.3), rgba(26,26,46,0.5))'
-                : 'radial-gradient(circle, rgba(240,192,96,0.3), rgba(26,26,46,0.5))',
-              border: `2px solid ${phase === 'in' ? 'rgba(184,212,200,0.4)' : phase === 'out' ? 'rgba(155,126,216,0.4)' : 'rgba(240,192,96,0.4)'}`,
+              background: phase === 'in' ? 'radial-gradient(circle, rgba(107,158,122,0.2), rgba(19,19,22,0.5))'
+                : phase === 'out' ? 'radial-gradient(circle, rgba(74,144,184,0.2), rgba(19,19,22,0.5))'
+                : 'radial-gradient(circle, rgba(232,168,32,0.2), rgba(19,19,22,0.5))',
+              border: `2px solid ${phase === 'in' ? 'rgba(107,158,122,0.3)' : phase === 'out' ? 'rgba(74,144,184,0.3)' : 'rgba(232,168,32,0.3)'}`,
             }}>
-              <span className="text-3xl font-bold text-white">{count}</span>
+              <span className="text-3xl font-bold" style={{ color: '#f5efe0' }}>{count}</span>
             </div>
           </div>
 
-          <p className="text-sm text-[#B0B0C0]">
+          <p className="text-sm" style={{ color: '#b8ad9a' }}>
             {phase && phaseLabel[phase]} · 第 {cycle + 1} / 5 轮
           </p>
 
-          <button onClick={stopBreathing} className="btn-geo-ghost text-sm mt-6">停止</button>
+          <button onClick={stopBreathing} className="mt-6 px-6 py-2 text-sm"
+            style={{ background: 'transparent', border: '1px solid rgba(255,255,255,0.06)', color: '#b8ad9a', borderRadius: 2, cursor: 'pointer' }}>
+            停止
+          </button>
         </div>
       ) : (
         <div className="space-y-4">
-          {exercises.map(ex => (
-            <div key={ex.id} className="geo-card p-5 flex items-center gap-4 cursor-pointer hover:border-[var(--accent-purple)]/30 transition-all animate-card-rise"
-              onClick={() => run(ex, 'start', 0)}>
-              <div className="text-3xl">{ex.icon}</div>
-              <div className="flex-1">
-                <h3 className="text-white font-bold text-sm">{ex.title}</h3>
-                <p className="text-xs text-[#707090]">{ex.desc}</p>
+          {BREATHING_EXERCISES.map(ex => (
+            <div key={ex.id} className="p-5 transition-all"
+              style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+              <div className="flex items-center gap-4">
+                <div className="text-3xl">{ex.icon}</div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-bold text-sm mb-1" style={{ color: '#f5efe0' }}>{ex.title}</h3>
+                  <p className="text-xs" style={{ color: '#7a7062' }}>{ex.desc}</p>
+                  {showScience === ex.id && (
+                    <p className="text-xs mt-2 leading-relaxed" style={{ color: '#5a5246' }}>
+                      {ex.science}
+                    </p>
+                  )}
+                </div>
+                <div className="flex items-center gap-2">
+                  <button onClick={(e) => { e.stopPropagation(); setShowScience(showScience === ex.id ? null : ex.id); }}
+                    className="text-xs transition-colors" style={{ color: showScience === ex.id ? '#e8a820' : '#5a5246' }}>
+                    {showScience === ex.id ? '收起' : '原理'}
+                  </button>
+                  <button onClick={() => run(ex, 'start', 0)}
+                    className="text-xs px-3 py-1.5 transition-all"
+                    style={{ background: '#e8a820', color: '#060f18', borderRadius: 2, border: 'none', fontWeight: 600, cursor: 'pointer' }}>
+                    ▶ 开始
+                  </button>
+                </div>
               </div>
-              <span className="text-xs text-[var(--accent-purple)]">▶ 开始</span>
             </div>
           ))}
         </div>
@@ -264,7 +392,13 @@ function DashboardTab() {
     fetch(`${API_BASE}/api/wellness/dashboard?user_id=1`).then(r => r.json()).then(setData).catch(() => {});
   }, []);
 
-  if (!data) return <div className="text-center text-[#707090] py-12">正在加载仪表盘...</div>;
+  if (!data) return (
+    <div className="text-center py-16">
+      <div className="text-4xl mb-4">📊</div>
+      <p className="text-sm" style={{ color: '#7a7062' }}>正在加载你的仪表盘...</p>
+      <p className="text-xs mt-2" style={{ color: '#5a5246' }}>需要更多数据才能生成趋势（请先记录情绪、睡眠和感恩日记）</p>
+    </div>
+  );
 
   const moodMax = Math.max(...(data.mood_trend || []).map((d: any) => d.score), 10);
 
@@ -273,32 +407,33 @@ function DashboardTab() {
       {/* 概览卡片 */}
       <div className="grid grid-cols-2 gap-4">
         {[
-          { label: '平均情绪', value: data.avg_mood || '--', unit: '/10', color: '#F0C060' },
-          { label: '感恩日记', value: data.gratitude_count || 0, unit: '篇', color: '#E8A598' },
-          { label: '冥想次数', value: data.meditation_count || 0, unit: '次', color: '#C4B5D4' },
-          { label: '统计天数', value: data.days, unit: '天', color: '#B8D4C8' },
+          { label: '平均情绪', value: data.avg_mood || '--', unit: '/10', color: '#e8a820', tip: '情绪是内心的晴雨表——没有"好"或"坏"的情绪，每一种都在告诉你一些重要的信息' },
+          { label: '感恩日记', value: data.gratitude_count || 0, unit: '篇', color: '#c0392b', tip: '感恩是一项可以锻炼的心理技能，而非天生的性格特质' },
+          { label: '冥想次数', value: data.meditation_count || 0, unit: '次', color: '#8b7ab8', tip: '冥想不在于"想什么"，而在于"觉察什么"' },
+          { label: '统计天数', value: data.days, unit: '天', color: '#6b9e7a', tip: '坚持是唯一的捷径——21天足以养成一个新习惯' },
         ].map((card, i) => (
-          <div key={i} className="geo-card p-4 text-center animate-card-rise" style={{ animationDelay: `${i * 0.1}s` }}>
+          <div key={i} className="p-4 text-center" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
             <div className="text-3xl font-bold mb-1" style={{ color: card.color }}>{card.value}</div>
-            <div className="text-[10px] text-[#707090]">{card.label}</div>
+            <div className="text-xs mb-2" style={{ color: '#5a5246' }}>{card.label}{card.unit}</div>
+            <div className="text-xs leading-relaxed" style={{ color: '#4a4038' }}>{card.tip}</div>
           </div>
         ))}
       </div>
 
-      {/* 情绪趋势简易图 */}
+      {/* 情绪趋势 */}
       {data.mood_trend?.length > 0 && (
-        <div className="geo-card p-6 animate-card-rise" style={{ animationDelay: '0.3s' }}>
-          <h3 className="text-sm font-bold text-white mb-4">📈 情绪趋势</h3>
+        <div className="p-6" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+          <h3 className="text-sm font-bold mb-4" style={{ color: '#f5efe0' }}>📈 情绪趋势</h3>
           <div className="flex items-end gap-1 h-24">
             {data.mood_trend.map((d: any, i: number) => (
               <div key={i} className="flex-1 flex flex-col items-center gap-1">
                 <div className="w-full rounded-t transition-all"
                   style={{
                     height: `${(d.score / moodMax) * 80}px`,
-                    background: `linear-gradient(180deg, var(--geo-coral), var(--geo-gold))`,
-                    opacity: 0.7 + (d.score / moodMax) * 0.3,
+                    background: `linear-gradient(180deg, #c0392b, #e8a820)`,
+                    opacity: 0.6 + (d.score / moodMax) * 0.4,
                   }} />
-                <span className="text-[9px] text-[#505060]">{d.date.slice(3)}</span>
+                <span className="text-xs" style={{ color: '#5a5246' }}>{d.date.slice(3)}</span>
               </div>
             ))}
           </div>
@@ -307,20 +442,20 @@ function DashboardTab() {
 
       {/* 睡眠趋势 */}
       {data.sleep_trend?.length > 0 && (
-        <div className="geo-card p-6 animate-card-rise" style={{ animationDelay: '0.4s' }}>
-          <h3 className="text-sm font-bold text-white mb-4">😴 睡眠趋势</h3>
+        <div className="p-6" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+          <h3 className="text-sm font-bold mb-4" style={{ color: '#f5efe0' }}>😴 睡眠趋势</h3>
           <div className="space-y-2">
             {data.sleep_trend.slice(-7).map((d: any, i: number) => (
               <div key={i} className="flex items-center gap-3 text-xs">
-                <span className="text-[#505060] w-10">{d.date.slice(3)}</span>
-                <div className="flex-1 h-4 rounded-full bg-[#ffffff]/05 overflow-hidden">
+                <span className="w-10" style={{ color: '#5a5246' }}>{d.date.slice(3)}</span>
+                <div className="flex-1 h-4 rounded-full overflow-hidden" style={{ background: '#ffffff05' }}>
                   <div className="h-full rounded-full transition-all"
                     style={{
                       width: `${(d.hours / 10) * 100}%`,
-                      background: `linear-gradient(90deg, #4a3a6a, var(--accent-purple))`,
+                      background: d.hours >= 7 ? 'linear-gradient(90deg, #4a90b8, #6b9e7a)' : 'linear-gradient(90deg, #c0392b, #e8a820)',
                     }} />
                 </div>
-                <span className="text-[#B0B0C0] w-12 text-right">{d.hours}h</span>
+                <span className="w-12 text-right" style={{ color: '#b8ad9a' }}>{d.hours}h</span>
               </div>
             ))}
           </div>
@@ -335,6 +470,15 @@ function GratitudeTab() {
   const [logs, setLogs] = useState<any[]>([]);
   const [content, setContent] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [showPrompts, setShowPrompts] = useState(false);
+
+  const PROMPTS = [
+    '今天让我微笑的一件小事是...',
+    '有一个人让我感到被关心——那是...',
+    '我为自己今天做的这件事感到骄傲...',
+    '今天的大自然给了我一个惊喜...',
+    '一个让我感到舒适的日常习惯是...',
+  ];
 
   useEffect(() => {
     fetch(`${API_BASE}/api/wellness/logs?log_type=gratitude&user_id=1`)
@@ -351,30 +495,67 @@ function GratitudeTab() {
         title: '感恩时刻', content, tags: ['感恩'],
       }),
     });
-    setContent(''); setSubmitted(s => !s);
+    setContent(''); setSubmitted(s => !s); setShowPrompts(false);
   };
 
   return (
     <div className="space-y-5">
-      <div className="geo-card p-6 animate-card-rise">
-        <h3 className="text-sm font-bold text-white mb-3">💝 今天，你感恩什么？</h3>
+      {/* 科普 */}
+      <div className="p-5" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+        <div className="flex items-center gap-2 mb-3">
+          <span className="text-xl">💝</span>
+          <h3 className="font-bold text-sm" style={{ color: '#f5efe0' }}>感恩的科学</h3>
+        </div>
+        <p className="text-xs leading-relaxed" style={{ color: '#7a7062', lineHeight: 1.8 }}>
+          2003年，Emmons & McCullough 的经典实验发现：连续10周每周写下5件感恩事件的小组，比"写烦恼"和"写日常"的小组表现出+25%的幸福感提升和更少的身体不适。感恩不是否认困难，而是在困难中训练自己看见光亮的能力。
+        </p>
+      </div>
+
+      {/* 写作区 */}
+      <div className="p-6" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+        <h3 className="text-sm font-bold mb-3" style={{ color: '#f5efe0' }}>今天，你感恩什么？</h3>
         <textarea
           value={content}
           onChange={e => setContent(e.target.value)}
-          placeholder="写下三件让你感恩的小事..."
-          className="input-geo w-full resize-none text-sm mb-3"
-          style={{ minHeight: '80px', background: 'rgba(26,26,46,0.6)' }}
+          placeholder="写下三件让你感恩的小事...可以是清晨的咖啡、朋友的消息、一阵凉风。"
+          className="w-full resize-none text-sm mb-3 p-4"
+          style={{
+            background: '#060f18', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2,
+            color: '#b8ad9a', outline: 'none', minHeight: '80px', lineHeight: 1.8,
+          }}
           rows={3}
         />
-        <button onClick={submit} disabled={!content.trim()} className="btn-geo text-sm px-6 disabled:opacity-40">
-          记录感恩
-        </button>
+        <div className="flex items-center justify-between">
+          <button onClick={() => setShowPrompts(!showPrompts)} className="text-xs"
+            style={{ color: '#5a5246', textDecoration: 'underline', background: 'none', border: 'none', cursor: 'pointer' }}>
+            {showPrompts ? '收起提示' : '需要灵感？'}
+          </button>
+          <button onClick={submit} disabled={!content.trim()}
+            className="px-6 py-2.5 text-sm font-semibold transition-all disabled:opacity-30"
+            style={{ background: '#e8a820', color: '#060f18', borderRadius: 2, border: 'none', cursor: 'pointer' }}>
+            记录感恩
+          </button>
+        </div>
+
+        {showPrompts && (
+          <div className="mt-4 space-y-2">
+            {PROMPTS.map((p, i) => (
+              <div key={i} className="p-3 cursor-pointer text-xs transition-all hover:border-[#e8a82020]"
+                style={{ background: '#060f18', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}
+                onClick={() => setContent(prev => prev + (prev ? '\n' : '') + p + ' ')}>
+                <span style={{ color: '#b8ad9a' }}>{p}</span>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
+      {/* 记录列表 */}
       {logs.map((log: any) => (
-        <div key={log.id} className="geo-card p-4 animate-card-rise text-sm">
-          <p className="text-[#B0B0C0] leading-relaxed mb-2">{log.content}</p>
-          <span className="text-[10px] text-[#505060]">
+        <div key={log.id} className="p-4 text-sm"
+          style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+          <p className="leading-relaxed mb-2" style={{ color: '#b8ad9a' }}>{log.content}</p>
+          <span className="text-xs" style={{ color: '#5a5246' }}>
             {new Date(log.created_at).toLocaleDateString('zh-CN')}
           </span>
         </div>
@@ -388,7 +569,18 @@ function SleepTab() {
   const [logs, setLogs] = useState<any[]>([]);
   const [hours, setHours] = useState(7);
   const [quality, setQuality] = useState(3);
+  const [dreamRecall, setDreamRecall] = useState(false);
+  const [notes, setNotes] = useState('');
   const [submitted, setSubmitted] = useState(false);
+
+  const HYGIENE_TIPS = [
+    '🕐 每天同一时间上床和起床——包括周末',
+    '📱 睡前1小时放下手机（蓝光抑制褪黑素分泌）',
+    '🌡️ 卧室温度18-22°C最适合睡眠',
+    '☕ 咖啡因的半衰期是5小时——下午2点后避免摄入',
+    '🧘 睡前做5分钟呼吸练习有助于入睡',
+    '📝 如果脑子很乱，把想法写下来再睡',
+  ];
 
   useEffect(() => {
     fetch(`${API_BASE}/api/wellness/logs?log_type=sleep&user_id=1`)
@@ -401,49 +593,97 @@ function SleepTab() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         user_id: 1, log_type: 'sleep',
-        title: `睡眠 ${hours}小时`, sleep_hours: hours, sleep_quality: quality,
+        title: `睡眠 ${hours}小时`,
+        content: notes || null,
+        sleep_hours: hours,
+        sleep_quality: quality,
+        tags: dreamRecall ? ['做梦'] : [],
       }),
     });
-    setSubmitted(s => !s);
+    setNotes(''); setSubmitted(s => !s);
   };
 
   return (
     <div className="space-y-5">
-      <div className="geo-card p-6 animate-card-rise">
-        <h3 className="text-sm font-bold text-white mb-4">🌙 记录睡眠</h3>
+      {/* 睡眠卫生 */}
+      <div className="p-5" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+        <div className="flex items-center gap-2 mb-3">
+          <span className="text-xl">🌙</span>
+          <h3 className="font-bold text-sm" style={{ color: '#f5efe0' }}>睡眠卫生小贴士</h3>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+          {HYGIENE_TIPS.map((tip, i) => (
+            <div key={i} className="text-xs leading-relaxed" style={{ color: '#7a7062' }}>
+              {tip}
+            </div>
+          ))}
+        </div>
+      </div>
 
-        <label className="text-xs text-[#B0B0C0] mb-2 block">睡眠时长: {hours} 小时</label>
+      {/* 记录表单 */}
+      <div className="p-6" style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+        <h3 className="text-sm font-bold mb-4" style={{ color: '#f5efe0' }}>记录昨晚的睡眠</h3>
+
+        <label className="text-xs mb-2 block font-medium" style={{ color: '#7a7062' }}>
+          睡眠时长: {hours} 小时
+        </label>
         <input
           type="range" min={0} max={14} step={0.5} value={hours}
           onChange={e => setHours(parseFloat(e.target.value))}
-          className="w-full mb-4 accent-[var(--accent-purple)]"
+          className="w-full mb-4"
+          style={{ accentColor: '#e8a820' }}
         />
 
-        <label className="text-xs text-[#B0B0C0] mb-2 block">睡眠质量</label>
+        <label className="text-xs mb-2 block font-medium" style={{ color: '#7a7062' }}>睡眠质量</label>
         <div className="flex gap-2 mb-4">
           {[1, 2, 3, 4, 5].map(q => (
-            <button
-              key={q}
-              onClick={() => setQuality(q)}
-              className={`w-10 h-10 rounded-xl text-lg transition-all ${
-                quality >= q ? 'bg-[var(--accent-purple)]/20 text-[var(--accent-purple)]' : 'bg-[#ffffff]/05 text-[#505060]'
-              }`}
-            >
+            <button key={q} onClick={() => setQuality(q)}
+              className="w-10 h-10 text-lg transition-all"
+              style={{
+                background: quality >= q ? 'rgba(232,168,32,0.1)' : '#060f18',
+                border: quality >= q ? '1px solid rgba(232,168,32,0.3)' : '1px solid rgba(255,255,255,0.06)',
+                borderRadius: 2,
+                color: quality >= q ? '#e8a820' : '#5a5246',
+              }}>
               {q <= 3 ? '😴' : q === 4 ? '😊' : '✨'}
             </button>
           ))}
         </div>
 
-        <button onClick={submit} className="btn-geo text-sm px-6">记录睡眠</button>
+        <label className="flex items-center gap-2 mb-4 text-xs" style={{ color: '#7a7062', cursor: 'pointer' }}>
+          <input type="checkbox" checked={dreamRecall} onChange={e => setDreamRecall(e.target.checked)}
+            style={{ accentColor: '#e8a820' }} />
+          记得昨晚的梦
+        </label>
+
+        <textarea
+          value={notes}
+          onChange={e => setNotes(e.target.value)}
+          placeholder="笔记（可选）：睡前在做什么？有没有半夜醒来？醒来时什么感觉？"
+          rows={2}
+          className="w-full resize-none text-xs mb-4 p-3"
+          style={{
+            background: '#060f18', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2,
+            color: '#b8ad9a', outline: 'none', lineHeight: 1.7,
+          }}
+        />
+
+        <button onClick={submit}
+          className="px-6 py-2.5 text-sm font-semibold transition-all"
+          style={{ background: '#e8a820', color: '#060f18', borderRadius: 2, border: 'none', cursor: 'pointer' }}>
+          记录睡眠
+        </button>
       </div>
 
+      {/* 记录列表 */}
       {logs.map((log: any) => (
-        <div key={log.id} className="geo-card p-4 flex items-center justify-between animate-card-rise text-sm">
+        <div key={log.id} className="p-4 flex items-center justify-between text-sm"
+          style={{ background: '#0a1620', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
           <div>
-            <span className="text-white font-bold">{log.sleep_hours}h</span>
-            <span className="text-[#505060] ml-2">品质 {log.sleep_quality}/5</span>
+            <span className="font-bold mr-2" style={{ color: '#f5efe0' }}>{log.sleep_hours}h</span>
+            <span style={{ color: '#5a5246' }}>品质 {log.sleep_quality}/5</span>
           </div>
-          <span className="text-[10px] text-[#505060]">
+          <span className="text-xs" style={{ color: '#5a5246' }}>
             {new Date(log.created_at).toLocaleDateString('zh-CN')}
           </span>
         </div>

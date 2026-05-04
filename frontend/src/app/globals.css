@@ -1,52 +1,91 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 /* ═══════════════════════════════════════════════════
-   千与千寻 × 康波研究院 — 梦境设计系统 v6.0
-   深海夜幕 · 黄铜金灯 · 极简几何 · 克制美学
+   DreamLab — Ghibli Bathhouse Design System
+   Warm · Spacious · Cinematic
    ═══════════════════════════════════════════════════ */
 
-:root {
-  /* ── 康波研究院基色 ── */
-  --bg-deep: #09090b;           /* 深海夜幕 — 极黑 */
-  --bg-mid: #131316;            /* 海洋中层 */
-  --bg-surface: #1c1c21;       /* 卡片表面 */
-  --bg-card: rgba(28, 28, 33, 0.88);
-
-  /* ── 黄铜金强调色 — 油屋的灯笼 ── */
-  --accent-gold: #e2b64f;
-  --accent-gold-dim: #c49a3c;
-  --accent-gold-glow: rgba(226, 182, 79, 0.15);
-
-  /* ── 辅助色 — 千与千寻的克制表达 ── */
-  --spirit-blue: #7eb8da;       /* 灵光蓝 — 白龙的鳞光 */
-  --coral-dim: #c47868;         /* 沉静珊瑚 — 红桥在夜幕中 */
-  --mint-dim: #8aaf9d;          /* 苔绿 — 雨后的森林 */
-  --lavender-dim: #9b8ab8;      /* 暮紫 — 傍晚的汤屋 */
-  --foam-white: #d4d4d8;       /* 浪花白 */
-
-  /* ── 文字层级 (zinc系) ── */
-  --text-white: #fafafa;
-  --text-soft: #a1a1aa;
-  --text-muted: #71717a;
-  --text-deep: #52525b;
-
-  /* ── 边框 (极细) ── */
-  --border-subtle: rgba(255, 255, 255, 0.06);
-  --border-card: #27272a;
-
-  /* ── 字体 ── */
+@theme {
+  --color-bg-deep: #060f18;
+  --color-bg-mid: #0a1620;
+  --color-bg-surface: #0d1a28;
+  --color-accent-gold: #e8a820;
+  --color-accent-gold-dim: #c48818;
+  --color-accent-gold-glow: rgba(232, 168, 32, 0.12);
+  --color-bridge-red: #c0392b;
+  --color-haku-teal: #1e8568;
+  --color-noface-purple: #6b4fa0;
+  --color-spirit-blue: #4a90b8;
+  --color-coral-dim: #c47868;
+  --color-mint-dim: #6b9e7a;
+  --color-lavender-dim: #8b7ab8;
+  --color-accent-purple: #7b5ea8;
+  --color-foam-white: #e8dcc8;
+  --color-text-white: #f5efe0;
+  --color-text-soft: #b8ad9a;
+  --color-text-muted: #7a7062;
+  --color-text-deep: #5a5246;
+  --color-border-subtle: rgba(255, 255, 255, 0.05);
+  --color-border-card: rgba(255, 255, 255, 0.07);
   --font-serif: 'Noto Serif SC', 'STSong', 'SimSun', serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+:root {
+  --bg-deep: #060f18;
+  --bg-mid: #0a1620;
+  --bg-surface: #0d1a28;
+  
+  --accent-gold: #e8a820;
+  --accent-gold-dim: #c48818;
+  --accent-gold-glow: rgba(232, 168, 32, 0.12);
+  
+  --bridge-red: #c0392b;
+  --haku-teal: #1e8568;
+  --noface-purple: #6b4fa0;
+  --spirit-blue: #4a90b8;
+  --coral-dim: #c47868;
+  --mint-dim: #6b9e7a;
+  --lavender-dim: #8b7ab8;
+  --accent-purple: #7b5ea8;
+  --foam-white: #e8dcc8;
+
+  --text-white: #f5efe0;
+  --text-soft: #b8ad9a;
+  --text-muted: #7a7062;
+  --text-deep: #5a5246;
+
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --border-card: rgba(255, 255, 255, 0.07);
+
+  --geo-coral: var(--bridge-red);
+  --geo-lavender: var(--lavender-dim);
+  --geo-mint: var(--mint-dim);
+  --geo-sand: var(--accent-gold);
+
+  --font-serif: 'Noto Serif SC', 'STSong', 'SimSun', serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Layout */
+.app-grid {
+  display: grid;
+  grid-template-columns: 1fr min(100% - 4rem, 1100px) 1fr;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+.margin-col { position: relative; overflow: hidden; pointer-events: none; z-index: 0; }
+.margin-col > * { pointer-events: auto; }
+.content-col { position: relative; z-index: 1; }
+@media (max-width: 768px) {
+  .app-grid { grid-template-columns: 0 min(100%, 768px) 0; }
+  .margin-col { display: none; }
 }
 
 * { box-sizing: border-box; }
 
 html, body {
   overscroll-behavior: none;
-  -webkit-overflow-scrolling: touch;
-  touch-action: manipulation;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -57,449 +96,203 @@ body {
   font-family: var(--font-sans);
   min-height: 100vh;
   min-height: 100dvh;
-  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-/* ── 标题系统 — Noto Serif SC 为主 ── */
-h1 { font-family: var(--font-serif); font-weight: 700; }
-h2 { font-family: var(--font-serif); font-weight: 600; }
-h3 { font-family: var(--font-sans); font-weight: 600; }
-.serif-title { font-family: var(--font-serif); font-weight: 700; }
+h1, h2, h3 { font-family: var(--font-serif); font-weight: 700; }
 
-/* ══════════════════════════════════════════════
-   背景系统 — 极简网格 + 深海微光
-   ══════════════════════════════════════════════ */
-
-/* 极细几何网格 — 替代之前的密集网格 */
+/* ── Subtle grid backdrop ── */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 0;
+  opacity: 0.02;
   background-image:
-    linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+    linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px);
   background-size: 80px 80px;
-  background-position: center center;
-  mask-image: radial-gradient(ellipse at 50% 0%, black 40%, transparent 80%);
+  mask-image: radial-gradient(ellipse at 50% 0%, black 30%, transparent 70%);
 }
 
-/* 深海渐变 — 极克制 */
-.ocean-bg {
-  background:
-    radial-gradient(ellipse at 50% 80%, rgba(19,19,22,0.8) 0%, #09090b 60%),
-    linear-gradient(180deg, #131316 0%, #09090b 100%);
-  position: relative;
-  overflow: hidden;
-}
-
-/* 海面微光 — 来自油屋灯笼的反射 */
-.ocean-bg::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 10%;
-  width: 80%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(226,182,79,0.15), transparent);
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* ══════════════════════════════════════════════
-   波浪 — 极简线条
-   ══════════════════════════════════════════════ */
-
-.ocean-waves {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 30%;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.ocean-wave {
-  position: absolute;
-  bottom: 0;
-  left: -50%;
-  width: 200%;
-  height: 40px;
-  border-radius: 50% 50% 0 0;
-}
-
-.ocean-wave:nth-child(1) {
-  background: linear-gradient(180deg, rgba(226,182,79,0.04) 0%, transparent 100%);
-  animation: wave-drift 15s ease-in-out infinite;
-  height: 50px;
-  bottom: 10px;
-}
-
-.ocean-wave:nth-child(2) {
-  background: linear-gradient(180deg, rgba(126,184,218,0.03) 0%, transparent 100%);
-  animation: wave-drift 20s ease-in-out infinite reverse;
-  height: 35px;
-  bottom: 20px;
-}
-
-.ocean-wave:nth-child(3) {
-  background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, transparent 100%);
-  animation: wave-drift 25s ease-in-out infinite;
-  height: 25px;
-  bottom: 25px;
-}
-
-@keyframes wave-drift {
-  0%, 100% { transform: translateX(-3%) translateY(0); }
-  25% { transform: translateX(0%) translateY(-2px); }
-  50% { transform: translateX(3%) translateY(0); }
-  75% { transform: translateX(0%) translateY(2px); }
-}
-
-/* 海面光点 — 极克制 */
-@keyframes sparkle {
-  0%, 100% { opacity: 0; }
-  50% { opacity: 0.5; }
-}
-
-/* ══════════════════════════════════════════════
-   油屋建筑 — 极简几何化
-   ══════════════════════════════════════════════ */
-
-.bathhouse-body {
-  width: 180px;
-  height: 140px;
-  background: linear-gradient(180deg, #1a1a1e 0%, #131316 100%);
-  border: 1px solid var(--border-card);
-  border-radius: 2px;
-  position: relative;
-}
-
-.bathhouse-bridge {
-  width: 100px;
-  height: 6px;
-  background: var(--coral-dim);
-  border-radius: 1px;
-  position: relative;
-  margin-top: -3px;
-  opacity: 0.6;
-}
-
-/* 灯笼 — 黄铜金 */
-.lantern {
-  width: 8px;
-  height: 12px;
-  background: var(--accent-gold);
-  border-radius: 50%;
-  position: relative;
-  box-shadow: 0 0 16px var(--accent-gold-glow);
-  animation: lantern-swing 6s ease-in-out infinite;
-}
-
-.lantern::before {
-  content: '';
-  position: absolute;
-  top: -6px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1px;
-  height: 6px;
-  background: rgba(226,182,79,0.2);
-}
-
-@keyframes lantern-swing {
-  0%, 100% { transform: rotate(-2deg); }
-  50% { transform: rotate(2deg); }
-}
-
-/* ══════════════════════════════════════════════
-   光灵粒子 — 极简光点
-   ══════════════════════════════════════════════ */
-
+/* ── Animations ── */
 @keyframes spirit-float {
   0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
-  50% { transform: translateY(-8px) translateX(4px); opacity: 0.6; }
+  50% { transform: translateY(-6px) translateX(3px); opacity: 0.5; }
 }
-
-.spirit-particle { position: absolute; border-radius: 50%; pointer-events: none; }
-.spirit-light { animation: spirit-float 8s ease-in-out infinite; }
-
-/* 灰尘精灵 */
+@keyframes float-slower {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes glow-breathe {
+  0%, 100% { box-shadow: 0 0 8px rgba(232,168,32,0.08); }
+  50% { box-shadow: 0 0 16px rgba(232,168,32,0.15); }
+}
+@keyframes firefly-float {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  25% { transform: translateY(-20px) translateX(var(--drift, 8px)); }
+  50% { transform: translateY(-10px) translateX(0); }
+  75% { transform: translateY(-30px) translateX(calc(var(--drift, 8px) * -1)); }
+}
+@keyframes cloud-drift {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+@keyframes golddust-float {
+  0% { opacity: 0; transform: translate(0, 0); }
+  20% { opacity: 0.4; }
+  50% { opacity: 0.2; transform: translate(6px, -10px); }
+  80% { opacity: 0.5; transform: translate(-3px, -5px); }
+  100% { opacity: 0; transform: translate(-1px, -6px); }
+}
+@keyframes sparkle-scatter {
+  0% { opacity: 0.6; transform: rotate(var(--angle, 0deg)) translateY(0) scale(1); }
+  100% { opacity: 0; transform: rotate(var(--angle, 0deg)) translateY(-12px) scale(0); }
+}
+@keyframes warm-breathe {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+@keyframes godray-sway {
+  0%, 100% { transform: rotate(-6deg) scaleY(1); }
+  50% { transform: rotate(6deg) scaleY(1.05); }
+}
 @keyframes soot-sprite {
   0%, 100% { transform: translateY(0) scale(1); }
   50% { transform: translateY(-8px) scale(1.1); }
 }
-
-.soot-sprite {
-  width: 8px;
-  height: 8px;
-  background: radial-gradient(circle at 40% 40%, #3f3f46, #18181b);
-  border-radius: 50%;
-  animation: soot-sprite 3s ease-in-out infinite;
+@keyframes float-kanji {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.04; }
+  50% { transform: translateY(-15px) rotate(2deg); opacity: 0.1; }
 }
-
-/* ══════════════════════════════════════════════
-   纪念碑谷几何 — 极简化
-   ══════════════════════════════════════════════ */
-
-.geo-block { position: absolute; pointer-events: none; }
-
-.geo-platform {
-  background: linear-gradient(135deg, rgba(126,184,218,0.06), rgba(155,138,184,0.03));
-  border: 1px solid rgba(255,255,255,0.04);
-  border-radius: 2px;
+@keyframes lantern-swing {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
 }
-
-/* ══════════════════════════════════════════════
-   动画轨道
-   ══════════════════════════════════════════════ */
-
-@keyframes float-slow {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
-}
-
-@keyframes float-slower {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-
-@keyframes glow-breathe {
-  0%, 100% { box-shadow: 0 0 8px rgba(226,182,79,0.1); }
-  50% { box-shadow: 0 0 16px rgba(226,182,79,0.2); }
-}
-
-@keyframes twinkle {
-  0%, 100% { opacity: 0.1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(1.5); }
-}
-
 @keyframes card-rise {
-  from { opacity: 0; transform: translateY(24px); }
+  from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes gradient-shift {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* 工具类 */
-.animate-float-slow   { animation: float-slow 8s ease-in-out infinite; }
+/* Utility */
 .animate-float-slower { animation: float-slower 10s ease-in-out infinite; }
-.animate-glow         { animation: glow-breathe 4s ease-in-out infinite; }
-.animate-card-rise    { animation: card-rise 0.6s ease-out backwards; }
-.animate-fade-in      { animation: card-rise 0.6s ease-out; }
+.animate-glow { animation: glow-breathe 4s ease-in-out infinite; }
+.page-transition { animation: card-rise 0.4s ease-out both; }
 
-/* ══════════════════════════════════════════════
-   组件层 — 康波研究院 × 千与千寻
-   ══════════════════════════════════════════════ */
-
-/* ── 浮动汉字灵体 ── */
-@keyframes float-kanji {
-  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.08; }
-  25% { transform: translateY(-20px) rotate(3deg); opacity: 0.15; }
-  50% { transform: translateY(-8px) rotate(-2deg); opacity: 0.1; }
-  75% { transform: translateY(-30px) rotate(1deg); opacity: 0.18; }
-}
-
-/* ── 灵光爆发 ── */
-@keyframes sparkle-burst {
-  0% { width: 0; height: 0; opacity: 1; }
-  50% { width: 60px; height: 60px; opacity: 0.4; }
-  100% { width: 120px; height: 120px; opacity: 0; margin-left: -60px; margin-top: -60px; }
-}
-
-/* ── 水面涟漪 ── */
-@keyframes water-ripple {
-  0% { width: 0; height: 0; opacity: 0.6; margin-left: 0; margin-top: 0; }
-  100% { width: 300px; height: 100px; opacity: 0; margin-left: -150px; margin-top: -50px; }
-}
-
-/* ── 几何轨道旋转 ── */
-@keyframes geo-orbit {
-  0% { transform: rotate(0deg) rotate(45deg); }
-  100% { transform: rotate(360deg) rotate(45deg); }
-}
-
+/* ════════════════ Components ════════════════ */
 @layer components {
-
-  /* ── 卡片 — 扁平极简，康波风格 ── */
-  .glass-card, .geo-card {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-card);
-    border-radius: 4px;
-    transition: all 0.4s ease;
-    box-shadow: none;
-  }
-
-  .glass-card:hover, .geo-card:hover {
-    border-color: rgba(226,182,79,0.25);
-    background: rgba(30,30,35,0.95);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-    transform: translateY(-2px);
-  }
-
-  /* ── 毛玻璃面板 ── */
-  .frost-panel {
-    background: rgba(9, 9, 11, 0.92);
-    backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255,255,255,0.05);
-  }
-
-  /* ── 主按钮 — 黄铜金 ── */
   .btn-primary, .btn-geo {
     background: var(--accent-gold);
     color: var(--bg-deep);
     font-weight: 600;
-    padding: 10px 24px;
-    border-radius: 4px;
+    padding: 12px 28px;
     border: none;
     cursor: pointer;
-    transition: all 0.25s ease;
+    transition: all 0.2s ease;
     font-size: 14px;
     font-family: var(--font-sans);
-    touch-action: manipulation;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.02em;
   }
-
   .btn-primary:hover, .btn-geo:hover {
-    background: #eac46a;
+    background: #f0b832;
     transform: translateY(-1px);
-    box-shadow: 0 2px 12px rgba(226,182,79,0.25);
   }
-
-  .btn-primary:active, .btn-geo:active {
-    transform: scale(0.97);
-    background: var(--accent-gold-dim);
-  }
-
   .btn-primary:disabled, .btn-geo:disabled {
     opacity: 0.4; cursor: not-allowed; transform: none;
   }
 
-  /* ── 副按钮 — 极细边框 ── */
   .btn-ghost, .btn-geo-ghost {
     background: transparent;
     color: var(--text-soft);
-    padding: 10px 24px;
-    border-radius: 4px;
+    padding: 12px 28px;
     border: 1px solid var(--border-card);
     cursor: pointer;
-    transition: all 0.25s ease;
-    touch-action: manipulation;
+    transition: all 0.2s ease;
     font-size: 14px;
     font-family: var(--font-sans);
   }
-
   .btn-ghost:hover, .btn-geo-ghost:hover {
-    border-color: rgba(226,182,79,0.3);
+    border-color: rgba(232,168,32,0.2);
     color: var(--accent-gold);
-    background: rgba(226,182,79,0.04);
   }
 
-  .btn-ghost:active, .btn-geo-ghost:active {
-    transform: scale(0.97);
-  }
-
-  /* ── 输入框 — 康波风格 ── */
   .input-field, .input-geo {
     width: 100%;
-    background: rgba(19, 19, 22, 0.8);
+    background: rgba(13,26,40,0.8);
     border: 1px solid var(--border-card);
-    border-radius: 4px;
     padding: 12px 16px;
     color: var(--text-white);
     font-size: 15px;
     font-family: var(--font-sans);
-    transition: all 0.25s ease;
+    transition: all 0.2s ease;
   }
-
   .input-field:focus, .input-geo:focus {
     outline: none;
     border-color: var(--accent-gold);
     box-shadow: 0 0 0 2px var(--accent-gold-glow);
   }
-
   .input-field::placeholder, .input-geo::placeholder {
     color: var(--text-muted);
   }
 
-  /* ── Badge — 极简标签 ── */
   .badge, .badge-geo {
     display: inline-block;
     padding: 2px 10px;
-    border-radius: 3px;
     font-size: 10px;
     font-weight: 600;
     font-family: var(--font-sans);
-    letter-spacing: 0.03em;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
   }
+  .badge-coral    { background: rgba(192,57,43,0.1); color: var(--bridge-red); border: 1px solid rgba(192,57,43,0.15); }
+  .badge-mint     { background: rgba(30,133,104,0.1); color: var(--haku-teal); border: 1px solid rgba(30,133,104,0.15); }
+  .badge-lavender { background: rgba(107,79,160,0.1); color: var(--noface-purple); border: 1px solid rgba(107,79,160,0.15); }
+  .badge-gold     { background: rgba(232,168,32,0.08); color: var(--accent-gold); border: 1px solid rgba(232,168,32,0.15); }
 
-  .badge-coral    { background: rgba(196,120,104,0.1); color: var(--coral-dim); border: 1px solid rgba(196,120,104,0.15); }
-  .badge-mint     { background: rgba(138,175,157,0.1); color: var(--mint-dim); border: 1px solid rgba(138,175,157,0.15); }
-  .badge-lavender { background: rgba(155,138,184,0.1); color: var(--lavender-dim); border: 1px solid rgba(155,138,184,0.15); }
-  .badge-gold     { background: rgba(226,182,79,0.08); color: var(--accent-gold); border: 1px solid rgba(226,182,79,0.15); }
-  .badge-ocean    { background: rgba(126,184,218,0.08); color: var(--spirit-blue); border: 1px solid rgba(126,184,218,0.15); }
-
-  /* ── 渐变文字 — 黄铜金 ── */
   .gradient-text {
-    background: linear-gradient(135deg, var(--accent-gold), #f0d078);
+    background: linear-gradient(135deg, var(--accent-gold), #f5d078);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-
-  .text-ocean-gradient {
-    background: linear-gradient(135deg, var(--spirit-blue), var(--accent-gold));
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: gradient-shift 8s ease infinite;
-  }
-
-  /* ── 按钮灵光拖尾 ── */
-  .btn-geo, .btn-geo-ghost {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .btn-geo::after {
-    content: '';
-    position: absolute;
-    top: 0; left: -100%;
-    width: 100%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
-    transition: left 0.4s ease;
-  }
-
-  .btn-geo:hover::after { left: 100%; }
 }
 
-/* ══════════════════════════════════════════════
-   移动端优化
-   ══════════════════════════════════════════════ */
-
-@media (max-width: 767px) {
-  input, textarea, select { font-size: 16px !important; }
-  ::-webkit-scrollbar { width: 0px; height: 0px; }
+/* ── Glass card ── */
+.glass-card, .geo-card {
+  background: var(--bg-mid);
+  border: 1px solid var(--border-card);
+  transition: all 0.3s ease;
+}
+.glass-card:hover, .geo-card:hover {
+  border-color: rgba(232,168,32,0.15);
+  background: rgba(15,26,40,0.95);
 }
 
-a, button, [role="button"] { touch-action: manipulation; }
-a:active, button:active, [role="button"]:active {
-  transform: scale(0.97);
-  transition: transform 0.1s ease;
+/* ── Frost panel ── */
+.frost-panel {
+  background: rgba(6,15,24,0.94);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
-* { -webkit-tap-highlight-color: transparent; }
 
-@media (min-width: 768px) {
-  ::-webkit-scrollbar { width: 5px; }
-  ::-webkit-scrollbar-track { background: var(--bg-deep); }
-  ::-webkit-scrollbar-thumb { background: rgba(226,182,79,0.15); border-radius: 2px; }
-  ::-webkit-scrollbar-thumb:hover { background: rgba(226,182,79,0.3); }
+/* ── Ghibli card ── */
+.ghibli-card {
+  background: rgba(10,22,32,0.85);
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: all 0.3s ease;
 }
+.ghibli-card:hover {
+  border-color: rgba(232,168,32,0.15);
+  background: rgba(13,26,40,0.9);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: rgba(232,168,32,0.1); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(232,168,32,0.2); }

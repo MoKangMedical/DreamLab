@@ -9,8 +9,8 @@ from typing import Optional
 
 
 MIMO_ENDPOINT = "https://api.deepseek.com/v1"
-MIMO_API_KEY = os.environ.get("DEEPSEEK_API_KEY", "")
-MIMO_MODEL = "deepseek-v4-pro"
+MIMO_API_KEY = os.environ.get("DEEPSEEK_API_KEY", "") or os.environ.get("OPENAI_API_KEY", "")
+MIMO_MODEL = "deepseek-chat"
 TIMEOUT_SECONDS = 60
 MAX_RETRIES = 2
 
