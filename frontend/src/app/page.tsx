@@ -52,6 +52,14 @@ const FEATURES = [
     metric: '100+',
     metricLabel: '社区成员',
   },
+  {
+    href: '/predict',
+    title: 'AI 心理预测',
+    desc: '基于你的数据，AI 预测心理趋势、人格发展和梦境模式。',
+    accent: '#d4a853',
+    metric: '4',
+    metricLabel: '预测维度',
+  },
 ];
 
 const VALUE_PROPS = [
@@ -293,11 +301,13 @@ export default function HomePage() {
             <div style={{ width: 24, height: 1, background: 'rgba(212,168,83,0.15)' }} />
             <span className="t-label">继续探索</span>
           </div>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
             {[
               { href: '/bathhouse', label: '油屋广场', desc: '千与千寻世界', accent: '#c4554d' },
               { href: '/spirited', label: '千寻之旅', desc: '五层梦境冒险', accent: '#d4a853' },
-              { href: '/courses', label: '系统课程', desc: '弗洛伊德 · 荣格 · 现代科学', accent: '#6b5b8a' },
+              { href: '/courses', label: '系统课程', desc: '10门课 · 39章 · 34万字', accent: '#6b5b8a' },
+              { href: '/reflect', label: '人生思考', desc: '梦后反思 · AI洞察报告', accent: '#5a9a6f' },
+              { href: '/knowledge', label: '知识库', desc: '循证心理学百科', accent: '#9a7ab8' },
               { href: '/profile/milestones', label: '成长轨迹', desc: '记录你的心理成长', accent: '#3b8b7a' },
             ].map((item, i) => (
               <Link

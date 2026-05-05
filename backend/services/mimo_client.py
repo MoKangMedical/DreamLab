@@ -274,3 +274,8 @@ async def generate_insight(reflections: list, dreams: list) -> str:
 
     result_text = await _call_mimo(messages, temperature=0.8, max_tokens=4096)
     return result_text.strip()
+
+
+async def chat_completion(messages: list, temperature: float = 0.7, max_tokens: int = 2048) -> str:
+    """Generic chat completion — returns text response."""
+    return await _call_mimo(messages, temperature=temperature, max_tokens=max_tokens)
