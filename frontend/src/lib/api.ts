@@ -206,3 +206,11 @@ export const likeCommunityPost = async (postId: number) => {
 export const addCommunityComment = async (postId: number, data: { author: string; content: string }) => {
   return request<any>(`/api/community/posts/${postId}/comments`, { method: 'POST', body: JSON.stringify(data) });
 };
+
+// Milestones & Achievements
+export const getUserStats = async (userId = 1) => {
+  return request<any>(`/api/milestones/stats/${userId}`);
+};
+export const getUserAchievements = async (userId = 1) => {
+  return request<any>(`/api/milestones/achievements/${userId}`);
+};

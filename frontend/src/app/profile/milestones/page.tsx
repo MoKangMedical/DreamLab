@@ -2,43 +2,34 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { getUserStats, getUserAchievements } from '@/lib/api';
 
 // ═══════════════════════════════════════════════════
-// Achievement definitions
+// Achievement definitions (used as fallback)
 // ═══════════════════════════════════════════════════
-interface Achievement {
-  id: string;
-  name: string;
-  desc: string;
-  icon: string;
-  condition: string;
-  unlocked: boolean;
-  progress: number; // 0-100
+interface AchievementData {
+  id?: number; key: string; name: string; desc: string; icon: string;
+  condition: string; unlocked: boolean; progress: number;
 }
 
-const ACHIEVEMENTS: Achievement[] = [
-  { id: 'first_assessment', name: '镜子里的自己', desc: '完成第一次心理测评', icon: '🪞', condition: '完成1次测评', unlocked: true, progress: 100 },
-  { id: 'dream_keeper', name: '梦境守护者', desc: '记录10个梦境', icon: '🌙', condition: '记录10个梦', unlocked: false, progress: 40 },
-  { id: 'three_days', name: '三日的修行', desc: '连续3天打卡', icon: '🔥', condition: '连续3天使用', unlocked: true, progress: 100 },
-  { id: 'seven_days', name: '七日的试炼', desc: '连续7天打卡', icon: '✨', condition: '连续7天使用', unlocked: false, progress: 57 },
-  { id: 'scholar', name: '油屋的学者', desc: '学完一门完整课程', icon: '📜', condition: '完成1门课程', unlocked: false, progress: 75 },
-  { id: 'meditator', name: '河神的弟子', desc: '完成10次冥想', icon: '🧘', condition: '冥想10次', unlocked: false, progress: 50 },
-  { id: 'helper', name: '无脸男的馈赠', desc: '在社区帮助他人10次', icon: '👤', condition: '发表10条评论', unlocked: false, progress: 30 },
-  { id: 'five_scales', name: '汤婆婆的契约', desc: '完成全部5个量表', icon: '🎭', condition: '完成5个量表', unlocked: false, progress: 60 },
-  { id: 'explorer', name: '油屋探险家', desc: '访问平台所有页面', icon: '🏮', condition: '探索全部区域', unlocked: false, progress: 80 },
+const FALLBACK_ACHIEVEMENTS: AchievementData[] = [
+  { key: 'first_assessment', name: '镜子里的自己', desc: '完成第一次心理测评', icon: '🪞', condition: '完成1次测评', unlocked: true, progress: 100 },
+  { key: 'dream_keeper', name: '梦境守护者', desc: '记录10个梦境', icon: '🌙', condition: '记录10个梦', unlocked: false, progress: 40 },
+  { key: 'three_days', name: '三日的修行', desc: '连续3天打卡', icon: '🔥', condition: '连续3天使用', unlocked: true, progress: 100 },
+  { key: 'seven_days', name: '七日的试炼', desc: '连续7天打卡', icon: '✨', condition: '连续7天使用', unlocked: false, progress: 57 },
+  { key: 'scholar', name: '油屋的学者', desc: '学完一门完整课程', icon: '📜', condition: '完成1门课程', unlocked: false, progress: 75 },
+  { key: 'meditator', name: '河神的弟子', desc: '完成10次冥想', icon: '🧘', condition: '冥想10次', unlocked: false, progress: 50 },
+  { key: 'helper', name: '无脸男的馈赠', desc: '在社区帮助他人10次', icon: '👤', condition: '发表10条评论', unlocked: false, progress: 30 },
+  { key: 'five_scales', name: '汤婆婆的契约', desc: '完成全部5个量表', icon: '🎭', condition: '完成5个量表', unlocked: false, progress: 60 },
+  { key: 'explorer', name: '油屋探险家', desc: '访问平台所有页面', icon: '🏮', condition: '探索全部区域', unlocked: false, progress: 80 },
 ];
 
 // ═══════════════════════════════════════════════════
-// Milestone definitions — 千寻之旅
+// Milestone definitions — 千寻之旅 (static content)
 // ═══════════════════════════════════════════════════
 interface Milestone {
-  id: string;
-  name: string;
-  desc: string;
-  icon: string;
-  color: string;
-  done: boolean;
-  quote: string;
+  id: string; name: string; desc: string; icon: string; color: string;
+  done: boolean; quote: string;
 }
 
 const MILESTONES: Milestone[] = [
@@ -49,17 +40,26 @@ const MILESTONES: Milestone[] = [
   { id: 'find_name', name: '白龙的天空', desc: '完成全部量表和学习，找回自己的名字', icon: '◆', color: '#5a7d9a', done: false, quote: '"我想起来了，我的名字是震早剑琥珀主。"' },
 ];
 
-// ═══════════════════════════════════════════════════
-// Stats
-// ═══════════════════════════════════════════════════
-const STATS = [
+interface StatItem { label: string; value: number; icon: string; color: string; }
+
+const FALLBACK_STATS: StatItem[] = [
   { label: '梦境记录', value: 12, icon: '🌙', color: '#d4a853' },
   { label: '测评完成', value: 3, icon: '🪞', color: '#c4554d' },
   { label: '课程章节', value: 8, icon: '📜', color: '#5a7d9a' },
   { label: '冥想次数', value: 5, icon: '🧘', color: '#3b8b7a' },
   { label: '社区发言', value: 6, icon: '💬', color: '#6b5b8a' },
-  { label: '连续打卡', value: 4, icon: '🔥', color: '#d4a853' },
+  { label: '陪伴对话', value: 4, icon: '💝', color: '#d4a853' },
 ];
+
+// ═══════════════════════════════════════════════════
+// Growth report (static)
+// ═══════════════════════════════════════════════════
+const growthReport = {
+  topDimension: '开放性',
+  topDimensionScore: 85,
+  improvementArea: '睡眠质量',
+  summary: '你在过去一个月里展现了积极的自我探索意愿。你完成了3项标准化测评，记录了12个梦境，并坚持了4天连续打卡。你的开放性得分很高——这预示着你对新经验的接纳能力很强。下一步建议关注睡眠质量和冥想习惯的建立。',
+};
 
 // ═══════════════════════════════════════════════════
 // Page
@@ -67,23 +67,28 @@ const STATS = [
 export default function MilestonesPage() {
   const [visible, setVisible] = useState(false);
   const [showReport, setShowReport] = useState(false);
+  const [stats, setStats] = useState<StatItem[]>(FALLBACK_STATS);
+  const [achievements, setAchievements] = useState<AchievementData[]>(FALLBACK_ACHIEVEMENTS);
 
   useEffect(() => { setVisible(true); }, []);
 
+  // Fetch real data from API
+  useEffect(() => {
+    (async () => {
+      try {
+        const [statsData, achData] = await Promise.all([
+          getUserStats(1),
+          getUserAchievements(1),
+        ]);
+        if (statsData?.stats?.length) setStats(statsData.stats);
+        if (achData?.achievements?.length) setAchievements(achData.achievements);
+      } catch { /* fallback to static */ }
+    })();
+  }, []);
+
   const doneCount = MILESTONES.filter(m => m.done).length;
   const journeyProgress = (doneCount / MILESTONES.length) * 100;
-  const unlockedAchievements = ACHIEVEMENTS.filter(a => a.unlocked).length;
-
-  const growthReport = {
-    totalAssessments: 3,
-    totalDreams: 12,
-    totalMeditations: 5,
-    streak: 4,
-    topDimension: '开放性',
-    topDimensionScore: 85,
-    improvementArea: '睡眠质量',
-    summary: '你在过去一个月里展现了积极的自我探索意愿。你完成了3项标准化测评，记录了12个梦境，并坚持了4天连续打卡。你的开放性得分很高——这预示着你对新经验的接纳能力很强。下一步建议关注睡眠质量和冥想习惯的建立。',
-  };
+  const unlockedAchievements = achievements.filter(a => a.unlocked).length;
 
   return (
     <div style={{ background: '#0a0a0c', minHeight: '100vh' }}>
@@ -102,9 +107,9 @@ export default function MilestonesPage() {
           </p>
         </div>
 
-        {/* ── Stats Grid ── */}
+        {/* ── Stats Grid (from API) ── */}
         <div className="grid grid-cols-3 md:grid-cols-6 gap-2 mb-12">
-          {STATS.map((s, i) => (
+          {stats.map((s, i) => (
             <div key={s.label} className="p-4 text-center transition-all duration-500"
               style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.04)', animationDelay: `${0.1 * i}s` }}>
               <div className="text-2xl mb-1">{s.icon}</div>
@@ -120,13 +125,11 @@ export default function MilestonesPage() {
             <h3 className="text-sm font-bold" style={{ color: '#f4f4f6' }}>千寻之旅</h3>
             <span className="text-xs" style={{ color: '#d4a853' }}>{doneCount}/{MILESTONES.length} 完成</span>
           </div>
-          {/* Progress bar */}
           <div className="h-1.5 mb-6" style={{ background: 'rgba(255,255,255,0.05)', borderRadius: 1 }}>
             <div className="h-full transition-all duration-1000" style={{ width: `${journeyProgress}%`, background: 'linear-gradient(90deg, #c4554d, #d4a853, #5a7d9a)', borderRadius: 1 }} />
           </div>
-          {/* Milestone nodes */}
           <div className="flex flex-wrap justify-between gap-4">
-            {MILESTONES.map((m, i) => (
+            {MILESTONES.map((m) => (
               <div key={m.id} className="flex-1 min-w-[120px] text-center">
                 <div className="w-10 h-10 mx-auto mb-2 flex items-center justify-center text-lg transition-all duration-300"
                   style={{
@@ -148,17 +151,17 @@ export default function MilestonesPage() {
           </div>
         </div>
 
-        {/* ── Achievements ── */}
+        {/* ── Achievements (from API) ── */}
         <div className="mb-12">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-sm font-bold" style={{ color: '#f4f4f6' }}>成就徽章</h3>
-            <span className="text-xs" style={{ color: '#d4a853' }}>{unlockedAchievements}/{ACHIEVEMENTS.length} 已解锁</span>
+            <span className="text-xs" style={{ color: '#d4a853' }}>{unlockedAchievements}/{achievements.length} 已解锁</span>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-            {ACHIEVEMENTS.map(a => (
-              <div key={a.id} className="p-4 transition-all duration-300"
+            {achievements.map(a => (
+              <div key={a.key} className="p-4 transition-all duration-300"
                 style={{
-                  background: a.unlocked ? `${a.id === 'first_assessment' ? '#c4554d' : '#d4a853'}08` : '#111113',
+                  background: a.unlocked ? 'rgba(212,168,83,0.03)' : '#111113',
                   border: `1px solid ${a.unlocked ? 'rgba(212,168,83,0.15)' : 'rgba(255,255,255,0.04)'}`,
                   opacity: a.unlocked ? 1 : 0.6,
                 }}>
@@ -183,11 +186,7 @@ export default function MilestonesPage() {
 
         {/* ── Growth Report ── */}
         <div className="mb-12" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.05)' }}>
-          <div
-            className="p-6 flex items-center justify-between cursor-pointer"
-            onClick={() => setShowReport(!showReport)}
-            style={{ cursor: 'pointer' }}
-          >
+          <div className="p-6 flex items-center justify-between cursor-pointer" onClick={() => setShowReport(!showReport)}>
             <div className="flex items-center gap-3">
               <span className="text-xl">📊</span>
               <div>
@@ -200,16 +199,14 @@ export default function MilestonesPage() {
           {showReport && (
             <div className="px-6 pb-6 pt-0">
               <div className="mb-4 p-4" style={{ background: '#0a0a0c', border: '1px solid rgba(255,255,255,0.04)' }}>
-                <p className="text-sm leading-relaxed" style={{ color: '#a1a1aa', lineHeight: 1.8 }}>
-                  {growthReport.summary}
-                </p>
+                <p className="text-sm leading-relaxed" style={{ color: '#a1a1aa', lineHeight: 1.8 }}>{growthReport.summary}</p>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 {[
                   { label: '最强维度', value: growthReport.topDimension, sub: `${growthReport.topDimensionScore}分`, color: '#d4a853' },
                   { label: '待改善', value: growthReport.improvementArea, sub: '建议关注', color: '#c4554d' },
-                  { label: '测评完成', value: `${growthReport.totalAssessments} 项`, sub: '累计', color: '#5a7d9a' },
-                  { label: '连续打卡', value: `${growthReport.streak} 天`, sub: '继续加油', color: '#3b8b7a' },
+                  { label: '测评完成', value: `${stats.find(s => s.label === '测评完成')?.value ?? 3} 项`, sub: '累计', color: '#5a7d9a' },
+                  { label: '社区发言', value: `${stats.find(s => s.label === '社区发言')?.value ?? 6} 条`, sub: '继续加油', color: '#3b8b7a' },
                 ].map(item => (
                   <div key={item.label} className="p-3 text-center" style={{ background: '#0a0a0c' }}>
                     <div className="text-xs mb-1" style={{ color: '#52525b' }}>{item.label}</div>
@@ -224,8 +221,7 @@ export default function MilestonesPage() {
 
         {/* ── Link back ── */}
         <div className="text-center">
-          <Link href="/profile"
-            className="text-xs transition-colors duration-300"
+          <Link href="/profile" className="text-xs transition-colors duration-300"
             style={{ color: '#52525b', fontFamily: 'Inter, sans-serif' }}>
             ← 返回个人中心
           </Link>

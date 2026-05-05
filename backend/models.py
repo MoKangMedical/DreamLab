@@ -298,3 +298,30 @@ class CommunityComment(Base):
 
     post = relationship("CommunityPost", back_populates="comments")
 
+
+# ===== 模块6: 白龙成长 =====
+class Achievement(Base):
+    """成就定义"""
+    __tablename__ = "achievements"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    key = Column(String(50), nullable=False, unique=True, index=True)  # first_assessment, dream_keeper...
+    name = Column(String(100), nullable=False)
+    desc = Column(Text, default="")
+    icon = Column(String(10), default="🏆")
+    condition = Column(String(200), default="")  # 解锁条件描述
+    sort_order = Column(Integer, default=0)
+
+
+class UserAchievement(Base):
+    """用户已解锁的成就"""
+    __tablename__ = "user_achievements"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    achievement_id = Column(Integer, ForeignKey("achievements.id", ondelete="CASCADE"), nullable=False)
+    progress = Column(Integer, default=0)  # 0-100
+    unlocked = Column(Boolean, default=False)
+    unlocked_at = Column(DateTime, nullable=True)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+
