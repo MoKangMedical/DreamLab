@@ -2,13 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { getCommunityPosts, createCommunityPost, likeCommunityPost, addCommunityComment } from '@/lib/api';
 
 interface Comment {
-  id: number; author: string; content: string; time: string;
+  id: number; author: string; content: string; created_at?: string;
 }
 interface Post {
   id: number; title: string; content: string; category: string;
-  author: string; time: string; comments: Comment[]; likes: number;
+  author: string; likes: number; comment_count: number; comments: Comment[];
 }
 
 const CATEGORIES = [
@@ -21,36 +22,10 @@ const CATEGORIES = [
 
 const GHIBLI_NAMES = ['千寻', '白龙', '无脸男', '锅炉爷爷', '小玲', '坊宝宝', '钱婆婆'];
 
-const SEED_POSTS: Post[] = [
-  { id: 1, title: '做完SAS测评，发现自己比想象中更焦虑', category: 'mood',
-    content: '一直以为自己只是"想太多"，做完量表才发现标准分到了58。看到"轻度焦虑"的结果反而松了口气——原来这不是我的错。',
-    author: '小玲', time: '2小时前', likes: 12,
-    comments: [
-      { id: 1, author: '锅炉爷爷', content: '焦虑不是缺陷，是身体在提醒你。锅炉房的火大一些没关系。', time: '1小时前' },
-      { id: 2, author: '无脸男', content: '......嗯。（默默递给你一杯热茶）', time: '30分钟前' },
-    ] },
-  { id: 2, title: '连续7天记录梦境，发现了惊人的模式', category: 'dream',
-    content: '反复出现"被追赶"和"找不到路"的主题。弗洛伊德说这些可能和安全感的缺失有关。',
-    author: '千寻', time: '5小时前', likes: 8,
-    comments: [
-      { id: 1, author: '白龙', content: '被追赶的梦往往与现实中逃避的问题有关。转过身，看看追赶你的是什么。', time: '3小时前' },
-    ] },
-  { id: 3, title: '学到荣格"阴影"概念，整个人都不好了——但是好的那种', category: 'growth',
-    content: '之前不能接受自己会嫉妒朋友的成功。荣格说阴影不是敌人，承认之后反而轻松了。',
-    author: '坊宝宝', time: '昨天', likes: 15,
-    comments: [
-      { id: 1, author: '钱婆婆', content: '能承认阴影的人，已经比大多数人勇敢了。', time: '昨天' },
-    ] },
-  { id: 4, title: '失眠三周，4-7-8呼吸法让我昨晚睡了6小时', category: 'help',
-    content: '之前觉得呼吸法太简单不可能有用，但昨晚真的在第三轮就睡着了。',
-    author: '煤煤虫', time: '昨天', likes: 20,
-    comments: [
-      { id: 1, author: '锅炉爷爷', content: '睡前泡个热水澡。最好的安眠药就是热水。', time: '昨天' },
-    ] },
-];
-
 export default function CommunityPage() {
   const [posts, setPosts] = useState<Post[]>([]);
+  const [total, setTotal] = useState(0);
+  const [loading, setLoading] = useState(true);
   const [activeCat, setActiveCat] = useState('all');
   const [showNewPost, setShowNewPost] = useState(false);
   const [newTitle, setNewTitle] = useState('');
@@ -59,57 +34,84 @@ export default function CommunityPage() {
   const [expandedPost, setExpandedPost] = useState<number | null>(null);
   const [commentText, setCommentText] = useState<Record<number, string>>({});
   const [visible, setVisible] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => { setVisible(true); }, []);
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem('dreamlab_community_posts');
-      setPosts(stored ? JSON.parse(stored) : SEED_POSTS);
-    } catch { setPosts(SEED_POSTS); }
-  }, []);
 
-  const savePosts = (newPosts: Post[]) => {
-    setPosts(newPosts);
-    localStorage.setItem('dreamlab_community_posts', JSON.stringify(newPosts));
+  // ── Fetch from API ──
+  const fetchPosts = async (category?: string) => {
+    setLoading(true);
+    try {
+      const data = await getCommunityPosts(category);
+      if (data?.items) {
+        setPosts(data.items);
+        setTotal(data.total || data.items.length);
+      }
+    } catch (e) {
+      console.warn('Community fetch failed, using cached', e);
+    }
+    setLoading(false);
   };
 
-  const filtered = activeCat === 'all' ? posts : posts.filter(p => p.category === activeCat);
+  useEffect(() => { fetchPosts(activeCat === 'all' ? undefined : activeCat); }, [activeCat]);
+
   const randomName = () => GHIBLI_NAMES[Math.floor(Math.random() * GHIBLI_NAMES.length)];
 
-  const handleNewPost = () => {
-    if (!newTitle.trim() || !newContent.trim()) return;
-    const post: Post = {
-      id: Date.now(), title: newTitle.trim(), content: newContent.trim(),
-      category: newCat, author: randomName(), time: '刚刚', likes: 0, comments: [],
-    };
-    savePosts([post, ...posts]);
-    setNewTitle(''); setNewContent(''); setShowNewPost(false);
+  // ── Create post ──
+  const handleNewPost = async () => {
+    if (!newTitle.trim() || !newContent.trim() || submitting) return;
+    setSubmitting(true);
+    const author = randomName();
+    try {
+      const created = await createCommunityPost({
+        author, title: newTitle.trim(), content: newContent.trim(), category: newCat,
+      });
+      if (created?.id) {
+        // Prepend to local list immediately for responsiveness
+        const newPost: Post = {
+          id: created.id, author, title: newTitle.trim(),
+          content: newContent.trim(), category: newCat, likes: 0, comment_count: 0, comments: [],
+        };
+        setPosts(prev => [newPost, ...prev]);
+        setTotal(prev => prev + 1);
+      }
+    } catch (e) { console.warn('Post creation failed', e); }
+    setNewTitle(''); setNewContent(''); setShowNewPost(false); setSubmitting(false);
   };
 
-  const handleComment = (postId: number) => {
+  // ── Like ──
+  const handleLike = async (postId: number) => {
+    // Optimistic update
+    setPosts(prev => prev.map(p => p.id === postId ? { ...p, likes: p.likes + 1 } : p));
+    try { await likeCommunityPost(postId); } catch { /* ignore */ }
+  };
+
+  // ── Comment ──
+  const handleComment = async (postId: number) => {
     const text = commentText[postId]?.trim();
     if (!text) return;
-    const updated = posts.map(p => p.id !== postId ? p : {
-      ...p, comments: [...p.comments, { id: Date.now(), author: randomName(), content: text, time: '刚刚' }],
-    });
-    savePosts(updated);
-    setCommentText({ ...commentText, [postId]: '' });
-  };
-
-  const handleLike = (postId: number) => {
-    savePosts(posts.map(p => p.id === postId ? { ...p, likes: p.likes + 1 } : p));
+    const author = randomName();
+    const optimisticId = Date.now();
+    // Optimistic
+    setPosts(prev => prev.map(p => p.id !== postId ? p : {
+      ...p,
+      comment_count: p.comment_count + 1,
+      comments: [...p.comments, { id: optimisticId, author, content: text }],
+    }));
+    setCommentText(prev => ({ ...prev, [postId]: '' }));
+    try { await addCommunityComment(postId, { author, content: text }); } catch { /* ignore */ }
   };
 
   return (
     <div style={{ background: '#0a0a0c' }}>
-      <section className={`m-section animate-fade-in`} style={{ paddingTop: 8 }}>
+      <section className="m-section animate-fade-in" style={{ paddingTop: 8 }}>
         {/* Header */}
         <div className="m-page-header">
           <div>
             <h1 className="m-title" style={{ fontSize: 24, display: 'flex', alignItems: 'center', gap: 8 }}>
               <span>🏮</span>油屋互助社区
             </h1>
-            <p className="m-caption mt-1" style={{ fontSize: 12 }}>匿名分享，安全表达</p>
+            <p className="m-caption mt-1" style={{ fontSize: 12 }}>匿名分享，安全表达 · {total} 篇帖子</p>
           </div>
           <button onClick={() => setShowNewPost(!showNewPost)}
             className="m-btn m-btn-primary m-btn-sm">
@@ -155,10 +157,10 @@ export default function CommunityPage() {
                 ))}
               </div>
               <button onClick={handleNewPost}
-                disabled={!newTitle.trim() || !newContent.trim()}
+                disabled={!newTitle.trim() || !newContent.trim() || submitting}
                 className="m-btn m-btn-primary m-btn-sm"
                 style={{ opacity: (!newTitle.trim() || !newContent.trim()) ? 0.3 : 1 }}>
-                发布
+                {submitting ? '发布中...' : '发布'}
               </button>
             </div>
           </div>
@@ -166,13 +168,18 @@ export default function CommunityPage() {
 
         {/* Post List */}
         <div className="space-y-2.5">
-          {filtered.length === 0 && (
+          {loading && (
+            <div className="text-center py-16 m-card">
+              <p className="m-body" style={{ color: 'var(--text-muted)', fontSize: 14 }}>加载中...</p>
+            </div>
+          )}
+          {!loading && posts.length === 0 && (
             <div className="text-center py-16 m-card">
               <p style={{ fontSize: 32, marginBottom: 12 }}>🏮</p>
               <p className="m-body" style={{ color: 'var(--text-muted)', fontSize: 14 }}>还没有帖子，来做第一个分享的人吧</p>
             </div>
           )}
-          {filtered.map(post => {
+          {posts.map(post => {
             const cat = CATEGORIES.find(c => c.key === post.category);
             const isExpanded = expandedPost === post.id;
             return (
@@ -184,7 +191,7 @@ export default function CommunityPage() {
                 <div className="flex items-center gap-2 mb-2">
                   {cat && <span style={{ fontSize: 14 }}>{cat.icon}</span>}
                   <span className="m-caption" style={{ fontSize: 11, color: 'var(--text-muted)' }}>
-                    {post.author} · {post.time}
+                    {post.author}
                   </span>
                 </div>
                 {/* Title & Preview */}
@@ -198,7 +205,7 @@ export default function CommunityPage() {
                     style={{ background: 'none', border: 'none', padding: 0, fontSize: 12, color: '#71717a', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4 }}>
                     💛 {post.likes}
                   </button>
-                  <span style={{ fontSize: 12, color: '#52525b' }}>💬 {post.comments.length}</span>
+                  <span style={{ fontSize: 12, color: '#52525b' }}>💬 {post.comment_count ?? post.comments.length}</span>
                 </div>
                 {/* Comments */}
                 {isExpanded && (
@@ -206,7 +213,7 @@ export default function CommunityPage() {
                     {post.comments.map(c => (
                       <div key={c.id} className="mb-2 pl-3" style={{ borderLeft: '1px solid rgba(212,168,83,0.1)' }}>
                         <span className="m-caption" style={{ color: '#d4a853', fontSize: 11, fontWeight: 600 }}>{c.author}</span>
-                        <span className="m-caption" style={{ color: 'var(--text-deep)', fontSize: 10, marginLeft: 8 }}>{c.time}</span>
+                        {c.created_at && <span className="m-caption" style={{ color: 'var(--text-deep)', fontSize: 10, marginLeft: 8 }}>{c.created_at}</span>}
                         <p className="m-caption" style={{ fontSize: 12, marginTop: 2 }}>{c.content}</p>
                       </div>
                     ))}

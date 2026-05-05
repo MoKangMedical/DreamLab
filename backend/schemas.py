@@ -25,6 +25,7 @@ class ChapterSchema(BaseModel):
     title: str
     body: str = ""
     order: int = 0
+    audio_intro: str = ""
 
 
 class CourseCreate(BaseModel):
@@ -198,3 +199,42 @@ class ErrorResponse(BaseModel):
 class StatusResponse(BaseModel):
     status: str
     message: str
+
+
+# ─── Module 5: Community ──────────────────────────────────
+
+class CommunityPostCreate(BaseModel):
+    author: str = Field(..., min_length=1, max_length=50)
+    title: str = Field(..., min_length=1, max_length=300)
+    content: str = Field(..., min_length=1, max_length=5000)
+    category: str = Field(..., pattern="^(mood|dream|growth|help)$")
+
+
+class CommunityCommentCreate(BaseModel):
+    author: str = Field(..., min_length=1, max_length=50)
+    content: str = Field(..., min_length=1, max_length=2000)
+
+
+class CommunityCommentResponse(BaseModel):
+    id: int
+    author: str
+    content: str
+    created_at: str
+
+    model_config = {"from_attributes": True}
+
+
+class CommunityPostResponse(BaseModel):
+    id: int
+    author: str
+    title: str
+    content: str
+    category: str
+    likes: int
+    is_pinned: bool
+    created_at: str
+    comment_count: int = 0
+    comments: List[CommunityCommentResponse] = []
+
+    model_config = {"from_attributes": True}
+

@@ -267,3 +267,34 @@ class QuizAttempt(Base):
     answers = Column(JSON, default=list)  # [{question_index, selected, correct}]
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
+
+# ===== 模块5: 互助社区 =====
+class CommunityPost(Base):
+    """社区帖子"""
+    __tablename__ = "community_posts"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="SET NULL"), nullable=True, index=True)
+    author = Column(String(50), nullable=False)  # 匿名昵称
+    title = Column(String(300), nullable=False)
+    content = Column(Text, nullable=False)
+    category = Column(String(20), nullable=False, index=True)  # mood/dream/growth/help
+    likes = Column(Integer, default=0)
+    is_pinned = Column(Boolean, default=False)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+    comments = relationship("CommunityComment", back_populates="post", cascade="all, delete-orphan")
+
+
+class CommunityComment(Base):
+    """帖子评论"""
+    __tablename__ = "community_comments"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    post_id = Column(Integer, ForeignKey("community_posts.id", ondelete="CASCADE"), nullable=False, index=True)
+    author = Column(String(50), nullable=False)  # 匿名昵称
+    content = Column(Text, nullable=False)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+    post = relationship("CommunityPost", back_populates="comments")
+
