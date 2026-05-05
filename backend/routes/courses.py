@@ -49,7 +49,7 @@ async def create_course(course_data: CourseCreate, db: AsyncSession = Depends(ge
 
 @router.get("/", response_model=list[CourseListItem])
 async def list_courses(
-    category: Optional[str] = Query(None, pattern="^(freud|jung|modern|eastern)?$"),
+    category: Optional[str] = Query(None, pattern="^(freud|jung|modern|eastern|economics|positive|mindfulness|cbt|attachment|personality)?$"),
     db: AsyncSession = Depends(get_db),
 ):
     """List all courses, optionally filtered by category."""

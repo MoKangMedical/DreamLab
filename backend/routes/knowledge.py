@@ -11,6 +11,7 @@ Routes:
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, func
+from sqlalchemy.orm import selectinload
 from ..database import get_db
 from ..models import KnowledgeArticle, KnowledgeCategory, QuizAttempt
 
@@ -46,7 +47,7 @@ async def list_articles(
     offset: int = Query(0, ge=0),
     db: AsyncSession = Depends(get_db),
 ):
-    q = select(KnowledgeArticle)
+    q = select(KnowledgeArticle).options(selectinload(KnowledgeArticle.category_rel))
     if category:
         q = q.join(KnowledgeCategory).where(KnowledgeCategory.slug == category)
     if search:
@@ -99,6 +100,7 @@ async def list_articles(
 async def list_featured(db: AsyncSession = Depends(get_db)):
     result = await db.execute(
         select(KnowledgeArticle)
+        .options(selectinload(KnowledgeArticle.category_rel))
         .where(KnowledgeArticle.is_featured == True)
         .order_by(KnowledgeArticle.created_at.desc())
         .limit(6)
@@ -131,7 +133,9 @@ async def list_featured(db: AsyncSession = Depends(get_db)):
 @router.get("/{slug}")
 async def get_article(slug: str, db: AsyncSession = Depends(get_db)):
     result = await db.execute(
-        select(KnowledgeArticle).where(KnowledgeArticle.slug == slug)
+        select(KnowledgeArticle)
+        .options(selectinload(KnowledgeArticle.category_rel))
+        .where(KnowledgeArticle.slug == slug)
     )
     article = result.scalar_one_or_none()
     if not article:

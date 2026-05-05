@@ -6,7 +6,7 @@ from ..config import SYNC_DATABASE_URL
 from ..models import Base, SpiritedProgress, SpiritedDialogue
 
 engine = create_engine(SYNC_DATABASE_URL, echo=False)
-router = APIRouter(prefix="/spirited", tags=["spirited"])
+router = APIRouter(prefix="/api/spirited", tags=["spirited"])
 
 # 确保表存在
 Base.metadata.create_all(bind=engine)

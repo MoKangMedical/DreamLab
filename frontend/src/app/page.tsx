@@ -6,68 +6,68 @@ import { useState, useEffect } from 'react';
 const FEATURES = [
   {
     href: '/assessments',
-    title: 'Psychological Assessments',
-    desc: '6 standardized clinical scales with AI-powered interpretation.',
+    title: '专业心理测评',
+    desc: '6 套标准化临床量表，AI 智能解读，看见真实的自己。',
     accent: '#c4554d',
     metric: '6',
-    metricLabel: 'Scales',
+    metricLabel: '专业量表',
   },
   {
     href: '/companion',
-    title: 'AI Companion',
-    desc: 'CBT-informed empathetic dialogue. Talk without judgment.',
+    title: 'AI 心灵陪伴',
+    desc: '基于 CBT 框架的共情对话，无需担心被评判。',
     accent: '#6b5b8a',
     metric: '24/7',
-    metricLabel: 'Available',
+    metricLabel: '随时陪伴',
   },
   {
     href: '/dream',
-    title: 'Dream Analysis',
-    desc: 'Four theoretical perspectives to decode your subconscious.',
+    title: '梦境解析',
+    desc: '弗洛伊德、荣格、现代科学、东方智慧——四重视角解码潜意识。',
     accent: '#d4a853',
     metric: '4',
-    metricLabel: 'Lenses',
+    metricLabel: '解读维度',
   },
   {
     href: '/knowledge',
-    title: 'Knowledge Base',
-    desc: 'Peer-reviewed psychology articles with interactive quizzes.',
+    title: '证据级知识库',
+    desc: '同行评审心理学文献 + 交互测验，科学不枯燥。',
     accent: '#3b8b7a',
     metric: '12',
-    metricLabel: 'Articles',
+    metricLabel: '精选文章',
   },
   {
     href: '/wellness',
-    title: 'Wellness Toolkit',
-    desc: 'Guided meditation, breathing exercises, gratitude journaling.',
+    title: '心智健康工坊',
+    desc: '引导冥想、呼吸练习、感恩日记——给心灵一个温柔的港湾。',
     accent: '#5a7d9a',
     metric: '5',
-    metricLabel: 'Tools',
+    metricLabel: '实用工具',
   },
   {
     href: '/community',
-    title: 'Community',
-    desc: 'Anonymous sharing in a warm, supportive space.',
+    title: '互助社区',
+    desc: '匿名分享，温暖陪伴。你从不孤单。',
     accent: '#c4554d',
     metric: '100+',
-    metricLabel: 'Members',
+    metricLabel: '社区成员',
   },
 ];
 
 const VALUE_PROPS = [
   {
-    title: 'Science-Backed',
-    desc: 'Every scale is a validated clinical instrument with decades of peer-reviewed research behind it. No pseudoscience, no horoscopes — just rigorous psychometrics.',
+    title: '科学循证',
+    desc: '每一个量表都是经过数十年同行评审验证的临床工具。没有伪科学，没有星座运势——只有严谨的心理测量学。',
     accent: '#d4a853',
   },
   {
-    title: 'AI-Powered Insight',
-    desc: 'DeepSeek provides personalized interpretations that go beyond raw scores. We help you understand not just what the numbers say, but what they mean for you.',
+    title: 'AI 深度洞察',
+    desc: 'DeepSeek 提供超越分数的个性化解读。我们帮你理解的不仅是数字，更是数字背后关于你的故事。',
     accent: '#3b8b7a',
   },
   {
-    title: 'Designed for Humans',
-    desc: 'Psychology doesn\'t have to feel clinical. We\'ve wrapped evidence-based tools in the warmth of Spirited Away\'s bathhouse — because healing should feel like coming home.',
+    title: '为人而设计',
+    desc: '心理学不必冷冰冰。我们把循证工具包裹在千与千寻油屋的温暖里——因为疗愈，应该像回家一样。',
     accent: '#6b5b8a',
   },
 ];
@@ -98,7 +98,7 @@ export default function HomePage() {
           <p
             className="mb-4"
             style={{
-              fontFamily: 'Inter, sans-serif',
+              fontFamily: "'Noto Sans SC', sans-serif",
               fontSize: 11,
               fontWeight: 500,
               letterSpacing: '0.12em',
@@ -106,7 +106,7 @@ export default function HomePage() {
               color: 'rgba(212,168,83,0.5)',
             }}
           >
-            Evidence-Based · AI-Powered · Clinically Informed
+            循证心理 · AI 驱动 · 临床级量表
           </p>
 
           {/* Headline */}
@@ -121,32 +121,32 @@ export default function HomePage() {
               color: '#f4f4f6',
             }}
           >
-            Understand Your
+            读懂你的
             <br />
-            <span style={{ color: '#d4a853' }}>Inner World</span>
+            <span style={{ color: '#d4a853' }}>内心世界</span>
           </h1>
 
           {/* Subtitle */}
           <p
             className="mb-10 max-w-md mx-auto"
             style={{
-              fontFamily: 'Inter, sans-serif',
+              fontFamily: "'Noto Sans SC', sans-serif",
               fontSize: 16,
               lineHeight: 1.7,
               color: '#a1a1aa',
             }}
           >
-            A psychology platform built on standardized assessments,
-            AI-powered interpretation, and evidence-based knowledge.
+            基于标准化心理测评、AI 深度解读与循证知识库
+            构建的心理学综合平台
           </p>
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-16">
             <Link href="/assessments" className="btn btn-primary" style={{ padding: '16px 36px', fontSize: 16 }}>
-              Start Assessment →
+              开始测评 →
             </Link>
             <Link href="/bathhouse" className="btn btn-ghost">
-              Explore Bathhouse
+              探索油屋
             </Link>
           </div>
 
@@ -160,15 +160,15 @@ export default function HomePage() {
             }}
           >
             {[
-              { value: '6', label: 'Clinical Scales' },
-              { value: '12', label: 'Articles' },
-              { value: '4', label: 'Theoretical Lenses' },
+              { value: '6', label: '临床量表' },
+              { value: '12', label: '精选文章' },
+              { value: '4', label: '解读维度' },
             ].map((s) => (
               <div key={s.label} className="text-center">
                 <div style={{ fontFamily: "'Noto Serif SC', serif", fontSize: 28, fontWeight: 700, color: '#d4a853' }}>
                   {s.value}
                 </div>
-                <div style={{ fontFamily: 'Inter, sans-serif', fontSize: 10, fontWeight: 500, color: '#71717a', letterSpacing: '0.03em', textTransform: 'uppercase' }}>
+                <div style={{ fontFamily: "'Noto Sans SC', sans-serif", fontSize: 10, fontWeight: 500, color: '#71717a', letterSpacing: '0.03em', textTransform: 'uppercase' }}>
                   {s.label}
                 </div>
               </div>
@@ -183,7 +183,7 @@ export default function HomePage() {
           {/* Section label */}
           <div className="flex items-center gap-3 mb-10">
             <div style={{ width: 24, height: 1, background: 'rgba(212,168,83,0.15)' }} />
-            <span className="t-label">Platform Features</span>
+            <span className="t-label">平台功能</span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -247,11 +247,11 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex items-center gap-3 mb-4">
             <div style={{ width: 24, height: 1, background: 'rgba(212,168,83,0.15)' }} />
-            <span className="t-label">Why DreamLab</span>
+            <span className="t-label">为什么选择 DreamLab</span>
           </div>
-          <h2 className="t-display mb-3">Science meets warmth</h2>
+          <h2 className="t-display mb-3">科学 × 温度</h2>
           <p className="t-body mb-10 max-w-lg">
-            We don&apos;t just give you scores — we help you understand what they mean for your life.
+            我们不只给你一个分数——我们帮你理解，这些数字对你的生活意味着什么。
           </p>
 
           <div className="space-y-3">
@@ -291,14 +291,14 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex items-center gap-3 mb-6">
             <div style={{ width: 24, height: 1, background: 'rgba(212,168,83,0.15)' }} />
-            <span className="t-label">Continue Exploring</span>
+            <span className="t-label">继续探索</span>
           </div>
           <div className="grid grid-cols-2 gap-2">
             {[
-              { href: '/bathhouse', label: 'Bathhouse', desc: 'Spirited Away', accent: '#c4554d' },
-              { href: '/spirited', label: 'Spirited Journey', desc: '5-floor adventure', accent: '#d4a853' },
-              { href: '/courses', label: 'Courses', desc: 'Freud · Jung · Science', accent: '#6b5b8a' },
-              { href: '/profile/milestones', label: 'Growth', desc: 'Track your progress', accent: '#3b8b7a' },
+              { href: '/bathhouse', label: '油屋广场', desc: '千与千寻世界', accent: '#c4554d' },
+              { href: '/spirited', label: '千寻之旅', desc: '五层梦境冒险', accent: '#d4a853' },
+              { href: '/courses', label: '系统课程', desc: '弗洛伊德 · 荣格 · 现代科学', accent: '#6b5b8a' },
+              { href: '/profile/milestones', label: '成长轨迹', desc: '记录你的心理成长', accent: '#3b8b7a' },
             ].map((item, i) => (
               <Link
                 key={item.href}

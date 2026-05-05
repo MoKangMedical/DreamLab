@@ -30,7 +30,7 @@ class ChapterSchema(BaseModel):
 class CourseCreate(BaseModel):
     title: str = Field(..., min_length=1, max_length=200)
     description: str
-    category: str = Field(..., pattern="^(freud|jung|modern|eastern)$")
+    category: str = Field(..., pattern="^(freud|jung|modern|eastern|economics|positive|mindfulness|cbt|attachment|personality)$")
     difficulty: str = "beginner"
     image_url: str = ""
     content: List[ChapterSchema] = []
@@ -39,7 +39,7 @@ class CourseCreate(BaseModel):
 class CourseUpdate(BaseModel):
     title: Optional[str] = Field(None, max_length=200)
     description: Optional[str] = None
-    category: Optional[str] = Field(None, pattern="^(freud|jung|modern|eastern)?$")
+    category: Optional[str] = Field(None, pattern="^(freud|jung|modern|eastern|economics|positive|mindfulness|cbt|attachment|personality)?$")
     difficulty: Optional[str] = None
     image_url: Optional[str] = None
     content: Optional[List[ChapterSchema]] = None
