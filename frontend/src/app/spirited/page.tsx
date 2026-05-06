@@ -130,11 +130,11 @@ export default function SpiritedPage() {
 
             {showLore && (
               <div className="mt-4 space-y-4">
-                <p className="text-sm leading-relaxed" style={{ color: '#a1a1aa', lineHeight: 1.8 }}>
+                <p className="text-sm leading-relaxed" style={{ color: '#a1a1aa', lineHeight: 2.0 }}>
                   {LORE.intro}
                 </p>
                 <blockquote className="border-l-2 pl-4 py-2 text-sm italic leading-relaxed"
-                  style={{ borderColor: '#d4a85330', color: '#71717a', lineHeight: 1.8 }}>
+                  style={{ borderColor: '#d4a85330', color: '#71717a', lineHeight: 2.0 }}>
                   {LORE.inspiration}
                 </blockquote>
                 <div className="text-xs" style={{ color: '#52525b' }}>
@@ -200,7 +200,7 @@ export default function SpiritedPage() {
                   {/* 叙事层 */}
                   <div className="p-4" style={{ background: '#0a0a0c', borderRadius: 2 }}>
                     <div className="text-xs mb-2 font-bold" style={{ color: floor.color }}>🎬 电影叙事</div>
-                    <p className="text-sm leading-relaxed mb-2" style={{ color: '#a1a1aa', lineHeight: 1.7 }}>
+                    <p className="text-sm leading-relaxed mb-2" style={{ color: '#a1a1aa', lineHeight: 1.9 }}>
                       {floor.symbolism}
                     </p>
                     <div className="flex items-center gap-2">
@@ -213,7 +213,7 @@ export default function SpiritedPage() {
                   {/* 心理学层 */}
                   <div className="p-4" style={{ background: '#0a0a0c', borderRadius: 2 }}>
                     <div className="text-xs mb-2 font-bold" style={{ color: '#d4a853' }}>🧠 心理学对应</div>
-                    <p className="text-sm leading-relaxed" style={{ color: '#71717a', lineHeight: 1.7 }}>
+                    <p className="text-sm leading-relaxed" style={{ color: '#71717a', lineHeight: 1.9 }}>
                       {floor.parallel}
                     </p>
                   </div>

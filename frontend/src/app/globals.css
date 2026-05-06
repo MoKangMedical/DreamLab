@@ -269,6 +269,38 @@ body::before {
 .section-sm { padding: 32px 0; }
 .section-lg { padding: 64px 0; }
 
+/* ════════════════ Content Centering ════════════════ */
+/* Standard centered page container — use inside content-col */
+.content-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+@media (max-width: 768px) {
+  .content-page {
+    max-width: 480px;
+    padding: 0 20px;
+  }
+}
+
+/* ════════════════ Text Spacing ════════════════ */
+/* Comfortable reading rhythm — generous gaps between elements */
+.text-spaced { line-height: 1.85; letter-spacing: 0.01em; }
+.text-spaced p { margin-bottom: 1.25em; }
+.text-spaced h1 { margin-bottom: 0.6em; }
+.text-spaced h2 { margin-bottom: 0.5em; }
+.text-spaced h3 { margin-bottom: 0.45em; }
+.text-spaced h4 { margin-bottom: 0.4em; }
+.text-spaced li { margin-bottom: 0.4em; }
+.text-spaced .card { margin-bottom: 12px; }
+
+/* Breathing room between sections */
+.section-gap { margin-bottom: 64px; }
+@media (max-width: 768px) { .section-gap { margin-bottom: 48px; } }
+
+/* Paragraph rhythm — use on content-rich pages */
+.p-spaced { line-height: 1.8; margin-bottom: 1em; }
+
 /* ════════════════ Glass Navigation (Desktop) ════════════════ */
 .glass-nav {
   position: fixed;

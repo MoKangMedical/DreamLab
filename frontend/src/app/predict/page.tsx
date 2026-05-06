@@ -61,7 +61,7 @@ export default function PredictPage() {
               AI 心理预测
             </h1>
           </div>
-          <p style={{ color: '#71717a', fontSize: 15, lineHeight: 1.7 }}>
+          <p style={{ color: '#71717a', fontSize: 15, lineHeight: 1.9 }}>
             基于你的测评数据、梦境记录和健康日志，AI 为你生成个性化的心理预测。
             像钱婆婆的占卜一样——不是命运，而是提醒。
           </p>

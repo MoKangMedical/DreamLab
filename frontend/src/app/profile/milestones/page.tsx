@@ -102,7 +102,7 @@ export default function MilestonesPage() {
               白龙的成长
             </h1>
           </div>
-          <p style={{ color: '#71717a', fontSize: 15, lineHeight: 1.7 }}>
+          <p style={{ color: '#71717a', fontSize: 15, lineHeight: 1.9 }}>
             像白龙找回自己的名字一样，每一次探索都是拼回完整自我的一块碎片。
           </p>
         </div>
@@ -173,7 +173,7 @@ export default function MilestonesPage() {
                   </div>
                   {a.unlocked && <span className="ml-auto text-xs" style={{ color: '#d4a853' }}>✓</span>}
                 </div>
-                <p className="text-xs" style={{ color: '#71717a', lineHeight: 1.6 }}>{a.desc}</p>
+                <p className="text-xs" style={{ color: '#71717a', lineHeight: 1.85 }}>{a.desc}</p>
                 {!a.unlocked && (
                   <div className="mt-2 h-1" style={{ background: 'rgba(255,255,255,0.04)', borderRadius: 1 }}>
                     <div className="h-full transition-all" style={{ width: `${a.progress}%`, background: 'rgba(212,168,83,0.3)', borderRadius: 1 }} />
@@ -199,7 +199,7 @@ export default function MilestonesPage() {
           {showReport && (
             <div className="px-6 pb-6 pt-0">
               <div className="mb-4 p-4" style={{ background: '#0a0a0c', border: '1px solid rgba(255,255,255,0.04)' }}>
-                <p className="text-sm leading-relaxed" style={{ color: '#a1a1aa', lineHeight: 1.8 }}>{growthReport.summary}</p>
+                <p className="text-sm leading-relaxed" style={{ color: '#a1a1aa', lineHeight: 2.0 }}>{growthReport.summary}</p>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 {[

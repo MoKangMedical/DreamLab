@@ -1,0 +1,102 @@
+.dream-header {
+  padding: 32px 24px 20px;
+}
+
+.dream-tag {
+  display: block;
+  font-size: 11px;
+  color: rgba(212, 168, 83, 0.5);
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+
+.dream-title {
+  display: block;
+  font-size: 24px;
+  font-weight: 700;
+  color: #f4f4f6;
+  margin-bottom: 8px;
+}
+
+.dream-desc {
+  display: block;
+  font-size: 13px;
+  color: #71717a;
+  line-height: 1.6;
+}
+
+.dream-input-area {
+  margin: 0 16px;
+  background: rgba(24, 24, 27, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.dream-textarea {
+  width: 100%;
+  min-height: 160px;
+  background: transparent;
+  color: #f4f4f6;
+  font-size: 15px;
+  line-height: 1.8;
+  border: none;
+  outline: none;
+}
+
+.dream-actions {
+  padding: 20px 24px;
+  text-align: center;
+}
+
+.btn-disabled {
+  opacity: 0.5;
+}
+
+.dream-perspectives {
+  padding: 24px 16px;
+}
+
+.perspectives-title {
+  display: block;
+  font-size: 13px;
+  color: #71717a;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+  padding-left: 8px;
+}
+
+.perspective-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.perspective-card {
+  width: calc(50% - 5px);
+  background: rgba(24, 24, 27, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+}
+
+.perspective-icon {
+  display: block;
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.perspective-name {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #d4a853;
+  margin-bottom: 4px;
+}
+
+.perspective-desc {
+  display: block;
+  font-size: 11px;
+  color: #52525b;
+}

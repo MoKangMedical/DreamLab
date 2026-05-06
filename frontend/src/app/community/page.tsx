@@ -104,7 +104,7 @@ export default function CommunityPage() {
 
   return (
     <div style={{ background: '#0a0a0c' }}>
-      <section className="m-section animate-fade-in" style={{ paddingTop: 8 }}>
+      <section className="m-section animate-fade-in max-w-lg mx-auto" style={{ paddingTop: 8 }}>
         {/* Header */}
         <div className="m-page-header">
           <div>
@@ -143,7 +143,7 @@ export default function CommunityPage() {
             <textarea value={newContent} onChange={e => setNewContent(e.target.value)}
               placeholder="安全地分享你的想法..."
               rows={3} className="input-field mb-3 resize-none"
-              style={{ borderRadius: 10, fontSize: 14, lineHeight: 1.7 }} />
+              style={{ borderRadius: 10, fontSize: 14, lineHeight: 1.9 }} />
             <div className="flex items-center justify-between">
               <div className="flex gap-1">
                 {CATEGORIES.filter(c => c.key !== 'all').map(cat => (
@@ -196,7 +196,7 @@ export default function CommunityPage() {
                 </div>
                 {/* Title & Preview */}
                 <h3 className="m-subtitle mb-1.5" style={{ fontSize: 15 }}>{post.title}</h3>
-                <p className="m-caption" style={{ fontSize: 13, lineHeight: 1.7 }}>
+                <p className="m-caption" style={{ fontSize: 13, lineHeight: 1.9 }}>
                   {isExpanded ? post.content : post.content.slice(0, 100) + (post.content.length > 100 ? '...' : '')}
                 </p>
                 {/* Actions */}

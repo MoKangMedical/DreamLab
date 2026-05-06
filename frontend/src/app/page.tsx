@@ -140,7 +140,7 @@ export default function HomePage() {
             style={{
               fontFamily: "'Noto Sans SC', sans-serif",
               fontSize: 16,
-              lineHeight: 1.7,
+              lineHeight: 1.9,
               color: '#a1a1aa',
             }}
           >
@@ -286,7 +286,7 @@ export default function HomePage() {
                 />
                 <div>
                   <h3 className="t-subtitle mb-1">{vp.title}</h3>
-                  <p className="t-caption" style={{ lineHeight: 1.7 }}>{vp.desc}</p>
+                  <p className="t-caption" style={{ lineHeight: 1.9 }}>{vp.desc}</p>
                 </div>
               </div>
             ))}

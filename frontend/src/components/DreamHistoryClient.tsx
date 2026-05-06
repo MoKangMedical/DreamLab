@@ -172,7 +172,7 @@ export default function DreamHistoryClient() {
                       {new Date(d.created_at || d.dream_date).toLocaleDateString('zh-CN')}
                     </span>
                   </div>
-                  <p className="text-sm leading-relaxed mb-3 line-clamp-2" style={{ color: '#a1a1aa', lineHeight: 1.7 }}>
+                  <p className="text-sm leading-relaxed mb-3 line-clamp-2" style={{ color: '#a1a1aa', lineHeight: 1.9 }}>
                     {d.content}
                   </p>
                   {d.emotions?.length > 0 && (

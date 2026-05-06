@@ -1,28 +1,111 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 /**
- * 宫崎骏音乐播放器
- * 使用 YouTube 播放 Joe Hisaishi 经典曲目
+ * 久石让音乐播放器 — 分页感知
+ * 每个页面自动匹配最合适的久石譲钢琴曲
  * 右下角浮动按钮 → 点击展开精简播放器
  */
+
+// 每个页面对应的 Joe Hisaishi YouTube 曲目
+const PAGE_MUSIC: Record<string, { videoId: string; title: string; subtitle: string }> = {
+  '/': {
+    videoId: 'f7SS57LFPco',
+    title: '人生のメリーゴーランド',
+    subtitle: 'ハウルの動く城',
+  },
+  '/assessments': {
+    videoId: 'z9TGgQY1noE',
+    title: 'あの夏へ',
+    subtitle: '千と千尋の神隠し',
+  },
+  '/companion': {
+    videoId: 'QAoQK4CKlPY',
+    title: '6番目の駅',
+    subtitle: '千と千尋の神隠し',
+  },
+  '/dream': {
+    videoId: '7LEmer7wwVI',
+    title: '海の見える街',
+    subtitle: '魔女の宅急便',
+  },
+  '/knowledge': {
+    videoId: 'f7SS57LFPco',
+    title: '人生のメリーゴーランド',
+    subtitle: 'ハウルの動く城',
+  },
+  '/wellness': {
+    videoId: 'X6R7fT_V0gA',
+    title: '風のとおり道',
+    subtitle: 'となりのトトロ',
+  },
+  '/community': {
+    videoId: 'V3V72pNQgc0',
+    title: 'ふたたび',
+    subtitle: '千と千尋の神隠し',
+  },
+  '/courses': {
+    videoId: 'DpN3O-sDTec',
+    title: 'いつも何度でも',
+    subtitle: '千と千尋の神隠し',
+  },
+  '/predict': {
+    videoId: 'HQKBwYPR4y8',
+    title: 'アシタカとサン',
+    subtitle: 'もののけ姫',
+  },
+  '/bathhouse': {
+    videoId: 'z9TGgQY1noE',
+    title: 'あの夏へ',
+    subtitle: '千と千尋の神隠し',
+  },
+  '/profile': {
+    videoId: 'X6R7fT_V0gA',
+    title: '風のとおり道',
+    subtitle: 'となりのトトロ',
+  },
+  '/spirited': {
+    videoId: 'DpN3O-sDTec',
+    title: 'いつも何度でも',
+    subtitle: '千と千尋の神隠し',
+  },
+  '/reflect': {
+    videoId: 'V3V72pNQgc0',
+    title: 'ふたたび',
+    subtitle: '千と千尋の神隠し',
+  },
+};
+
 export default function GhibliMusic() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [volume, setVolume] = useState(30);
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
-  // Joe Hisaishi Piano Collection — YouTube playlist
-  const playlistId = 'PL2C9DA302B3C8E2C6';
-  const videoId = 'DpN3O-sDTec'; // 千与千寻 主题曲钢琴版
+  // 匹配当前路径（处理 /assessments/1 这类子路由）
+  const matchedKey = Object.keys(PAGE_MUSIC).find((key) => {
+    if (key === '/') return pathname === '/';
+    return pathname === key || pathname.startsWith(key + '/');
+  });
+  const track = PAGE_MUSIC[matchedKey || '/'] || PAGE_MUSIC['/'];
+
+  // 路由切换时自动换曲
+  useEffect(() => {
+    if (playing && iframeRef.current) {
+      const src = `https://www.youtube.com/embed/${track.videoId}?autoplay=1&loop=1&playlist=${track.videoId}&controls=0&disablekb=1&modestbranding=1&rel=0&volume=${volume}`;
+      iframeRef.current.src = src;
+    }
+  }, [pathname]);
 
   const togglePlay = () => {
     if (!open) {
       setOpen(true);
       setTimeout(() => {
         if (iframeRef.current) {
-          const src = `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}&controls=0&disablekb=1&modestbranding=1&rel=0&volume=${volume}`;
+          const src = `https://www.youtube.com/embed/${track.videoId}?autoplay=1&loop=1&playlist=${track.videoId}&controls=0&disablekb=1&modestbranding=1&rel=0&volume=${volume}`;
           iframeRef.current.src = src;
         }
         setPlaying(true);
@@ -71,7 +154,7 @@ export default function GhibliMusic() {
           cursor: 'pointer',
           boxShadow: playing ? '0 0 20px rgba(212,168,83,0.1)' : 'none',
         }}
-        title={playing ? '暂停音乐' : '播放宫崎骏音乐 🎵'}
+        title={playing ? '暂停音乐' : '久石譲 · 背景音乐'}
       >
         {playing ? '🎶' : '🎵'}
       </button>
@@ -96,9 +179,15 @@ export default function GhibliMusic() {
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
               <span style={{ fontSize: 14 }}>{playing ? '🎶' : '🎵'}</span>
-              <span style={{ fontSize: 11, color: '#a1a1aa', fontWeight: 500 }}>
-                いつも何度でも
-              </span>
+              <div>
+                <span style={{ fontSize: 11, color: '#a1a1aa', fontWeight: 500 }}>
+                  {track.title}
+                </span>
+                <br />
+                <span style={{ fontSize: 9, color: '#52525b' }}>
+                  {track.subtitle}
+                </span>
+              </div>
             </div>
             <button
               onClick={close}
@@ -120,7 +209,7 @@ export default function GhibliMusic() {
             ref={iframeRef}
             style={{ display: 'none' }}
             allow="autoplay"
-            title="Ghibli Music"
+            title="Joe Hisaishi BGM"
           />
 
           {/* 控制条 */}
@@ -143,7 +232,7 @@ export default function GhibliMusic() {
             >
               {playing ? '⏸' : '▶'}
             </button>
-            
+
             {/* 音量滑条 */}
             <div className="flex-1 flex items-center gap-2">
               <span style={{ fontSize: 12, color: '#52525b' }}>🔈</span>
@@ -166,7 +255,7 @@ export default function GhibliMusic() {
           </div>
 
           <p style={{ fontSize: 10, color: '#52525b', marginTop: 8, textAlign: 'center' }}>
-            久石譲 · 千と千尋の神隠し
+            久石譲 · スタジオジブリ
           </p>
         </div>
       )}

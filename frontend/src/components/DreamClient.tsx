@@ -142,7 +142,7 @@ export default function DreamClient() {
                   style={{
                     background: '#0a0a0c', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2,
                     padding: '16px', color: '#a1a1aa', fontFamily: 'Inter, sans-serif',
-                    outline: 'none', lineHeight: 1.8,
+                    outline: 'none', lineHeight: 2.0,
                   }}
                 />
               </div>

@@ -212,7 +212,7 @@ export default function ReflectClient() {
                     className="w-full resize-none text-sm leading-relaxed"
                     style={{
                       background: '#0a0a0c', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2,
-                      padding: '16px', color: '#a1a1aa', outline: 'none', lineHeight: 1.8,
+                      padding: '16px', color: '#a1a1aa', outline: 'none', lineHeight: 2.0,
                     }}
                   />
                 </div>
@@ -311,7 +311,7 @@ export default function ReflectClient() {
                     {new Date(r.created_at).toLocaleDateString('zh-CN')}
                   </span>
                 </div>
-                <p className="text-sm leading-relaxed mb-3" style={{ color: '#a1a1aa', lineHeight: 1.8 }}>
+                <p className="text-sm leading-relaxed mb-3" style={{ color: '#a1a1aa', lineHeight: 2.0 }}>
                   {r.content}
                 </p>
                 {r.mood_score && (

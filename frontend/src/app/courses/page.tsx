@@ -147,7 +147,7 @@ export default async function CoursesPage() {
                     <p className="text-xs" style={{ color: '#52525b' }}>{s.year}</p>
                   </div>
                 </div>
-                <p className="text-sm leading-relaxed mb-4" style={{ color: '#a1a1aa', lineHeight: 1.8 }}>{s.theory}</p>
+                <p className="text-sm leading-relaxed mb-4" style={{ color: '#a1a1aa', lineHeight: 2.0 }}>{s.theory}</p>
                 <blockquote className="border-l-2 pl-4 mb-4 text-sm italic" style={{ borderColor: s.color + '40', color: '#71717a' }}>{s.quote}</blockquote>
                 <div className="flex flex-wrap gap-1.5">
                   {s.keyTerms.map(t => <span key={t} className="text-xs px-2.5 py-1" style={{ background: s.color + '10', border: `1px solid ${s.color}20`, color: s.color, borderRadius: 2 }}>{t}</span>)}
@@ -174,7 +174,7 @@ export default async function CoursesPage() {
                     <p className="text-xs" style={{ color: s.color }}>{s.founder}</p>
                   </div>
                 </div>
-                <p className="text-xs leading-relaxed mb-3" style={{ color: '#71717a', lineHeight: 1.7 }}>{s.desc}</p>
+                <p className="text-xs leading-relaxed mb-3" style={{ color: '#71717a', lineHeight: 1.9 }}>{s.desc}</p>
                 <div className="flex flex-wrap gap-1">
                   {s.tags.map(t => <span key={t} className="text-xs px-2 py-0.5" style={{ background: s.color + '08', color: s.color + 'cc', borderRadius: 1 }}>{t}</span>)}
                 </div>
@@ -239,7 +239,7 @@ export default async function CoursesPage() {
                     </div>
                     <span className="text-xs shrink-0" style={{ color: '#52525b' }}>{course.chapter_count}章</span>
                   </div>
-                  <p className="text-xs leading-relaxed" style={{ color: '#71717a', lineHeight: 1.6 }}>{course.description}</p>
+                  <p className="text-xs leading-relaxed" style={{ color: '#71717a', lineHeight: 1.85 }}>{course.description}</p>
                 </Link>
               );
             })}

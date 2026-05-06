@@ -210,7 +210,7 @@ export default function MarginDecor({ side }: { side: 'left' | 'right' }) {
             {whisper.haiku}
           </p>
           <div style={{ width: 24, height: 1, background: 'linear-gradient(90deg, rgba(212,168,83,0.3), transparent)', marginBottom: 8 }} />
-          <p style={{ fontSize: 12, color: '#a1a1aa', lineHeight: 1.7, margin: 0 }}>
+          <p style={{ fontSize: 12, color: '#a1a1aa', lineHeight: 1.9, margin: 0 }}>
             {whisper.message}
           </p>
           <div style={{ marginTop: 10, display: 'flex', alignItems: 'center', gap: 8 }}>

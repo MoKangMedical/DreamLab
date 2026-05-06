@@ -439,7 +439,7 @@ function ArticleCard({ article, onClick }: { article: Article; onClick: () => vo
       <h3 className="font-bold mb-2" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6', fontSize: 16 }}>
         {article.title}
       </h3>
-      <p className="text-sm leading-relaxed mb-3" style={{ color: '#71717a', lineHeight: 1.7 }}>
+      <p className="text-sm leading-relaxed mb-3" style={{ color: '#71717a', lineHeight: 1.9 }}>
         {article.summary}
       </p>
       {article.key_concepts?.length > 0 && (

@@ -107,7 +107,7 @@ function FeatureCard({ feature, index }: { feature: (typeof FEATURES)[0]; index:
           >
             {feature.title}
           </h3>
-          <p className="text-sm leading-relaxed" style={{ color: '#71717a', lineHeight: 1.7 }}>
+          <p className="text-sm leading-relaxed" style={{ color: '#71717a', lineHeight: 1.9 }}>
             {feature.desc}
           </p>
           <div
@@ -236,7 +236,7 @@ export default function BathhousePage() {
 
           <p
             className="max-w-lg mx-auto mb-10 leading-relaxed"
-            style={{ fontSize: 16, color: '#a1a1aa', lineHeight: 1.8 }}
+            style={{ fontSize: 16, color: '#a1a1aa', lineHeight: 2.0 }}
           >
             Through the bathhouse&apos;s misty floors, in the deepest chambers of dreams,
             rediscover the name you once forgot — and the self you truly are.
@@ -277,7 +277,7 @@ export default function BathhousePage() {
               fontFamily: "'Noto Serif SC', serif",
               fontSize: 'clamp(22px, 4vw, 38px)',
               color: '#f4f4f6',
-              lineHeight: 1.6,
+              lineHeight: 1.85,
             }}
           >
             「{q.quote}」
@@ -360,7 +360,7 @@ export default function BathhousePage() {
               >
                 {item.title}
               </h3>
-              <p className="text-sm leading-relaxed" style={{ color: '#71717a', lineHeight: 1.8 }}>
+              <p className="text-sm leading-relaxed" style={{ color: '#71717a', lineHeight: 2.0 }}>
                 {item.desc}
               </p>
             </div>
@@ -386,7 +386,7 @@ export default function BathhousePage() {
           </h2>
           <p
             className="max-w-lg mx-auto mb-10 leading-relaxed"
-            style={{ fontSize: 15, color: '#71717a', lineHeight: 1.8 }}
+            style={{ fontSize: 15, color: '#71717a', lineHeight: 2.0 }}
           >
             Yubaba&apos;s mirror reflects your truth · No-Face quietly listens to unspoken words ·
             The river spirit cleanses a weary soul · Haku guides you to find who you truly are

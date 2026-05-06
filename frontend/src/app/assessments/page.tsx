@@ -112,7 +112,7 @@ function AssessmentCard({ a, index }: { a: typeof ASSESSMENTS[0]; index: number 
         </div>
 
         {/* 量表介绍 */}
-        <p className="text-sm leading-relaxed mb-6" style={{ color: '#a1a1aa', lineHeight: 1.8 }}>
+        <p className="text-sm leading-relaxed mb-6" style={{ color: '#a1a1aa', lineHeight: 2.0 }}>
           {a.intro}
         </p>
 

@@ -34,7 +34,7 @@ export default function ProfilePage() {
   const journeyProgress = (MILESTONES.filter(m => m.done).length / MILESTONES.length) * 100;
 
   return (
-    <div className={`animate-fade-in`} style={{ background: '#0a0a0c' }}>
+    <div className={`animate-fade-in max-w-lg mx-auto`} style={{ background: '#0a0a0c' }}>
       {/* Stats Grid */}
       <div className="grid grid-cols-3 gap-2 mb-6" style={{ paddingTop: 4 }}>
         {STATS.map((s, i) => (

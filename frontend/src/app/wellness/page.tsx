@@ -506,7 +506,7 @@ function GratitudeTab() {
           <span className="text-xl">💝</span>
           <h3 className="font-bold text-sm" style={{ color: '#f4f4f6' }}>感恩的科学</h3>
         </div>
-        <p className="text-xs leading-relaxed" style={{ color: '#71717a', lineHeight: 1.8 }}>
+        <p className="text-xs leading-relaxed" style={{ color: '#71717a', lineHeight: 2.0 }}>
           2003年，Emmons & McCullough 的经典实验发现：连续10周每周写下5件感恩事件的小组，比"写烦恼"和"写日常"的小组表现出+25%的幸福感提升和更少的身体不适。感恩不是否认困难，而是在困难中训练自己看见光亮的能力。
         </p>
       </div>
@@ -521,7 +521,7 @@ function GratitudeTab() {
           className="w-full resize-none text-sm mb-3 p-4"
           style={{
             background: '#0a0a0c', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2,
-            color: '#a1a1aa', outline: 'none', minHeight: '80px', lineHeight: 1.8,
+            color: '#a1a1aa', outline: 'none', minHeight: '80px', lineHeight: 2.0,
           }}
           rows={3}
         />
@@ -664,7 +664,7 @@ function SleepTab() {
           className="w-full resize-none text-xs mb-4 p-3"
           style={{
             background: '#0a0a0c', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2,
-            color: '#a1a1aa', outline: 'none', lineHeight: 1.7,
+            color: '#a1a1aa', outline: 'none', lineHeight: 1.9,
           }}
         />
 
