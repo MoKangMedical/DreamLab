@@ -1,6 +1,7 @@
-// 课程 Mock 数据 — 4门课程，每门4章
+// 课程 Mock 数据 — 30门课程，覆盖全部心理学经典
 
 export const MOCK_COURSES = [
+  // ━━━ 梦学基石 (4门) ━━━
   {
     id: 1, title: '弗洛伊德：梦的解析入门', category: 'freud', difficulty: 'beginner',
     description: '从《梦的解析》出发，系统学习弗洛伊德精神分析解梦方法。理解潜意识、自由联想与梦的工作机制。',
@@ -40,5 +41,144 @@ export const MOCK_COURSES = [
       { title: '第三章：佛教与梦——一切有为法如梦幻泡影', content: '佛教将梦作为"空性"的核心比喻。《金刚经》说"一切有为法，如梦幻泡影"。在佛教视角下，不仅梦是虚幻的，清醒时的经验同样如幻。梦被用作修行的工具——通过观察梦的虚幻本质，修行者领悟一切现象的"无自性"。' },
       { title: '第四章：东西方梦学的对话', content: '西方追问梦的"来源"（过去的记忆和欲望），东方关注梦的"去向"（未来的征兆和启示）。弗洛伊德问"这个梦隐藏了什么"，周公问"这个梦预示了什么"。当代整合视角认为两者并不矛盾：梦既是心理历史的回响，也是未来可能性的探照灯。' },
     ]
-  }
+  },
+  // ━━━ 系统理论 (8门) ━━━
+  {
+    id: 5, title: '康波周期与人类意识演化', category: 'economics', difficulty: 'advanced',
+    description: '50-60年长波周期如何塑造集体意识？从工业革命到AI时代，技术浪潮与人类心理的共振。',
+    chapters: [
+      { title: '第一章：什么是康波周期', content: '康德拉季耶夫长波理论揭示了经济-技术约50-60年的周期性波动。从蒸汽机到AI，每一次技术浪潮不仅重塑了生产方式，也深刻改变了人类的集体心理结构和意识状态。' },
+      { title: '第二章：集体意识的浪潮', content: '在康波的繁荣期，乐观主义盛行，人们更愿意冒险、创业、追求新体验。在衰退期，保守主义抬头，人们更关注安全、稳定和传统价值。一代人的核心价值观很大程度上由成长期的经济环境塑造。' },
+    ]
+  },
+  {
+    id: 6, title: '人格心理学：认识你自己', category: 'personality', difficulty: 'beginner',
+    description: '从大五模型到MBTI，从特质论到叙事认同。系统理解人格理论的各大流派与自我认知工具。',
+    chapters: [
+      { title: '第一章：人格是什么', content: '德尔斐神庙刻着"认识你自己"。人格心理学研究的是使每个人独特的、相对稳定的思维、情感和行为模式。本课程将带你深入大五人格、MBTI、叙事认同等人格理论，找到认识自己的科学路径。' },
+      { title: '第二章：大五人格（OCEAN）', content: '开放性、尽责性、外向性、宜人性、神经质——这五大维度构成了科学界公认的人格结构。每个维度不是非此即彼，而是一个连续谱。你在每个维度上的位置，构成了你独特的人格画像。' },
+    ]
+  },
+  {
+    id: 7, title: '进化心理学：心灵的远古根源', category: 'evolutionary', difficulty: 'intermediate',
+    description: '从达尔文到现代进化心理学。理解人类心理机制如何被百万年的自然选择和性选择所塑造。',
+    chapters: []
+  },
+  {
+    id: 8, title: '发展心理学：一生的成长旅程', category: 'developmental', difficulty: 'beginner',
+    description: '从婴儿到老年，人类心理发展的完整旅程。皮亚杰、维果茨基、埃里克森的发展阶段理论。',
+    chapters: []
+  },
+  {
+    id: 9, title: '社会心理学：情境的力量', category: 'social', difficulty: 'intermediate',
+    description: '从众、服从、归因、刻板印象。理解社会情境如何塑造个体行为——有时比性格更强大。',
+    chapters: []
+  },
+  {
+    id: 10, title: '行为主义心理学：从条件反射到行为改变', category: 'behaviorism', difficulty: 'beginner',
+    description: '巴甫洛夫的狗、斯金纳的鸽子、华生的小艾伯特。经典条件反射和操作性条件反射如何解释和改变行为。',
+    chapters: []
+  },
+  {
+    id: 11, title: '格式塔心理学：整体大于部分之和', category: 'gestalt', difficulty: 'intermediate',
+    description: '知觉组织的科学——我们如何将碎片整合为整体？从视觉错觉到问题解决的顿悟，格式塔重塑了我们对"理解"的理解。',
+    chapters: []
+  },
+  {
+    id: 12, title: '存在主义心理学：自由、意义与死亡', category: 'existential', difficulty: 'advanced',
+    description: '弗兰克尔、罗洛·梅、欧文·亚隆。面对生命的基本焦虑——死亡、自由、孤独、无意义——如何活出真实的人生？',
+    chapters: []
+  },
+  // ━━━ 临床与应用 (8门) ━━━
+  {
+    id: 13, title: '认知行为疗法：重塑思维模式', category: 'cbt', difficulty: 'intermediate',
+    description: '全世界研究最多的心理疗法。识别认知扭曲、挑战自动思维、重塑核心信念。终身受用的心理工具。',
+    chapters: []
+  },
+  {
+    id: 14, title: '积极心理学：幸福科学入门', category: 'positive', difficulty: 'beginner',
+    description: '不研究疾病，而是研究幸福。PERMA模型、心流体验、感恩实践、韧性培养——用科学方法构建丰盈人生。',
+    chapters: []
+  },
+  {
+    id: 15, title: '正念冥想：觉知的艺术', category: 'mindfulness', difficulty: 'beginner',
+    description: '从东方禅修到fMRI验证的大脑训练术。MBSR八周课程改变前额叶-杏仁核连接。不是宗教，是神经可塑性实践。',
+    chapters: []
+  },
+  {
+    id: 16, title: '依恋理论：亲密关系中的自我', category: 'attachment', difficulty: 'intermediate',
+    description: '童年依恋模式如何影响一生的亲密关系？安全型、焦虑型、回避型——认识你的依恋风格，走向修复之旅。',
+    chapters: []
+  },
+  {
+    id: 17, title: '人本主义心理学：成为一个人的旅程', category: 'humanistic', difficulty: 'beginner',
+    description: '马斯洛的需求金字塔、罗杰斯的无条件积极关注。相信每个人都有自我实现的潜能——心理学不只是修复缺陷，更是释放潜能。',
+    chapters: []
+  },
+  {
+    id: 18, title: '异常心理学：理解心理障碍', category: 'abnormal', difficulty: 'advanced',
+    description: 'DSM-5诊断框架、心境障碍、焦虑障碍、精神分裂症谱系。减少偏见，科学理解心理疾病。不是标签，是理解。',
+    chapters: []
+  },
+  {
+    id: 19, title: '创伤与修复心理学', category: 'trauma', difficulty: 'intermediate',
+    description: 'PTSD、童年创伤、代际创伤。创伤如何改变大脑和身体？EMDR、体感疗法、叙事暴露——科学证明的修复路径。',
+    chapters: []
+  },
+  {
+    id: 20, title: '健康心理学：身心连接的科学', category: 'health', difficulty: 'beginner',
+    description: '心理神经免疫学、应激-疾病连接、行为改变模型。你的信念和情绪如何影响身体健康？从科学到自我关怀。',
+    chapters: []
+  },
+  // ━━━ 神经科学与专项 (10门) ━━━
+  {
+    id: 21, title: '神经心理学：大脑如何创造心灵', category: 'neuropsychology', difficulty: 'advanced',
+    description: '前额叶与人格、海马体与记忆、杏仁核与情绪。从Phineas Gage到fMRI，探索心灵的物质基础。',
+    chapters: []
+  },
+  {
+    id: 22, title: '情绪心理学：喜怒哀乐的科学', category: 'emotion', difficulty: 'beginner',
+    description: 'Ekman的六种基本情绪、情绪建构理论、情绪调节策略。情绪不是理性的敌人——它是决策和社交的核心。',
+    chapters: []
+  },
+  {
+    id: 23, title: '教育心理学：如何有效学习', category: 'educational', difficulty: 'beginner',
+    description: '间隔效应、测试效应、成长型思维。从认知科学中提炼出真正有效的学习方法，告别低效努力。',
+    chapters: []
+  },
+  {
+    id: 24, title: '儿童心理学：理解小小心灵', category: 'child', difficulty: 'beginner',
+    description: '皮亚杰的认知发展、维果茨基的最近发展区、气质与依恋。从0到12岁，理解儿童的内心世界。',
+    chapters: []
+  },
+  {
+    id: 25, title: '爱情心理学：亲密关系的科学', category: 'love', difficulty: 'beginner',
+    description: '斯滕伯格的爱情三角、Gottman的婚姻研究、吸引力的心理学原理。用科学理解人类最深刻的情感。',
+    chapters: []
+  },
+  {
+    id: 26, title: '创造性心理学：灵感从哪里来', category: 'creativity', difficulty: 'intermediate',
+    description: '发散思维与收敛思维、心流与创造、创新的人格特质。创造力不是天才的专属——它可以被培养。',
+    chapters: []
+  },
+  {
+    id: 27, title: '犯罪心理学：黑暗中的心灵', category: 'forensic', difficulty: 'advanced',
+    description: '犯罪心理画像、精神病态、供述心理学。理解犯罪行为的心理机制——是为了预防，而不是猎奇。',
+    chapters: []
+  },
+  {
+    id: 28, title: '消费心理学：我们为什么购买', category: 'consumer', difficulty: 'beginner',
+    description: '锚定效应、框架效应、稀缺性心理。商家如何利用认知偏差影响你的决策？了解这些，做更明智的消费者。',
+    chapters: []
+  },
+  {
+    id: 29, title: '临终与死亡心理学：生命的最后一课', category: 'thanatology', difficulty: 'advanced',
+    description: 'Kübler-Ross的五个阶段、死亡焦虑、临终关怀。面对生命的终点，找到活着的意义。',
+    chapters: []
+  },
+  {
+    id: 30, title: '运动心理学：巅峰状态的心理秘密', category: 'sports', difficulty: 'intermediate',
+    description: '心理韧性、可视化训练、choking现象。顶尖运动员如何训练大脑？这些技巧同样适用于日常生活。',
+    chapters: []
+  },
 ];

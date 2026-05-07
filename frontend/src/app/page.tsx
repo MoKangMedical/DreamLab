@@ -305,7 +305,7 @@ export default function HomePage() {
             {[
               { href: '/bathhouse', label: '油屋广场', desc: '千与千寻世界', accent: '#c4554d' },
               { href: '/spirited', label: '千寻之旅', desc: '五层梦境冒险', accent: '#d4a853' },
-              { href: '/courses', label: '系统课程', desc: '10门课 · 39章 · 34万字', accent: '#6b5b8a' },
+              { href: '/courses', label: '系统课程', desc: '30门课 · 120+章 · 50万+字', accent: '#6b5b8a' },
               { href: '/reflect', label: '人生思考', desc: '梦后反思 · AI洞察报告', accent: '#5a9a6f' },
               { href: '/knowledge', label: '知识库', desc: '循证心理学百科', accent: '#9a7ab8' },
               { href: '/profile/milestones', label: '成长轨迹', desc: '记录你的心理成长', accent: '#3b8b7a' },

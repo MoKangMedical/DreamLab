@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 const TABS = [
   { href: '/', label: 'Home', icon: '⌂' },
+  { href: '/courses', label: 'Courses', icon: '▣' },
   { href: '/assessments', label: 'Assess', icon: '◎' },
   { href: '/companion', label: 'Talk', icon: '◉' },
   { href: '/community', label: 'Community', icon: '◇' },

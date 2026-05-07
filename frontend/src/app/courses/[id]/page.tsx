@@ -8,11 +8,31 @@ const CATEGORIES: Record<string, { label: string; icon: string; color: string }>
   modern:    { label: '神经科学', icon: '🧠', color: '#5a7d9a' },
   eastern:   { label: '东方解梦', icon: '🏮', color: '#d4a853' },
   economics: { label: '康波周期', icon: '🌊', color: '#5a9a6f' },
+  personality: { label: '人格心理', icon: '🪞', color: '#9a7ab8' },
+  evolutionary: { label: '进化心理', icon: '🧬', color: '#8a9a5a' },
+  developmental: { label: '发展心理', icon: '🌱', color: '#6aab8a' },
+  social:    { label: '社会心理', icon: '👥', color: '#5a8aba' },
+  behaviorism: { label: '行为主义', icon: '🐕', color: '#aa7a5a' },
+  gestalt:   { label: '格式塔',   icon: '🔷', color: '#7a6aaa' },
+  existential: { label: '存在主义', icon: '🌌', color: '#5a6a9a' },
+  cbt:       { label: '认知行为', icon: '🔧', color: '#4a90b8' },
   positive:  { label: '积极心理', icon: '☀️', color: '#e8a850' },
   mindfulness: { label: '正念冥想', icon: '🧘', color: '#7a9aad' },
-  cbt:       { label: '认知行为', icon: '🔧', color: '#4a90b8' },
   attachment: { label: '依恋理论', icon: '💕', color: '#c47a8a' },
-  personality: { label: '人格心理', icon: '🪞', color: '#9a7ab8' },
+  humanistic: { label: '人本主义', icon: '🌻', color: '#d4a860' },
+  abnormal:  { label: '异常心理', icon: '🩺', color: '#9a5a6a' },
+  trauma:    { label: '创伤修复', icon: '🕊️', color: '#8a8a6a' },
+  health:    { label: '健康心理', icon: '🍃', color: '#6a9a6a' },
+  neuropsychology: { label: '神经心理', icon: '⚡', color: '#5a6aba' },
+  emotion:   { label: '情绪心理', icon: '🌈', color: '#d4708a' },
+  educational: { label: '教育心理', icon: '📚', color: '#4a8a9a' },
+  child:     { label: '儿童心理', icon: '🧸', color: '#d4906a' },
+  love:      { label: '爱情心理', icon: '💝', color: '#d4607a' },
+  creativity: { label: '创造心理', icon: '🎨', color: '#aa7aba' },
+  forensic:  { label: '犯罪心理', icon: '🔍', color: '#6a5a6a' },
+  consumer:  { label: '消费心理', icon: '🛒', color: '#5a9a8a' },
+  thanatology: { label: '死亡心理', icon: '🕯️', color: '#7a7a8a' },
+  sports:    { label: '运动心理', icon: '🏃', color: '#4a8a6a' },
 };
 
 const DIFFICULTY_LABELS: Record<string, string> = {
@@ -20,7 +40,7 @@ const DIFFICULTY_LABELS: Record<string, string> = {
 };
 
 export function generateStaticParams() {
-  return Array.from({ length: 10 }, (_, i) => ({ id: String(i + 1) }));
+  return Array.from({ length: 30 }, (_, i) => ({ id: String(i + 1) }));
 }
 
 interface PageProps { params: { id: string } }
