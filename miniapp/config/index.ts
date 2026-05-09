@@ -17,7 +17,9 @@ export default {
   ],
   defineConstants: {},
   copy: {
-    patterns: [],
+    patterns: [
+      { from: 'src/sitemap.json', to: 'dist/sitemap.json' },
+    ],
     options: {},
   },
   framework: 'react',

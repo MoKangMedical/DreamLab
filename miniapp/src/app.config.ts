@@ -10,6 +10,7 @@ export default defineAppConfig({
     'pages/reflect/index',
     'pages/profile/index',
   ],
+  sitemapLocation: 'sitemap.json',
   window: {
     backgroundTextStyle: 'dark',
     navigationBarBackgroundColor: '#0a0a0c',

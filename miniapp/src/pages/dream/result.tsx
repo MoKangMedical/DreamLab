@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { View, Text, ScrollView } from '@tarojs/components'
 import Taro, { useRouter } from '@tarojs/taro'
+import { API_BASE, DREAM_RESULT_STORAGE_PREFIX } from '../../config/env'
 import './result.scss'
 
 interface DreamResult {
@@ -14,8 +15,6 @@ interface DreamResult {
   eastern_analysis: string
 }
 
-const API_BASE = 'https://43.134.3.158/api'
-
 export default function DreamResultPage() {
   const router = useRouter()
   const [result, setResult] = useState<DreamResult | null>(null)
@@ -23,14 +22,31 @@ export default function DreamResultPage() {
 
   useEffect(() => {
     const id = router.params.id
-    if (id) {
+    if (!id) return
+
+    try {
+      const stored = Taro.getStorageSync(`${DREAM_RESULT_STORAGE_PREFIX}${id}`)
+      if (stored && typeof stored === 'object') {
+        setResult(stored as DreamResult)
+        return
+      }
+    } catch {
+      // Continue with remote loading when available.
+    }
+
+    if (API_BASE) {
       Taro.request({
         url: `${API_BASE}/dreams/${id}`,
         method: 'GET',
+        timeout: 12000,
       }).then((res) => {
         if (res.statusCode === 200) {
-          setResult(res.data as DreamResult)
+          const data = res.data as DreamResult
+          Taro.setStorageSync(`${DREAM_RESULT_STORAGE_PREFIX}${id}`, data)
+          setResult(data)
         }
+      }).catch(() => {
+        setResult(null)
       })
     }
   }, [router.params.id])
@@ -72,7 +88,7 @@ export default function DreamResultPage() {
             </Text>
           ) : (
             <View className='loading'>
-              <Text>AI 正在四重视角解读你的梦...</Text>
+              <Text>暂未找到这次梦境记录，请返回重新输入梦境。</Text>
             </View>
           )}
         </View>

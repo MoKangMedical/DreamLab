@@ -3,9 +3,22 @@
 import { useState } from 'react'
 import { View, Text, Textarea } from '@tarojs/components'
 import Taro from '@tarojs/taro'
+import { API_BASE, DREAM_RESULT_STORAGE_PREFIX } from '../../config/env'
 import './index.scss'
 
-const API_BASE = 'https://43.134.3.158/api'
+function buildLocalDreamResult(content: string) {
+  const id = Date.now()
+  const shortDream = content.trim().slice(0, 80)
+
+  return {
+    id,
+    created_at: new Date().toISOString(),
+    freudian_analysis: `从弗洛伊德视角看，这段梦境可能呈现了被压抑的愿望、压力或未表达的情绪。你可以回想梦中最强烈的画面「${shortDream}」，观察它是否连接到近期的关系、责任或安全感议题。`,
+    jungian_analysis: `从荣格视角看，梦境中的人物、地点和物件可以被视为内在原型。请留意梦里最有力量的象征，它可能代表你正在发展但尚未被充分看见的一部分自我。`,
+    modern_analysis: '从现代睡眠科学看，梦常常会把近期记忆、情绪压力和身体状态重新组合。这个梦可以被当作一次情绪整理的线索，而不是确定的预言或诊断。',
+    eastern_analysis: '从东方心象视角看，梦境提醒你观察当下身心是否失衡。可以记录梦后的身体感受、情绪余波和当天发生的事件，再选择一个温和的小行动照顾自己。',
+  }
+}
 
 export default function DreamPage() {
   const [dream, setDream] = useState('')
@@ -15,26 +28,30 @@ export default function DreamPage() {
     if (!dream.trim()) return
     setLoading(true)
     try {
-      const res = await Taro.request({
-        url: `${API_BASE}/dreams/analyze`,
-        method: 'POST',
-        header: { 'Content-Type': 'application/json' },
-        data: { content: dream },
-      })
-      if (res.statusCode === 200) {
-        const data = res.data as {
-          id?: number
-          freudian_analysis?: string
-          jungian_analysis?: string
-          modern_analysis?: string
-          eastern_analysis?: string
-        }
-        Taro.navigateTo({
-          url: `/pages/dream/result?id=${data.id || 0}`,
+      if (API_BASE) {
+        const res = await Taro.request({
+          url: `${API_BASE}/dreams/analyze`,
+          method: 'POST',
+          header: { 'Content-Type': 'application/json' },
+          data: { content: dream },
+          timeout: 12000,
         })
+        if (res.statusCode === 200) {
+          const data = res.data as { id?: number }
+          const id = data.id || Date.now()
+          Taro.setStorageSync(`${DREAM_RESULT_STORAGE_PREFIX}${id}`, { ...data, id })
+          Taro.navigateTo({ url: `/pages/dream/result?id=${id}` })
+          return
+        }
       }
-    } catch (e) {
-      Taro.showToast({ title: '分析失败，请重试', icon: 'none' })
+
+      const result = buildLocalDreamResult(dream)
+      Taro.setStorageSync(`${DREAM_RESULT_STORAGE_PREFIX}${result.id}`, result)
+      Taro.navigateTo({ url: `/pages/dream/result?id=${result.id}` })
+    } catch {
+      const result = buildLocalDreamResult(dream)
+      Taro.setStorageSync(`${DREAM_RESULT_STORAGE_PREFIX}${result.id}`, result)
+      Taro.navigateTo({ url: `/pages/dream/result?id=${result.id}` })
     } finally {
       setLoading(false)
     }

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Input, ScrollView, Text, Textarea, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
+import { API_BASE } from '../../config/env'
 import './index.scss'
 
-const API_BASE = 'https://43.134.3.158/api'
 const STORAGE_KEY = 'dreamlab_reflections'
 
 const STAGES = [
@@ -74,19 +74,23 @@ export default function ReflectPage() {
 
     setSaving(true)
     try {
-      await Taro.request({
-        url: `${API_BASE}/reflect`,
-        method: 'POST',
-        header: { 'Content-Type': 'application/json' },
-        data: {
-          user_id: 1,
-          title: item.title,
-          content: item.content,
-          mood_score: item.mood,
-        },
-        timeout: 8000,
-      })
-      Taro.showToast({ title: '反思已保存', icon: 'success' })
+      if (API_BASE) {
+        await Taro.request({
+          url: `${API_BASE}/reflect`,
+          method: 'POST',
+          header: { 'Content-Type': 'application/json' },
+          data: {
+            user_id: 1,
+            title: item.title,
+            content: item.content,
+            mood_score: item.mood,
+          },
+          timeout: 8000,
+        })
+        Taro.showToast({ title: '反思已保存', icon: 'success' })
+      } else {
+        Taro.showToast({ title: '已本地保存', icon: 'success' })
+      }
     } catch {
       Taro.showToast({ title: '已本地保存', icon: 'none' })
     } finally {

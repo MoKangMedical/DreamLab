@@ -1,4 +1,5 @@
 import Taro from '@tarojs/taro'
+import { COURSE_DATA_BASE_URL } from '../config/env'
 
 export interface DreamLabChapter {
   title: string
@@ -44,9 +45,8 @@ interface AcademyBlueprint {
   categories: string[]
 }
 
-const DATA_BASE_URL = 'https://MoKangMedical.github.io/DreamLab/data'
-const COURSES_INDEX_URL = `${DATA_BASE_URL}/course-index.json`
-const COURSES_DATA_URL = `${DATA_BASE_URL}/courses.json`
+const COURSES_INDEX_URL = `${COURSE_DATA_BASE_URL}/course-index.json`
+const COURSES_DATA_URL = `${COURSE_DATA_BASE_URL}/courses.json`
 const COURSES_CACHE_KEY = 'dreamlab_courses_index_v2'
 const COURSE_DETAIL_CACHE_KEY = 'dreamlab_course_detail_v2_'
 
@@ -277,7 +277,7 @@ export async function loadDreamLabCourseDetail(courseId: number) {
   }
 
   try {
-    const response = await Taro.request({ url: `${DATA_BASE_URL}/courses/${courseId}.json`, method: 'GET', timeout: 15000 })
+    const response = await Taro.request({ url: `${COURSE_DATA_BASE_URL}/courses/${courseId}.json`, method: 'GET', timeout: 15000 })
     if (response.statusCode >= 200 && response.statusCode < 300) {
       const data = Array.isArray(response.data) ? response.data[0] : response.data
       if (data && typeof data === 'object') {
