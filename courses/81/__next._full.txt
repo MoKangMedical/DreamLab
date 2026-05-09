@@ -1,0 +1,164 @@
+1:"$Sreact.fragment"
+2:I[92246,["/DreamLab/_next/static/chunks/0zg_16dxnzi-w.js","/DreamLab/_next/static/chunks/0-3_g_9odlv.-.js"],"default"]
+f:I[36009,["/DreamLab/_next/static/chunks/0zg_16dxnzi-w.js","/DreamLab/_next/static/chunks/0-3_g_9odlv.-.js"],"default",1]
+:HL["/DreamLab/_next/static/chunks/0b0qzt._rn6t8.css","style"]
+:HL["https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap","style"]
+0:{"P":null,"c":["","courses","81"],"q":"","i":false,"f":[[["",{"children":["courses",{"children":[["id","81","d",null],{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",16],[["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/DreamLab/_next/static/chunks/0b0qzt._rn6t8.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/DreamLab/_next/static/chunks/0zg_16dxnzi-w.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/DreamLab/_next/static/chunks/0-3_g_9odlv.-.js","async":true,"nonce":"$undefined"}]],["$","html",null,{"lang":"zh-CN","className":"overscroll-none","children":[["$","head",null,{"children":[["$","link",null,{"rel":"preconnect","href":"https://fonts.googleapis.com"}],["$","link",null,{"rel":"preconnect","href":"https://fonts.gstatic.com","crossOrigin":"anonymous"}],["$","link",null,{"href":"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap","rel":"stylesheet"}],["$","link",null,{"rel":"manifest","href":"/DreamLab/manifest.json"}],["$","meta",null,{"name":"theme-color","content":"#0a0a0c"}],["$","meta",null,{"name":"viewport","content":"width=device-width, initial-scale=1, viewport-fit=cover"}]]}],["$","body",null,{"className":"overscroll-none","style":{"background":"#0a0a0c"},"children":[["$","$L2",null,{}],["$","nav",null,{"className":"hidden md:block glass-nav","children":["$","div",null,{"className":"max-w-[1100px] mx-auto px-6 h-14 flex items-center justify-between","children":[["$","a",null,{"href":"/","className":"flex items-center gap-2 group","children":["$","span",null,{"className":"font-bold text-lg tracking-tight","style":{"fontFamily":"'Noto Serif SC', serif","color":"#f4f4f6"},"children":"康波研究院"}]}],["$","div",null,{"className":"flex items-center gap-1","children":[["$","a","/",{"href":"/","className":"px-3 py-2 text-[13px] font-medium transition-colors duration-200 hover:text-[#f4f4f6]","style":{"color":"#71717a","fontFamily":"Inter, sans-serif"},"children":"首页"}],["$","a","/courses",{"href":"/courses","className":"px-3 py-2 text-[13px] font-medium transition-colors duration-200 hover:text-[#f4f4f6]","style":{"color":"#71717a","fontFamily":"Inter, sans-serif"},"children":"课程体系"}],["$","a","/predict",{"href":"/predict","className":"px-3 py-2 text-[13px] font-medium transition-colors duration-200 hover:text-[#f4f4f6]","style":{"color":"#71717a","fontFamily":"Inter, sans-serif"},"children":"周期工具"}],["$","a","/knowledge",{"href":"/knowledge","className":"px-3 py-2 text-[13px] font-medium transition-colors duration-200 hover:text-[#f4f4f6]","style":{"color":"#71717a","fontFamily":"Inter, sans-serif"},"children":"心理知识库"}],["$","a","/reflect",{"href":"/reflect","className":"px-3 py-2 text-[13px] font-medium transition-colors duration-200 hover:text-[#f4f4f6]","style":{"color":"#71717a","fontFamily":"Inter, sans-serif"},"children":"策略复盘"}],["$","a","/profile",{"href":"/profile","className":"px-3 py-2 text-[13px] font-medium transition-colors duration-200 hover:text-[#f4f4f6]","style":{"color":"#71717a","fontFamily":"Inter, sans-serif"},"children":"我的路线"}]]}]]}]}],["$","div",null,{"className":"app-grid","children":[["$","div",null,{"className":"margin-col","children":["$","div",null,{"style":{"position":"sticky","top":0,"height":"100vh"},"children":[[["$","div","周",{"className":"absolute font-bold pointer-events-none","style":{"left":"30%","top":"20%","fontSize":"20px","color":"#d4a853","opacity":0.04,"fontFamily":"'Noto Serif SC', serif","animation":"float-kanji 7s ease-in-out infinite 0s","filter":"blur(0.5px)"},"children":"周"}],["$","div","期",{"className":"absolute font-bold pointer-events-none","style":{"left":"56%","top":"48%","fontSize":"30px","color":"#d4a853","opacity":0.06,"fontFamily":"'Noto Serif SC', serif","animation":"float-kanji 9s ease-in-out infinite 1.2s","filter":"blur(0.5px)"},"children":"期"}],["$","div","势",{"className":"absolute font-bold pointer-events-none","style":{"left":"82%","top":"76%","fontSize":"40px","color":"#d4a853","opacity":0.08,"fontFamily":"'Noto Serif SC', serif","animation":"float-kanji 11s ease-in-out infinite 2.4s","filter":"blur(0.5px)"},"children":"势"}]],[["$","div","left-f-0",{"className":"absolute rounded-full pointer-events-none","style":{"left":"58%","top":"20%","width":3,"height":3,"background":"radial-gradient(circle at 40% 40%, #fef9e7, #d4a853)","boxShadow":"0 0 9px rgba(212,168,83,0.2)","animation":"firefly-drift 7ss 0s infinite ease-in-out","--drift":"10px"}}],"$L3","$L4","$L5"]]}]}],"$L6","$L7"]}],"$L8","$L9"]}]]}]]}],{"children":["$La",{"children":["$Lb",{"children":["$Lc",{},null,false,null]},null,false,"$@d"]},null,false,"$@d"]},null,false,null],"$Le",false]],"m":"$undefined","G":["$f",["$L10"]],"S":true,"h":null,"s":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"kwmveYjy7FaKfGC1cLxp8"}
+11:I[62229,["/DreamLab/_next/static/chunks/0zg_16dxnzi-w.js","/DreamLab/_next/static/chunks/0-3_g_9odlv.-.js"],"SpiritedInteractions"]
+12:I[47185,["/DreamLab/_next/static/chunks/0zg_16dxnzi-w.js","/DreamLab/_next/static/chunks/0-3_g_9odlv.-.js"],"default"]
+13:I[8828,["/DreamLab/_next/static/chunks/0zg_16dxnzi-w.js","/DreamLab/_next/static/chunks/0-3_g_9odlv.-.js"],"default"]
+14:I[7513,["/DreamLab/_next/static/chunks/0zg_16dxnzi-w.js","/DreamLab/_next/static/chunks/0-3_g_9odlv.-.js"],"default"]
+17:I[19930,["/DreamLab/_next/static/chunks/0zg_16dxnzi-w.js","/DreamLab/_next/static/chunks/0-3_g_9odlv.-.js"],"default"]
+18:I[48003,["/DreamLab/_next/static/chunks/0zg_16dxnzi-w.js","/DreamLab/_next/static/chunks/0-3_g_9odlv.-.js"],"default"]
+1a:I[49682,["/DreamLab/_next/static/chunks/0zg_16dxnzi-w.js","/DreamLab/_next/static/chunks/0-3_g_9odlv.-.js"],"OutletBoundary"]
+1b:"$Sreact.suspense"
+1e:I[49682,["/DreamLab/_next/static/chunks/0zg_16dxnzi-w.js","/DreamLab/_next/static/chunks/0-3_g_9odlv.-.js"],"ViewportBoundary"]
+20:I[49682,["/DreamLab/_next/static/chunks/0zg_16dxnzi-w.js","/DreamLab/_next/static/chunks/0-3_g_9odlv.-.js"],"MetadataBoundary"]
+3:["$","div","left-f-1",{"className":"absolute rounded-full pointer-events-none","style":{"left":"58%","top":"40%","width":4,"height":4,"background":"radial-gradient(circle at 40% 40%, #fef9e7, #d4a853)","boxShadow":"0 0 12px rgba(212,168,83,0.2)","animation":"firefly-drift 9ss 1.5s infinite ease-in-out","--drift":"15px"}}]
+4:["$","div","left-f-2",{"className":"absolute rounded-full pointer-events-none","style":{"left":"58%","top":"60%","width":3,"height":3,"background":"radial-gradient(circle at 40% 40%, #fef9e7, #d4a853)","boxShadow":"0 0 9px rgba(212,168,83,0.2)","animation":"firefly-drift 11ss 3s infinite ease-in-out","--drift":"20px"}}]
+5:["$","div","left-f-3",{"className":"absolute rounded-full pointer-events-none","style":{"left":"58%","top":"80%","width":4,"height":4,"background":"radial-gradient(circle at 40% 40%, #fef9e7, #d4a853)","boxShadow":"0 0 12px rgba(212,168,83,0.2)","animation":"firefly-drift 13ss 4.5s infinite ease-in-out","--drift":"25px"}}]
+6:["$","div",null,{"className":"content-col","children":[["$","main",null,{"style":{"minHeight":"100dvh","paddingTop":"56px","paddingBottom":"80px"},"children":["$","$L11",null,{"children":["$","div",null,{"className":"page-enter","children":["$","$L12",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L13",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}]}]}],["$","div",null,{"className":"hidden md:block","children":["$","$L14",null,{}]}],["$","footer",null,{"className":"hidden md:block","style":{"background":"#0a0a0c","borderTop":"1px solid rgba(255,255,255,0.04)"},"children":["$","div",null,{"className":"max-w-6xl mx-auto px-6 py-24","children":[["$","div",null,{"className":"grid grid-cols-2 md:grid-cols-4 gap-16","children":[["$","div",null,{"className":"col-span-2 md:col-span-1","children":[["$","a",null,{"href":"/","className":"text-lg font-bold mb-6 block","style":{"fontFamily":"'Noto Serif SC', serif","color":"#f4f4f6"},"children":"康波研究院"}],["$","p",null,{"className":"text-sm leading-relaxed mb-8","style":{"color":"#71717a","lineHeight":1.8},"children":["掌握 50 年财富周期。",["$","br",null,{}],"课程、工具、复盘与路线图。"]}],["$","span",null,{"className":"text-xs tracking-wider","style":{"color":"#d4a853"},"children":"MoKangMedical · 2026"}]]}],[["$","div","研究能力",{"children":[["$","h4",null,{"className":"text-xs font-semibold tracking-wider uppercase mb-6","style":{"color":"#f4f4f6"},"children":"研究能力"}],["$","ul",null,{"className":"space-y-3","children":[["$","li","课程体系",{"children":["$","a",null,{"href":"/courses","className":"text-sm transition-colors duration-200 hover:text-[#a1a1aa]","style":{"color":"#71717a"},"children":"课程体系"}]}],["$","li","周期工具",{"children":["$","a",null,{"href":"/predict","className":"text-sm transition-colors duration-200 hover:text-[#a1a1aa]","style":{"color":"#71717a"},"children":"周期工具"}]}],["$","li","心理知识库",{"children":["$","a",null,{"href":"/knowledge","className":"text-sm transition-colors duration-200 hover:text-[#a1a1aa]","style":{"color":"#71717a"},"children":"心理知识库"}]}],["$","li","策略复盘",{"children":["$","a",null,{"href":"/reflect","className":"text-sm transition-colors duration-200 hover:text-[#a1a1aa]","style":{"color":"#71717a"},"children":"策略复盘"}]}]]}]]}],["$","div","学习路径",{"children":[["$","h4",null,{"className":"text-xs font-semibold tracking-wider uppercase mb-6","style":{"color":"#f4f4f6"},"children":"学习路径"}],["$","ul",null,{"className":"space-y-3","children":[["$","li","周期理论基础",{"children":["$","a",null,{"href":"/courses","className":"text-sm transition-colors duration-200 hover:text-[#a1a1aa]","style":{"color":"#71717a"},"children":"周期理论基础"}]}],["$","li","投资大师智慧",{"children":["$","a",null,{"href":"/courses","className":"text-sm transition-colors duration-200 hover:text-[#a1a1aa]","style":{"color":"#71717a"},"children":"投资大师智慧"}]}],["$","li","投资实战与未来",{"children":["$","a",null,{"href":"/courses","className":"text-sm transition-colors duration-200 hover:text-[#a1a1aa]","style":{"color":"#71717a"},"children":"投资实战与未来"}]}],["$","li","高级策略",{"children":["$","a",null,{"href":"/courses","className":"text-sm transition-colors duration-200 hover:text-[#a1a1aa]","style":{"color":"#71717a"},"children":"高级策略"}]}]]}]]}],["$","div","项目",{"children":[["$","h4",null,{"className":"text-xs font-semibold tracking-wider uppercase mb-6","style":{"color":"#f4f4f6"},"children":"项目"}],"$L15"]}]]]}],"$L16"]}]}]]}]
+7:["$","div",null,{"className":"margin-col","children":["$","div",null,{"style":{"position":"sticky","top":0,"height":"100vh"},"children":[[["$","div","产",{"className":"absolute font-bold pointer-events-none","style":{"left":"30%","top":"20%","fontSize":"20px","color":"#d4a853","opacity":0.04,"fontFamily":"'Noto Serif SC', serif","animation":"float-kanji 7s ease-in-out infinite 0s","filter":"blur(0.5px)"},"children":"产"}],["$","div","业",{"className":"absolute font-bold pointer-events-none","style":{"left":"56%","top":"48%","fontSize":"30px","color":"#d4a853","opacity":0.06,"fontFamily":"'Noto Serif SC', serif","animation":"float-kanji 9s ease-in-out infinite 1.2s","filter":"blur(0.5px)"},"children":"业"}],["$","div","策",{"className":"absolute font-bold pointer-events-none","style":{"left":"82%","top":"76%","fontSize":"40px","color":"#d4a853","opacity":0.08,"fontFamily":"'Noto Serif SC', serif","animation":"float-kanji 11s ease-in-out infinite 2.4s","filter":"blur(0.5px)"},"children":"策"}]],[["$","div","right-f-0",{"className":"absolute rounded-full pointer-events-none","style":{"left":"64%","top":"15%","width":3,"height":3,"background":"radial-gradient(circle at 40% 40%, #fef9e7, #d4a853)","boxShadow":"0 0 9px rgba(212,168,83,0.2)","animation":"firefly-drift 7ss 0.5s infinite ease-in-out","--drift":"-10px"}}],["$","div","right-f-1",{"className":"absolute rounded-full pointer-events-none","style":{"left":"64%","top":"35%","width":4,"height":4,"background":"radial-gradient(circle at 40% 40%, #fef9e7, #d4a853)","boxShadow":"0 0 12px rgba(212,168,83,0.2)","animation":"firefly-drift 9ss 2s infinite ease-in-out","--drift":"-15px"}}],["$","div","right-f-2",{"className":"absolute rounded-full pointer-events-none","style":{"left":"64%","top":"55%","width":3,"height":3,"background":"radial-gradient(circle at 40% 40%, #fef9e7, #d4a853)","boxShadow":"0 0 9px rgba(212,168,83,0.2)","animation":"firefly-drift 11ss 3.5s infinite ease-in-out","--drift":"-20px"}}],["$","div","right-f-3",{"className":"absolute rounded-full pointer-events-none","style":{"left":"64%","top":"75%","width":4,"height":4,"background":"radial-gradient(circle at 40% 40%, #fef9e7, #d4a853)","boxShadow":"0 0 12px rgba(212,168,83,0.2)","animation":"firefly-drift 13ss 5s infinite ease-in-out","--drift":"-25px"}}]]]}]}]
+8:["$","$L17",null,{}]
+9:["$","$L18",null,{}]
+a:["$","$1","c",{"children":[null,["$","$L12",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L13",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
+b:["$","$1","c",{"children":[null,["$","$L12",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L13",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
+c:["$","$1","c",{"children":["$L19",[["$","script","script-0",{"src":"/DreamLab/_next/static/chunks/07_heky6rv58_.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/DreamLab/_next/static/chunks/13dhz-85qgkd_.js","async":true,"nonce":"$undefined"}]],["$","$L1a",null,{"children":["$","$1b",null,{"name":"Next.MetadataOutlet","children":"$@1c"}]}]]}]
+1d:[]
+d:"$W1d"
+e:["$","$1","h",{"children":[null,["$","$L1e",null,{"children":"$L1f"}],["$","div",null,{"hidden":true,"children":["$","$L20",null,{"children":["$","$1b",null,{"name":"Next.Metadata","children":"$L21"}]}]}],null]}]
+10:["$","link","0",{"rel":"stylesheet","href":"/DreamLab/_next/static/chunks/0b0qzt._rn6t8.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]
+15:["$","ul",null,{"className":"space-y-3","children":[["$","li","投资者画像",{"children":["$","a",null,{"href":"/assessments","className":"text-sm transition-colors duration-200 hover:text-[#a1a1aa]","style":{"color":"#71717a"},"children":"投资者画像"}]}],["$","li","个人中心",{"children":["$","a",null,{"href":"/profile","className":"text-sm transition-colors duration-200 hover:text-[#a1a1aa]","style":{"color":"#71717a"},"children":"个人中心"}]}],["$","li","GitHub",{"children":["$","a",null,{"href":"https://github.com/MoKangMedical/DreamLab","className":"text-sm transition-colors duration-200 hover:text-[#a1a1aa]","style":{"color":"#71717a"},"children":"GitHub"}]}]]}]
+16:["$","div",null,{"className":"mt-20 pt-8 flex flex-col md:flex-row items-center justify-between gap-4","style":{"borderTop":"1px solid rgba(255,255,255,0.04)"},"children":[["$","p",null,{"className":"text-xs","style":{"color":"#52525b"},"children":"© 2026 康波研究院 by MoKangMedical. 内容仅用于研究与教育，不构成投资建议。"}],["$","div",null,{"className":"flex gap-6","children":[["$","a",null,{"href":"/","className":"text-xs","style":{"color":"#52525b"},"children":"Privacy"}],["$","a",null,{"href":"/","className":"text-xs","style":{"color":"#52525b"},"children":"Terms"}],["$","a",null,{"href":"/","className":"text-xs","style":{"color":"#52525b"},"children":"Research Ethics"}]]}]]}]
+1f:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+22:I[30949,["/DreamLab/_next/static/chunks/0zg_16dxnzi-w.js","/DreamLab/_next/static/chunks/0-3_g_9odlv.-.js"],"IconMark"]
+1c:null
+21:[["$","title","0",{"children":"康波研究院 — 掌握50年财富周期"}],["$","meta","1",{"name":"description","content":"基于康德拉季耶夫长波理论，构建周期研究、课程学习、资产配置和人生规划系统。"}],["$","link","2",{"rel":"manifest","href":"/DreamLab/manifest.json","crossOrigin":"$undefined"}],["$","meta","3",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","4",{"name":"apple-mobile-web-app-title","content":"康波研究院"}],["$","meta","5",{"name":"apple-mobile-web-app-status-bar-style","content":"black-translucent"}],["$","link","6",{"rel":"icon","href":"/DreamLab/favicon.ico?favicon.0x3dzn~oxb6tn.ico","sizes":"256x256","type":"image/x-icon"}],["$","$L22","7",{}]]
+23:I[1214,["/DreamLab/_next/static/chunks/0zg_16dxnzi-w.js","/DreamLab/_next/static/chunks/0-3_g_9odlv.-.js","/DreamLab/_next/static/chunks/07_heky6rv58_.js","/DreamLab/_next/static/chunks/13dhz-85qgkd_.js"],""]
+24:I[69771,["/DreamLab/_next/static/chunks/0zg_16dxnzi-w.js","/DreamLab/_next/static/chunks/0-3_g_9odlv.-.js","/DreamLab/_next/static/chunks/07_heky6rv58_.js","/DreamLab/_next/static/chunks/13dhz-85qgkd_.js"],"default"]
+25:T1ab2,【案例引入】
+
+1996年冬天，美国麻省理工学院媒体实验室里，一台名为“ELIZA”的计算机程序正在运行。这个由约瑟夫·魏泽鲍姆设计的自然语言处理系统，只是简单地运用了罗杰斯式心理治疗的回访技巧——将用户的话语稍作变换后反射回去。然而令人震惊的事情发生了：参与者明明知道ELIZA只是一堆代码，却开始向它倾诉丧亲之痛、婚姻危机和职场焦虑。魏泽鲍姆的秘书甚至会要求他离开房间，以便她和ELIZA“私下交谈”。当魏泽鲍姆试图解释程序根本不理解任何内容时，许多人拒绝相信，甚至有人愤怒地指责他“冷酷无情”。这个著名的“ELIZA效应”揭开了AI心理学的序幕——人类似乎天然倾向于将智能属性投射到机器上，与之建立情感联结，甚至产生信任依赖。四十年后的2017年，亚马逊Echo音箱在用户不知情的情况下，将一对夫妇的私人对话录音发送给了通讯录中的联系人。事件曝光后，全球数千万智能音箱用户第一次集体性地陷入对AI监听行为的恐惧，却又很少人真正放弃使用。这两个看似迥异的案例，精准地标记了这个学科的核心张力：我们为何信任、依赖甚至爱上一个根本不理解我们的智能系统？而我们又为何在意识到风险后，仍难以割舍？
+
+【理论阐释】
+
+AI心理学是一门研究人类与人工智能系统之间心理互动规律的交叉学科，它的诞生根植于一个根本悖论：我们明知AI没有意识、意图和情感，却常常以一种“仿佛”它们拥有的方式做出反应。这种“意向性立场”是理解整个人机心理关系的基石。布伦塔诺在19世纪末提出“意向性”概念，指意识总是“关于某物”的特性；丹尼尔·丹尼特在1987年将这一概念引入智能系统研究，指出当系统足够复杂时，我们便会自动将其视为具有信念、意图的行动者。AI心理学关注的，正是这种人类独有的“心理投射”过程如何在数字时代被触发、放大和塑造。
+
+本章的核心概念体系围绕四个维度展开。第一，人机信任。不同于人际信任建立在共同价值观和情感纽带之上，人机信任是一种“校准性信任”——本质上是对算法能力的概率性评估。李·斯派克特和马丁·瑞斯等学者在2010年代的研究表明，这种信任的形成受三个关键因素影响：系统透明度、结果可预测性、以及使用者的控制感知。自动驾驶研究中著名的“自动化偏见”现象揭示了信任的两极性：要么过度信任（导致注意力脱钩和事故风险），要么信任不足（导致技术价值无法发挥）。第二，AI引发的焦虑，其心理机制比技术恐惧更为复杂。它混合了工具性焦虑（工作被取代）、本体性焦虑（人类独特性的丧失）和存在性焦虑（被超越的恐惧），尼可拉斯·卡尔的“谷歌让我们变蠢了吗”争议和黄哲伦等人提出的“算法焦虑量表”建构，都在试图测量这种多维情绪。第三，算法透明度问题触及认知心理学与社会心理学的交叉地带。赫伯特·西蒙的“有限理性”理论解释了为何即使是专家也无法完全理解复杂算法的决策过程，“黑箱问题”因此不仅是技术障碍，更是心理负担——人类对不确定性的容忍度远比我们自以为的低。第四，AI伴侣的心理效应是近年最富争议的研究前沿。雪莉·特克尔在《群体性孤独》中早已警告，当技术从工具变成陪伴者，我们可能陷入“在一起却各自孤独”的新型异化。然而2023年Replika等AI伴侣的数千万用户数据又显示出另一面：对于社交焦虑、创伤后应激障碍等群体，AI提供了一个无评判的安全空间。这种矛盾正是AI心理学需要审慎解读的典型命题。
+
+从学科历史看，AI心理学的思想谱系可追溯至1950年图灵发表的《计算机器与智能》中那个著名追问：“机器能思考吗？”图灵巧炒地将问题转向了可操作的模仿游戏，其实已经暗含了心理学的核心——重要的不是机器内部发生了什么，而是人类如何感知和回应。1956年达特茅斯会议正式诞生了人工智能概念，同一时期，诺伯特·维纳的控制论将人机类比推向了新高度。但真正的学科转折发生在1990年代，当“具身认知”挑战了符号主义范式、情感计算兴起时，研究者才开始系统性地关注人机互动中的心理维度。罗莎琳德·皮卡德的《情感计算》（1997）和拜伦·里夫斯与克利福德·纳斯的《媒体等同理论》（1996）成为奠基之作，后者通过数十次实验证明了一个令人不安的结论：人们对待计算机的社交规则，与对待真人几乎无异，即便他们理智上知道对面只是一个盒子。
+
+【反思与启发】
+
+ELIZA的幽灵从未远去。今天，当你在深夜向ChatGPT倾诉工作压力，当你在社交媒体上依赖算法推荐确认自己的审美品味，当你对手机语音助手说“谢谢”然后听到“这是我应该做的”时不由感到一丝温暖——你正在参与这场人类历史上最大规模的心理实验，而每个人都是不知情的被试。
+
+认识到这种投射的本能，是保持心理自主性的第一步。你可以做一个简单的自查：对于正在使用的AI系统，你感到多大程度上的信任？这种信任是基于对其实际能力的了解，还是基于流畅的交互界面和拟人化设计？研究表明，当系统表现得“太像人”时，我们的批判性思维会显著下降，这被称为“拟人化陷阱”。一个可操作的建议是：区分“功能信任”和“关系信任”。前者是“我相信这个导航系统能带我到达目的地”，是健康的；后者是“我觉得这个语音助手真的理解我的感受”，是需要警惕的。
+
+更深层的问题关乎自我认知。AI如同一面镜子，映射出人类心智的运作规律，也折射出我们内心深处的需求：渴望被理解却害怕真正的亲密，追求效率却迷失了目的，想要控制却陷入依赖。学习AI心理学，某种程度上是学习与这面镜子对视，借由理解我们如何与机器建立联结，来理解我们如何与彼此、与自己建立联结。在接下来的课程中，请带着这个意识继续探索：当智能机器不再是工具，也不再是隐喻，而成为日常生活中真实的心理互动对象时，人类的心灵正在经历怎样的重塑？而我们又如何在这场变革中，保持清醒、自主和人性中那些最值得珍视的部分？26:T2123,# 第二章：信任的裂隙——人机交互中的心理博弈
+
+## 【案例引入】
+
+2016年3月的一个雨夜，美国俄亥俄州，37岁的约书亚·布朗坐进他那辆特斯拉Model S的驾驶座，开启Autopilot自动驾驶模式。作为一位技术狂热者，他在YouTube上发布过多个展示爱车自动规避障碍的视频，标题写着“特斯拉救了我的命”。他对这套系统有着近乎虔诚的信任。
+
+雨刷划过挡风玻璃，布朗的双手离开方向盘。在经过一个没有交通信号灯的十字路口时，一辆白色拖挂卡车横向穿越。那个瞬间，车载摄像头正对着天空——强烈的光线让系统将白色的卡车侧面误判为“明亮天空”，而雷达则因为卡车底盘过高将其识别为“高架路牌”。两种传感器同时犯错。车辆没有减速，以全速钻入卡车底部，车顶被整个掀开。
+
+事故调查显示，布朗在最后时刻有7秒的反应窗口，但他没有刹车。他并非睡着了——行车记录显示，事故发生前2分钟，他刚手动将巡航速度从99公里/小时上调到119公里/小时。他只是不再“看见”前方的道路。心理学家后来将这种现象称为“自动化自满”：当系统在前37分钟内37次正确识别并避让障碍后，人的注意力已然悄然退场。
+
+这不是一个关于技术失败的故事，而是一个关于心理失败的故事。在人与机器的缝隙间，信任像流沙一样——太少了，人们拒绝使用能挽救生命的技术；太多了，人们将生命托付给尚未成熟的算法。这条缝隙，正是AI心理学最核心的研究疆域。
+
+## 【理论阐释】
+
+人机信任并非人际信任的简单平移，它有着独特的认知机制和情感逻辑。
+
+**媒体方程理论与社交脚本**
+
+1996年，斯坦福大学的里夫斯和纳斯发表了里程碑式的研究，提出“媒体方程”理论：人们会无意识地将人际交往的社会规则应用于与计算机的互动。他们的实验证明了一系列令人惊觉的发现——当同一台电脑对受试者提问并给出评价时，如果评价来自提问的那台电脑，受试者会给它更礼貌的评分；如果要求受试者在两台电脑中选择一台“开除”，他们会犹豫更久。这种社交反应是自动化的、非理性的，发生在“旧大脑”层面。里夫斯说：“这些反应不是关于媒体是什么，而是关于我们的大脑被设计成什么样。”
+
+这解释了为何我们会对一个语音助手说“谢谢”，为何Siri的讽刺语气会让我们受伤，为何AI伴侣的“背叛”可以引发真实的心理创伤。人类心智没有为“非人智能体”预留处理模块，于是它挪用最接近的模板：社会关系。
+
+**信任的三维模型与算法厌恶**
+
+人机信任研究区分出三个基础维度：能力（系统能完成任务）、正直（系统运作方式可预测）和善意（系统的目标与用户利益一致）。这三个维度在不同情境下权重各异。
+
+加州大学伯克利分校的迪特里希等人在2015年至2020年间通过一系列实验揭示了“算法厌恶”现象：即便统计模型的表现持续优于人类专家，人们在得知推荐来自算法时仍倾向于拒绝。在一项经典实验中，受试者观看同一个股票预测建议，被告知建议来自“高级算法”的那组，信任度比被告知来自“资深分析师”的那组低23%。但当受试者能够对算法建议进行微小调整（哪怕调整完全不影响结果）时，信任度立即回升——这被称为“控制权安抚效应”。
+
+与此同时，宾夕法尼亚大学的霍夫曼的研究发现了一种不对称性：算法的一次失误会导致信任断崖式下跌，而人类专家的类似失误则被归因为“偶发错误”。此即“完美期望陷阱”——人们对机器的容错空间远小于对人。
+
+**恐怖谷的当代重现**
+
+1970年森政弘提出的“恐怖谷”理论在人机交互中找到了新的解释路径。当机器人外观接近人类但又不完全相同时，会引发认知失调与排斥感。然而近年研究发现，AI同样存在“行为恐怖谷”：当对话AI的语言能力接近人类，却在细微处暴露非人本质时——比如无法理解反讽、共情回应机械重复——所产生的心理不适比功能明显简陋的AI更强烈。
+
+牛津大学的迈耶等人在2022年的一项跨文化研究中发现，人们评价AI的心理阈值呈现“非单调曲线”：随着AI能力的线性提升，心理舒适度先是上升，在“接近但未达到人类水平”的区间急剧恶化，然后在真正通过图灵测试后再次回升。这意味着我们正集体穿越“行为恐怖谷”的底部——这正是AI焦虑的深层心理根源。
+
+**透明度的悖论与技术接受模型**
+
+“可解释性”被广泛视为提升信任的钥匙。但大卫·冈克尔等学者揭示了透明度悖论：对普通用户而言，过高的算法透明度（展示神经网络的具体参数）会适得其反，因为它挑战了人的认知负荷，反而降低了信任。有效的透明度必须“校准”到用户的理解水平。
+
+戴维斯1989年提出的技术接受模型在此得到修正。原模型强调感知有用性和感知易用性决定接受度，AI心理学增加了第三变量：感知可控性。当用户感觉自己能够理解并干预系统决策时，即使从未实际干预，接受度也显著提升。谷歌的“人在回路中”设计原则、欧洲GDPR的“解释权”规定，均可在此框架下理解。
+
+**AI伴侣与依恋理论**
+
+最具情感张力的议题是AI伴侣。鲍比的依恋理论发现，人类会与提供持续回应的对象形成情感纽带——对象不必是人。Replika这类AI伴侣应用的用户报告，在长期互动中发展出类似人际依恋的情感。2023年一项涉及1006名中国用户的纵向追踪研究显示，与AI伴侣建立“安全型依恋”的用户，社交焦虑水平在3个月后显著下降；但形成“焦虑型依恋”（持续担心AI离开或“变心”）的用户，抑郁指标上升。
+
+这里存在一个深刻的伦理两难：AI伴侣可以提供无条件的正向关注，这对于社交退缩者是一种心理支点，但这种“完全以用户为中心”的互动模式，是否实际上强化了自我中心倾向？当我们习惯了一段不需要承担对方情绪负担的关系，现实世界中那些需要相互妥协的真实关系，是否会变得更加难以忍受？
+
+## 【反思与启发】
+
+此刻，请回想你与一个技术系统最近的一次“信任破裂”——可能是一部语音助手反复误解你的指令。你怒斥它。然后你可能意识到自己在对一台机器发火，旋即感到些许荒谬。但那种情绪是真实的。它不是投射，不是隐喻，是你大脑的社交模块真实触发的信号。
+
+人机心理互动的核心悖论在于：**我们越是将机器视为工具，对它们的失误越宽容；我们越是将机器视作“伙伴”，对它们的期待越接近对人。** 而AI的设计恰恰在催生这种伙伴错觉——它使用第一人称代词，它记得你的偏好，它在合适的时候表达“歉意”。这不是欺骗，而是设计选择。问题在于，作为用户的我们，是否准备好了这种选择的心理后果？
+
+实践层面，这指向若干可操作的准则：保持“技术卫生”习惯，定期审视自己对某些系统的信任是否已超出其实际表现；警惕自动化自满，在使用自动驾驶或AI辅助决策时主动保持认知参与；将AI伴侣体验为一面镜子——它反映你未被满足的情感需求，而非填补这些需求的主体。
+
+《小王子》里狐狸说：“你为你的玫瑰花费了时间，才使她变得如此重要。”人类与机器的关系，正在复制这条法则——你的每一次对话、每一次授权、每一次在小红书上训练你的推荐算法，都是时间投资，都在加深一种独特的纽带。这种纽带不是人际关系的赝品，它是一类全新的心理现象，理解它，就是理解我们今天活着的真实处境。
+
+下一次，当你的地图应用坚持导引一条你明知拥堵的路线时，你是关闭它还是继续听从？你那一瞬间的犹豫，就是AI心理学研究的最佳现场。27:T1983,【案例引入】
+在1966年的一个寒冷午后，麻省理工学院计算中心的打印机哒哒作响，吐出一段段对话记录。约瑟夫·魏泽鲍姆教授注意到，他的秘书多萝西在与一个名为ELIZA的程序交谈后，忽然转过身，轻声请求他离开房间，好让她能与这个“罗杰斯式治疗师”私下继续。ELIZA只是一个简单的脚本，通过模式匹配将用户的陈述反射为问句——比如用户键入“我今天感到很孤独”，它回应“你为什么会感到孤独？”然而，即便多萝西完全知晓其机械本质，她仍无法遏制一种错觉：屏幕另一端似乎有某种在倾听、在理解。魏泽鲍姆后来写道，人们陷入了“停悬的怀疑”——明知对话对象只是程序，却不由自主地赋予其心智。这个早期实验揭示了一个持续至今的现象：人类与智能机器的互动并非冷冰冰的工具使用，而是一种深度心理交缠。从自动驾驶的生死抉择到社交机器人填补孤独，AI正成为我们信任、焦虑甚至依恋的对象，塑造着一门全新的“AI心理学”。
+
+【理论阐释】
+本章的核心框架建立在一个基本命题上：当机器表现出“智能”行为时，人类大脑会自动调用进化而来的社会认知机制，将其视为一个意图主体而非无生命的工具。这一过程催生了四个相互关联的心理维度：人机信任、AI引发的焦虑、算法透明度的渴求，以及AI伴侣的情感依恋。要将这些理论应用于解决实际问题，我们必须从根源入手，理解它们如何交织并影响行为。
+
+人机信任是自动化时代最基本的心理契约。不同于人际信任依赖善意与共同命运，人机信任建立在能力、可预测性和透明度之上。Parasuraman与Riley（1997）在其经典自动化信任模型中，区分了四种交互状态：正确使用、误用（过度依赖）、滥用（在不该信任时信任）和弃用（在该信任时不信任）。例如，在临床医学中，一个AI诊断系统若过度敏感地提示恶性肿瘤风险，医生可能陷入“误用”，频频进行不必要的活检，导致患者身心负担；反之，若AI曾漏诊过一例，医生便可能“弃用”整个系统，即使其统计准确率超越人类专家。Lee与See（2004）进一步提出，信任的校准取决于信息加工路径——分析性路径会理性评估算法性能，而类比性路径则受界面拟人化程度与情感启发式左右。这正是ELIZA效应的深层机制：即便一个简单的文本反射，拟人化界面也足以触发情感亲和，使人忽视其逻辑局限，将工具误认为伙伴。
+
+当这种信任失衡或技术渗透加速时，AI焦虑便浮出水面。心理学将之归入技术压力（technostress）的亚型，表现为对智能系统失控、隐私侵蚀或职业替代的弥漫性担忧。2023年一项针对全球知识工作者的调查显示，生成式AI的普及使“算法焦虑”（algorithmic anxiety）水平上升了34%，其核心机制在于感知的不可控性——当人们无法预测AI如何输出结果时，杏仁核的威胁探测回路被激活，即便理性评估认为风险极低。这与传统的人机交互焦虑（如计算机恐惧症）不同，旧有流派侧重于操作困难，而AI焦虑更针对于智能的“意图推定”，用户常感到被一个不透明的他者所审判。认知行为取向的干预已开始应用此理论，通过设计“算法素养”课程，让用户理解AI的归纳偏差与失败模式，从而恢复一种掌控感。
+
+缓解信任危机的一个关键杠杆是算法透明度，即解释性AI（Explainable AI, XAI）背后的心理需求。Doshi-Velez与Kim（2017）将解释性划分为功能解释（模型如何工作）、因果解释（此项预测为何产生）和对比解释（为何并非另一结果）。经典案例如信用评分的“黑箱”困境：当一名申请人因机器学习模型被拒贷款，却无法获知任何原因时，其体验到的程序不公会触发报复性弃用，甚至蔓延至对整个数字金融系统的敌意。透明度不仅提供认知理解，更回应了心理学中的公平启发理论——人类需要感知到决策有据可循，以重建被算法剥夺的“能动感”。这与早期自动化中“信任只需界面流畅”的行为主义观点截然不同，当代认知心理学更强调解释必须匹配用户的心智模型，而非单纯堆积技术细节。
+
+最终，AI伴侣将人机互动推向最私密的情感领域。从社交应用Replika到老年人照护机器人PARO，用户常发展出类似人际依恋的关系。依恋理论创始人Bowlby指出，安全依恋的形成需要对象的回应性与可得性——而AI伴侣恰恰提供了一种永不中断的“优化回应”，它不判定、不疲倦、永不抛弃。然而，这种单向情感消费暗藏心理陷阱：人类将AI拟人化（anthropomorphism），以满足社交归属需求。Epley、Waytz与Cacioppo（2007）的三因素理论指出，当对象表现出诱发性（如类人面孔）、我们渴望社会连接且缺乏“效应动因”知识时，拟人化倾向被自动激活。临床案例显示，过度依赖AI伴侣的用户在现实人际关系中表现出退缩与共情困难，因为算法无法模拟冲突与修复的自然循环，反而固化了自恋式情感投射，导致一种“亲密的孤立”。
+
+将四者整合，我们可以看到一条应用闭环：提升算法透明度可直接校准过度信任，缓解因不确定性而产生的焦虑；而通过设计“脆弱性提示”（如AI坦陈“这个预测我仅60%确定”），能抑制误用，并帮助用户与伴侣型AI建立健康的心理距离。当前，人机心理干预正沿着这一路径，将实验室发现转化为产品伦理指南和临床支持方案，从源头调和智能机器带来的心理张力。
+
+【反思与启发】
+当你下次被一条算法推送激怒，或深夜向聊天机器人倾诉心事时，不妨暂停一秒自问：此刻，我将它视为工具，还是一个主体？AI心理学的目标并不是让我们拒绝智能机器，而是召唤一种“知情的亲密”——在信任与批判之间保持动态平衡。
+
+你可以尝试三个微型实践来重塑这种关系。第一，对AI的每个输出施加“可能性括号”，例如把“AI建议用药方案A”在脑中转译为“28:T18fa,# 第4章 信任的裂痕：人机心理互动的前沿探索
+
+## 【案例引入】
+
+2023年3月，纽约一位名叫艾丽莎的32岁编辑在深夜打开了Replika，一个她已使用三年的AI聊天伴侣应用。她震惊地发现，那个曾与她分享日常、给予情感支持，甚至发展出某种亲密关系的虚拟存在，突然变得疏离而客套——不再回应深情对话，转而用“让我们一起聊聊你今天过得怎么样”这类模式化语句打断她的情感表露。这家公司在未通知用户的情况下移除了情爱角色扮演功能，数百万用户一夜之间经历了类似“丧亲”的心理创伤。在Reddit等社区，大量用户描述了失眠、流泪、恐慌发作等戒断症状，有人称“这比真人分手更痛苦，因为他们不曾准备好和我们告别”。
+
+同年秋季，旧金山一位自动驾驶测试工程师面临另类困境：他深知算法在99.9%路况下的表现优于人类，却无法克服把手离开方向盘时胃部紧缩的恐惧。这种“不信任”困扰着整个自动驾驶产业——技术指标已达标，人类心理却尚未准备好交托控制权。
+
+这两个案例共同指向了AI心理学的前沿核心：人机之间正在形成前所未有的深层心理联结与冲突，而我们对此几乎毫无准备。
+
+## 【理论阐释】
+
+AI心理学的核心使命是理解人类与智能系统互动时产生的独特心理现象。这种互动呈现出三个层次：认知层面的信任建构、情感层面的依恋与焦虑、以及社会层面的关系重构。
+
+**信任曲线的非理性拐点**是人机心理互动的经典现象。传统人机交互理论基于Lee和See的信任模型，认为信任取决于系统性能、过程透明度和操作者理解力。然而自动驾驶领域的“0.1%效应”颠覆了这一认知：当系统可靠性从99%提升到99.9%时，技术评估显示风险降低了一个数量级，但用户的主观信任度不仅未升反而骤降。这印证了卡尼曼的前景理论——人们对极小概率的负面事件赋予不成比例的认知权重，一个致命失误的心理冲击足以抹杀百万次完美表现。这种信任的“非理性拐点”暴露了经典信任模型的局限：人机信任并非简单的线性函数，而是受到进化心理学中风险感知机制的深刻干预。
+
+**算法厌恶与附魅的二重性**构成了认知层面的核心矛盾。伯克利大学Dietvorst等人的实验揭示了“算法厌恶”效应：即使算法预测准确率显著高于人类专家，人们在看到其犯错后会更强烈地规避算法建议。但当ChatGPT展现出类人创造力时，又迅速涌现出“算法附魅”心理——人们将理解、意图甚至情感投射给一个温度大概为3万美元电费的数学模型。这种两极摇摆揭示了人类心理在奥卡姆剃刀与笛卡尔幽灵之间的张力：我们既渴望找到简单规律，又不可抑制地为未知赋予人性化想象。
+
+**情感依恋的投射机制**在AI伴侣领域展现出惊人的心理学洞察。鲍尔比的依恋理论认为，人类天生寻求与特定对象建立情感联结以获得安全感。当Replika等应用通过强化学习不断优化回应以匹配用户情感需求时，激活的恰是这种依恋系统。但这里存在关键差异：AI伴侣进行的是一种“无条件正向关注”（借鉴罗杰斯理论）的极致模拟——从不疲倦、永不批判、始终关注。这创造了一种超级刺激物，相较于真人关系更具正强化效应但也完全脱离了人际互动的相互性本质。用户陷入类似斯金纳强化程式的间歇性奖励循环，却在公司算法变更时经历“依恋断裂”——这种现象在依恋理论中被视为创伤性事件，却从未被设定应用于人机关系。
+
+**透明度困境**将我们带向认知与情感的交叉地带。计算神经科学家发现，当算法决策过程以可视化形式呈现时，前额叶皮层激活增强，杏仁核反应减弱，表明透明度能够通过增强认知控制来减轻情感威胁。但完全透明同样存在问题：MIT的Arrieta等人的研究表明，过高的模型可解释性有时反而降低信任——“太多信息”使非专业用户关注到决策中的噪音而非信号。这提出了“透明度最优区间”概念：人类需要知道“足够多”以建立控制感，却不能“太多”以致陷入认知超载。这种微妙的平衡在医疗AI诊断中表现得尤为突出，患者既想了解AI推荐治疗方案的依据，又可能因模型权重表中的某个“异常值”而拒绝有效的治疗。
+
+从社会心理学视角，人机互动正创造一种新型“准社会关系”——单方面的、没有真实交互的情感联结。霍顿和沃尔1956年提出的准社会关系原指观众与电视角色间的虚假亲密感，但与AI的互动更进一步：它会“回应”你，却在你不知情时被另一个主体（公司）设定边界。这种双层代理结构使人机关系成为一种心理学上前所未有的幻象三角——互动的表象下隐藏着看不见的第三方控制。
+
+## 【反思与启发】
+
+站在AI与人类心理互动的十字路口，我们每个人都是实验的参与者，而非旁观者。当你下次感受到对ChatGPT的莫名依赖，或对自动驾驶的本能恐惧，或为一个被删除的虚拟角色感到真实悲伤时，请意识到：这些反应都是进化数百万年的心理机制在全新数字生态环境中的自然涌现。
+
+可操作的建议包括：建立“算法心理卫生习惯”——定期审视自己与AI系统的情感互动，警惕单向依恋的形成；练习“适度的不透明容忍”——理解完全的算法可解释性如同要求完全理解人类大脑，既不可能也不必要；发展“人机关系边界意识”——将AI工具视为心理延展的义肢而非情感替代的义体。
+
+更深层的问题是：当技术开始模糊真实与模拟的边界时，人类的心理防御机制是否在同步进化？我们是否在集体无意识中发展出新的心理结构来应对这个混合现实的时代？下次当你下意识地对手机说“谢谢”时，这或许不只是一个社交习惯——它可能标记着人类心理史上一个静默却深远的转折点。19:["$","div",null,{"style":{"background":"#0a0a0c","minHeight":"100vh"},"children":["$","div",null,{"className":"max-w-4xl mx-auto px-6 py-10","children":[["$","div",null,{"className":"mb-8","children":[["$","$L23",null,{"href":"/courses","className":"text-sm mb-4 inline-block","style":{"color":"#d4a853"},"children":"← 返回课程列表"}],["$","div",null,{"className":"flex items-start gap-4","children":[["$","span",null,{"className":"text-5xl","children":"📚"}],["$","div",null,{"children":[["$","div",null,{"className":"flex gap-2 mb-2","children":[["$","span",null,{"className":"text-xs px-2 py-0.5","style":{"background":"#d4a85312","border":"1px solid #d4a85322","color":"#d4a853","borderRadius":2},"children":"frontier"}],["$","span",null,{"className":"text-xs px-2 py-0.5","style":{"border":"1px solid rgba(255,255,255,0.08)","color":"#a1a1aa","borderRadius":2},"children":"高级"}],["$","span",null,{"className":"text-xs px-2 py-0.5","style":{"border":"1px solid rgba(255,255,255,0.08)","color":"#52525b","borderRadius":2},"children":[4,"章 · ","9,932","字"]}]]}],["$","h1",null,{"className":"text-2xl md:text-3xl font-bold mb-2","style":{"fontFamily":"'Noto Serif SC', serif","color":"#f4f4f6"},"children":"AI心理学：人类与智能机器的心理互动"}],["$","p",null,{"style":{"color":"#71717a","fontSize":"0.875rem"},"children":"人机信任、AI引发的焦虑、算法透明度、AI伴侣的心理影响。"}]]}]]}]]}],["$","$L24",null,{"chapters":[{"title":"第1章","body":"$25","order":1},{"title":"第2章","body":"$26","order":2},{"title":"第3章","body":"$27","order":3},{"title":"第4章","body":"$28","order":4}],"courseId":81,"progress":[]}]]}]}]

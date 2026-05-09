@@ -1,5 +1,5 @@
 1:"$Sreact.fragment"
-2:I[39756,["/DreamLab/_next/static/chunks/08ud36ph.lgt7.js","/DreamLab/_next/static/chunks/0d3shmwh5_nmn.js"],"default"]
-3:I[37457,["/DreamLab/_next/static/chunks/08ud36ph.lgt7.js","/DreamLab/_next/static/chunks/0d3shmwh5_nmn.js"],"default"]
+2:I[47185,["/DreamLab/_next/static/chunks/0zg_16dxnzi-w.js","/DreamLab/_next/static/chunks/0-3_g_9odlv.-.js"],"default"]
+3:I[8828,["/DreamLab/_next/static/chunks/0zg_16dxnzi-w.js","/DreamLab/_next/static/chunks/0-3_g_9odlv.-.js"],"default"]
 4:[]
-0:{"rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"isPartial":false,"staleTime":300,"varyParams":"$W4","buildId":"TAIbrmBRk5kORrzpeIugc"}
+0:{"rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"isPartial":false,"staleTime":300,"varyParams":"$W4","buildId":"kwmveYjy7FaKfGC1cLxp8"}
