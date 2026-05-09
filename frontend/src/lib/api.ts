@@ -1,9 +1,9 @@
 // 客户端 API 封装 + Mock 降级层
 // 无后端时自动降级为 Mock 数据，确保静态站点内容完整可用
 import { MOCK_ASSESSMENTS } from './mock-assessments';
-import { MOCK_COURSES } from './mock-courses';
 import { MOCK_WELLNESS, MOCK_COMPANION_REPLIES } from './mock-data';
 import { MOCK_KNOWLEDGE_CATEGORIES, MOCK_KNOWLEDGE_ARTICLES, MOCK_KNOWLEDGE_FEATURED, MOCK_QUIZ_RESULT } from './mock-knowledge';
+import allCourses from '@/../public/data/courses.json';
 
 const API_BASE = typeof window !== 'undefined' ? (process.env.NEXT_PUBLIC_API_URL || '') : '';
 
@@ -34,9 +34,9 @@ function getMockData<T>(endpoint: string): T {
   if (endpoint.startsWith('/api/courses')) {
     if (endpoint.match(/\/api\/courses\/\d+/)) {
       const id = Number(endpoint.split('/').pop()?.split('?')[0]);
-      return (MOCK_COURSES.find(c => c.id === id) || null) as T;
+      return (allCourses.find(c => c.id === id) || null) as T;
     }
-    return MOCK_COURSES as T;
+    return allCourses as T;
   }
 
   // Assessments

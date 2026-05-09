@@ -1,14 +1,16 @@
 import Link from 'next/link';
 import ChapterList from '@/components/ChapterList';
 import { getCourse, getProgress } from '@/lib/server-data';
-import { KANGBO_CATEGORIES, KANGBO_COURSES } from '@/lib/kangbo-courses';
+import coursesData from '@/../public/data/courses.json';
 
 const DIFFICULTY_LABELS: Record<string, string> = {
   beginner: '入门', core: '核心', intermediate: '进阶', advanced: '高级', master: '终极',
 };
 
 export function generateStaticParams() {
-  return KANGBO_COURSES.map((course) => ({ id: String(course.id) }));
+  // Generate all 100 course pages
+  const allIds = Array.from({ length: 100 }, (_, i) => i + 1);
+  return allIds.map((id) => ({ id: String(id) }));
 }
 
 interface PageProps { params: Promise<{ id: string }> }
@@ -28,7 +30,9 @@ export default async function CourseDetailPage({ params }: PageProps) {
     );
   }
 
-  const cat = KANGBO_CATEGORIES[course.category] || { label: course.category, icon: '课', color: '#6b5b8a' };
+  const catMeta = coursesData.find((c: any) => c.id === id);
+  const catLabel = catMeta?.category || course.category;
+  const cat = { label: catLabel, color: '#d4a853' };
   const chapters = Array.isArray(course.content) ? course.content : [];
   const totalWords = chapters.reduce((sum: number, ch: any) => sum + (ch.body?.length || 0), 0);
 
@@ -42,7 +46,7 @@ export default async function CourseDetailPage({ params }: PageProps) {
             ← 返回课程列表
           </Link>
           <div className="flex items-start gap-4">
-            <span className="text-5xl">{cat.icon}</span>
+            <span className="text-5xl">📚</span>
             <div>
               <div className="flex gap-2 mb-2">
                 <span className="text-xs px-2 py-0.5" style={{ background: cat.color + '12', border: `1px solid ${cat.color}22`, color: cat.color, borderRadius: 2 }}>{cat.label}</span>
