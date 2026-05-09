@@ -13,7 +13,7 @@ export default defineAppConfig({
   window: {
     backgroundTextStyle: 'dark',
     navigationBarBackgroundColor: '#0a0a0c',
-    navigationBarTitleText: 'DreamLab',
+    navigationBarTitleText: '康波研究院',
     navigationBarTextStyle: 'white',
   },
   tabBar: {
@@ -27,12 +27,12 @@ export default defineAppConfig({
         text: '首页',
       },
       {
-        pagePath: 'pages/dream/index',
-        text: '解梦',
+        pagePath: 'pages/assessments/index',
+        text: '画像',
       },
       {
         pagePath: 'pages/courses/index',
-        text: '课程',
+        text: '康波课',
       },
       {
         pagePath: 'pages/profile/index',

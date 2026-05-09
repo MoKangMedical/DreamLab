@@ -1,3 +1,3 @@
 export default definePageConfig({
-  navigationBarTitleText: '人生思考',
+  navigationBarTitleText: '策略复盘',
 })

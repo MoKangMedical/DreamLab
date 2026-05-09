@@ -10,6 +10,7 @@ export function generateStaticParams() {
   ];
 }
 
-export default function Page({ params }: { params: { floor: string } }) {
-  return <FloorPage params={params} />;
+export default async function Page({ params }: { params: Promise<{ floor: string }> }) {
+  const resolvedParams = await params;
+  return <FloorPage params={resolvedParams} />;
 }

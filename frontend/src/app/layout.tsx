@@ -4,47 +4,44 @@ import BottomNav from "@/components/BottomNav";
 import InteractiveGhibli from "@/components/InteractiveGhibli";
 import { SpiritedInteractions } from "@/components/SpiritedInteractions";
 import GlobalExploreMore from "@/components/GlobalExploreMore";
-import GhibliMusic from "@/components/GhibliMusic";
 import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 
 export const metadata: Metadata = {
-  title: "DreamLab — Evidence-Based Psychology",
-  description: "Standardized assessments, AI-powered insight, evidence-based knowledge. Understand your inner world.",
+  title: "康波研究院 — 掌握50年财富周期",
+  description: "基于康德拉季耶夫长波理论，构建周期研究、课程学习、资产配置和人生规划系统。",
   manifest: "/DreamLab/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "DreamLab",
+    title: "康波研究院",
   },
 };
 
 const NAV_LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/courses", label: "Courses" },
-  { href: "/assessments", label: "Assessments" },
-  { href: "/companion", label: "Companion" },
-  { href: "/dream", label: "Dreams" },
-  { href: "/knowledge", label: "Knowledge" },
-  { href: "/wellness", label: "Wellness" },
+  { href: "/", label: "首页" },
+  { href: "/courses", label: "课程体系" },
+  { href: "/predict", label: "周期工具" },
+  { href: "/knowledge", label: "心理知识库" },
+  { href: "/reflect", label: "策略复盘" },
+  { href: "/profile", label: "我的路线" },
 ];
 
 const FOOTER_COLUMNS = {
-  Platform: [
-    { label: "Assessments", href: "/assessments" },
-    { label: "AI Companion", href: "/companion" },
-    { label: "Dream Analysis", href: "/dream" },
-    { label: "Wellness Toolkit", href: "/wellness" },
-    { label: "Community", href: "/community" },
+  研究能力: [
+    { label: "课程体系", href: "/courses" },
+    { label: "周期工具", href: "/predict" },
+    { label: "心理知识库", href: "/knowledge" },
+    { label: "策略复盘", href: "/reflect" },
   ],
-  Learn: [
-    { label: "Knowledge Base", href: "/knowledge" },
-    { label: "Courses", href: "/courses" },
-    { label: "Spirited Journey", href: "/spirited" },
-    { label: "Bathhouse", href: "/bathhouse" },
+  学习路径: [
+    { label: "周期理论基础", href: "/courses" },
+    { label: "投资大师智慧", href: "/courses" },
+    { label: "投资实战与未来", href: "/courses" },
+    { label: "高级策略", href: "/courses" },
   ],
-  About: [
-    { label: "Evidence & Sources", href: "/knowledge" },
-    { label: "Privacy & Ethics", href: "/" },
+  项目: [
+    { label: "投资者画像", href: "/assessments" },
+    { label: "个人中心", href: "/profile" },
     { label: "GitHub", href: "https://github.com/MoKangMedical/DreamLab" },
   ],
 };
@@ -76,7 +73,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 className="font-bold text-lg tracking-tight"
                 style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}
               >
-                DreamLab
+                康波研究院
               </span>
             </a>
             <div className="flex items-center gap-1">
@@ -131,15 +128,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                       className="text-lg font-bold mb-6 block"
                       style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}
                     >
-                      DreamLab
+                      康波研究院
                     </a>
                     <p
                       className="text-sm leading-relaxed mb-8"
                       style={{ color: '#71717a', lineHeight: 1.8 }}
                     >
-                      Evidence-based psychology platform.
+                      掌握 50 年财富周期。
                       <br />
-                      Understand your inner world.
+                      课程、工具、复盘与路线图。
                     </p>
                     <span
                       className="text-xs tracking-wider"
@@ -177,7 +174,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}
                 >
                   <p className="text-xs" style={{ color: '#52525b' }}>
-                    © 2026 DreamLab by MoKangMedical. All assessments are for reference only and do not constitute clinical diagnosis.
+                    © 2026 康波研究院 by MoKangMedical. 内容仅用于研究与教育，不构成投资建议。
                   </p>
                   <div className="flex gap-6">
                     <a href="/" className="text-xs" style={{ color: '#52525b' }}>
@@ -187,7 +184,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                       Terms
                     </a>
                     <a href="/" className="text-xs" style={{ color: '#52525b' }}>
-                      Ethics
+                      Research Ethics
                     </a>
                   </div>
                 </div>
@@ -203,16 +200,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <BottomNav />
         <PWAInstallPrompt />
-        <GhibliMusic />
       </body>
     </html>
   );
 }
 
-/* ── Margin Decorations — Subtle Ghibli atmosphere in side columns ── */
+/* ── Margin Decorations — subtle long-wave atmosphere in side columns ── */
 function MarginDecorations({ side }: { side: 'left' | 'right' }) {
   const isLeft = side === 'left';
-  const kanji = isLeft ? ['夢', '心', '風'] : ['光', '祈', '霊'];
+  const kanji = isLeft ? ['周', '期', '势'] : ['产', '业', '策'];
   const fireflyCount = 4;
 
   // Generate stable fireflies

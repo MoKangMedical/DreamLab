@@ -1,5 +1,4 @@
-// DreamLab 小程序 — 首页
-// 轻量版平台入口，仅展示核心功能卡片
+// 康波研究院小程序 — 首页
 
 import { View, Text } from '@tarojs/components'
 import Taro from '@tarojs/taro'
@@ -7,23 +6,23 @@ import './index.scss'
 
 export default function Index() {
   const features = [
-    { title: '梦境解析', desc: '四重视角解读你的梦', icon: '🌙', path: '/pages/dream/index', color: '#d4a853' },
-    { title: '心理测评', desc: '6 套临床量表', icon: '◎', path: '/pages/assessments/index', color: '#c4554d' },
-    { title: '系统课程', desc: '10门课 · 39章', icon: '📚', path: '/pages/courses/index', color: '#6b5b8a' },
-    { title: '人生思考', desc: '梦后反思 · AI洞察', icon: '💭', path: '/pages/reflect/index', color: '#5a9a6f' },
+    { title: '康波课程', desc: '65门课 · 10阶段', icon: '周', path: '/pages/courses/index', color: '#d4a853', tab: true },
+    { title: '周期测评', desc: '风险偏好与行为偏差', icon: '◎', path: '/pages/assessments/index', color: '#c4554d', tab: true },
+    { title: '策略复盘', desc: '假设 · 证据 · 风险', icon: '策', path: '/pages/reflect/index', color: '#5a9a6f' },
+    { title: '我的路线', desc: '课程进度与30年蓝图', icon: '图', path: '/pages/profile/index', color: '#6b5b8a', tab: true },
   ]
 
   return (
     <View className='page'>
       {/* Header */}
       <View className='hero'>
-        <Text className='hero-tag'>循证心理 · AI 驱动</Text>
+        <Text className='hero-tag'>KANGBO ACADEMY · 2026-2040</Text>
         <Text className='hero-title'>
-          读懂你的{'\n'}
-          <Text className='hero-title-gold'>内心世界</Text>
+          掌握50年{'\n'}
+          <Text className='hero-title-gold'>财富周期</Text>
         </Text>
         <Text className='hero-desc'>
-          基于标准化心理测评、AI深度解读与循证知识库
+          康波理论、产业地图、资产配置和个人路线图
         </Text>
       </View>
 
@@ -33,7 +32,7 @@ export default function Index() {
           <View
             key={i}
             className='feature-card'
-            onClick={() => Taro.navigateTo({ url: f.path })}
+            onClick={() => f.tab ? Taro.switchTab({ url: f.path }) : Taro.navigateTo({ url: f.path })}
           >
             <View className='feature-accent' style={{ background: f.color }} />
             <Text className='feature-icon'>{f.icon}</Text>
@@ -47,9 +46,9 @@ export default function Index() {
       <View className='cta'>
         <View
           className='btn-gold'
-          onClick={() => Taro.navigateTo({ url: '/pages/dream/index' })}
+          onClick={() => Taro.switchTab({ url: '/pages/courses/index' })}
         >
-          <Text>开始解梦 →</Text>
+          <Text>进入课程体系 →</Text>
         </View>
       </View>
     </View>

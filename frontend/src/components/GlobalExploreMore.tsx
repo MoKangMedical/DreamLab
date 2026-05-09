@@ -11,14 +11,12 @@ interface ExploreLink {
 }
 
 const EXPLORE_ALL: ExploreLink[] = [
-  { href: '/assessments', label: 'Assessments', desc: '6 clinical scales', accent: '#c4554d' },
-  { href: '/companion', label: 'AI Companion', desc: 'Empathetic dialogue', accent: '#6b5b8a' },
-  { href: '/wellness', label: 'Wellness', desc: 'Meditation & breathing', accent: '#3b8b7a' },
-  { href: '/knowledge', label: 'Knowledge', desc: 'Peer-reviewed articles', accent: '#d4a853' },
-  { href: '/spirited', label: 'Spirited Journey', desc: 'Narrative adventure', accent: '#5a7d9a' },
-  { href: '/courses', label: 'Courses', desc: 'Freud · Jung · Science', accent: '#6b5b8a' },
-  { href: '/dream', label: 'Dreams', desc: 'Record & decode', accent: '#d4a853' },
-  { href: '/bathhouse', label: 'Bathhouse', desc: 'Cinematic landing', accent: '#c4554d' },
+  { href: '/courses', label: '课程体系', desc: '65 门 · 10 阶段', accent: '#d4a853' },
+  { href: '/predict', label: '周期工具', desc: '定位 2026-2040', accent: '#4f9db8' },
+  { href: '/knowledge', label: '心理知识库', desc: 'CBT · 正念 · 睡眠', accent: '#8b7cf6' },
+  { href: '/reflect', label: '策略复盘', desc: '假设 · 证据 · 风险', accent: '#72a66a' },
+  { href: '/assessments', label: '投资者画像', desc: '风险与行为偏差', accent: '#c4554d' },
+  { href: '/profile', label: '我的路线', desc: '课程进度与目标', accent: '#cfa34d' },
 ];
 
 function getLinksFor(pathname: string): ExploreLink[] {
@@ -28,16 +26,12 @@ function getLinksFor(pathname: string): ExploreLink[] {
 }
 
 function getTitleFor(pathname: string): string {
-  if (pathname.startsWith('/dream')) return 'Continue Your Journey';
-  if (pathname.startsWith('/assessments')) return 'After the Assessment';
-  if (pathname.startsWith('/companion')) return 'After the Conversation';
-  if (pathname.startsWith('/wellness')) return 'Keep Exploring';
-  if (pathname.startsWith('/knowledge')) return 'Further Reading';
-  if (pathname.startsWith('/spirited')) return 'Return from the Bathhouse';
-  if (pathname.startsWith('/courses')) return 'Continue Learning';
-  if (pathname.startsWith('/profile')) return 'Your Growth Path';
-  if (pathname.startsWith('/bathhouse')) return 'Enter the Bathhouse';
-  return 'Continue Exploring';
+  if (pathname.startsWith('/courses')) return '继续学习';
+  if (pathname.startsWith('/predict')) return '继续定位';
+  if (pathname.startsWith('/knowledge')) return '继续研究';
+  if (pathname.startsWith('/reflect')) return '继续复盘';
+  if (pathname.startsWith('/profile')) return '我的路线';
+  return '继续探索';
 }
 
 export default function GlobalExploreMore() {

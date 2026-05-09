@@ -1,4 +1,4 @@
 // 首页配置
 export default definePageConfig({
-  navigationBarTitleText: 'DreamLab',
+  navigationBarTitleText: '康波研究院',
 })

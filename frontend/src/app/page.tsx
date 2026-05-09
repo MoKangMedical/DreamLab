@@ -1,248 +1,128 @@
-'use client';
-
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { KANGBO_COURSES, KANGBO_PHASES } from '@/lib/kangbo-courses';
 
-const FEATURES = [
+const CAPABILITIES = [
   {
-    href: '/assessments',
-    title: '专业心理测评',
-    desc: '6 套标准化临床量表，AI 智能解读，看见真实的自己。',
-    accent: '#c4554d',
-    metric: '6',
-    metricLabel: '专业量表',
-  },
-  {
-    href: '/companion',
-    title: 'AI 心灵陪伴',
-    desc: '基于 CBT 框架的共情对话，无需担心被评判。',
-    accent: '#6b5b8a',
-    metric: '24/7',
-    metricLabel: '随时陪伴',
-  },
-  {
-    href: '/dream',
-    title: '梦境解析',
-    desc: '弗洛伊德、荣格、现代科学、东方智慧——四重视角解码潜意识。',
+    href: '/courses',
+    title: '康波课程体系',
+    desc: '65 门课程串联长波理论、投资大师、宏观指标、资产配置和传承方案。',
+    metric: '65',
+    label: '门课程',
     accent: '#d4a853',
-    metric: '4',
-    metricLabel: '解读维度',
-  },
-  {
-    href: '/knowledge',
-    title: '证据级知识库',
-    desc: '同行评审心理学文献 + 交互测验，科学不枯燥。',
-    accent: '#3b8b7a',
-    metric: '12',
-    metricLabel: '精选文章',
-  },
-  {
-    href: '/wellness',
-    title: '心智健康工坊',
-    desc: '引导冥想、呼吸练习、感恩日记——给心灵一个温柔的港湾。',
-    accent: '#5a7d9a',
-    metric: '5',
-    metricLabel: '实用工具',
-  },
-  {
-    href: '/community',
-    title: '互助社区',
-    desc: '匿名分享，温暖陪伴。你从不孤单。',
-    accent: '#c4554d',
-    metric: '100+',
-    metricLabel: '社区成员',
   },
   {
     href: '/predict',
-    title: 'AI 心理预测',
-    desc: '基于你的数据，AI 预测心理趋势、人格发展和梦境模式。',
-    accent: '#d4a853',
+    title: '周期定位工具',
+    desc: '用年龄、资产、风险偏好和关键变量生成 2026-2040 的观察与行动框架。',
+    metric: '2040',
+    label: '规划终点',
+    accent: '#4f9db8',
+  },
+  {
+    href: '/knowledge',
+    title: '心理学知识库',
+    desc: '保留 CBT、正念、依恋、神经科学、积极心理学和睡眠科学等原有知识内容。',
+    metric: '10',
+    label: '知识主题',
+    accent: '#8b7cf6',
+  },
+  {
+    href: '/reflect',
+    title: '策略复盘',
+    desc: '把每次判断写成假设、证据、风险和下次复盘日期，形成个人研究档案。',
     metric: '4',
-    metricLabel: '预测维度',
+    label: '复盘字段',
+    accent: '#72a66a',
+  },
+  {
+    href: '/assessments',
+    title: '投资者画像',
+    desc: '保留心理测评能力，用于识别风险承受力、情绪波动和行为偏差。',
+    metric: '6',
+    label: '量表',
+    accent: '#c4554d',
+  },
+  {
+    href: '/profile',
+    title: '我的财富路线',
+    desc: '跟踪课程进度、复盘记录和长期目标，形成可持续的学习闭环。',
+    metric: '30Y',
+    label: '路线图',
+    accent: '#cfa34d',
   },
 ];
 
-const VALUE_PROPS = [
-  {
-    title: '科学循证',
-    desc: '每一个量表都是经过数十年同行评审验证的临床工具。没有伪科学，没有星座运势——只有严谨的心理测量学。',
-    accent: '#d4a853',
-  },
-  {
-    title: 'AI 深度洞察',
-    desc: 'DeepSeek 提供超越分数的个性化解读。我们帮你理解的不仅是数字，更是数字背后关于你的故事。',
-    accent: '#3b8b7a',
-  },
-  {
-    title: '为人而设计',
-    desc: '心理学不必冷冰冰。我们把循证工具包裹在千与千寻油屋的温暖里——因为疗愈，应该像回家一样。',
-    accent: '#6b5b8a',
-  },
+const FRAMEWORK = [
+  { title: '长波定方向', desc: '用 50-60 年技术与资本开支周期判断大方向。' },
+  { title: '中周期定节奏', desc: '结合债务、库存、地产和政策周期决定等待或行动。' },
+  { title: '产业定赛道', desc: '观察 AI、能源、生物科技、先进制造等主导产业扩散。' },
+  { title: '家庭定方案', desc: '把资产、职业、城市、教育和传承放进同一张路线图。' },
 ];
 
 export default function HomePage() {
-  const [visible, setVisible] = useState(false);
-  useEffect(() => { setVisible(true); }, []);
+  const totalMinutes = KANGBO_COURSES.reduce((sum, course) => sum + course.minutes, 0);
+  const featured = KANGBO_COURSES.filter((course) => [1, 2, 3, 6, 20, 50].includes(course.id));
 
   return (
     <div style={{ background: '#0a0a0c' }}>
-      {/* ════════════════ HERO ════════════════ */}
-      <section
-        className={`section-lg transition-all duration-700 ${visible ? 'opacity-100' : 'opacity-0'}`}
-        style={{ paddingTop: 48, paddingBottom: 64 }}
-      >
-        {/* Ambient glow */}
-        <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-80 h-80 rounded-full pointer-events-none"
-          style={{
-            background: 'radial-gradient(circle, rgba(212,168,83,0.06), transparent 70%)',
-            filter: 'blur(80px)',
-            zIndex: 0,
-          }}
-        />
-
-        <div className="relative z-10 text-center px-4">
-          {/* Label */}
-          <p
-            className="mb-4"
-            style={{
-              fontFamily: "'Noto Sans SC', sans-serif",
-              fontSize: 11,
-              fontWeight: 500,
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase',
-              color: 'rgba(212,168,83,0.5)',
-            }}
-          >
-            循证心理 · AI 驱动 · 临床级量表
-          </p>
-
-          {/* Headline */}
-          <h1
-            className="mb-2"
-            style={{
-              fontFamily: "'Noto Serif SC', serif",
-              fontWeight: 700,
-              fontSize: 'clamp(44px, 11vw, 80px)',
-              lineHeight: 1.04,
-              letterSpacing: '-0.035em',
-              color: '#f4f4f6',
-            }}
-          >
-            读懂你的
-            <br />
-            <span style={{ color: '#d4a853' }}>内心世界</span>
-          </h1>
-
-          {/* Subtitle */}
-          <p
-            className="mb-10 max-w-md mx-auto"
-            style={{
-              fontFamily: "'Noto Sans SC', sans-serif",
-              fontSize: 16,
-              lineHeight: 1.9,
-              color: '#a1a1aa',
-            }}
-          >
-            基于标准化心理测评、AI 深度解读与循证知识库
-            构建的心理学综合平台
-          </p>
-
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-16">
-            <Link href="/assessments" className="btn btn-primary" style={{ padding: '16px 36px', fontSize: 16 }}>
-              开始测评 →
-            </Link>
-            <Link href="/bathhouse" className="btn btn-ghost">
-              探索油屋
-            </Link>
-          </div>
-
-          {/* Trust indicators */}
-          <div
-            className="inline-flex items-center gap-12 px-10 py-6"
-            style={{
-              background: 'rgba(24,24,27,0.5)',
-              border: '1px solid rgba(255,255,255,0.04)',
-              borderRadius: 16,
-            }}
-          >
-            {[
-              { value: '6', label: '临床量表' },
-              { value: '12', label: '精选文章' },
-              { value: '4', label: '解读维度' },
-            ].map((s) => (
-              <div key={s.label} className="text-center">
-                <div style={{ fontFamily: "'Noto Serif SC', serif", fontSize: 28, fontWeight: 700, color: '#d4a853' }}>
-                  {s.value}
-                </div>
-                <div style={{ fontFamily: "'Noto Sans SC', sans-serif", fontSize: 10, fontWeight: 500, color: '#71717a', letterSpacing: '0.03em', textTransform: 'uppercase' }}>
-                  {s.label}
-                </div>
+      <section className="px-5 md:px-6 pt-16 md:pt-24 pb-12 md:pb-16">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.08fr_0.92fr] gap-10 items-end">
+            <div>
+              <h1
+                className="font-bold mb-5"
+                style={{ fontFamily: "'Noto Serif SC', serif", fontSize: 'clamp(48px, 9vw, 92px)', lineHeight: 1.02, color: '#f4f4f6' }}
+              >
+                康波研究院
+              </h1>
+              <p className="text-lg md:text-xl leading-9 max-w-2xl mb-8" style={{ color: '#a1a1aa' }}>
+                掌握 50 年财富周期，把宏观长波、产业变迁、资产配置和人生阶段放进同一套研究系统。
+                从 2026 到 2040，做有证据、有节奏、有复盘的长期决策。
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Link href="/courses" className="btn btn-primary" style={{ padding: '15px 30px' }}>
+                  查看 65 门课程 →
+                </Link>
+                <Link href="/reflect" className="btn btn-ghost">
+                  开始策略复盘
+                </Link>
               </div>
-            ))}
+            </div>
+
+            <div className="grid grid-cols-3 gap-2">
+              {[
+                { value: '65', label: '精编课程' },
+                { value: '10', label: '阶段体系' },
+                { value: `${Math.round(totalMinutes / 60)}h`, label: '学习时长' },
+                { value: '4', label: '共振框架' },
+                { value: '2026', label: '回升窗口' },
+                { value: '2040', label: '路线终点' },
+              ].map((item) => (
+                <div key={item.label} className="p-4 md:p-5" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
+                  <div className="text-2xl md:text-3xl font-bold" style={{ fontFamily: "'Noto Serif SC', serif", color: '#d4a853' }}>{item.value}</div>
+                  <div className="text-[11px] mt-1" style={{ color: '#71717a' }}>{item.label}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ════════════════ FEATURES ════════════════ */}
-      <section className="section" style={{ paddingTop: 0 }}>
-        <div className="max-w-6xl mx-auto px-4">
-          {/* Section label */}
-          <div className="flex items-center gap-3 mb-10">
-            <div style={{ width: 24, height: 1, background: 'rgba(212,168,83,0.15)' }} />
-            <span className="t-label">平台功能</span>
+      <section className="px-5 md:px-6 py-12">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center gap-3 mb-8">
+            <div style={{ width: 28, height: 1, background: 'rgba(212,168,83,0.2)' }} />
+            <span className="text-xs tracking-[0.18em] uppercase" style={{ color: 'rgba(212,168,83,0.62)' }}>能力排布</span>
           </div>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {FEATURES.map((f, i) => (
-              <Link
-                key={f.href}
-                href={f.href}
-                className="card card-interactive group"
-                style={{ animation: `fade-up 0.4s ease-out ${i * 0.05}s both` }}
-              >
-                {/* Accent line */}
-                <div
-                  className="mb-5 transition-all duration-300"
-                  style={{ width: 28, height: 3, background: f.accent, borderRadius: 2 }}
-                />
-
-                {/* Title */}
-                <h3
-                  className="mb-2"
-                  style={{
-                    fontFamily: "'Noto Serif SC', serif",
-                    fontSize: 18,
-                    fontWeight: 700,
-                    color: '#f4f4f6',
-                  }}
-                >
-                  {f.title}
-                </h3>
-
-                {/* Description */}
-                <p
-                  className="mb-5 text-sm leading-relaxed"
-                  style={{ color: '#71717a' }}
-                >
-                  {f.desc}
-                </p>
-
-                {/* Metric */}
-                <div className="flex items-baseline gap-2 mt-auto">
-                  <span style={{ fontFamily: "'Noto Serif SC', serif", fontSize: 22, fontWeight: 700, color: f.accent }}>
-                    {f.metric}
-                  </span>
-                  <span className="t-caption">{f.metricLabel}</span>
-                </div>
-
-                {/* Arrow on hover */}
-                <div
-                  className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-300"
-                  style={{ color: f.accent, fontSize: 18 }}
-                >
-                  →
+            {CAPABILITIES.map((item) => (
+              <Link key={item.href} href={item.href} className="group block p-6 transition-all duration-300 hover:translate-y-[-2px]" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
+                <div className="w-8 h-1 mb-5" style={{ background: item.accent, borderRadius: 999 }} />
+                <h2 className="text-lg font-bold mb-2" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>{item.title}</h2>
+                <p className="text-sm leading-7 mb-5" style={{ color: '#85858e' }}>{item.desc}</p>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-2xl font-bold" style={{ fontFamily: "'Noto Serif SC', serif", color: item.accent }}>{item.metric}</span>
+                  <span className="text-xs" style={{ color: '#71717a' }}>{item.label}</span>
                 </div>
               </Link>
             ))}
@@ -250,79 +130,74 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ════════════════ VALUE PROPS ════════════════ */}
-      <section className="section-lg">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="flex items-center gap-3 mb-4">
-            <div style={{ width: 24, height: 1, background: 'rgba(212,168,83,0.15)' }} />
-            <span className="t-label">为什么选择 DreamLab</span>
+      <section className="px-5 md:px-6 py-12">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-8">
+          <div>
+            <div className="flex items-center gap-3 mb-5">
+              <div style={{ width: 28, height: 1, background: 'rgba(212,168,83,0.2)' }} />
+              <span className="text-xs tracking-[0.18em] uppercase" style={{ color: 'rgba(212,168,83,0.62)' }}>研究框架</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>
+              从宏观周期到个人方案
+            </h2>
+            <p className="text-sm leading-7" style={{ color: '#85858e' }}>
+              首页不再按心理功能堆叠，而是按照“研究框架 → 课程体系 → 工具复盘 → 个人路线”组织。
+              这样用户进入后先理解方法，再进入课程和实践。
+            </p>
           </div>
-          <h2 className="t-display mb-3">科学 × 温度</h2>
-          <p className="t-body mb-10 max-w-lg">
-            我们不只给你一个分数——我们帮你理解，这些数字对你的生活意味着什么。
-          </p>
-
-          <div className="space-y-3">
-            {VALUE_PROPS.map((vp, i) => (
-              <div
-                key={i}
-                className="card"
-                style={{
-                  display: 'flex',
-                  gap: 20,
-                  alignItems: 'flex-start',
-                  animation: `fade-up 0.4s ease-out ${i * 0.08}s both`,
-                }}
-              >
-                <div
-                  style={{
-                    width: 4,
-                    height: 40,
-                    background: vp.accent,
-                    borderRadius: 2,
-                    marginTop: 4,
-                    flexShrink: 0,
-                  }}
-                />
-                <div>
-                  <h3 className="t-subtitle mb-1">{vp.title}</h3>
-                  <p className="t-caption" style={{ lineHeight: 1.9 }}>{vp.desc}</p>
-                </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {FRAMEWORK.map((item, index) => (
+              <div key={item.title} className="p-5" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
+                <div className="text-sm mb-3" style={{ color: '#d4a853' }}>0{index + 1}</div>
+                <h3 className="font-bold mb-2" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>{item.title}</h3>
+                <p className="text-sm leading-7" style={{ color: '#85858e' }}>{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ════════════════ EXPLORE ════════════════ */}
-      <section className="section" style={{ paddingBottom: 48 }}>
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="flex items-center gap-3 mb-6">
-            <div style={{ width: 24, height: 1, background: 'rgba(212,168,83,0.15)' }} />
-            <span className="t-label">继续探索</span>
+      <section className="px-5 md:px-6 py-12">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center justify-between gap-4 mb-8">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <div style={{ width: 28, height: 1, background: 'rgba(212,168,83,0.2)' }} />
+                <span className="text-xs tracking-[0.18em] uppercase" style={{ color: 'rgba(212,168,83,0.62)' }}>课程路径</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>10 大阶段</h2>
+            </div>
+            <Link href="/courses" className="hidden md:inline-flex text-sm" style={{ color: '#d4a853' }}>全部课程 →</Link>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-            {[
-              { href: '/bathhouse', label: '油屋广场', desc: '千与千寻世界', accent: '#c4554d' },
-              { href: '/spirited', label: '千寻之旅', desc: '五层梦境冒险', accent: '#d4a853' },
-              { href: '/courses', label: '系统课程', desc: '30门课 · 120+章 · 50万+字', accent: '#6b5b8a' },
-              { href: '/reflect', label: '人生思考', desc: '梦后反思 · AI洞察报告', accent: '#5a9a6f' },
-              { href: '/knowledge', label: '知识库', desc: '循证心理学百科', accent: '#9a7ab8' },
-              { href: '/profile/milestones', label: '成长轨迹', desc: '记录你的心理成长', accent: '#3b8b7a' },
-            ].map((item, i) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="card card-interactive"
-                style={{ padding: '18px 20px', animation: `fade-up 0.4s ease-out ${i * 0.06 + 0.3}s both` }}
-              >
-                <div className="flex items-center gap-3">
-                  <div style={{ width: 4, height: 4, background: item.accent, borderRadius: '50%' }} />
-                  <div>
-                    <p className="t-subtitle" style={{ fontSize: 14 }}>{item.label}</p>
-                    <p className="t-caption" style={{ fontSize: 11 }}>{item.desc}</p>
-                  </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {KANGBO_PHASES.map((phase) => (
+              <Link key={phase.key} href="/courses" className="p-5 flex gap-4 items-start transition-all duration-300 hover:translate-y-[-2px]" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
+                <div className="w-11 h-11 flex items-center justify-center text-sm font-bold shrink-0" style={{ background: phase.color, color: '#0a0a0c', borderRadius: 8 }}>
+                  {phase.icon}
                 </div>
+                <div>
+                  <h3 className="font-bold mb-1" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>{phase.title}</h3>
+                  <p className="text-xs leading-6" style={{ color: '#71717a' }}>{phase.subtitle}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-5 md:px-6 pt-12 pb-24">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center gap-3 mb-8">
+            <div style={{ width: 28, height: 1, background: 'rgba(212,168,83,0.2)' }} />
+            <span className="text-xs tracking-[0.18em] uppercase" style={{ color: 'rgba(212,168,83,0.62)' }}>先学这六课</span>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            {featured.map((course) => (
+              <Link key={course.id} href={`/courses/${course.id}`} className="block p-5" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
+                <div className="text-xs mb-3" style={{ color: '#d4a853' }}>Course {course.id}</div>
+                <h3 className="font-bold mb-2 leading-6" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>{course.title}</h3>
+                <p className="text-xs leading-6 mb-3" style={{ color: '#85858e' }}>{course.description}</p>
+                <p className="text-xs" style={{ color: '#d4a853' }}>产出：{course.outcome}</p>
               </Link>
             ))}
           </div>

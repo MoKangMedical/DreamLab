@@ -5,19 +5,19 @@ import { getReflections, createReflection, getDreams } from '@/lib/api';
 
 // ── 写作引导 ──
 const REFLECT_PROMPTS = [
-  { q: '这个梦让你想到了生活中的什么？', hint: '梦是现实的隐喻' },
-  { q: '梦里最强烈的情绪是什么？为什么？', hint: '情绪比情节更诚实' },
-  { q: '如果你是梦里的另一个人物，你会看到什么？', hint: '换位带来全新视角' },
-  { q: '这个梦在提醒你什么？', hint: '梦是心灵的自我调节' },
-  { q: '醒来后，你做了（或想做）什么不同的事？', hint: '梦是行动的起点' },
+  { q: '我现在判断处于哪个周期阶段？为什么？', hint: '先定位，再行动' },
+  { q: '支持这个判断的三条证据是什么？', hint: '证据要能被复查' },
+  { q: '如果判断错误，最可能错在哪里？', hint: '先写反例，避免自我确认' },
+  { q: '本次判断对应的资产、职业或学习动作是什么？', hint: '判断必须落到行动' },
+  { q: '下一次复盘日期和观察指标是什么？', hint: '没有复盘就没有系统' },
 ];
 
 // ── 反思的阶段 ──
 const STAGES = [
-  { title: '记录', desc: '诚实地写下梦的内容，不做评判', icon: '📝' },
-  { title: '感受', desc: '辨别梦激发的情绪——恐惧、渴望、困惑', icon: '💭' },
-  { title: '联想', desc: '梦中的符号让你想到什么人或事？', icon: '🔗' },
-  { title: '行动', desc: '这个梦在邀请你做出什么改变？', icon: '🌱' },
+  { title: '假设', desc: '写清楚你对周期、产业或资产的判断', icon: '假' },
+  { title: '证据', desc: '列出支持和反对这次判断的数据', icon: '证' },
+  { title: '风险', desc: '明确什么情况会证明你错了', icon: '险' },
+  { title: '行动', desc: '设定仓位、学习或观察的下一步', icon: '行' },
 ];
 
 export default function ReflectClient() {
@@ -60,11 +60,11 @@ export default function ReflectClient() {
       const r = await getReflections();
       setReflections(r);
     } catch {
-      alert('提交失败，请确认后端服务已启动');
+      alert('保存失败，请确认后端服务已启动');
     }
   };
 
-  const moodEmojis = ['😢', '😟', '😐', '🙂', '😊'];
+  const moodEmojis = ['谨慎', '观望', '中性', '积极', '进攻'];
 
   return (
     <div style={{ background: '#0a0a0c', minHeight: '100vh' }}>
@@ -72,21 +72,20 @@ export default function ReflectClient() {
 
         {/* ════════════════ Hero ════════════════ */}
         <div className={`text-center mb-16 transition-all duration-1000 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="text-5xl md:text-6xl mb-6">🌱</div>
+          <div className="text-5xl md:text-6xl mb-6">策</div>
           <h1 className="font-bold mb-4" style={{
             fontFamily: "'Noto Serif SC', serif",
             fontSize: 'clamp(32px, 5vw, 56px)',
             color: '#f4f4f6',
             lineHeight: 1.1,
           }}>
-            梦后的思考
+            策略复盘
           </h1>
           <p className="max-w-lg mx-auto text-sm leading-relaxed mb-2" style={{ color: '#a1a1aa' }}>
-            记录梦只是第一步——理解梦才是真正的工作
+            每一次判断都要留下假设、证据、风险和复盘日期
           </p>
           <p className="max-w-md mx-auto text-sm leading-relaxed" style={{ color: '#71717a' }}>
-            每一次反思，都是在梦与现实之间搭建一座桥。
-            日积月累，你会看到自己心灵的地图渐渐成形。
+            把课程知识写进真实决策流程，日积月累形成自己的周期研究档案。
           </p>
         </div>
 
@@ -101,10 +100,10 @@ export default function ReflectClient() {
             fontSize: 'clamp(22px, 3vw, 32px)',
             color: '#f4f4f6',
           }}>
-            如何深度反思一个梦
+            如何写一份可复盘判断
           </h2>
           <p className="text-sm mb-6" style={{ color: '#71717a' }}>
-            这是从梦到智慧的四个步骤，每一步都比上一步更深入
+            这是从观点到行动的四个步骤，每一步都要能被未来的自己复查
           </p>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -115,7 +114,7 @@ export default function ReflectClient() {
                     style={{ background: '#d4a85318', color: '#d4a853' }}>
                     {i + 1}
                   </span>
-                  <span className="text-lg">{s.icon}</span>
+                <span className="text-lg" style={{ color: '#d4a853' }}>{s.icon}</span>
                 </div>
                 <h3 className="text-sm font-bold mb-1" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>
                   {s.title}
@@ -147,7 +146,7 @@ export default function ReflectClient() {
               <div key={i} className="p-5 cursor-pointer transition-all hover:border-[#d4a85320]"
                 style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}
                 onClick={() => {
-                  setContent(prev => prev + (prev ? '\n\n' : '') + '💭 ' + p.q + '\n');
+                  setContent(prev => prev + (prev ? '\n\n' : '') + p.q + '\n');
                   setShowForm(true);
                   setTimeout(() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }), 100);
                 }}>
@@ -164,14 +163,14 @@ export default function ReflectClient() {
             <div>
               <div className="flex items-center gap-3 mb-2">
                 <div style={{ width: 32, height: 1, background: 'rgba(255,255,255,0.06)' }} />
-                <span className="text-xs tracking-[0.2em] uppercase" style={{ color: 'rgba(212,168,83,0.5)' }}>我的反思</span>
+                <span className="text-xs tracking-[0.2em] uppercase" style={{ color: 'rgba(212,168,83,0.5)' }}>我的复盘</span>
               </div>
               <h2 className="font-bold" style={{
                 fontFamily: "'Noto Serif SC', serif",
                 fontSize: 'clamp(22px, 3vw, 32px)',
                 color: '#f4f4f6',
               }}>
-                写下你的思考
+                写下你的策略判断
               </h2>
             </div>
             <button onClick={() => setShowForm(!showForm)}
@@ -181,7 +180,7 @@ export default function ReflectClient() {
                 fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: 13,
                 borderRadius: 2, border: 'none', cursor: 'pointer',
               }}>
-              {showForm ? '收起' : '+ 写反思'}
+              {showForm ? '收起' : '+ 写复盘'}
             </button>
           </div>
 
@@ -194,7 +193,7 @@ export default function ReflectClient() {
                     type="text"
                     value={title}
                     onChange={e => setTitle(e.target.value)}
-                    placeholder="给这段思考起个名字..."
+                    placeholder="例如：第六轮康波 AI 赛道判断"
                     className="w-full text-sm"
                     style={{
                       background: '#0a0a0c', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2,
@@ -207,7 +206,7 @@ export default function ReflectClient() {
                   <textarea
                     value={content}
                     onChange={e => setContent(e.target.value)}
-                    placeholder="写下你的感悟...可以从上面的引导问题开始"
+                    placeholder="写下假设、证据、反例、风险和下一步动作..."
                     rows={6}
                     className="w-full resize-none text-sm leading-relaxed"
                     style={{
@@ -217,14 +216,14 @@ export default function ReflectClient() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs mb-2 font-medium" style={{ color: '#71717a' }}>心情</label>
+                  <label className="block text-xs mb-2 font-medium" style={{ color: '#71717a' }}>策略状态</label>
                   <div className="flex gap-3">
                     {moodEmojis.map((emoji, i) => (
                       <button
                         key={i}
                         type="button"
                         onClick={() => setMoodScore(i + 1)}
-                        className="text-3xl p-2 transition-all"
+                        className="text-sm p-2 transition-all"
                         style={{
                           borderRadius: 2,
                           background: moodScore === i + 1 ? '#d4a85312' : 'transparent',
@@ -238,7 +237,7 @@ export default function ReflectClient() {
                 </div>
                 {dreams.length > 0 && (
                   <div>
-                    <label className="block text-xs mb-2 font-medium" style={{ color: '#71717a' }}>关联梦境（可选）</label>
+                    <label className="block text-xs mb-2 font-medium" style={{ color: '#71717a' }}>关联记录（可选）</label>
                     <select
                       value={linkedDreamId || ''}
                       onChange={e => setLinkedDreamId(e.target.value ? Number(e.target.value) : null)}
@@ -263,7 +262,7 @@ export default function ReflectClient() {
                     fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: 14,
                     borderRadius: 2, border: 'none', cursor: 'pointer',
                   }}>
-                  🌱 保存反思
+                  保存复盘
                 </button>
               </div>
             </div>
@@ -283,10 +282,10 @@ export default function ReflectClient() {
           </div>
         ) : reflections.length === 0 ? (
           <div className="text-center py-16">
-            <span className="text-5xl block mb-4">🌱</span>
-            <p className="text-sm mb-4" style={{ color: '#71717a' }}>还没有反思记录</p>
+            <span className="text-5xl block mb-4">策</span>
+            <p className="text-sm mb-4" style={{ color: '#71717a' }}>还没有复盘记录</p>
             <p className="text-xs mb-6" style={{ color: '#52525b' }}>
-              每一次反思，都是一次与自己的深度对话
+              第一篇复盘会成为你周期研究档案的起点
             </p>
             <button onClick={() => setShowForm(true)}
               className="transition-all duration-300 hover:scale-105"
@@ -295,7 +294,7 @@ export default function ReflectClient() {
                 fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: 13,
                 borderRadius: 2, border: 'none', cursor: 'pointer',
               }}>
-              写第一篇反思
+              写第一篇复盘
             </button>
           </div>
         ) : (
@@ -316,7 +315,7 @@ export default function ReflectClient() {
                 </p>
                 {r.mood_score && (
                   <div className="text-xs" style={{ color: '#52525b' }}>
-                    心情：{moodEmojis[r.mood_score - 1] || '😐'}
+                    状态：{moodEmojis[r.mood_score - 1] || '中性'}
                   </div>
                 )}
               </div>

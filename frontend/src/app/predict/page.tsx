@@ -1,235 +1,155 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import type { ReactNode } from 'react';
 import Link from 'next/link';
 
-const PREDICTION_TYPES = [
-  { key: 'personality', icon: '🔮', name: '人格发展趋势', desc: '基于测评数据预测你的人格成长方向', color: '#d4a853' },
-  { key: 'trend', icon: '📈', name: '心理健康趋势', desc: '分析你的情绪、睡眠和健康趋势', color: '#3b8b7a' },
-  { key: 'compatibility', icon: '💫', name: '人际兼容分析', desc: '了解你与他人的互动模式和匹配度', color: '#6b5b8a' },
-  { key: 'dream-pattern', icon: '🌙', name: '梦境模式预测', desc: '发现你梦境中的隐藏规律', color: '#5a7d9a' },
+const AGE_GROUPS = [
+  { key: '20s', label: '20-29 岁', focus: '技能、城市、行业选择优先于资产收益', action: '把主要资金投入学习、迁移和高质量现金流能力。' },
+  { key: '30s', label: '30-39 岁', focus: '收入曲线、家庭资产和风险预算开始定型', action: '建立核心资产仓位、保险与应急现金流，避免过早重仓单一资产。' },
+  { key: '40s', label: '40-49 岁', focus: '资产防守、事业第二曲线和家庭责任并重', action: '压低杠杆，扩大现金流资产，布局下一轮产业机会。' },
+  { key: '50s', label: '50 岁以上', focus: '保值、现金流、传承和医疗支出优先', action: '降低组合波动，强化现金流、税务和传承安排。' },
 ];
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || '';
+const RISK_LEVELS = [
+  { key: 'low', label: '稳健', allocation: '现金流资产 / 高等级固收 / 黄金保险属性' },
+  { key: 'mid', label: '均衡', allocation: '核心资产 + 卫星赛道 + 定期再平衡' },
+  { key: 'high', label: '进取', allocation: '提高权益和创新产业暴露，但必须设置回撤上限' },
+];
+
+const CYCLE_STAGE = [
+  { key: 'recovery', label: '回升初期', signal: '流动性修复、产业资本开支抬头、风险偏好恢复' },
+  { key: 'boom', label: '繁荣扩散', signal: '技术渗透加速、盈利扩张、估值分化加剧' },
+  { key: 'slowdown', label: '增长放缓', signal: '信用收缩、库存压力、政策托底信号增多' },
+  { key: 'stress', label: '压力出清', signal: '违约、失业、资产折价和政策转向集中出现' },
+];
 
 export default function PredictPage() {
-  const [activeType, setActiveType] = useState('personality');
-  const [concern, setConcern] = useState('');
-  const [relationship, setRelationship] = useState('');
-  const [targetTraits, setTargetTraits] = useState('');
-  const [recentDream, setRecentDream] = useState('');
-  const [result, setResult] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [stats, setStats] = useState<any>(null);
-  const [error, setError] = useState('');
+  const [ageGroup, setAgeGroup] = useState('30s');
+  const [risk, setRisk] = useState('mid');
+  const [stage, setStage] = useState('recovery');
+  const [industry, setIndustry] = useState('AI / 算力 / 自动化');
 
-  const handlePredict = async () => {
-    setLoading(true);
-    setResult(null);
-    setError('');
-    try {
-      const body: any = { user_id: 1 };
-      if (activeType === 'trend') body.concern = concern;
-      if (activeType === 'compatibility') { body.relationship = relationship; body.target_traits = targetTraits; }
-      if (activeType === 'dream-pattern') body.recent_dream = recentDream;
-
-      const res = await fetch(`${API_BASE}/api/predict/${activeType}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      });
-      if (!res.ok) throw new Error('预测请求失败');
-      const data = await res.json();
-      setResult(data.prediction);
-      setStats(data);
-    } catch (e: any) {
-      setError(e.message || '预测服务暂时不可用，请稍后再试');
-    }
-    setLoading(false);
-  };
-
-  const active = PREDICTION_TYPES.find(t => t.key === activeType)!;
+  const result = useMemo(() => {
+    const age = AGE_GROUPS.find((item) => item.key === ageGroup)!;
+    const riskLevel = RISK_LEVELS.find((item) => item.key === risk)!;
+    const cycle = CYCLE_STAGE.find((item) => item.key === stage)!;
+    return {
+      title: `${age.label} · ${riskLevel.label}型 · ${cycle.label}`,
+      summary: `你的研究重点应放在「${industry || '主导产业'}」与个人现金流能力的匹配上。当前假设为${cycle.label}，优先观察${cycle.signal}。`,
+      actions: [
+        age.action,
+        `组合框架：${riskLevel.allocation}。`,
+        `产业观察：为「${industry || '主导产业'}」建立估值、政策、订单和人才流动四类指标。`,
+        '每 30 天复盘一次：如果关键指标连续两次恶化，降低风险暴露并更新假设。',
+      ],
+    };
+  }, [ageGroup, industry, risk, stage]);
 
   return (
     <div style={{ background: '#0a0a0c', minHeight: '100vh' }}>
-      <div className="max-w-4xl mx-auto px-4 md:px-6 pt-14 md:pt-20 pb-32">
-        {/* Header */}
+      <div className="max-w-5xl mx-auto px-5 md:px-6 pt-14 md:pt-22 pb-24">
         <div className="mb-10">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="text-2xl">🔮</span>
-            <h1 className="font-bold" style={{ fontFamily: "'Noto Serif SC', serif", fontSize: 'clamp(24px, 4vw, 42px)', color: '#f4f4f6' }}>
-              AI 心理预测
-            </h1>
-          </div>
-          <p style={{ color: '#71717a', fontSize: 15, lineHeight: 1.9 }}>
-            基于你的测评数据、梦境记录和健康日志，AI 为你生成个性化的心理预测。
-            像钱婆婆的占卜一样——不是命运，而是提醒。
+          <h1 className="font-bold mb-4" style={{ fontFamily: "'Noto Serif SC', serif", fontSize: 'clamp(34px, 6vw, 64px)', color: '#f4f4f6', lineHeight: 1.1 }}>
+            康波周期定位工具
+          </h1>
+          <p className="text-sm md:text-base leading-8 max-w-2xl" style={{ color: '#a1a1aa' }}>
+            输入年龄阶段、风险偏好、周期假设和关注产业，生成一份研究参考版的 2026-2040 行动框架。
+            结果用于学习和复盘，不构成投资建议。
           </p>
         </div>
 
-        {/* Prediction Type Selector */}
-        <div className="grid grid-cols-2 gap-2 mb-8">
-          {PREDICTION_TYPES.map(type => (
-            <button
-              key={type.key}
-              onClick={() => { setActiveType(type.key); setResult(null); setError(''); }}
-              className="text-left p-4 transition-all duration-200"
-              style={{
-                background: activeType === type.key ? `${type.color}10` : '#111113',
-                border: `1px solid ${activeType === type.key ? type.color + '30' : 'rgba(255,255,255,0.04)'}`,
-                borderRadius: 12,
-              }}
-            >
-              <div className="text-xl mb-1">{type.icon}</div>
-              <div className="text-sm font-semibold mb-0.5" style={{ color: activeType === type.key ? type.color : '#a1a1aa' }}>
-                {type.name}
-              </div>
-              <div className="text-xs" style={{ color: '#52525b' }}>{type.desc}</div>
-            </button>
-          ))}
-        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-[0.92fr_1.08fr] gap-4">
+          <div className="p-5 md:p-6" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
+            <Section title="年龄阶段">
+              <Segmented options={AGE_GROUPS} value={ageGroup} onChange={setAgeGroup} />
+            </Section>
 
-        {/* Input Form */}
-        <div className="mb-8 p-6" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 12 }}>
-          <div className="flex items-center gap-2 mb-5">
-            <span style={{ fontSize: 20 }}>{active.icon}</span>
-            <h3 className="text-sm font-bold" style={{ color: active.color }}>{active.name}</h3>
+            <Section title="风险偏好">
+              <Segmented options={RISK_LEVELS} value={risk} onChange={setRisk} />
+            </Section>
+
+            <Section title="周期假设">
+              <Segmented options={CYCLE_STAGE} value={stage} onChange={setStage} />
+            </Section>
+
+            <label className="block text-xs mb-2" style={{ color: '#71717a' }}>关注产业</label>
+            <input
+              value={industry}
+              onChange={(event) => setIndustry(event.target.value)}
+              className="w-full px-4 py-3 text-sm"
+              style={{ background: '#0a0a0c', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 8, color: '#f4f4f6', outline: 'none' }}
+              placeholder="例如：AI / 新能源 / 生物科技"
+            />
           </div>
 
-          {activeType === 'trend' && (
-            <div className="mb-4">
-              <label className="block text-xs mb-2" style={{ color: '#71717a' }}>你最关心什么？（可选）</label>
-              <textarea
-                value={concern} onChange={e => setConcern(e.target.value)}
-                placeholder="比如：最近睡眠不好、工作压力大、情绪波动..."
-                rows={2}
-                className="w-full p-3 text-sm resize-none"
-                style={{ background: '#0a0a0c', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 10, color: '#a1a1aa', outline: 'none' }}
-              />
+          <div className="p-5 md:p-6" style={{ background: '#111113', border: '1px solid rgba(212,168,83,0.18)', borderRadius: 8 }}>
+            <div className="text-xs mb-3" style={{ color: '#d4a853' }}>定位结果</div>
+            <h2 className="text-2xl md:text-3xl font-bold mb-4" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>{result.title}</h2>
+            <p className="text-sm leading-7 mb-6" style={{ color: '#a1a1aa' }}>{result.summary}</p>
+
+            <div className="space-y-3">
+              {result.actions.map((action, index) => (
+                <div key={action} className="flex gap-3 p-4" style={{ background: '#0a0a0c', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 8 }}>
+                  <div className="text-xs font-bold shrink-0" style={{ color: '#d4a853' }}>{index + 1}</div>
+                  <p className="text-sm leading-7" style={{ color: '#c8c8d0' }}>{action}</p>
+                </div>
+              ))}
             </div>
-          )}
 
-          {activeType === 'compatibility' && (
-            <>
-              <div className="mb-3">
-                <label className="block text-xs mb-2" style={{ color: '#71717a' }}>关系类型</label>
-                <select value={relationship} onChange={e => setRelationship(e.target.value)}
-                  className="w-full p-3 text-sm"
-                  style={{ background: '#0a0a0c', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 10, color: '#a1a1aa', outline: 'none' }}>
-                  <option value="">选择关系类型...</option>
-                  <option value="恋人/伴侣">恋人/伴侣</option>
-                  <option value="朋友">朋友</option>
-                  <option value="同事">同事</option>
-                  <option value="家人">家人</option>
-                  <option value="自己">与自己的关系</option>
-                </select>
-              </div>
-              <div className="mb-3">
-                <label className="block text-xs mb-2" style={{ color: '#71717a' }}>对方特质描述（可选）</label>
-                <textarea
-                  value={targetTraits} onChange={e => setTargetTraits(e.target.value)}
-                  placeholder="比如：ta比较内向但很细心，容易想太多..."
-                  rows={2}
-                  className="w-full p-3 text-sm resize-none"
-                  style={{ background: '#0a0a0c', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 10, color: '#a1a1aa', outline: 'none' }}
-                />
-              </div>
-            </>
-          )}
-
-          {activeType === 'dream-pattern' && (
-            <div className="mb-4">
-              <label className="block text-xs mb-2" style={{ color: '#71717a' }}>最近印象深刻的梦（可选）</label>
-              <textarea
-                value={recentDream} onChange={e => setRecentDream(e.target.value)}
-                placeholder="描述你最近做的一个梦..."
-                rows={3}
-                className="w-full p-3 text-sm resize-none"
-                style={{ background: '#0a0a0c', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 10, color: '#a1a1aa', outline: 'none' }}
-              />
-            </div>
-          )}
-
-          <button
-            onClick={handlePredict}
-            disabled={loading}
-            className="w-full py-3 px-6 text-sm font-semibold transition-all duration-200"
-            style={{
-              background: loading ? 'rgba(255,255,255,0.04)' : active.color + '15',
-              border: `1px solid ${active.color}30`,
-              borderRadius: 10,
-              color: loading ? '#52525b' : active.color,
-              cursor: loading ? 'not-allowed' : 'pointer',
-            }}
-          >
-            {loading ? '🔮 AI 正在分析...' : `🔮 开始${active.name}`}
-          </button>
-        </div>
-
-        {/* Result */}
-        {error && (
-          <div className="p-6 mb-8" style={{ background: 'rgba(196,85,77,0.05)', border: '1px solid rgba(196,85,77,0.1)', borderRadius: 12 }}>
-            <p className="text-sm" style={{ color: '#c4554d' }}>{error}</p>
-          </div>
-        )}
-
-        {result && (
-          <div className="mb-8">
-            {/* Stats bar */}
-            {stats && (stats.data_points !== undefined) && (
-              <div className="flex items-center gap-4 mb-6 px-4 py-2"
-                style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)', borderRadius: 8 }}>
-                <span className="text-xs" style={{ color: '#52525b' }}>
-                  📊 基于 {stats.data_points} 条数据
-                </span>
-                {stats.avg_mood && (
-                  <span className="text-xs" style={{ color: '#3b8b7a' }}>
-                    😊 情绪均分 {stats.avg_mood}/10
-                  </span>
-                )}
-                {stats.avg_sleep && (
-                  <span className="text-xs" style={{ color: '#5a7d9a' }}>
-                    😴 睡眠均长 {stats.avg_sleep}h
-                  </span>
-                )}
-                {stats.dream_count !== undefined && (
-                  <span className="text-xs" style={{ color: '#6b5b8a' }}>
-                    🌙 {stats.dream_count} 个梦
-                  </span>
-                )}
-              </div>
-            )}
-
-            {/* Prediction text */}
-            <div className="p-6 leading-relaxed text-sm"
-              style={{
-                background: '#111113',
-                border: `1px solid ${active.color}15`,
-                borderRadius: 12,
-                color: '#a1a1aa',
-                lineHeight: 1.9,
-                whiteSpace: 'pre-wrap',
-              }}>
-              {result}
+            <div className="flex flex-col sm:flex-row gap-3 mt-6">
+              <Link href="/reflect" className="btn btn-primary" style={{ padding: '12px 22px' }}>
+                写入策略复盘 →
+              </Link>
+              <Link href="/courses/6" className="btn btn-ghost">
+                学习操作手册
+              </Link>
             </div>
           </div>
-        )}
-
-        {/* Navigation */}
-        <div className="flex flex-wrap gap-3 justify-center">
-          <Link href="/assessments" className="text-xs transition-colors" style={{ color: '#52525b' }}>
-            ← 去做测评
-          </Link>
-          <span style={{ color: '#27272a' }}>·</span>
-          <Link href="/dream" className="text-xs transition-colors" style={{ color: '#52525b' }}>
-            记录梦境 →
-          </Link>
-          <span style={{ color: '#27272a' }}>·</span>
-          <Link href="/wellness" className="text-xs transition-colors" style={{ color: '#52525b' }}>
-            健康工坊 →
-          </Link>
         </div>
       </div>
+    </div>
+  );
+}
+
+function Section({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <div className="mb-6">
+      <div className="text-xs mb-2" style={{ color: '#71717a' }}>{title}</div>
+      {children}
+    </div>
+  );
+}
+
+function Segmented({
+  options,
+  value,
+  onChange,
+}: {
+  options: { key: string; label: string }[];
+  value: string;
+  onChange: (value: string) => void;
+}) {
+  return (
+    <div className="grid grid-cols-2 gap-2">
+      {options.map((option) => {
+        const active = value === option.key;
+        return (
+          <button
+            key={option.key}
+            onClick={() => onChange(option.key)}
+            className="px-3 py-2 text-sm text-left transition-colors"
+            style={{
+              color: active ? '#0a0a0c' : '#a1a1aa',
+              background: active ? '#d4a853' : '#0a0a0c',
+              border: `1px solid ${active ? 'rgba(212,168,83,0.5)' : 'rgba(255,255,255,0.08)'}`,
+              borderRadius: 8,
+            }}
+          >
+            {option.label}
+          </button>
+        );
+      })}
     </div>
   );
 }

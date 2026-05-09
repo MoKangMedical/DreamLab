@@ -151,21 +151,21 @@ export default function AssessmentsPage() {
       <div className="relative pt-14 md:pt-20 pb-16 md:pb-24">
         <div className="max-w-5xl mx-auto px-6 text-center">
           <div className={`transition-all duration-1000 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="text-5xl md:text-7xl mb-6">🪞</div>
+            <div className="text-5xl md:text-7xl mb-6">镜</div>
             <h1 className="font-bold mb-4" style={{
               fontFamily: "'Noto Serif SC', serif",
               fontSize: 'clamp(36px, 6vw, 64px)',
               color: '#f4f4f6',
               lineHeight: 1.1,
             }}>
-              汤婆婆の契约之镜
+              投资者画像
             </h1>
             <p className="text-lg mb-2" style={{ color: '#a1a1aa' }}>
-              六把钥匙，开启内心深处的六扇门
+              先理解自己的情绪、睡眠、韧性和行为偏差
             </p>
             <p className="max-w-lg mx-auto text-sm leading-relaxed" style={{ color: '#71717a' }}>
-              所有量表均基于国际标准心理学工具，经过数十年临床验证。
-              AI 深度解读帮助你将数据转化为对自己的理解。
+              这些测评保留为风险承受力和行为金融训练的辅助材料。
+              结果仅用于自我观察，不构成诊断或投资建议。
             </p>
           </div>
         </div>

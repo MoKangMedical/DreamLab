@@ -4,12 +4,12 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
 const TABS = [
-  { href: '/', label: 'Home', icon: '⌂' },
-  { href: '/courses', label: 'Courses', icon: '▣' },
-  { href: '/assessments', label: 'Assess', icon: '◎' },
-  { href: '/companion', label: 'Talk', icon: '◉' },
-  { href: '/community', label: 'Community', icon: '◇' },
-  { href: '/profile', label: 'Profile', icon: '○' },
+  { href: '/', label: '首页', icon: '⌂' },
+  { href: '/courses', label: '课程', icon: '▣' },
+  { href: '/predict', label: '工具', icon: '◎' },
+  { href: '/knowledge', label: '知识', icon: '◇' },
+  { href: '/reflect', label: '复盘', icon: '◉' },
+  { href: '/profile', label: '我的', icon: '○' },
 ];
 
 export default function BottomNav() {
