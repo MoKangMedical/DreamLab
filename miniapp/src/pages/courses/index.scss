@@ -88,6 +88,40 @@
   padding: 0 16px 30px;
 }
 
+.course-state-card {
+  padding: 18px;
+  border: 1px solid rgba(212, 168, 83, 0.14);
+  border-radius: 10px;
+  text-align: center;
+  background: rgba(17, 17, 19, 0.94);
+}
+
+.course-state-title {
+  display: block;
+  color: #f4f4f6;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.course-state-desc {
+  display: block;
+  color: #71717a;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.course-retry-btn {
+  display: inline-flex;
+  margin-top: 14px;
+  color: #0a0a0c;
+  border-radius: 8px;
+  padding: 9px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #d4a853, #b8942e);
+}
+
 .course-card {
   margin-bottom: 12px;
   padding: 17px;

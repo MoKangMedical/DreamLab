@@ -221,10 +221,17 @@
 .gold-btn {
   display: inline-block;
   min-width: 120px;
+  margin: 0 5px 8px;
   color: #0a0a0c;
   border-radius: 8px;
   padding: 12px 18px;
   font-size: 14px;
   font-weight: 600;
   background: linear-gradient(135deg, #d4a853, #b8942e);
+}
+
+.retry-btn {
+  color: #d4a853;
+  border: 1px solid rgba(212, 168, 83, 0.24);
+  background: rgba(212, 168, 83, 0.08);
 }

@@ -5,26 +5,26 @@ import './index.scss'
 
 const STATS = [
   { label: '课程', value: 12, icon: '课', color: '#d4a853' },
-  { label: '复盘', value: 3, icon: '策', color: '#3b8b7a' },
-  { label: '工具', value: 4, icon: '盘', color: '#5a7d9a' },
-  { label: '画像', value: 2, icon: '镜', color: '#c4554d' },
-  { label: '报告', value: 5, icon: '研', color: '#6b5b8a' },
-  { label: '蓝图', value: 1, icon: '图', color: '#cfa34d' },
+  { label: '反思', value: 3, icon: '思', color: '#3b8b7a' },
+  { label: '梦境', value: 4, icon: '梦', color: '#5a7d9a' },
+  { label: '测评', value: 2, icon: '镜', color: '#c4554d' },
+  { label: '知识', value: 5, icon: '研', color: '#6b5b8a' },
+  { label: '路线', value: 1, icon: '图', color: '#cfa34d' },
 ]
 
 const MILESTONES = [
-  { name: '周期定位', desc: '确认阶段', done: true, color: '#d4a853' },
-  { name: '产业地图', desc: '筛选赛道', done: true, color: '#5a7d9a' },
-  { name: '资产框架', desc: '配置原则', done: true, color: '#3b8b7a' },
-  { name: '风险预案', desc: '压力测试', done: false, color: '#c4554d' },
-  { name: '30年蓝图', desc: '代际传承', done: false, color: '#cfa34d' },
+  { name: '梦境记录', desc: '收集素材', done: true, color: '#d4a853' },
+  { name: '心理测评', desc: '建立画像', done: true, color: '#5a7d9a' },
+  { name: '课程学习', desc: '建立坐标', done: true, color: '#3b8b7a' },
+  { name: '反思日志', desc: '持续复盘', done: false, color: '#c4554d' },
+  { name: '成长路线', desc: '长期照护', done: false, color: '#cfa34d' },
 ]
 
 const ACTIVITIES = [
-  { text: '学习：康波理论，完成周期四季定位图', time: '2小时前', icon: '课', color: '#d4a853' },
-  { text: '复盘：AI 与能源赛道的主导产业假设', time: '昨天', icon: '策', color: '#3b8b7a' },
-  { text: '完成投资者画像：风险偏好中等', time: '2天前', icon: '镜', color: '#c4554d' },
-  { text: '学习：周金涛四周期嵌套模型', time: '3天前', icon: '研', color: '#5a7d9a' },
+  { text: '学习：弗洛伊德梦的解析入门，完成梦境双层拆解', time: '2小时前', icon: '课', color: '#d4a853' },
+  { text: '反思：反复梦到迷路后的情绪记录', time: '昨天', icon: '思', color: '#3b8b7a' },
+  { text: '完成心理测评：睡眠与焦虑状态观察', time: '2天前', icon: '镜', color: '#c4554d' },
+  { text: '学习：正念冥想，完成 10 分钟觉察练习', time: '3天前', icon: '研', color: '#5a7d9a' },
 ]
 
 function go(url: string, tab = false) {
@@ -54,10 +54,10 @@ export default function ProfilePage() {
       <ScrollView scrollY className='profile-scroll'>
         <View className='profile-hero'>
           <View className='avatar-ring'>
-            <Text>康</Text>
+            <Text>梦</Text>
           </View>
-          <Text className='profile-name'>康波研究员</Text>
-          <Text className='profile-desc'>把课程、复盘、资产配置与30年蓝图串成自己的周期路线。</Text>
+          <Text className='profile-name'>DreamLab 探索者</Text>
+          <Text className='profile-desc'>把课程、测评、梦境解析与反思日志串成自己的成长路线。</Text>
         </View>
 
         <View className='stats-grid'>
@@ -74,7 +74,7 @@ export default function ProfilePage() {
 
         <View className='journey-card'>
           <View className='journey-head'>
-            <Text className='card-title'>周期路线</Text>
+            <Text className='card-title'>成长路线</Text>
             <Text className='journey-count'>{doneCount}/{MILESTONES.length}</Text>
           </View>
           <View className='journey-track'>
@@ -99,7 +99,7 @@ export default function ProfilePage() {
         <View className='quick-grid'>
           <View className='quick-card' onClick={() => go('/pages/assessments/index', true)}>
             <Text className='quick-icon'>镜</Text>
-            <Text className='quick-title'>投资者画像</Text>
+            <Text className='quick-title'>心理测评</Text>
           </View>
           <View className='quick-card' onClick={() => go('/pages/courses/index', true)}>
             <Text className='quick-icon'>书</Text>
@@ -107,10 +107,10 @@ export default function ProfilePage() {
           </View>
           <View className='quick-card' onClick={() => go('/pages/reflect/index')}>
             <Text className='quick-icon'>思</Text>
-            <Text className='quick-title'>写复盘</Text>
+            <Text className='quick-title'>写反思</Text>
           </View>
           <View className='quick-card' onClick={() => go('/pages/index/index', true)}>
-            <Text className='quick-icon'>康</Text>
+            <Text className='quick-icon'>梦</Text>
             <Text className='quick-title'>返回首页</Text>
           </View>
         </View>
@@ -127,8 +127,8 @@ export default function ProfilePage() {
         </View>
 
         <View className='quote-card'>
-          <Text className='quote-text'>每一次判断都要留下假设、证据、风险和复盘日期。</Text>
-          <Text className='quote-author'>康波研究院</Text>
+          <Text className='quote-text'>把梦境、情绪和行动记录下来，成长才会留下线索。</Text>
+          <Text className='quote-author'>DreamLab</Text>
         </View>
       </ScrollView>
     </View>

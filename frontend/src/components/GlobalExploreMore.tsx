@@ -11,12 +11,12 @@ interface ExploreLink {
 }
 
 const EXPLORE_ALL: ExploreLink[] = [
-  { href: '/courses', label: '课程体系', desc: '65 门 · 10 阶段', accent: '#d4a853' },
-  { href: '/predict', label: '周期工具', desc: '定位 2026-2040', accent: '#4f9db8' },
+  { href: '/courses', label: '心理课程', desc: '100 门 · 7 学院', accent: '#d4a853' },
+  { href: '/dream', label: '梦境解析', desc: '象征 · 情绪 · 潜意识', accent: '#4f9db8' },
   { href: '/knowledge', label: '心理知识库', desc: 'CBT · 正念 · 睡眠', accent: '#8b7cf6' },
-  { href: '/reflect', label: '策略复盘', desc: '假设 · 证据 · 风险', accent: '#72a66a' },
-  { href: '/assessments', label: '投资者画像', desc: '风险与行为偏差', accent: '#c4554d' },
-  { href: '/profile', label: '我的路线', desc: '课程进度与目标', accent: '#cfa34d' },
+  { href: '/reflect', label: '反思日志', desc: '情绪 · 想法 · 行动', accent: '#72a66a' },
+  { href: '/assessments', label: '心理测评', desc: '情绪与人格观察', accent: '#c4554d' },
+  { href: '/profile', label: '我的成长', desc: '课程进度与目标', accent: '#cfa34d' },
 ];
 
 function getLinksFor(pathname: string): ExploreLink[] {
@@ -27,10 +27,10 @@ function getLinksFor(pathname: string): ExploreLink[] {
 
 function getTitleFor(pathname: string): string {
   if (pathname.startsWith('/courses')) return '继续学习';
-  if (pathname.startsWith('/predict')) return '继续定位';
+  if (pathname.startsWith('/dream')) return '继续解析';
   if (pathname.startsWith('/knowledge')) return '继续研究';
-  if (pathname.startsWith('/reflect')) return '继续复盘';
-  if (pathname.startsWith('/profile')) return '我的路线';
+  if (pathname.startsWith('/reflect')) return '继续反思';
+  if (pathname.startsWith('/profile')) return '我的成长';
   return '继续探索';
 }
 

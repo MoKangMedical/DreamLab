@@ -7,40 +7,42 @@ import GlobalExploreMore from "@/components/GlobalExploreMore";
 import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 
 export const metadata: Metadata = {
-  title: "康波研究院 — 掌握50年财富周期",
-  description: "基于康德拉季耶夫长波理论，构建周期研究、课程学习、资产配置和人生规划系统。",
+  title: "DreamLab 心理研究院",
+  description: "DreamLab 提供梦境解析、心理测评、心理学课程、知识库和反思日志，帮助用户建立可复盘的心智成长系统。",
   manifest: "/DreamLab/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "康波研究院",
+    title: "DreamLab",
   },
 };
 
 const NAV_LINKS = [
   { href: "/", label: "首页" },
-  { href: "/courses", label: "课程体系" },
-  { href: "/predict", label: "周期工具" },
+  { href: "/courses", label: "心理课程" },
+  { href: "/assessments", label: "心理测评" },
+  { href: "/dream", label: "梦境解析" },
   { href: "/knowledge", label: "心理知识库" },
-  { href: "/reflect", label: "策略复盘" },
-  { href: "/profile", label: "我的路线" },
+  { href: "/reflect", label: "反思日志" },
+  { href: "/profile", label: "我的成长" },
 ];
 
 const FOOTER_COLUMNS = {
   研究能力: [
-    { label: "课程体系", href: "/courses" },
-    { label: "周期工具", href: "/predict" },
+    { label: "心理课程", href: "/courses" },
+    { label: "心理测评", href: "/assessments" },
+    { label: "梦境解析", href: "/dream" },
     { label: "心理知识库", href: "/knowledge" },
-    { label: "策略复盘", href: "/reflect" },
+    { label: "反思日志", href: "/reflect" },
   ],
   学习路径: [
-    { label: "周期理论基础", href: "/courses" },
-    { label: "投资大师智慧", href: "/courses" },
-    { label: "投资实战与未来", href: "/courses" },
-    { label: "高级策略", href: "/courses" },
+    { label: "梦境解析与象征基础", href: "/courses" },
+    { label: "心理学核心理论", href: "/courses" },
+    { label: "疗愈工具与心智健康", href: "/courses" },
+    { label: "关系、学习与生活应用", href: "/courses" },
   ],
   项目: [
-    { label: "投资者画像", href: "/assessments" },
+    { label: "心理测评", href: "/assessments" },
     { label: "个人中心", href: "/profile" },
     { label: "GitHub", href: "https://github.com/MoKangMedical/DreamLab" },
   ],
@@ -73,7 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 className="font-bold text-lg tracking-tight"
                 style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}
               >
-                康波研究院
+                DreamLab
               </span>
             </a>
             <div className="flex items-center gap-1">
@@ -128,15 +130,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                       className="text-lg font-bold mb-6 block"
                       style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}
                     >
-                      康波研究院
+                      DreamLab
                     </a>
                     <p
                       className="text-sm leading-relaxed mb-8"
                       style={{ color: '#71717a', lineHeight: 1.8 }}
                     >
-                      掌握 50 年财富周期。
+                      梦境、测评、课程与反思。
                       <br />
-                      课程、工具、复盘与路线图。
+                      建立可复盘的心智成长路线。
                     </p>
                     <span
                       className="text-xs tracking-wider"
@@ -174,7 +176,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}
                 >
                   <p className="text-xs" style={{ color: '#52525b' }}>
-                    © 2026 康波研究院 by MoKangMedical. 内容仅用于研究与教育，不构成投资建议。
+                    © 2026 DreamLab by MoKangMedical. 内容仅用于心理学教育与自我观察，不能替代专业诊断或治疗。
                   </p>
                   <div className="flex gap-6">
                     <a href="/" className="text-xs" style={{ color: '#52525b' }}>
@@ -205,10 +207,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   );
 }
 
-/* ── Margin Decorations — subtle long-wave atmosphere in side columns ── */
+/* ── Margin Decorations — subtle DreamLab atmosphere in side columns ── */
 function MarginDecorations({ side }: { side: 'left' | 'right' }) {
   const isLeft = side === 'left';
-  const kanji = isLeft ? ['周', '期', '势'] : ['产', '业', '策'];
+  const kanji = isLeft ? ['梦', '心', '识'] : ['觉', '察', '思'];
   const fireflyCount = 4;
 
   // Generate stable fireflies

@@ -158,14 +158,14 @@ export default function AssessmentsPage() {
               color: '#f4f4f6',
               lineHeight: 1.1,
             }}>
-              投资者画像
+              心理测评
             </h1>
             <p className="text-lg mb-2" style={{ color: '#a1a1aa' }}>
-              先理解自己的情绪、睡眠、韧性和行为偏差
+              先理解自己的情绪、睡眠、人格和心理韧性
             </p>
             <p className="max-w-lg mx-auto text-sm leading-relaxed" style={{ color: '#71717a' }}>
-              这些测评保留为风险承受力和行为金融训练的辅助材料。
-              结果仅用于自我观察，不构成诊断或投资建议。
+              六套标准化量表用于自我观察和课程学习前后的状态对照。
+              结果仅用于心理健康参考，不能替代专业诊断。
             </p>
           </div>
         </div>

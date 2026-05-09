@@ -1,3 +1,3 @@
 export default definePageConfig({
-  navigationBarTitleText: '投资者画像',
+  navigationBarTitleText: '心理测评',
 })

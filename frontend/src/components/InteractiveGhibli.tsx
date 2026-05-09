@@ -7,6 +7,23 @@ interface Whisper {
   haiku: string; message: string; feeling: string; element_type: string; fading: boolean;
 }
 
+function seededRandom(seed: number) {
+  const value = Math.sin(seed * 9999) * 10000;
+  return value - Math.floor(value);
+}
+
+function formatNumber(value: number, digits = 3) {
+  return Number(value.toFixed(digits)).toString();
+}
+
+function pct(value: number) {
+  return `${formatNumber(value * 100)}%`;
+}
+
+function px(value: number) {
+  return `${formatNumber(value)}px`;
+}
+
 /**
  * InteractiveGhibli — 全屏背景氛围 + 精灵低语
  * 水彩纹理 · 体积光 · 黄金粉尘 · 萤火虫可点击
@@ -20,23 +37,23 @@ export default function InteractiveGhibli() {
   // ── 全局黄金粉尘 ──
   const goldDust = Array.from({ length: 50 }, (_, i) => ({
     id: i,
-    left: `${Math.random() * 100}%`,
-    top: `${Math.random() * 100}%`,
-    delay: `${Math.random() * 12}s`,
-    duration: `${8 + Math.random() * 18}s`,
-    size: 1 + Math.random() * 1.5,
-    opacity: 0.06 + Math.random() * 0.2,
+    left: pct(seededRandom(i + 1)),
+    top: pct(seededRandom(i + 101)),
+    delay: `${formatNumber(seededRandom(i + 201) * 12)}s`,
+    duration: `${formatNumber(8 + seededRandom(i + 301) * 18)}s`,
+    size: 1 + seededRandom(i + 401) * 1.5,
+    opacity: 0.06 + seededRandom(i + 501) * 0.2,
   }));
 
   // ── 背景萤火虫（不可点击，纯装饰） ──
   const bgFireflies = Array.from({ length: 8 }, (_, i) => ({
     id: i,
-    left: `${8 + Math.random() * 84}%`,
-    top: `${5 + Math.random() * 90}%`,
+    left: `${formatNumber(8 + seededRandom(i + 701) * 84)}%`,
+    top: `${formatNumber(5 + seededRandom(i + 801) * 90)}%`,
     delay: `${i * 2}s`,
-    duration: `${7 + Math.random() * 8}s`,
-    size: 3 + Math.random() * 3,
-    drift: (Math.random() - 0.5) * 50,
+    duration: `${formatNumber(7 + seededRandom(i + 901) * 8)}s`,
+    size: 3 + seededRandom(i + 1001) * 3,
+    drift: formatNumber((seededRandom(i + 1101) - 0.5) * 50),
   }));
 
   const fetchWhisper = useCallback(async (element: string, x: number, y: number) => {
@@ -112,11 +129,11 @@ export default function InteractiveGhibli() {
       {goldDust.map(d => (
         <div key={`gd-${d.id}`} style={{
           position: 'absolute', left: d.left, top: d.top,
-          width: d.size, height: d.size, borderRadius: '50%',
-          background: `radial-gradient(circle, rgba(254,249,195,${d.opacity * 1.4}), transparent)`,
-          boxShadow: `0 0 ${d.size * 2}px rgba(212,168,83,${d.opacity})`,
+          width: px(d.size), height: px(d.size), borderRadius: '50%',
+          background: `radial-gradient(circle, rgba(254,249,195,${formatNumber(d.opacity * 1.4)}), transparent)`,
+          boxShadow: `0 0 ${px(d.size * 2)} rgba(212,168,83,${formatNumber(d.opacity)})`,
           animation: `golddust-float ${d.duration} ${d.delay} infinite ease-in-out`,
-          opacity: 0,
+          opacity: '0',
         }} />
       ))}
 
@@ -124,26 +141,26 @@ export default function InteractiveGhibli() {
       {bgFireflies.map(f => (
         <div key={`bff-${f.id}`} style={{
           position: 'absolute', left: f.left, top: f.top,
-          width: f.size, height: f.size,
+          width: px(f.size), height: px(f.size),
           animation: `firefly-float ${f.duration} ${f.delay} infinite ease-in-out`,
           // @ts-ignore
           '--drift': `${f.drift}px`,
         } as any}>
           <div style={{
             position: 'absolute', left: '50%', top: '50%',
-            width: f.size * 4, height: f.size * 4,
-            marginLeft: -(f.size * 2), marginTop: -(f.size * 2),
+            width: px(f.size * 4), height: px(f.size * 4),
+            marginLeft: px(-(f.size * 2)), marginTop: px(-(f.size * 2)),
             borderRadius: '50%',
             background: 'radial-gradient(circle, rgba(212,168,83,0.04) 0%, rgba(212,168,83,0.01) 40%, transparent 70%)',
             filter: 'blur(3px)',
           }} />
           <div style={{
             position: 'absolute', left: '50%', top: '50%',
-            width: f.size * 0.5, height: f.size * 0.5,
-            marginLeft: -(f.size * 0.25), marginTop: -(f.size * 0.25),
+            width: px(f.size * 0.5), height: px(f.size * 0.5),
+            marginLeft: px(-(f.size * 0.25)), marginTop: px(-(f.size * 0.25)),
             borderRadius: '50%',
             background: 'radial-gradient(circle, #fffef8 0%, #d4a853 80%)',
-            boxShadow: `0 0 ${f.size}px rgba(254,249,195,0.2)`,
+            boxShadow: `0 0 ${px(f.size)} rgba(254,249,195,0.2)`,
           }} />
         </div>
       ))}

@@ -1,4 +1,4 @@
-// 康波研究院小程序 — 首页
+// DreamLab 小程序 — 首页
 
 import { View, Text } from '@tarojs/components'
 import Taro from '@tarojs/taro'
@@ -6,23 +6,23 @@ import './index.scss'
 
 export default function Index() {
   const features = [
-    { title: '康波课程', desc: '65门课 · 10阶段', icon: '周', path: '/pages/courses/index', color: '#d4a853', tab: true },
-    { title: '周期测评', desc: '风险偏好与行为偏差', icon: '◎', path: '/pages/assessments/index', color: '#c4554d', tab: true },
-    { title: '策略复盘', desc: '假设 · 证据 · 风险', icon: '策', path: '/pages/reflect/index', color: '#5a9a6f' },
-    { title: '我的路线', desc: '课程进度与30年蓝图', icon: '图', path: '/pages/profile/index', color: '#6b5b8a', tab: true },
+    { title: '心理课程', desc: '100门课 · 7学院', icon: '课', path: '/pages/courses/index', color: '#d4a853', tab: true },
+    { title: '心理测评', desc: '情绪 · 睡眠 · 人格', icon: '◎', path: '/pages/assessments/index', color: '#c4554d', tab: true },
+    { title: '反思日志', desc: '情境 · 感受 · 照护', icon: '思', path: '/pages/reflect/index', color: '#5a9a6f' },
+    { title: '我的成长', desc: '课程进度与成长路线', icon: '图', path: '/pages/profile/index', color: '#6b5b8a', tab: true },
   ]
 
   return (
     <View className='page'>
       {/* Header */}
       <View className='hero'>
-        <Text className='hero-tag'>KANGBO ACADEMY · 2026-2040</Text>
+        <Text className='hero-tag'>DREAMLAB ACADEMY</Text>
         <Text className='hero-title'>
-          掌握50年{'\n'}
-          <Text className='hero-title-gold'>财富周期</Text>
+          梦境与心理{'\n'}
+          <Text className='hero-title-gold'>成长系统</Text>
         </Text>
         <Text className='hero-desc'>
-          康波理论、产业地图、资产配置和个人路线图
+          梦境解析、心理测评、课程学习和反思日志
         </Text>
       </View>
 

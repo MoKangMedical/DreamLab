@@ -4,7 +4,7 @@ import './app.scss'
 
 function App({ children }: PropsWithChildren<object>) {
   useLaunch(() => {
-    console.log('康波研究院 MiniApp launched')
+    console.log('DreamLab MiniApp launched')
   })
 
   return children

@@ -1,3 +1,3 @@
 export default definePageConfig({
-  navigationBarTitleText: '策略复盘',
+  navigationBarTitleText: '反思日志',
 })

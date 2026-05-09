@@ -4,6 +4,15 @@
  * PageAtmosphere — 千与千寻漫画风格页面氛围
  * 墨染光斑 · 和纸星点 · 暖帘呼吸
  */
+function seededRandom(seed: number) {
+  const value = Math.sin(seed * 7919) * 10000;
+  return value - Math.floor(value);
+}
+
+function formatNumber(value: number, digits = 3) {
+  return Number(value.toFixed(digits)).toString();
+}
+
 export default function PageAtmosphere() {
   return (
     <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 0 }}>
@@ -33,12 +42,12 @@ export default function PageAtmosphere() {
           key={`star-${i}`}
           className="absolute rounded-full"
           style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            width: `${1 + Math.random() * 2}px`,
-            height: `${1 + Math.random() * 2}px`,
-            background: `rgba(245,239,224,${0.05 + Math.random() * 0.1})`,
-            animation: `atmo-twinkle ${3 + Math.random() * 5}s ease-in-out infinite ${Math.random() * 4}s`,
+            left: `${formatNumber(seededRandom(i + 1) * 100)}%`,
+            top: `${formatNumber(seededRandom(i + 101) * 100)}%`,
+            width: `${formatNumber(1 + seededRandom(i + 201) * 2)}px`,
+            height: `${formatNumber(1 + seededRandom(i + 301) * 2)}px`,
+            background: `rgba(245,239,224,${formatNumber(0.05 + seededRandom(i + 401) * 0.1)})`,
+            animation: `atmo-twinkle ${formatNumber(3 + seededRandom(i + 501) * 5)}s ease-in-out infinite ${formatNumber(seededRandom(i + 601) * 4)}s`,
           }}
         />
       ))}

@@ -1,21 +1,21 @@
 import Link from 'next/link';
-import { KANGBO_COURSES, KANGBO_PHASES } from '@/lib/kangbo-courses';
+import { DREAMLAB_COURSES, DREAMLAB_PHASES } from '@/lib/dreamlab-courses';
 
 const CAPABILITIES = [
   {
     href: '/courses',
-    title: '康波课程体系',
-    desc: '65 门课程串联长波理论、投资大师、宏观指标、资产配置和传承方案。',
-    metric: '65',
+    title: 'DreamLab 课程体系',
+    desc: '100 门心理学课程串联梦境解析、核心理论、疗愈工具、生活应用和前沿交叉。',
+    metric: '100',
     label: '门课程',
     accent: '#d4a853',
   },
   {
-    href: '/predict',
-    title: '周期定位工具',
-    desc: '用年龄、资产、风险偏好和关键变量生成 2026-2040 的观察与行动框架。',
-    metric: '2040',
-    label: '规划终点',
+    href: '/assessments',
+    title: '心理测评矩阵',
+    desc: '用标准化量表观察焦虑、抑郁、睡眠、人格、韧性和综合心理状态。',
+    metric: '6',
+    label: '套量表',
     accent: '#4f9db8',
   },
   {
@@ -28,40 +28,41 @@ const CAPABILITIES = [
   },
   {
     href: '/reflect',
-    title: '策略复盘',
-    desc: '把每次判断写成假设、证据、风险和下次复盘日期，形成个人研究档案。',
+    title: '反思日志',
+    desc: '把梦境、情绪、自动想法和行动选择写成可复盘的成长记录。',
     metric: '4',
-    label: '复盘字段',
+    label: '记录维度',
     accent: '#72a66a',
   },
   {
-    href: '/assessments',
-    title: '投资者画像',
-    desc: '保留心理测评能力，用于识别风险承受力、情绪波动和行为偏差。',
-    metric: '6',
-    label: '量表',
+    href: '/dream',
+    title: '梦境解析',
+    desc: '记录梦境文本，生成象征、情绪、潜意识主题和生活线索。',
+    metric: 'AI',
+    label: '解析',
     accent: '#c4554d',
   },
   {
     href: '/profile',
-    title: '我的财富路线',
-    desc: '跟踪课程进度、复盘记录和长期目标，形成可持续的学习闭环。',
-    metric: '30Y',
+    title: '我的成长路线',
+    desc: '跟踪课程、测评、梦境和反思记录，形成个人心理学习档案。',
+    metric: '1',
     label: '路线图',
     accent: '#cfa34d',
   },
 ];
 
 const FRAMEWORK = [
-  { title: '长波定方向', desc: '用 50-60 年技术与资本开支周期判断大方向。' },
-  { title: '中周期定节奏', desc: '结合债务、库存、地产和政策周期决定等待或行动。' },
-  { title: '产业定赛道', desc: '观察 AI、能源、生物科技、先进制造等主导产业扩散。' },
-  { title: '家庭定方案', desc: '把资产、职业、城市、教育和传承放进同一张路线图。' },
+  { title: '梦境看入口', desc: '用梦境素材进入潜意识、情绪主题和未被表达的需求。' },
+  { title: '理论建坐标', desc: '用人格、发展、社会、神经与存在主义理论建立理解框架。' },
+  { title: '工具做练习', desc: '用 CBT、正念、依恋和创伤修复工具支持日常自我照护。' },
+  { title: '记录成路线', desc: '把测评、课程、梦境和反思连接成可持续的个人成长档案。' },
 ];
 
 export default function HomePage() {
-  const totalMinutes = KANGBO_COURSES.reduce((sum, course) => sum + course.minutes, 0);
-  const featured = KANGBO_COURSES.filter((course) => [1, 2, 3, 6, 20, 50].includes(course.id));
+  const totalMinutes = DREAMLAB_COURSES.reduce((sum, course) => sum + course.minutes, 0);
+  const totalChapters = DREAMLAB_COURSES.reduce((sum, course) => sum + course.chapter_count, 0);
+  const featured = DREAMLAB_COURSES.filter((course) => [1, 2, 3, 15, 31, 60].includes(course.id));
 
   return (
     <div style={{ background: '#0a0a0c' }}>
@@ -73,30 +74,30 @@ export default function HomePage() {
                 className="font-bold mb-5"
                 style={{ fontFamily: "'Noto Serif SC', serif", fontSize: 'clamp(48px, 9vw, 92px)', lineHeight: 1.02, color: '#f4f4f6' }}
               >
-                康波研究院
+                DreamLab 心理研究院
               </h1>
               <p className="text-lg md:text-xl leading-9 max-w-2xl mb-8" style={{ color: '#a1a1aa' }}>
-                掌握 50 年财富周期，把宏观长波、产业变迁、资产配置和人生阶段放进同一套研究系统。
-                从 2026 到 2040，做有证据、有节奏、有复盘的长期决策。
+                用梦境解析、心理测评、经典课程、知识库和反思日志，建立一套可学习、可观察、可复盘的心智成长系统。
+                从潜意识线索到日常照护动作，把心理学知识放进真实生活。
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Link href="/courses" className="btn btn-primary" style={{ padding: '15px 30px' }}>
-                  查看 65 门课程 →
+                  查看 100 门课程 →
                 </Link>
                 <Link href="/reflect" className="btn btn-ghost">
-                  开始策略复盘
+                  开始反思记录
                 </Link>
               </div>
             </div>
 
             <div className="grid grid-cols-3 gap-2">
               {[
-                { value: '65', label: '精编课程' },
-                { value: '10', label: '阶段体系' },
+                { value: '100', label: '心理课程' },
+                { value: '7', label: '学院体系' },
                 { value: `${Math.round(totalMinutes / 60)}h`, label: '学习时长' },
-                { value: '4', label: '共振框架' },
-                { value: '2026', label: '回升窗口' },
-                { value: '2040', label: '路线终点' },
+                { value: '6', label: '心理量表' },
+                { value: 'AI', label: '梦境解析' },
+                { value: `${totalChapters}`, label: '课程章节' },
               ].map((item) => (
                 <div key={item.label} className="p-4 md:p-5" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
                   <div className="text-2xl md:text-3xl font-bold" style={{ fontFamily: "'Noto Serif SC', serif", color: '#d4a853' }}>{item.value}</div>
@@ -138,11 +139,11 @@ export default function HomePage() {
               <span className="text-xs tracking-[0.18em] uppercase" style={{ color: 'rgba(212,168,83,0.62)' }}>研究框架</span>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>
-              从宏观周期到个人方案
+              从梦境材料到成长路线
             </h2>
             <p className="text-sm leading-7" style={{ color: '#85858e' }}>
-              首页不再按心理功能堆叠，而是按照“研究框架 → 课程体系 → 工具复盘 → 个人路线”组织。
-              这样用户进入后先理解方法，再进入课程和实践。
+              从一段梦境、一份量表或一次情绪波动开始，逐步连接理论、练习和反思。
+              每一次记录都会成为下一次理解自己的线索。
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -165,12 +166,12 @@ export default function HomePage() {
                 <div style={{ width: 28, height: 1, background: 'rgba(212,168,83,0.2)' }} />
                 <span className="text-xs tracking-[0.18em] uppercase" style={{ color: 'rgba(212,168,83,0.62)' }}>课程路径</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>10 大阶段</h2>
+              <h2 className="text-3xl md:text-4xl font-bold" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>7 大学院</h2>
             </div>
             <Link href="/courses" className="hidden md:inline-flex text-sm" style={{ color: '#d4a853' }}>全部课程 →</Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {KANGBO_PHASES.map((phase) => (
+            {DREAMLAB_PHASES.map((phase) => (
               <Link key={phase.key} href="/courses" className="p-5 flex gap-4 items-start transition-all duration-300 hover:translate-y-[-2px]" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
                 <div className="w-11 h-11 flex items-center justify-center text-sm font-bold shrink-0" style={{ background: phase.color, color: '#0a0a0c', borderRadius: 8 }}>
                   {phase.icon}

@@ -17,11 +17,11 @@ export default function AssessmentsPage() {
     <View className='page assessments-page'>
       <ScrollView scrollY className='assessments-scroll'>
         <View className='assessments-hero'>
-          <Text className='page-kicker'>投资者画像</Text>
+          <Text className='page-kicker'>心理测评</Text>
           <Text className='assessments-icon'>◎</Text>
-          <Text className='page-title'>风险与行为观察</Text>
+          <Text className='page-title'>情绪与人格观察</Text>
           <Text className='page-desc'>
-            六套标准化量表，辅助观察情绪、睡眠、人格、韧性和投资行为偏差。
+            六套标准化量表，辅助观察情绪、睡眠、人格、韧性和综合心理状态。
           </Text>
         </View>
 
@@ -60,7 +60,7 @@ export default function AssessmentsPage() {
         </View>
 
         <View className='assessment-notice'>
-          <Text>测评结果仅供自我观察，不能替代专业诊断或投资建议。</Text>
+          <Text>测评结果仅供自我观察，不能替代专业诊断或治疗。</Text>
         </View>
       </ScrollView>
     </View>

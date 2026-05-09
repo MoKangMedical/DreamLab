@@ -7,21 +7,21 @@ const API_BASE = 'https://43.134.3.158/api'
 const STORAGE_KEY = 'dreamlab_reflections'
 
 const STAGES = [
-  { title: '假设', desc: '写清楚你对周期和资产的判断', icon: '假' },
-  { title: '证据', desc: '列出支持和反对这次判断的数据', icon: '证' },
-  { title: '风险', desc: '明确什么情况会证明你错了', icon: '险' },
-  { title: '行动', desc: '设定仓位、学习或观察的下一步', icon: '行' },
+  { title: '情境', desc: '写清楚发生了什么、梦到了什么', icon: '境' },
+  { title: '感受', desc: '记录情绪、身体反应和自动想法', icon: '感' },
+  { title: '理解', desc: '寻找证据、反例和更温和的解释', icon: '解' },
+  { title: '照护', desc: '设定一个可完成的小行动', icon: '护' },
 ]
 
 const PROMPTS = [
-  { q: '我现在判断处于哪个周期阶段？为什么？', hint: '先定位，再行动' },
-  { q: '支持这个判断的三条证据是什么？', hint: '证据要能被复查' },
-  { q: '如果判断错误，最可能错在哪里？', hint: '先写反例，避免自我确认' },
-  { q: '本次判断对应的资产、职业或学习动作是什么？', hint: '判断必须落到行动' },
-  { q: '下一次复盘日期和观察指标是什么？', hint: '没有复盘就没有系统' },
+  { q: '今天最强烈的情绪是什么？它出现在什么情境里？', hint: '先命名，再理解' },
+  { q: '我反复出现的梦境、念头或身体感受在提醒什么？', hint: '把材料写清楚' },
+  { q: '支持这个想法的证据是什么？有没有其他解释？', hint: '用 CBT 的方式温和求证' },
+  { q: '我真正需要的支持、边界或行动是什么？', hint: '从觉察走向照护' },
+  { q: '下一次复盘要观察哪个小变化？', hint: '让成长可以被回看' },
 ]
 
-const MOODS = ['谨慎', '观望', '中性', '积极', '进攻']
+const MOODS = ['低落', '焦虑', '平稳', '清明', '有力']
 
 interface ReflectionItem {
   id: number
@@ -86,7 +86,7 @@ export default function ReflectPage() {
         },
         timeout: 8000,
       })
-      Taro.showToast({ title: '复盘已保存', icon: 'success' })
+      Taro.showToast({ title: '反思已保存', icon: 'success' })
     } catch {
       Taro.showToast({ title: '已本地保存', icon: 'none' })
     } finally {
@@ -103,10 +103,10 @@ export default function ReflectPage() {
     <View className='page reflect-page'>
       <ScrollView scrollY className='reflect-scroll'>
         <View className='reflect-hero'>
-          <Text className='reflect-kicker'>周期研究日志</Text>
-          <Text className='reflect-title'>策略复盘</Text>
+          <Text className='reflect-kicker'>DreamLab 反思日志</Text>
+          <Text className='reflect-title'>心理反思</Text>
           <Text className='reflect-desc'>
-            每一次判断都写下假设、证据、风险和复盘日期，让课程知识进入真实决策流程。
+            把梦境、情绪、想法和行动写成可回看的成长档案。
           </Text>
         </View>
 
@@ -124,7 +124,7 @@ export default function ReflectPage() {
 
         <View className='section-block'>
           <Text className='section-kicker'>引导问题</Text>
-          <Text className='section-title'>写一份可复盘判断</Text>
+          <Text className='section-title'>写一份可复盘反思</Text>
           {PROMPTS.map((prompt) => (
             <View key={prompt.q} className='prompt-card' onClick={() => usePrompt(prompt.q)}>
               <Text className='prompt-q'>{prompt.q}</Text>
@@ -136,11 +136,11 @@ export default function ReflectPage() {
         <View className='section-block'>
           <View className='section-head'>
             <View>
-              <Text className='section-kicker'>我的复盘</Text>
-              <Text className='section-title'>写下你的策略判断</Text>
+              <Text className='section-kicker'>我的反思</Text>
+              <Text className='section-title'>写下你的心理观察</Text>
             </View>
             <View className='write-btn' onClick={() => setShowForm((value) => !value)}>
-              <Text>{showForm ? '收起' : '+ 写复盘'}</Text>
+              <Text>{showForm ? '收起' : '+ 写反思'}</Text>
             </View>
           </View>
 
@@ -150,7 +150,7 @@ export default function ReflectPage() {
               <Input
                 className='field-input'
                 value={title}
-                placeholder='例如：第六轮康波 AI 赛道判断'
+                placeholder='例如：反复梦到迷路后的情绪记录'
                 onInput={(event) => setTitle(event.detail.value)}
               />
 
@@ -158,12 +158,12 @@ export default function ReflectPage() {
               <Textarea
                 className='field-textarea'
                 value={content}
-                placeholder='写下假设、证据、反例、风险和下一步动作'
+                placeholder='写下情境、梦境片段、情绪、自动想法、证据和下一步照护动作'
                 maxlength={2000}
                 onInput={(event) => setContent(event.detail.value)}
               />
 
-              <Text className='field-label'>策略状态</Text>
+              <Text className='field-label'>当前状态</Text>
               <View className='mood-row'>
                 {MOODS.map((label, index) => (
                   <View
@@ -177,7 +177,7 @@ export default function ReflectPage() {
               </View>
 
               <View className={`save-btn ${saving ? 'save-disabled' : ''}`} onClick={saving ? undefined : saveReflection}>
-                <Text>{saving ? '保存中...' : '保存复盘'}</Text>
+                <Text>{saving ? '保存中...' : '保存反思'}</Text>
               </View>
             </View>
           )}
@@ -187,8 +187,8 @@ export default function ReflectPage() {
           {reflections.length === 0 ? (
             <View className='empty-reflect'>
               <Text className='empty-icon'>◇</Text>
-              <Text className='empty-title'>还没有复盘记录</Text>
-              <Text className='empty-desc'>第一篇复盘会成为你周期研究档案的起点。</Text>
+              <Text className='empty-title'>还没有反思记录</Text>
+              <Text className='empty-desc'>第一篇反思会成为你 DreamLab 成长档案的起点。</Text>
             </View>
           ) : (
             reflections.map((item) => (

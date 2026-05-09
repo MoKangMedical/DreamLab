@@ -5,19 +5,19 @@ import { getReflections, createReflection, getDreams } from '@/lib/api';
 
 // ── 写作引导 ──
 const REFLECT_PROMPTS = [
-  { q: '我现在判断处于哪个周期阶段？为什么？', hint: '先定位，再行动' },
-  { q: '支持这个判断的三条证据是什么？', hint: '证据要能被复查' },
-  { q: '如果判断错误，最可能错在哪里？', hint: '先写反例，避免自我确认' },
-  { q: '本次判断对应的资产、职业或学习动作是什么？', hint: '判断必须落到行动' },
-  { q: '下一次复盘日期和观察指标是什么？', hint: '没有复盘就没有系统' },
+  { q: '今天最强烈的情绪是什么？它出现在什么情境里？', hint: '先命名，再理解' },
+  { q: '我反复出现的梦境、念头或身体感受在提醒什么？', hint: '把材料写清楚' },
+  { q: '支持这个想法的证据是什么？有没有其他解释？', hint: '用 CBT 的方式温和求证' },
+  { q: '我真正需要的支持、边界或行动是什么？', hint: '从觉察走向照护' },
+  { q: '下一次复盘要观察哪个小变化？', hint: '让成长可以被回看' },
 ];
 
 // ── 反思的阶段 ──
 const STAGES = [
-  { title: '假设', desc: '写清楚你对周期、产业或资产的判断', icon: '假' },
-  { title: '证据', desc: '列出支持和反对这次判断的数据', icon: '证' },
-  { title: '风险', desc: '明确什么情况会证明你错了', icon: '险' },
-  { title: '行动', desc: '设定仓位、学习或观察的下一步', icon: '行' },
+  { title: '情境', desc: '写清楚发生了什么、梦到了什么', icon: '境' },
+  { title: '感受', desc: '记录情绪、身体反应和自动想法', icon: '感' },
+  { title: '理解', desc: '寻找证据、反例和更温和的解释', icon: '解' },
+  { title: '照护', desc: '设定一个可完成的小行动', icon: '护' },
 ];
 
 export default function ReflectClient() {
@@ -64,7 +64,7 @@ export default function ReflectClient() {
     }
   };
 
-  const moodEmojis = ['谨慎', '观望', '中性', '积极', '进攻'];
+  const moodEmojis = ['低落', '焦虑', '平稳', '清明', '有力'];
 
   return (
     <div style={{ background: '#0a0a0c', minHeight: '100vh' }}>
@@ -72,20 +72,20 @@ export default function ReflectClient() {
 
         {/* ════════════════ Hero ════════════════ */}
         <div className={`text-center mb-16 transition-all duration-1000 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="text-5xl md:text-6xl mb-6">策</div>
+          <div className="text-5xl md:text-6xl mb-6">思</div>
           <h1 className="font-bold mb-4" style={{
             fontFamily: "'Noto Serif SC', serif",
             fontSize: 'clamp(32px, 5vw, 56px)',
             color: '#f4f4f6',
             lineHeight: 1.1,
           }}>
-            策略复盘
+            反思日志
           </h1>
           <p className="max-w-lg mx-auto text-sm leading-relaxed mb-2" style={{ color: '#a1a1aa' }}>
-            每一次判断都要留下假设、证据、风险和复盘日期
+            把梦境、情绪、想法和行动写成可回看的成长档案
           </p>
           <p className="max-w-md mx-auto text-sm leading-relaxed" style={{ color: '#71717a' }}>
-            把课程知识写进真实决策流程，日积月累形成自己的周期研究档案。
+            每一篇记录都可以连接课程、测评和梦境解析，帮助你更稳定地理解自己。
           </p>
         </div>
 
@@ -100,10 +100,10 @@ export default function ReflectClient() {
             fontSize: 'clamp(22px, 3vw, 32px)',
             color: '#f4f4f6',
           }}>
-            如何写一份可复盘判断
+            如何写一份可复盘反思
           </h2>
           <p className="text-sm mb-6" style={{ color: '#71717a' }}>
-            这是从观点到行动的四个步骤，每一步都要能被未来的自己复查
+            这是从经验到照护的四个步骤，每一步都要具体到未来可以回看
           </p>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -163,14 +163,14 @@ export default function ReflectClient() {
             <div>
               <div className="flex items-center gap-3 mb-2">
                 <div style={{ width: 32, height: 1, background: 'rgba(255,255,255,0.06)' }} />
-                <span className="text-xs tracking-[0.2em] uppercase" style={{ color: 'rgba(212,168,83,0.5)' }}>我的复盘</span>
+                <span className="text-xs tracking-[0.2em] uppercase" style={{ color: 'rgba(212,168,83,0.5)' }}>我的反思</span>
               </div>
               <h2 className="font-bold" style={{
                 fontFamily: "'Noto Serif SC', serif",
                 fontSize: 'clamp(22px, 3vw, 32px)',
                 color: '#f4f4f6',
               }}>
-                写下你的策略判断
+                写下你的心理观察
               </h2>
             </div>
             <button onClick={() => setShowForm(!showForm)}
@@ -180,7 +180,7 @@ export default function ReflectClient() {
                 fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: 13,
                 borderRadius: 2, border: 'none', cursor: 'pointer',
               }}>
-              {showForm ? '收起' : '+ 写复盘'}
+              {showForm ? '收起' : '+ 写反思'}
             </button>
           </div>
 
@@ -193,7 +193,7 @@ export default function ReflectClient() {
                     type="text"
                     value={title}
                     onChange={e => setTitle(e.target.value)}
-                    placeholder="例如：第六轮康波 AI 赛道判断"
+                    placeholder="例如：反复梦到迷路后的情绪记录"
                     className="w-full text-sm"
                     style={{
                       background: '#0a0a0c', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2,
@@ -206,7 +206,7 @@ export default function ReflectClient() {
                   <textarea
                     value={content}
                     onChange={e => setContent(e.target.value)}
-                    placeholder="写下假设、证据、反例、风险和下一步动作..."
+                    placeholder="写下情境、梦境片段、情绪、自动想法、证据和下一步照护动作..."
                     rows={6}
                     className="w-full resize-none text-sm leading-relaxed"
                     style={{
@@ -216,7 +216,7 @@ export default function ReflectClient() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs mb-2 font-medium" style={{ color: '#71717a' }}>策略状态</label>
+                  <label className="block text-xs mb-2 font-medium" style={{ color: '#71717a' }}>当前状态</label>
                   <div className="flex gap-3">
                     {moodEmojis.map((emoji, i) => (
                       <button
@@ -262,7 +262,7 @@ export default function ReflectClient() {
                     fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: 14,
                     borderRadius: 2, border: 'none', cursor: 'pointer',
                   }}>
-                  保存复盘
+                  保存反思
                 </button>
               </div>
             </div>
@@ -282,10 +282,10 @@ export default function ReflectClient() {
           </div>
         ) : reflections.length === 0 ? (
           <div className="text-center py-16">
-            <span className="text-5xl block mb-4">策</span>
-            <p className="text-sm mb-4" style={{ color: '#71717a' }}>还没有复盘记录</p>
+            <span className="text-5xl block mb-4">思</span>
+            <p className="text-sm mb-4" style={{ color: '#71717a' }}>还没有反思记录</p>
             <p className="text-xs mb-6" style={{ color: '#52525b' }}>
-              第一篇复盘会成为你周期研究档案的起点
+              第一篇反思会成为你 DreamLab 成长档案的起点
             </p>
             <button onClick={() => setShowForm(true)}
               className="transition-all duration-300 hover:scale-105"
@@ -294,7 +294,7 @@ export default function ReflectClient() {
                 fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: 13,
                 borderRadius: 2, border: 'none', cursor: 'pointer',
               }}>
-              写第一篇复盘
+              写第一篇反思
             </button>
           </div>
         ) : (

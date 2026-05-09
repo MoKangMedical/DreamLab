@@ -4,26 +4,26 @@ import Link from 'next/link';
 
 const STATS = [
   { label: '课程', value: 12, icon: '课', color: '#d4a853' },
-  { label: '复盘', value: 3, icon: '策', color: '#3b8b7a' },
-  { label: '工具', value: 4, icon: '盘', color: '#5a7d9a' },
-  { label: '画像', value: 2, icon: '镜', color: '#c4554d' },
-  { label: '报告', value: 5, icon: '研', color: '#6b5b8a' },
-  { label: '蓝图', value: 1, icon: '图', color: '#cfa34d' },
+  { label: '反思', value: 3, icon: '思', color: '#3b8b7a' },
+  { label: '梦境', value: 4, icon: '梦', color: '#5a7d9a' },
+  { label: '测评', value: 2, icon: '镜', color: '#c4554d' },
+  { label: '知识', value: 5, icon: '研', color: '#6b5b8a' },
+  { label: '路线', value: 1, icon: '图', color: '#cfa34d' },
 ];
 
 const ACTIVITIES = [
-  { text: '学习：康波理论，完成周期四季定位图', time: '2小时前', icon: '课', color: '#d4a853' },
-  { text: '复盘：AI 与能源赛道的主导产业假设', time: '昨天', icon: '策', color: '#3b8b7a' },
-  { text: '完成投资者画像：风险偏好中等', time: '2天前', icon: '镜', color: '#c4554d' },
-  { text: '学习：周金涛四周期嵌套模型', time: '3天前', icon: '研', color: '#5a7d9a' },
+  { text: '学习：弗洛伊德梦的解析入门，完成梦境双层拆解', time: '2小时前', icon: '课', color: '#d4a853' },
+  { text: '反思：反复梦到迷路后的情绪记录', time: '昨天', icon: '思', color: '#3b8b7a' },
+  { text: '完成心理测评：睡眠与焦虑状态观察', time: '2天前', icon: '镜', color: '#c4554d' },
+  { text: '学习：正念冥想，完成 10 分钟觉察练习', time: '3天前', icon: '研', color: '#5a7d9a' },
 ];
 
 const MILESTONES = [
-  { name: '周期定位', desc: '确认阶段', done: true, color: '#d4a853' },
-  { name: '产业地图', desc: '筛选赛道', done: true, color: '#5a7d9a' },
-  { name: '资产框架', desc: '配置原则', done: true, color: '#3b8b7a' },
-  { name: '风险预案', desc: '压力测试', done: false, color: '#c4554d' },
-  { name: '30年蓝图', desc: '代际传承', done: false, color: '#cfa34d' },
+  { name: '梦境记录', desc: '收集素材', done: true, color: '#d4a853' },
+  { name: '心理测评', desc: '建立画像', done: true, color: '#5a7d9a' },
+  { name: '课程学习', desc: '建立坐标', done: true, color: '#3b8b7a' },
+  { name: '反思日志', desc: '持续复盘', done: false, color: '#c4554d' },
+  { name: '成长路线', desc: '长期照护', done: false, color: '#cfa34d' },
 ];
 
 export default function ProfilePage() {
@@ -45,7 +45,7 @@ export default function ProfilePage() {
       {/* Journey */}
       <div className="m-card mb-4" style={{ padding: 18 }}>
         <div className="flex items-center justify-between mb-3">
-          <h3 className="m-subtitle" style={{ fontSize: 14 }}>周期路线</h3>
+          <h3 className="m-subtitle" style={{ fontSize: 14 }}>成长路线</h3>
           <span style={{ fontSize: 11, color: '#d4a853' }}>{MILESTONES.filter(m => m.done).length}/{MILESTONES.length}</span>
         </div>
         <div className="h-1.5 rounded-full mb-4" style={{ background: 'rgba(255,255,255,0.05)' }}>
@@ -73,9 +73,9 @@ export default function ProfilePage() {
       <div className="grid grid-cols-2 gap-2 mb-4">
         {[
           { href: '/courses', label: '继续学习', icon: '课', color: '#d4a853' },
-          { href: '/reflect', label: '写策略复盘', icon: '策', color: '#3b8b7a' },
-          { href: '/predict', label: '周期定位', icon: '盘', color: '#5a7d9a' },
-          { href: '/assessments', label: '投资者画像', icon: '镜', color: '#c4554d' },
+          { href: '/reflect', label: '写反思日志', icon: '思', color: '#3b8b7a' },
+          { href: '/dream', label: '梦境解析', icon: '梦', color: '#5a7d9a' },
+          { href: '/assessments', label: '心理测评', icon: '镜', color: '#c4554d' },
         ].map(item => (
           <Link key={item.href} href={item.href}
             className="m-card m-card-interactive flex items-center gap-3"
@@ -107,7 +107,7 @@ export default function ProfilePage() {
         <Link href="/profile/milestones"
           className="flex items-center justify-between py-2"
           style={{ borderBottom: '1px solid rgba(255,255,255,0.03)', textDecoration: 'none' }}>
-          <span className="m-subtitle" style={{ fontSize: 14 }}>查看完整周期路线</span>
+          <span className="m-subtitle" style={{ fontSize: 14 }}>查看完整成长路线</span>
           <span style={{ color: '#52525b' }}>→</span>
         </Link>
         <Link href="/courses"
@@ -120,9 +120,9 @@ export default function ProfilePage() {
       {/* Quote */}
       <div className="m-card text-center m-section-sm" style={{ padding: 24 }}>
         <p className="m-body" style={{ fontSize: 14, fontFamily: "'Noto Serif SC', serif", fontStyle: 'italic' }}>
-          "每一次判断都要留下假设、证据、风险和复盘日期。"
+          "把梦境、情绪和行动记录下来，成长才会留下线索。"
         </p>
-        <p className="m-caption mt-2" style={{ fontSize: 11 }}>—— 康波研究院</p>
+        <p className="m-caption mt-2" style={{ fontSize: 11 }}>—— DreamLab</p>
       </div>
 
       <div style={{ height: 16 }} />

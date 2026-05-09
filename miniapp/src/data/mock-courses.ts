@@ -1,857 +1,297 @@
-export interface KangboChapter {
-  title: string;
-  content: string;
-  body: string;
-  order: number;
+import Taro from '@tarojs/taro'
+
+export interface DreamLabChapter {
+  title: string
+  content: string
+  body: string
+  order: number
 }
 
-export interface KangboCourse {
-  id: number;
-  title: string;
-  category: string;
-  difficulty: string;
-  description: string;
-  phaseKey: string;
-  phaseIndex: number;
-  phaseTitle: string;
-  phaseIcon: string;
-  minutes: number;
-  tags: string[];
-  outcome: string;
-  chapters: KangboChapter[];
-  chapter_count: number;
+export interface DreamLabCourse {
+  id: number
+  title: string
+  category: string
+  difficulty: string
+  description: string
+  phaseKey: string
+  phaseIndex: number
+  phaseTitle: string
+  phaseIcon: string
+  minutes: number
+  tags: string[]
+  outcome: string
+  content: DreamLabChapter[]
+  chapters: DreamLabChapter[]
+  chapter_count: number
 }
 
-interface CourseBlueprint {
-  id: number;
-  title: string;
-  category: string;
-  difficulty: string;
-  minutes: number;
-  description: string;
-  tags: string[];
-  outcome: string;
+interface RawCourse {
+  id: number
+  title: string
+  description: string
+  category: string
+  difficulty: string
+  chapter_count?: number
+  content?: Array<{ title: string; body: string; order?: number }>
 }
 
-interface PhaseBlueprint {
-  key: string;
-  title: string;
-  icon: string;
-  subtitle: string;
-  color: string;
-  courses: CourseBlueprint[];
+interface AcademyBlueprint {
+  key: string
+  title: string
+  icon: string
+  subtitle: string
+  color: string
+  categories: string[]
 }
 
-export const KANGBO_CATEGORIES: Record<string, { label: string; icon: string; color: string }> = {
-  foundation: { label: '周期基础', icon: '周', color: '#d4a853' },
-  masters: { label: '大师思想', icon: '师', color: '#8b7cf6' },
-  schools: { label: '经济学派', icon: '辩', color: '#ef7d57' },
-  macro: { label: '实战宏观', icon: '势', color: '#4f9db8' },
-  china: { label: '中国经济', icon: '中', color: '#d75f5f' },
-  life: { label: '生活经济', icon: '民', color: '#72a66a' },
-  finance: { label: '理财基础', icon: '财', color: '#cfa34d' },
-  history: { label: '金融历史', icon: '史', color: '#8b9ac8' },
-  practice: { label: '投资实战', icon: '投', color: '#5da38f' },
-  advanced: { label: '高级策略', icon: '策', color: '#b879c8' },
-};
+const DATA_BASE_URL = 'https://MoKangMedical.github.io/DreamLab/data'
+const COURSES_INDEX_URL = `${DATA_BASE_URL}/course-index.json`
+const COURSES_DATA_URL = `${DATA_BASE_URL}/courses.json`
+const COURSES_CACHE_KEY = 'dreamlab_courses_index_v2'
+const COURSE_DETAIL_CACHE_KEY = 'dreamlab_course_detail_v2_'
 
-const PHASE_BLUEPRINTS: PhaseBlueprint[] = [
+export const DREAMLAB_CATEGORIES: Record<string, { label: string; icon: string; color: string }> = {
+  freud: { label: '弗洛伊德学派', icon: '弗', color: '#d4a853' },
+  jung: { label: '荣格学派', icon: '荣', color: '#8b7cf6' },
+  modern: { label: '睡眠科学', icon: '眠', color: '#4f9db8' },
+  eastern: { label: '东方梦学', icon: '易', color: '#ef7d57' },
+  'dream-science': { label: '梦的科学', icon: '梦', color: '#7c3aed' },
+  systems: { label: '系统理论', icon: '理', color: '#0891b2' },
+  personality: { label: '人格心理学', icon: '格', color: '#a78bfa' },
+  evolutionary: { label: '进化心理学', icon: '演', color: '#34d399' },
+  developmental: { label: '发展心理学', icon: '生', color: '#fbbf24' },
+  social: { label: '社会心理学', icon: '群', color: '#60a5fa' },
+  behaviorism: { label: '行为主义', icon: '行', color: '#f472b6' },
+  gestalt: { label: '格式塔', icon: '整', color: '#c084fc' },
+  existential: { label: '存在主义', icon: '存', color: '#94a3b8' },
+  cbt: { label: '认知行为疗法', icon: '认', color: '#38bdf8' },
+  clinical: { label: '临床应用', icon: '疗', color: '#059669' },
+  abnormal: { label: '异常心理学', icon: '异', color: '#e879f9' },
+  trauma: { label: '创伤心理学', icon: '创', color: '#f87171' },
+  positive: { label: '积极心理学', icon: '幸', color: '#facc15' },
+  mindfulness: { label: '正念冥想', icon: '念', color: '#4ade80' },
+  attachment: { label: '依恋理论', icon: '恋', color: '#fb7185' },
+  humanistic: { label: '人本主义', icon: '人', color: '#2dd4bf' },
+  health: { label: '健康心理学', icon: '健', color: '#86efac' },
+  emotion: { label: '情绪心理学', icon: '情', color: '#fbbf24' },
+  neuropsychology: { label: '神经心理学', icon: '脑', color: '#818cf8' },
+  neuroscience: { label: '神经科学', icon: '神', color: '#4f46e5' },
+  creativity: { label: '创造心理学', icon: '创', color: '#c084fc' },
+  educational: { label: '教育心理学', icon: '学', color: '#a3e635' },
+  child: { label: '儿童心理学', icon: '童', color: '#fdba74' },
+  love: { label: '爱情心理学', icon: '爱', color: '#f43f5e' },
+  forensic: { label: '犯罪心理学', icon: '察', color: '#64748b' },
+  consumer: { label: '消费心理学', icon: '购', color: '#f59e0b' },
+  sports: { label: '运动心理学', icon: '动', color: '#22d3ee' },
+  thanatology: { label: '临终心理学', icon: '终', color: '#9ca3af' },
+  applied: { label: '应用心理学', icon: '用', color: '#ea580c' },
+  frontier: { label: '前沿交叉', icon: '新', color: '#db2777' },
+}
+
+const ACADEMIES: AcademyBlueprint[] = [
   {
-    key: 'foundation',
-    title: '周期理论基础',
+    key: 'dream-academy',
+    title: '梦境解析学院',
     icon: '01',
-    subtitle: '第 1-6 课 · 建立康波语言、周期定位和 2026-2040 行动框架',
+    subtitle: '精神分析、荣格、睡眠科学、东方梦学与梦境研究前沿',
     color: '#d4a853',
-    courses: [
-      {
-        id: 1,
-        title: '康波理论：为什么经济有四季',
-        category: 'foundation',
-        difficulty: 'beginner',
-        minutes: 30,
-        description: '用康德拉季耶夫长波解释技术革命、资本开支和资产价格的长期节奏，建立周期四季的基础坐标。',
-        tags: ['长波理论', '经济四季', '周期定位'],
-        outcome: '画出一张自己的康波四季定位图',
-      },
-      {
-        id: 2,
-        title: '周金涛：人生就是一场康波',
-        category: 'foundation',
-        difficulty: 'core',
-        minutes: 40,
-        description: '把长波、库存、产能、房地产和人生阶段放到同一张图里，理解财富机会与个人生命周期的重叠窗口。',
-        tags: ['周金涛', '四周期嵌套', '人生机会'],
-        outcome: '生成个人三次财富机会时间表',
-      },
-      {
-        id: 3,
-        title: 'AI 驱动的新纪元：第六轮康波',
-        category: 'foundation',
-        difficulty: 'core',
-        minutes: 45,
-        description: '围绕 AI、能源、生物技术和自动化基础设施，拆解第六轮康波可能的主导产业和扩散路径。',
-        tags: ['AI', '能源革命', '主导产业'],
-        outcome: '完成第六轮康波产业候选清单',
-      },
-      {
-        id: 4,
-        title: '顶级家族：老钱密码',
-        category: 'foundation',
-        difficulty: 'core',
-        minutes: 35,
-        description: '复盘跨周期家族的信托、现金流、业务组合和代际传承安排，提炼普通家庭可借鉴的稳健原则。',
-        tags: ['家族财富', '跨周期', '传承'],
-        outcome: '写出家庭资产防守规则',
-      },
-      {
-        id: 5,
-        title: '货币战争与全球博弈',
-        category: 'foundation',
-        difficulty: 'advanced',
-        minutes: 40,
-        description: '从美元信用、汇率、资本流动和地缘冲突理解货币体系变化，建立宏观风险识别的基本框架。',
-        tags: ['美元周期', '汇率', '地缘风险'],
-        outcome: '建立全球流动性观察清单',
-      },
-      {
-        id: 6,
-        title: '投资操作手册 2026-2040',
-        category: 'foundation',
-        difficulty: 'advanced',
-        minutes: 50,
-        description: '把周期位置、年龄阶段、风险承受力和资产配置连接起来，形成可复盘的长期行动手册。',
-        tags: ['2026-2040', '行动手册', '资产配置'],
-        outcome: '完成一版 15 年资产与职业路线图',
-      },
-    ],
+    categories: ['freud', 'jung', 'modern', 'eastern', 'dream-science'],
   },
   {
-    key: 'masters',
-    title: '投资大师智慧',
+    key: 'theory-academy',
+    title: '心理理论学院',
     icon: '02',
-    subtitle: '第 7-12 课 · 学习顶级投资者处理价值、泡沫、债务和不确定性的方式',
+    subtitle: '人格、发展、社会、行为、格式塔、存在主义与系统理论',
     color: '#8b7cf6',
-    courses: [
-      {
-        id: 7,
-        title: '价值投资：从格雷厄姆到巴菲特',
-        category: 'masters',
-        difficulty: 'beginner',
-        minutes: 40,
-        description: '学习安全边际、内在价值、护城河和长期复利，用价值框架约束周期情绪。',
-        tags: ['安全边际', '护城河', '复利'],
-        outcome: '写出一家公司价值评估清单',
-      },
-      {
-        id: 8,
-        title: '索罗斯：反身性与量子基金',
-        category: 'masters',
-        difficulty: 'advanced',
-        minutes: 45,
-        description: '理解市场预期如何反过来改变现实基本面，并用反身性框架识别趋势强化和崩塌点。',
-        tags: ['反身性', '趋势', '宏观对冲'],
-        outcome: '完成一个反身性循环案例图',
-      },
-      {
-        id: 9,
-        title: '达里奥：全天候与债务周期',
-        category: 'masters',
-        difficulty: 'core',
-        minutes: 40,
-        description: '拆解债务周期、去杠杆、风险平价和全天候组合，建立穿越不同经济环境的配置思路。',
-        tags: ['债务周期', '全天候', '风险平价'],
-        outcome: '搭建简化版全天候配置模板',
-      },
-      {
-        id: 10,
-        title: '塔勒布：黑天鹅与反脆弱',
-        category: 'masters',
-        difficulty: 'core',
-        minutes: 35,
-        description: '用肥尾、凸性和杠铃策略处理不可预测事件，把风险管理从预测转向承受力设计。',
-        tags: ['黑天鹅', '反脆弱', '杠铃策略'],
-        outcome: '列出个人财务反脆弱改造项',
-      },
-      {
-        id: 11,
-        title: '凯恩斯：动物精神与政府干预',
-        category: 'masters',
-        difficulty: 'beginner',
-        minutes: 30,
-        description: '理解有效需求、流动性陷阱和动物精神，读懂危机中财政与货币政策的边界。',
-        tags: ['有效需求', '动物精神', '政策周期'],
-        outcome: '完成一次政策影响路径拆解',
-      },
-      {
-        id: 12,
-        title: '明斯基：金融不稳定假说',
-        category: 'masters',
-        difficulty: 'core',
-        minutes: 35,
-        description: '从对冲融资、投机融资到庞氏融资，识别繁荣如何内生地产生金融脆弱性。',
-        tags: ['明斯基时刻', '融资结构', '泡沫预警'],
-        outcome: '搭建一张杠杆风险雷达图',
-      },
-    ],
+    categories: ['systems', 'personality', 'evolutionary', 'developmental', 'social', 'behaviorism', 'gestalt', 'existential'],
   },
   {
-    key: 'schools',
-    title: '经济学派对决',
+    key: 'clinical-academy',
+    title: '心理疗法学院',
     icon: '03',
-    subtitle: '第 13-16 课 · 用多元理论解释货币、信用、资本和危机',
-    color: '#ef7d57',
-    courses: [
-      {
-        id: 13,
-        title: '奥地利学派：货币、周期与自由',
-        category: 'schools',
-        difficulty: 'advanced',
-        minutes: 40,
-        description: '理解米塞斯、哈耶克对信用扩张和错误投资的解释，建立警惕过度干预的分析视角。',
-        tags: ['米塞斯', '哈耶克', '信用扩张'],
-        outcome: '写出一条信用扩张到衰退的因果链',
-      },
-      {
-        id: 14,
-        title: '现代货币理论 MMT：主权货币的真相',
-        category: 'schools',
-        difficulty: 'advanced',
-        minutes: 35,
-        description: '从主权货币、财政约束和通胀边界理解 MMT 的核心主张，并辨析其适用条件。',
-        tags: ['MMT', '主权货币', '财政约束'],
-        outcome: '完成 MMT 与传统财政观对照表',
-      },
-      {
-        id: 15,
-        title: '马克思：资本积累与危机理论',
-        category: 'schools',
-        difficulty: 'advanced',
-        minutes: 40,
-        description: '从资本积累、利润率、过剩产能和阶层结构理解周期性危机的深层机制。',
-        tags: ['资本积累', '利润率', '危机理论'],
-        outcome: '复盘一个产业过剩案例',
-      },
-      {
-        id: 16,
-        title: '巴拉塔：大贬值与货币重置',
-        category: 'schools',
-        difficulty: 'core',
-        minutes: 35,
-        description: '从法币信用、硬资产和制度重置角度理解极端货币情境下的防守逻辑。',
-        tags: ['大贬值', '硬资产', '货币重置'],
-        outcome: '设计一张极端情境防守清单',
-      },
-    ],
-  },
-  {
-    key: 'macro',
-    title: '周期实战应用',
-    icon: '04',
-    subtitle: '第 17-20 课 · 将宏观变量转化为可跟踪的投资与组织决策',
-    color: '#4f9db8',
-    courses: [
-      {
-        id: 17,
-        title: '人口周期：经济的终极密码',
-        category: 'macro',
-        difficulty: 'core',
-        minutes: 40,
-        description: '理解出生率、老龄化、迁移和劳动人口结构如何改变消费、房产、养老金和产业机会。',
-        tags: ['人口红利', '老龄化', '城市迁移'],
-        outcome: '完成一张人口变量影响图',
-      },
-      {
-        id: 18,
-        title: '地缘政治经济学：大国博弈与投资',
-        category: 'macro',
-        difficulty: 'advanced',
-        minutes: 45,
-        description: '把供应链、贸易壁垒、制裁和区域冲突纳入资产与产业判断，识别脆弱环节。',
-        tags: ['供应链', '制裁', '大国博弈'],
-        outcome: '建立地缘风险检查表',
-      },
-      {
-        id: 19,
-        title: '技术奇点：当 AI 超越人类',
-        category: 'macro',
-        difficulty: 'advanced',
-        minutes: 35,
-        description: '用指数增长、算力成本和应用扩散观察 AI 对生产率、就业结构和估值体系的冲击。',
-        tags: ['技术奇点', '生产率', 'AI 应用'],
-        outcome: '绘制 AI 影响的三层产业链',
-      },
-      {
-        id: 20,
-        title: '终极整合：构建你的投资世界观',
-        category: 'macro',
-        difficulty: 'core',
-        minutes: 60,
-        description: '把周期、估值、风险、政策、产业和个人目标整合为一套可执行、可更新的决策系统。',
-        tags: ['投资世界观', '决策系统', '复盘'],
-        outcome: '写出个人投资宣言 1.0',
-      },
-    ],
-  },
-  {
-    key: 'china',
-    title: '趋势洞察：读懂中国经济',
-    icon: '05',
-    subtitle: '第 21-24 课 · 理解地方政府、产业政策、债务和财富分化',
-    color: '#d75f5f',
-    courses: [
-      {
-        id: 21,
-        title: '有温度的经济学',
-        category: 'china',
-        difficulty: 'beginner',
-        minutes: 30,
-        description: '把宏观变量落到县城、家庭、老龄化和普通人的选择上，训练有场景感的经济观察能力。',
-        tags: ['慢变量', '县城经济', '银发经济'],
-        outcome: '写一份身边经济观察笔记',
-      },
-      {
-        id: 22,
-        title: '置身事内：中国政府与经济',
-        category: 'china',
-        difficulty: 'core',
-        minutes: 40,
-        description: '从地方政府行为、土地财政、产业政策和债务约束理解中国经济运行的制度逻辑。',
-        tags: ['地方政府', '土地财政', '产业政策'],
-        outcome: '画出地方财政传导链条',
-      },
-      {
-        id: 23,
-        title: '债务危机：达里奥的全天候思维',
-        category: 'china',
-        difficulty: 'core',
-        minutes: 45,
-        description: '用债务周期和去杠杆框架分析宏观压力，理解危机、政策应对和普通人的防守动作。',
-        tags: ['债务危机', '去杠杆', '防守策略'],
-        outcome: '完成家庭债务压力测试',
-      },
-      {
-        id: 24,
-        title: '21 世纪资本论：贫富分化的真相',
-        category: 'china',
-        difficulty: 'core',
-        minutes: 30,
-        description: '理解资本收益、人力资本、税制和代际传递如何影响财富分布，并思考个体应对方式。',
-        tags: ['贫富分化', '人力资本', '代际传递'],
-        outcome: '列出提升人力资本的年度计划',
-      },
-    ],
-  },
-  {
-    key: 'life',
-    title: '生活经济学',
-    icon: '06',
-    subtitle: '第 25-30 课 · 用经济学思维处理教育、医疗、消费和家庭资产',
-    color: '#72a66a',
-    courses: [
-      {
-        id: 25,
-        title: '贫穷的本质：反直觉发现',
-        category: 'life',
-        difficulty: 'beginner',
-        minutes: 30,
-        description: '从信息、风险、现金流和机会成本理解贫困陷阱，避免把结构问题简单归因于个人意志。',
-        tags: ['贫困陷阱', '风险管理', '信息差'],
-        outcome: '完成一次个人现金流漏斗分析',
-      },
-      {
-        id: 26,
-        title: '薛兆丰经济学讲义：用经济学看世界',
-        category: 'life',
-        difficulty: 'beginner',
-        minutes: 30,
-        description: '用价格、成本、边际、产权和交易费用解释日常选择，训练经济学直觉。',
-        tags: ['机会成本', '边际决策', '价格机制'],
-        outcome: '用边际分析改写一个生活决策',
-      },
-      {
-        id: 27,
-        title: '激荡三十年：中国经济的奇迹与教训',
-        category: 'life',
-        difficulty: 'beginner',
-        minutes: 35,
-        description: '复盘改革、企业家、产业迁移和资本市场演化，理解宏大叙事背后的企业命运。',
-        tags: ['改革开放', '企业史', '产业迁移'],
-        outcome: '复盘一家企业的周期命运',
-      },
-      {
-        id: 28,
-        title: '房子、教育、医疗：三大民生经济学',
-        category: 'life',
-        difficulty: 'core',
-        minutes: 40,
-        description: '用供需、财政、人口和资产属性理解家庭最重要的三类支出，做长期预算安排。',
-        tags: ['住房', '教育', '医疗'],
-        outcome: '完成家庭三大支出预算表',
-      },
-      {
-        id: 29,
-        title: '数字经济时代：你的钱去哪了',
-        category: 'life',
-        difficulty: 'core',
-        minutes: 35,
-        description: '理解平台算法、数据定价、数字支付和消费诱导，建立数字时代的现金流防线。',
-        tags: ['平台经济', '算法定价', '数字货币'],
-        outcome: '完成一次订阅和冲动消费清理',
-      },
-      {
-        id: 30,
-        title: '未来十年：普通人如何守住财富',
-        category: 'life',
-        difficulty: 'advanced',
-        minutes: 45,
-        description: '把收入、储蓄、保险、资产配置和学习曲线组合起来，建立普通家庭的防守与进攻顺序。',
-        tags: ['家庭资产', '防守优先', '终身学习'],
-        outcome: '写出未来十年的家庭财富守则',
-      },
-    ],
-  },
-  {
-    key: 'finance',
-    title: '理财基础技能',
-    icon: '07',
-    subtitle: '第 31-33 课 · 先打好个人理财、通胀和配置的基本功',
-    color: '#cfa34d',
-    courses: [
-      {
-        id: 31,
-        title: '储蓄与复利：世界第八大奇迹',
-        category: 'finance',
-        difficulty: 'beginner',
-        minutes: 40,
-        description: '理解储蓄率、复利、时间价值和行为习惯，先让财富系统有稳定燃料。',
-        tags: ['复利', '储蓄率', '时间价值'],
-        outcome: '计算个人复利目标和储蓄率',
-      },
-      {
-        id: 32,
-        title: '通货膨胀与购买力',
-        category: 'finance',
-        difficulty: 'beginner',
-        minutes: 40,
-        description: '学会读懂 CPI、货币供应和实际收益率，理解为什么现金也有风险。',
-        tags: ['CPI', '实际收益率', '购买力'],
-        outcome: '计算家庭年度真实收益率',
-      },
-      {
-        id: 33,
-        title: '资产配置入门',
-        category: 'finance',
-        difficulty: 'beginner',
-        minutes: 45,
-        description: '从 60/40、再平衡、风险预算和生命周期配置入手，建立个人资产组合雏形。',
-        tags: ['资产配置', '再平衡', '生命周期'],
-        outcome: '搭建第一版资产配置表',
-      },
-    ],
-  },
-  {
-    key: 'history',
-    title: '经济史与金融体系',
-    icon: '08',
-    subtitle: '第 34-39 课 · 从金融史、战争、货币体系和交易博弈中识别重复模式',
-    color: '#8b9ac8',
-    courses: [
-      {
-        id: 34,
-        title: '欧美经济群雄逐鹿 300 年',
-        category: 'history',
-        difficulty: 'advanced',
-        minutes: 45,
-        description: '从荷兰、英国到美国的霸权转移理解金融中心、产业革命和制度优势的长周期更替。',
-        tags: ['霸权转移', '金融中心', '制度优势'],
-        outcome: '完成一张 300 年霸权转移时间轴',
-      },
-      {
-        id: 35,
-        title: '世界金融史：从贝壳到比特币',
-        category: 'history',
-        difficulty: 'advanced',
-        minutes: 45,
-        description: '梳理货币、银行、股票、债券和数字资产的演化，理解金融创新与风险的双重性。',
-        tags: ['货币史', '银行', '数字资产'],
-        outcome: '整理金融工具演化图谱',
-      },
-      {
-        id: 36,
-        title: '二战：战争、财富与智慧',
-        category: 'history',
-        difficulty: 'advanced',
-        minutes: 45,
-        description: '从战争动员、技术突破、财政扩张和战后重建理解极端冲击如何重塑财富格局。',
-        tags: ['战争经济', '技术突破', '战后重建'],
-        outcome: '复盘一次危机后的产业重排',
-      },
-      {
-        id: 37,
-        title: '布雷顿森林体系',
-        category: 'history',
-        difficulty: 'advanced',
-        minutes: 40,
-        description: '理解美元、黄金、特里芬难题和石油美元体系，读懂国际货币秩序的核心矛盾。',
-        tags: ['美元', '黄金', '石油美元'],
-        outcome: '画出国际货币体系变迁图',
-      },
-      {
-        id: 38,
-        title: '货币战争：金融博弈与国家命运',
-        category: 'history',
-        difficulty: 'advanced',
-        minutes: 40,
-        description: '从汇率、资本流动、制裁和金融危机复盘国家之间的金融博弈方式。',
-        tags: ['汇率战', '资本流动', '金融危机'],
-        outcome: '建立金融博弈事件库',
-      },
-      {
-        id: 39,
-        title: '交易的艺术：商业博弈与谈判',
-        category: 'history',
-        difficulty: 'core',
-        minutes: 45,
-        description: '用 BATNA、博弈论和谈判心理学优化交易结构，理解价格之外的价值创造。',
-        tags: ['BATNA', '谈判', '博弈论'],
-        outcome: '为一个真实谈判设计备选方案',
-      },
-    ],
-  },
-  {
-    key: 'practice',
-    title: '投资实战与未来',
-    icon: '09',
-    subtitle: '第 40-50 课 · 覆盖房地产、股票、黄金、数字资产、指标、风控和传承',
+    subtitle: 'CBT、临床应用、异常心理、创伤理解与修复路径',
     color: '#5da38f',
-    courses: [
-      {
-        id: 40,
-        title: '房地产投资周期',
-        category: 'practice',
-        difficulty: 'core',
-        minutes: 45,
-        description: '用人口、利率、库存、租售比和城市能级判断房地产周期位置和风险边界。',
-        tags: ['房地产', '租售比', '城市周期'],
-        outcome: '完成一座城市的房地产周期判断',
-      },
-      {
-        id: 41,
-        title: '股票市场周期与估值',
-        category: 'practice',
-        difficulty: 'core',
-        minutes: 50,
-        description: '学习 PE、PB、CAPE、股息率和盈利周期，把估值放回宏观环境中理解。',
-        tags: ['股票', '估值', '盈利周期'],
-        outcome: '建立一个市场估值仪表盘',
-      },
-      {
-        id: 42,
-        title: '黄金与贵金属投资',
-        category: 'practice',
-        difficulty: 'advanced',
-        minutes: 40,
-        description: '理解黄金的货币属性、实际利率、央行购金和避险需求，识别配置角色。',
-        tags: ['黄金', '实际利率', '避险'],
-        outcome: '写出贵金属配置边界',
-      },
-      {
-        id: 43,
-        title: '加密货币与数字资产',
-        category: 'practice',
-        difficulty: 'advanced',
-        minutes: 40,
-        description: '从区块链、比特币周期、稳定币、DeFi 和监管角度理解数字资产的机会与风险。',
-        tags: ['比特币', 'DeFi', '监管'],
-        outcome: '完成数字资产风险分层表',
-      },
-      {
-        id: 44,
-        title: '全球宏观经济指标',
-        category: 'practice',
-        difficulty: 'core',
-        minutes: 45,
-        description: '学会使用 GDP、CPI、PMI、M2、收益率曲线和信用利差建立宏观仪表盘。',
-        tags: ['PMI', '收益率曲线', '信用利差'],
-        outcome: '配置一套月度宏观看板',
-      },
-      {
-        id: 45,
-        title: '投资心理学与行为金融',
-        category: 'practice',
-        difficulty: 'core',
-        minutes: 45,
-        description: '识别损失厌恶、锚定、过度自信和羊群效应，把投资纪律写成可执行清单。',
-        tags: ['行为金融', '认知偏差', '纪律'],
-        outcome: '制定一份交易前检查表',
-      },
-      {
-        id: 46,
-        title: '风险管理与对冲策略',
-        category: 'practice',
-        difficulty: 'core',
-        minutes: 50,
-        description: '理解最大回撤、夏普比率、相关性、期权和杠铃策略，先管理活下来这件事。',
-        tags: ['风险预算', '对冲', '最大回撤'],
-        outcome: '完成组合最大回撤预案',
-      },
-      {
-        id: 47,
-        title: '退休规划与养老金',
-        category: 'practice',
-        difficulty: 'core',
-        minutes: 45,
-        description: '从养老金三支柱、4% 法则、长寿风险和现金流匹配设计退休规划。',
-        tags: ['养老金', '退休', '现金流'],
-        outcome: '测算个人退休现金流缺口',
-      },
-      {
-        id: 48,
-        title: '税务筹划与财富传承',
-        category: 'practice',
-        difficulty: 'core',
-        minutes: 45,
-        description: '理解合法税务安排、信托、保险、家族治理和传承沟通，减少财富传递摩擦。',
-        tags: ['税务', '信托', '传承'],
-        outcome: '写出家庭传承事项清单',
-      },
-      {
-        id: 49,
-        title: 'ESG 与可持续投资',
-        category: 'practice',
-        difficulty: 'advanced',
-        minutes: 40,
-        description: '理解 ESG 评级、碳交易、绿色债券和能源转型，识别长期资本偏好的变化。',
-        tags: ['ESG', '碳交易', '绿色金融'],
-        outcome: '评估一个行业的 ESG 机会',
-      },
-      {
-        id: 50,
-        title: '构建你的投资体系：终极课程',
-        category: 'practice',
-        difficulty: 'master',
-        minutes: 60,
-        description: '把前 49 课整合成投资哲学、资产配置、风险管理、复盘机制和学习系统。',
-        tags: ['体系整合', '投资宣言', '复盘机制'],
-        outcome: '提交个人投资体系 1.0',
-      },
-    ],
+    categories: ['cbt', 'clinical', 'abnormal', 'trauma'],
   },
   {
-    key: 'advanced',
-    title: '实战进阶：高级投资策略',
-    icon: '10',
-    subtitle: '第 51-65 课 · 从理论到实战的最后一公里',
-    color: '#b879c8',
-    courses: [
-      {
-        id: 51,
-        title: '宏观经济指标：读懂数据的语言',
-        category: 'advanced',
-        difficulty: 'advanced',
-        minutes: 60,
-        description: '区分领先、同步、滞后指标，并用三灯系统把宏观数据转化为月度判断。',
-        tags: ['领先指标', '三灯系统', '数据看板'],
-        outcome: '搭建个人宏观三灯系统',
-      },
-      {
-        id: 52,
-        title: '央行与货币政策：资产价格的终极定价者',
-        category: 'advanced',
-        difficulty: 'advanced',
-        minutes: 60,
-        description: '理解利率、准备金、QE、QT、公开市场操作和预期管理如何影响资产价格。',
-        tags: ['央行', '利率', 'QE/QT'],
-        outcome: '拆解一次央行会议对资产的影响',
-      },
-      {
-        id: 53,
-        title: '行业轮动策略：在正确的季节配置正确的行业',
-        category: 'advanced',
-        difficulty: 'advanced',
-        minutes: 55,
-        description: '结合美林时钟、盈利周期和政策方向，设计行业轮动和核心卫星配置方法。',
-        tags: ['行业轮动', '美林时钟', '核心卫星'],
-        outcome: '建立一个行业轮动观察表',
-      },
-      {
-        id: 54,
-        title: '债券市场深度解析：利率、久期与收益率曲线',
-        category: 'advanced',
-        difficulty: 'advanced',
-        minutes: 60,
-        description: '理解久期、凸性、信用利差和收益率曲线，掌握债券在组合里的防守与进攻角色。',
-        tags: ['债券', '久期', '收益率曲线'],
-        outcome: '计算一只债券基金的久期风险',
-      },
-      {
-        id: 55,
-        title: '康波周期深度剖析：经济物理学视角',
-        category: 'advanced',
-        difficulty: 'advanced',
-        minutes: 60,
-        description: '把长波、技术扩散、资本开支、商品周期和社会心理合并成一套深度周期模型。',
-        tags: ['康波深度', '技术扩散', '资本开支'],
-        outcome: '完成第六轮康波深度定位报告',
-      },
-      {
-        id: 56,
-        title: '房地产周期与 REITs：从砖块到证券',
-        category: 'advanced',
-        difficulty: 'advanced',
-        minutes: 55,
-        description: '把实体地产和 REITs 放在同一周期框架里，理解现金流、利率和杠杆的影响。',
-        tags: ['REITs', '现金流', '地产证券化'],
-        outcome: '评估一个 REITs 的周期位置',
-      },
-      {
-        id: 57,
-        title: '外汇市场与汇率周期：全球资金的潮汐',
-        category: 'advanced',
-        difficulty: 'advanced',
-        minutes: 55,
-        description: '学习利率平价、美元指数、套利交易和央行干预，识别汇率对资产的传导。',
-        tags: ['外汇', '美元指数', '套利交易'],
-        outcome: '完成一组汇率敏感性分析',
-      },
-      {
-        id: 58,
-        title: '新兴市场投资：康波周期中的全球化配置',
-        category: 'advanced',
-        difficulty: 'advanced',
-        minutes: 60,
-        description: '从人口、制度、货币、外债和产业位置评估新兴市场机会与尾部风险。',
-        tags: ['新兴市场', '全球配置', '政治风险'],
-        outcome: '比较两个新兴市场的配置价值',
-      },
-      {
-        id: 59,
-        title: '地缘政治风险与投资策略',
-        category: 'advanced',
-        difficulty: 'advanced',
-        minutes: 55,
-        description: '把战争、制裁、供应链重构和能源安全纳入组合风险，设计情境应对方案。',
-        tags: ['战争风险', '制裁', '供应链'],
-        outcome: '写出三种地缘情境的组合预案',
-      },
-      {
-        id: 60,
-        title: '科技创新与康波周期：AI、新能源与生物科技',
-        category: 'advanced',
-        difficulty: 'advanced',
-        minutes: 60,
-        description: '建立颠覆性创新识别框架，判断技术从概念、渗透到产业利润的迁移过程。',
-        tags: ['科技创新', '新能源', '生物科技'],
-        outcome: '构建一张科技产业利润迁移图',
-      },
-      {
-        id: 61,
-        title: 'ESG 投资与康波周期：新范式下的价值重估',
-        category: 'advanced',
-        difficulty: 'advanced',
-        minutes: 55,
-        description: '观察能源转型、碳定价和监管约束如何改变行业成本曲线和估值中枢。',
-        tags: ['ESG', '碳定价', '价值重估'],
-        outcome: '完成能源转型受益链分析',
-      },
-      {
-        id: 62,
-        title: '量化分析工具：从数据到决策',
-        category: 'advanced',
-        difficulty: 'advanced',
-        minutes: 60,
-        description: '用数据获取、回测、因子、风险模型和可视化方法，把判断变成可验证流程。',
-        tags: ['量化', '回测', '因子'],
-        outcome: '设计一个简单因子回测方案',
-      },
-      {
-        id: 63,
-        title: '行为金融学：驯服你最大的敌人',
-        category: 'advanced',
-        difficulty: 'advanced',
-        minutes: 55,
-        description: '把认知偏差、情绪波动和市场情绪指标纳入交易纪律，减少自己对组合的伤害。',
-        tags: ['认知偏差', '市场情绪', '纪律系统'],
-        outcome: '建立一套投资情绪日志',
-      },
-      {
-        id: 64,
-        title: '危机投资学：在恐惧中寻找财富',
-        category: 'advanced',
-        difficulty: 'advanced',
-        minutes: 60,
-        description: '用危机四阶段、流动性、估值和政策底识别逆向机会，同时控制抄底风险。',
-        tags: ['危机四阶段', '逆向投资', '流动性'],
-        outcome: '写出一份危机入场分批规则',
-      },
-      {
-        id: 65,
-        title: '投资体系总结：30 年财富蓝图与代际传承',
-        category: 'advanced',
-        difficulty: 'master',
-        minutes: 60,
-        description: '把财富目标、家庭治理、资产组合、教育投资和传承安排合并成 30 年蓝图。',
-        tags: ['财富蓝图', '代际传承', '体系总结'],
-        outcome: '提交 30 年财富蓝图终稿',
-      },
-    ],
+    key: 'wellbeing-academy',
+    title: '心智健康学院',
+    icon: '04',
+    subtitle: '积极心理、正念、依恋、人本主义、健康与情绪调节',
+    color: '#ef7d57',
+    categories: ['positive', 'mindfulness', 'attachment', 'humanistic', 'health', 'emotion'],
   },
-];
+  {
+    key: 'cognitive-academy',
+    title: '神经认知学院',
+    icon: '05',
+    subtitle: '大脑、神经科学、创造、教育与儿童心理发展',
+    color: '#4f9db8',
+    categories: ['neuropsychology', 'neuroscience', 'creativity', 'educational', 'child'],
+  },
+  {
+    key: 'applied-academy',
+    title: '生活应用学院',
+    icon: '06',
+    subtitle: '亲密关系、消费、运动、司法、临终与生活场景应用',
+    color: '#c4554d',
+    categories: ['love', 'forensic', 'consumer', 'sports', 'thanatology', 'applied'],
+  },
+  {
+    key: 'frontier-academy',
+    title: '前沿交叉学院',
+    icon: '07',
+    subtitle: 'AI、数字疗法、跨文化、组织与未来心理学议题',
+    color: '#b879c8',
+    categories: ['frontier'],
+  },
+]
 
-function buildChapters(course: CourseBlueprint, phase: PhaseBlueprint): KangboChapter[] {
-  const keywords = course.tags.join('、');
-  const disclaimer = '本课程用于研究与教育，不构成任何投资建议；涉及资产配置时，请结合自身风险承受能力并咨询持牌专业人士。';
+export const DREAMLAB_PHASES = ACADEMIES.map((academy, index) => ({
+  key: academy.key,
+  title: academy.title,
+  icon: academy.icon,
+  subtitle: academy.subtitle,
+  color: academy.color,
+  index: index + 1,
+  courseIds: [] as number[],
+  courseCount: 0,
+}))
 
-  const chapters = [
-    {
-      title: '第1章：关键问题与周期位置',
-      content: `本章先回答「${course.title}」要解决的核心问题。你需要把它放回「${phase.title}」模块中理解：它不是孤立知识点，而是康波研究院周期决策系统中的一个部件。学习时请记录三个问题：当前处在什么周期位置，主要变量正在上行还是下行，哪些信号会证明原判断失效。`,
-    },
-    {
-      title: '第2章：核心模型与指标清单',
-      content: `围绕 ${keywords} 建立可复用模型。先定义关键变量，再找到可观察指标，最后设定更新频率。不要只记结论，要把结论拆成「数据来源、触发阈值、观察窗口、反向证据」四项，这样课程内容才能进入真实决策流程。`,
-    },
-    {
-      title: '第3章：历史案例与现实映射',
-      content: `选择一个历史案例和一个当下案例进行对照：历史案例帮助你理解周期共性，当下案例帮助你识别环境差异。复盘时至少写出驱动因素、市场叙事、政策反应、资产表现和普通人的可行动作，避免把故事当成规律。`,
-    },
-    {
-      title: `第4章：实战作业：${course.outcome}`,
-      content: `本课最终产出是「${course.outcome}」。请用一页纸完成：结论、依据、风险、下一次复盘日期。完成后再做一次反向推演：如果你的判断错了，最可能错在哪里。${disclaimer}`,
-    },
-  ];
+export const MOCK_COURSES: DreamLabCourse[] = []
 
-  return chapters.map((chapter, index) => ({
-    ...chapter,
-    body: chapter.content,
-    order: index + 1,
-  }));
+function getAcademy(category: string) {
+  return ACADEMIES.find((academy) => academy.categories.includes(category)) || ACADEMIES[1]
 }
 
-export const KANGBO_PHASES = PHASE_BLUEPRINTS.map((phase, index) => ({
-  key: phase.key,
-  title: phase.title,
-  icon: phase.icon,
-  subtitle: phase.subtitle,
-  color: phase.color,
-  index: index + 1,
-  courseIds: phase.courses.map((course) => course.id),
-}));
+function getMinutes(chapters: DreamLabChapter[], chapterCount: number) {
+  const words = chapters.reduce((sum, chapter) => sum + chapter.body.length, 0)
+  if (words > 0) return Math.max(20, Math.round(words / 420))
+  return Math.max(20, chapterCount * 18)
+}
 
-export const KANGBO_COURSES: KangboCourse[] = PHASE_BLUEPRINTS.reduce<KangboCourse[]>((acc, phase, phaseIndex) => {
-  phase.courses.forEach((course) => {
-    const chapters = buildChapters(course, phase);
-    acc.push({
-      ...course,
-      phaseKey: phase.key,
-      phaseIndex: phaseIndex + 1,
-      phaseTitle: phase.title,
-      phaseIcon: phase.icon,
-      chapters,
-      chapter_count: chapters.length,
-    });
-  });
-  return acc;
-}, []);
+function parseCourseData(data: unknown): RawCourse[] {
+  if (Array.isArray(data)) return data as RawCourse[]
+  if (typeof data === 'string') {
+    const parsed = JSON.parse(data)
+    return Array.isArray(parsed) ? parsed as RawCourse[] : []
+  }
+  return []
+}
 
-export const MOCK_COURSES = KANGBO_COURSES;
+function normalizeCourse(course: RawCourse): DreamLabCourse {
+  const academy = getAcademy(course.category)
+  const phaseIndex = ACADEMIES.findIndex((item) => item.key === academy.key) + 1
+  const chapters = (course.content || []).map((chapter, index) => ({
+    title: chapter.title,
+    content: chapter.body,
+    body: chapter.body,
+    order: chapter.order || index + 1,
+  }))
+  const chapterCount = course.chapter_count || chapters.length
+
+  return {
+    id: course.id,
+    title: course.title,
+    category: course.category,
+    difficulty: course.difficulty,
+    description: course.description,
+    phaseKey: academy.key,
+    phaseIndex,
+    phaseTitle: academy.title,
+    phaseIcon: academy.icon,
+    minutes: getMinutes(chapters, chapterCount),
+    tags: [DREAMLAB_CATEGORIES[course.category]?.label || course.category, academy.title],
+    outcome: `完成「${course.title}」的案例、理论与反思记录`,
+    content: chapters,
+    chapters,
+    chapter_count: chapterCount,
+  }
+}
+
+function normalizeCourses(courses: RawCourse[]) {
+  return courses
+    .filter((course) => course && typeof course.id === 'number')
+    .sort((a, b) => a.id - b.id)
+    .map(normalizeCourse)
+}
+
+function readCachedCourses() {
+  try {
+    const cached = Taro.getStorageSync(COURSES_CACHE_KEY)
+    return Array.isArray(cached) ? normalizeCourses(cached as RawCourse[]) : []
+  } catch {
+    return []
+  }
+}
+
+function writeCache(key: string, data: unknown) {
+  try {
+    Taro.setStorageSync(key, data)
+  } catch {
+    // Cache failures should not block the learning flow.
+  }
+}
+
+async function requestCourses(url: string) {
+  const response = await Taro.request({ url, method: 'GET', timeout: 15000 })
+  if (response.statusCode < 200 || response.statusCode >= 300) {
+    throw new Error(`课程数据请求失败：${response.statusCode}`)
+  }
+  return parseCourseData(response.data)
+}
+
+export async function loadDreamLabCourseIndex() {
+  try {
+    const indexCourses = await requestCourses(COURSES_INDEX_URL)
+    if (indexCourses.length > 0) {
+      writeCache(COURSES_CACHE_KEY, indexCourses)
+      return normalizeCourses(indexCourses)
+    }
+  } catch {
+    // Older GitHub Pages deployments may not have the compact index yet.
+  }
+
+  try {
+    const allCourses = await requestCourses(COURSES_DATA_URL)
+    if (allCourses.length > 0) {
+      const indexCourses = allCourses.map(({ content, ...course }) => course)
+      writeCache(COURSES_CACHE_KEY, indexCourses)
+      allCourses.forEach((course) => writeCache(`${COURSE_DETAIL_CACHE_KEY}${course.id}`, course))
+      return normalizeCourses(indexCourses)
+    }
+  } catch {
+    const cached = readCachedCourses()
+    if (cached.length > 0) return cached
+  }
+
+  throw new Error('暂时无法加载课程列表')
+}
+
+export async function loadDreamLabCourseDetail(courseId: number) {
+  try {
+    const cached = Taro.getStorageSync(`${COURSE_DETAIL_CACHE_KEY}${courseId}`)
+    if (cached && typeof cached === 'object') return normalizeCourse(cached as RawCourse)
+  } catch {
+    // Continue with network.
+  }
+
+  try {
+    const response = await Taro.request({ url: `${DATA_BASE_URL}/courses/${courseId}.json`, method: 'GET', timeout: 15000 })
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      const data = Array.isArray(response.data) ? response.data[0] : response.data
+      if (data && typeof data === 'object') {
+        writeCache(`${COURSE_DETAIL_CACHE_KEY}${courseId}`, data)
+        return normalizeCourse(data as RawCourse)
+      }
+    }
+  } catch {
+    // Older GitHub Pages deployments may only expose the combined JSON.
+  }
+
+  const allCourses = await requestCourses(COURSES_DATA_URL)
+  const course = allCourses.find((item) => item.id === courseId)
+  if (!course) throw new Error('课程未找到')
+  writeCache(`${COURSE_DETAIL_CACHE_KEY}${courseId}`, course)
+  return normalizeCourse(course)
+}

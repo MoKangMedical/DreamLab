@@ -2,7 +2,7 @@
 // 仅在 Server Component 中使用
 import { exec } from 'child_process';
 import { promisify } from 'util';
-import { KANGBO_COURSES } from './kangbo-courses';
+import { DREAMLAB_COURSES } from './dreamlab-courses';
 
 const execAsync = promisify(exec);
 
@@ -22,7 +22,7 @@ export interface ProgressItem {
   completed: boolean;
 }
 
-const KANGBO_SERVER_COURSES: Course[] = KANGBO_COURSES.map((course) => ({
+const DREAMLAB_SERVER_COURSES: Course[] = DREAMLAB_COURSES.map((course) => ({
   id: course.id,
   title: course.title,
   description: course.description,
@@ -52,7 +52,7 @@ export async function getCourse(id: number): Promise<Course | null> {
     const escapedSql = sql.replace(/"/g, '""');
     const { stdout } = await execAsync(`sqlite3 -json "${DB_PATH}" "${escapedSql}"`);
     const rows: any[] = stdout.trim() ? JSON.parse(stdout) : [];
-    if (rows.length === 0) return KANGBO_SERVER_COURSES.find(c => c.id === id) || null;
+    if (rows.length === 0) return DREAMLAB_SERVER_COURSES.find(c => c.id === id) || null;
     const row = rows[0];
     return {
       id: row.id,
@@ -63,7 +63,7 @@ export async function getCourse(id: number): Promise<Course | null> {
       content: JSON.parse(row.content || '[]'),
     };
   } catch {
-    return KANGBO_SERVER_COURSES.find(c => c.id === id) || null;
+    return DREAMLAB_SERVER_COURSES.find(c => c.id === id) || null;
   }
 }
 

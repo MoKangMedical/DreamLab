@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { ScrollView, Text, View } from '@tarojs/components'
 import Taro, { useRouter } from '@tarojs/taro'
-import { KANGBO_CATEGORIES, MOCK_COURSES } from '../../data/mock-courses'
+import { DREAMLAB_CATEGORIES, DreamLabCourse, loadDreamLabCourseDetail } from '../../data/mock-courses'
 import './detail.scss'
 
 const DIFFICULTY_LABELS: Record<string, string> = {
@@ -25,9 +25,26 @@ function chapterContent(chapter: any, index: number) {
 export default function CourseDetailPage() {
   const router = useRouter()
   const courseId = Number(router.params.id || 1)
-  const course = MOCK_COURSES.find((item) => item.id === courseId)
+  const [course, setCourse] = useState<DreamLabCourse | null>(null)
   const [activeChapter, setActiveChapter] = useState(0)
   const [completed, setCompleted] = useState<number[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
+
+  const loadCourse = async () => {
+    setLoading(true)
+    setError('')
+    try {
+      const nextCourse = await loadDreamLabCourseDetail(courseId)
+      setCourse(nextCourse)
+      setActiveChapter(0)
+    } catch (err) {
+      setCourse(null)
+      setError(err instanceof Error ? err.message : '课程内容加载失败')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
     try {
@@ -38,7 +55,12 @@ export default function CourseDetailPage() {
     }
   }, [courseId])
 
-  const category = course ? (KANGBO_CATEGORIES[course.category] || { label: course.category, icon: '课', color: '#6b5b8a' }) : KANGBO_CATEGORIES.foundation
+  useEffect(() => {
+    loadCourse()
+  }, [courseId])
+
+  const fallbackCategory = { label: '心理课程', icon: '课', color: '#d4a853' }
+  const category = course ? (DREAMLAB_CATEGORIES[course.category] || { label: course.category, icon: '课', color: '#6b5b8a' }) : fallbackCategory
   const chapters = course?.chapters || []
   const progress = chapters.length > 0 ? Math.round((completed.length / chapters.length) * 100) : 0
   const totalWords = useMemo(() => {
@@ -53,12 +75,26 @@ export default function CourseDetailPage() {
     Taro.setStorageSync(storageKey(courseId), next)
   }
 
+  if (loading) {
+    return (
+      <View className='page course-detail-page'>
+        <View className='empty-course'>
+          <Text className='empty-icon'>⌛</Text>
+          <Text className='empty-text'>正在同步课程内容</Text>
+        </View>
+      </View>
+    )
+  }
+
   if (!course) {
     return (
       <View className='page course-detail-page'>
         <View className='empty-course'>
           <Text className='empty-icon'>📭</Text>
-          <Text className='empty-text'>课程未找到</Text>
+          <Text className='empty-text'>{error || '课程未找到'}</Text>
+          <View className='gold-btn retry-btn' onClick={loadCourse}>
+            <Text>重新加载</Text>
+          </View>
           <View className='gold-btn' onClick={() => Taro.navigateBack()}>
             <Text>返回课程列表</Text>
           </View>
