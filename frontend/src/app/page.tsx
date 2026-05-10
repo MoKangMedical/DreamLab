@@ -66,31 +66,31 @@ export default function HomePage() {
 
   return (
     <div style={{ background: '#0a0a0c' }}>
-      <section className="px-5 md:px-6 pt-16 md:pt-24 pb-12 md:pb-16">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-[1.08fr_0.92fr] gap-10 items-end">
+      <section className="px-5 md:px-8 pt-20 md:pt-32 pb-20 md:pb-28">
+        <div className="max-w-[1180px] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-14 xl:gap-20 items-center">
             <div>
               <h1
-                className="font-bold mb-5"
-                style={{ fontFamily: "'Noto Serif SC', serif", fontSize: 'clamp(48px, 9vw, 92px)', lineHeight: 1.02, color: '#f4f4f6' }}
+                className="font-bold mb-7"
+                style={{ fontFamily: "'Noto Serif SC', serif", fontSize: 'clamp(52px, 8vw, 96px)', lineHeight: 1.04, color: '#f4f4f6' }}
               >
                 DreamLab 心理研究院
               </h1>
-              <p className="text-lg md:text-xl leading-9 max-w-2xl mb-8" style={{ color: '#a1a1aa' }}>
+              <p className="text-lg md:text-xl leading-10 max-w-2xl mb-10" style={{ color: '#a1a1aa' }}>
                 用梦境解析、心理测评、经典课程、知识库和反思日志，建立一套可学习、可观察、可复盘的心智成长系统。
                 从潜意识线索到日常照护动作，把心理学知识放进真实生活。
               </p>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Link href="/courses" className="btn btn-primary" style={{ padding: '15px 30px' }}>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href="/courses" className="btn btn-primary" style={{ padding: '17px 34px' }}>
                   查看 100 门课程 →
                 </Link>
-                <Link href="/reflect" className="btn btn-ghost">
+                <Link href="/reflect" className="btn btn-ghost" style={{ padding: '17px 34px' }}>
                   开始反思记录
                 </Link>
               </div>
             </div>
 
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               {[
                 { value: '100', label: '心理课程' },
                 { value: '7', label: '学院体系' },
@@ -99,7 +99,7 @@ export default function HomePage() {
                 { value: 'AI', label: '梦境解析' },
                 { value: `${totalChapters}`, label: '课程章节' },
               ].map((item) => (
-                <div key={item.label} className="p-4 md:p-5" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
+                <div key={item.label} className="p-5 md:p-6" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
                   <div className="text-2xl md:text-3xl font-bold" style={{ fontFamily: "'Noto Serif SC', serif", color: '#d4a853' }}>{item.value}</div>
                   <div className="text-[11px] mt-1" style={{ color: '#71717a' }}>{item.label}</div>
                 </div>
@@ -109,18 +109,18 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="px-5 md:px-6 py-12">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center gap-3 mb-8">
-            <div style={{ width: 28, height: 1, background: 'rgba(212,168,83,0.2)' }} />
+      <section className="px-5 md:px-8 py-20 md:py-24">
+        <div className="max-w-[1180px] mx-auto">
+          <div className="flex items-center gap-4 mb-10">
+            <div style={{ width: 34, height: 1, background: 'rgba(212,168,83,0.2)' }} />
             <span className="text-xs tracking-[0.18em] uppercase" style={{ color: 'rgba(212,168,83,0.62)' }}>能力排布</span>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {CAPABILITIES.map((item) => (
-              <Link key={item.href} href={item.href} className="group block p-6 transition-all duration-300 hover:translate-y-[-2px]" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
-                <div className="w-8 h-1 mb-5" style={{ background: item.accent, borderRadius: 999 }} />
-                <h2 className="text-lg font-bold mb-2" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>{item.title}</h2>
-                <p className="text-sm leading-7 mb-5" style={{ color: '#85858e' }}>{item.desc}</p>
+              <Link key={item.href} href={item.href} className="group block p-7 md:p-8 transition-all duration-300 hover:translate-y-[-2px]" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
+                <div className="w-9 h-1 mb-6" style={{ background: item.accent, borderRadius: 999 }} />
+                <h2 className="text-xl font-bold mb-3" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>{item.title}</h2>
+                <p className="text-sm leading-8 mb-7" style={{ color: '#85858e' }}>{item.desc}</p>
                 <div className="flex items-baseline gap-2">
                   <span className="text-2xl font-bold" style={{ fontFamily: "'Noto Serif SC', serif", color: item.accent }}>{item.metric}</span>
                   <span className="text-xs" style={{ color: '#71717a' }}>{item.label}</span>
@@ -131,54 +131,54 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="px-5 md:px-6 py-12">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-8">
+      <section className="px-5 md:px-8 py-20 md:py-24">
+        <div className="max-w-[1180px] mx-auto grid grid-cols-1 lg:grid-cols-[0.82fr_1.18fr] gap-12 xl:gap-20">
           <div>
-            <div className="flex items-center gap-3 mb-5">
-              <div style={{ width: 28, height: 1, background: 'rgba(212,168,83,0.2)' }} />
+            <div className="flex items-center gap-4 mb-6">
+              <div style={{ width: 34, height: 1, background: 'rgba(212,168,83,0.2)' }} />
               <span className="text-xs tracking-[0.18em] uppercase" style={{ color: 'rgba(212,168,83,0.62)' }}>研究框架</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6', lineHeight: 1.18 }}>
               从梦境材料到成长路线
             </h2>
-            <p className="text-sm leading-7" style={{ color: '#85858e' }}>
+            <p className="text-base leading-8" style={{ color: '#85858e' }}>
               从一段梦境、一份量表或一次情绪波动开始，逐步连接理论、练习和反思。
               每一次记录都会成为下一次理解自己的线索。
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {FRAMEWORK.map((item, index) => (
-              <div key={item.title} className="p-5" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
-                <div className="text-sm mb-3" style={{ color: '#d4a853' }}>0{index + 1}</div>
-                <h3 className="font-bold mb-2" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>{item.title}</h3>
-                <p className="text-sm leading-7" style={{ color: '#85858e' }}>{item.desc}</p>
+              <div key={item.title} className="p-7" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
+                <div className="text-sm mb-4" style={{ color: '#d4a853' }}>0{index + 1}</div>
+                <h3 className="text-lg font-bold mb-3" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>{item.title}</h3>
+                <p className="text-sm leading-8" style={{ color: '#85858e' }}>{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="px-5 md:px-6 py-12">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-between gap-4 mb-8">
+      <section className="px-5 md:px-8 py-20 md:py-24">
+        <div className="max-w-[1180px] mx-auto">
+          <div className="flex items-center justify-between gap-6 mb-10">
             <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div style={{ width: 28, height: 1, background: 'rgba(212,168,83,0.2)' }} />
+              <div className="flex items-center gap-4 mb-5">
+                <div style={{ width: 34, height: 1, background: 'rgba(212,168,83,0.2)' }} />
                 <span className="text-xs tracking-[0.18em] uppercase" style={{ color: 'rgba(212,168,83,0.62)' }}>课程路径</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>7 大学院</h2>
+              <h2 className="text-3xl md:text-5xl font-bold" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>7 大学院</h2>
             </div>
             <Link href="/courses" className="hidden md:inline-flex text-sm" style={{ color: '#d4a853' }}>全部课程 →</Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {DREAMLAB_PHASES.map((phase) => (
-              <Link key={phase.key} href="/courses" className="p-5 flex gap-4 items-start transition-all duration-300 hover:translate-y-[-2px]" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
-                <div className="w-11 h-11 flex items-center justify-center text-sm font-bold shrink-0" style={{ background: phase.color, color: '#0a0a0c', borderRadius: 8 }}>
+              <Link key={phase.key} href="/courses" className="p-6 md:p-7 flex gap-5 items-start transition-all duration-300 hover:translate-y-[-2px]" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
+                <div className="w-12 h-12 flex items-center justify-center text-sm font-bold shrink-0" style={{ background: phase.color, color: '#0a0a0c', borderRadius: 8 }}>
                   {phase.icon}
                 </div>
                 <div>
-                  <h3 className="font-bold mb-1" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>{phase.title}</h3>
-                  <p className="text-xs leading-6" style={{ color: '#71717a' }}>{phase.subtitle}</p>
+                  <h3 className="text-lg font-bold mb-2" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>{phase.title}</h3>
+                  <p className="text-sm leading-7" style={{ color: '#71717a' }}>{phase.subtitle}</p>
                 </div>
               </Link>
             ))}
@@ -186,19 +186,19 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="px-5 md:px-6 pt-12 pb-24">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center gap-3 mb-8">
-            <div style={{ width: 28, height: 1, background: 'rgba(212,168,83,0.2)' }} />
+      <section className="px-5 md:px-8 pt-20 md:pt-24 pb-28 md:pb-36">
+        <div className="max-w-[1180px] mx-auto">
+          <div className="flex items-center gap-4 mb-10">
+            <div style={{ width: 34, height: 1, background: 'rgba(212,168,83,0.2)' }} />
             <span className="text-xs tracking-[0.18em] uppercase" style={{ color: 'rgba(212,168,83,0.62)' }}>先学这六课</span>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {featured.map((course) => (
-              <Link key={course.id} href={`/courses/${course.id}`} className="block p-5" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
-                <div className="text-xs mb-3" style={{ color: '#d4a853' }}>Course {course.id}</div>
-                <h3 className="font-bold mb-2 leading-6" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>{course.title}</h3>
-                <p className="text-xs leading-6 mb-3" style={{ color: '#85858e' }}>{course.description}</p>
-                <p className="text-xs" style={{ color: '#d4a853' }}>产出：{course.outcome}</p>
+              <Link key={course.id} href={`/courses/${course.id}`} className="block p-6 md:p-7" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
+                <div className="text-xs mb-4" style={{ color: '#d4a853' }}>Course {course.id}</div>
+                <h3 className="text-lg font-bold mb-3 leading-7" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>{course.title}</h3>
+                <p className="text-sm leading-7 mb-4" style={{ color: '#85858e' }}>{course.description}</p>
+                <p className="text-xs leading-6" style={{ color: '#d4a853' }}>产出：{course.outcome}</p>
               </Link>
             ))}
           </div>

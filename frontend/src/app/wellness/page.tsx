@@ -85,30 +85,30 @@ export default function WellnessPage() {
 
   return (
     <div style={{ background: '#0a0a0c', minHeight: '100vh' }}>
-      <div className={`max-w-4xl mx-auto px-4 pt-14 pb-28 transition-all duration-1000 ${visible ? 'opacity-100' : 'opacity-0'}`}>
+      <div className={`max-w-[1180px] mx-auto px-5 md:px-8 pt-20 md:pt-32 pb-32 md:pb-40 transition-all duration-1000 ${visible ? 'opacity-100' : 'opacity-0'}`}>
         {/* ════════════════ Hero ════════════════ */}
-        <div className="text-center mb-8">
-          <div className="text-5xl mb-4">♨️</div>
-          <h1 className="font-bold mb-3" style={{
+        <div className="text-center mb-12">
+          <div className="text-5xl md:text-6xl mb-8">♨️</div>
+          <h1 className="font-bold mb-6" style={{
             fontFamily: "'Noto Serif SC', serif",
-            fontSize: 'clamp(32px, 5vw, 48px)',
+            fontSize: 'clamp(42px, 6vw, 72px)',
             color: '#f4f4f6',
           }}>
             河神的净化汤
           </h1>
-          <p className="max-w-md mx-auto text-sm leading-relaxed" style={{ color: '#71717a' }}>
+          <p className="max-w-2xl mx-auto text-sm md:text-base leading-8" style={{ color: '#71717a' }}>
             心智健康不是没有问题，而是拥有应对问题的工具。
             这里是你每日的心灵澡堂。
           </p>
         </div>
 
         {/* ════════════════ Tabs ════════════════ */}
-        <div className="flex justify-center gap-1 mb-8 overflow-x-auto">
+        <div className="flex justify-center gap-2 md:gap-3 mb-10 overflow-x-auto">
           {TABS.map(t => (
             <button
               key={t.key}
               onClick={() => setTab(t.key)}
-              className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium transition-all whitespace-nowrap ${
+              className={`flex items-center gap-2 px-4 md:px-5 py-2.5 text-sm font-medium transition-all whitespace-nowrap ${
                 tab === t.key
                   ? 'text-[#f4f4f6] border-[#d4a85330]'
                   : 'text-[#52525b] hover:text-[#a1a1aa]'
@@ -116,7 +116,7 @@ export default function WellnessPage() {
               style={{
                 background: tab === t.key ? 'rgba(212,168,83,0.08)' : 'transparent',
                 border: tab === t.key ? '1px solid rgba(212,168,83,0.2)' : '1px solid transparent',
-                borderRadius: 2,
+                borderRadius: 8,
               }}>
               <span>{t.icon}</span>
               <span className="hidden sm:inline">{t.label}</span>
@@ -125,7 +125,7 @@ export default function WellnessPage() {
         </div>
 
         {/* 标签描述 */}
-        <p className="text-xs text-center mb-8 leading-relaxed" style={{ color: '#52525b' }}>
+        <p className="text-sm text-center mb-12 leading-7" style={{ color: '#52525b' }}>
           {TABS.find(t => t.key === tab)?.desc}
         </p>
 

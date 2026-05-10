@@ -302,36 +302,36 @@ export default function KnowledgePage() {
   // ═══════════════════════════════════════════════
   return (
     <div style={{ background: '#0a0a0c', minHeight: '100vh' }}>
-      <div className="max-w-6xl mx-auto px-4 md:px-6 pt-14 md:pt-20 pb-32">
+      <div className="max-w-[1180px] mx-auto px-5 md:px-8 pt-20 md:pt-32 pb-32 md:pb-40">
         
         {/* Hero */}
-        <div className={`text-center mb-12 transition-all duration-1000 ${visible ? 'opacity-100' : 'opacity-0'}`}>
-          <div className="text-5xl md:text-6xl mb-6">📚</div>
-          <h1 className="font-bold mb-4" style={{
+        <div className={`text-center mb-16 transition-all duration-1000 ${visible ? 'opacity-100' : 'opacity-0'}`}>
+          <div className="text-5xl md:text-6xl mb-8">📚</div>
+          <h1 className="font-bold mb-6" style={{
             fontFamily: "'Noto Serif SC', serif",
-            fontSize: 'clamp(32px, 5vw, 56px)',
+            fontSize: 'clamp(42px, 6vw, 72px)',
             color: '#f4f4f6',
             lineHeight: 1.1,
           }}>
             证据级知识库
           </h1>
-          <p className="max-w-lg mx-auto text-sm leading-relaxed" style={{ color: '#71717a' }}>
+          <p className="max-w-2xl mx-auto text-sm md:text-base leading-8" style={{ color: '#71717a' }}>
             从焦虑到睡眠、从CBT到正念——每篇文章都有同行评审来源。
             不只是科普，每一句话都有据可查。
           </p>
         </div>
 
         {/* 搜索 */}
-        <div className="max-w-xl mx-auto mb-10">
+        <div className="max-w-2xl mx-auto mb-12">
           <input
             type="text"
             value={search}
             onChange={e => { setSearch(e.target.value); if (!e.target.value) fetchArticles(selectedCat, ''); }}
             onKeyDown={e => { if (e.key === 'Enter') fetchArticles(selectedCat, search); }}
             placeholder="搜索文章...（如：焦虑、CBT、睡眠）"
-            className="w-full text-sm px-5 py-3"
+            className="w-full text-sm px-6 py-4"
             style={{
-              background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2,
+              background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8,
               color: '#a1a1aa', outline: 'none',
             }}
           />
@@ -339,7 +339,7 @@ export default function KnowledgePage() {
 
         {/* 分类筛选 */}
         {categories.length > 0 && (
-          <div className="flex flex-wrap justify-center gap-2 mb-12">
+          <div className="flex flex-wrap justify-center gap-3 mb-16">
             <button
               onClick={() => { setSelectedCat(null); fetchArticles(null, search); }}
               className="text-xs px-4 py-2 transition-all"
@@ -347,7 +347,7 @@ export default function KnowledgePage() {
                 background: !selectedCat ? 'rgba(212,168,83,0.08)' : 'transparent',
                 border: `1px solid ${!selectedCat ? 'rgba(212,168,83,0.2)' : 'rgba(255,255,255,0.06)'}`,
                 color: !selectedCat ? '#d4a853' : '#52525b',
-                borderRadius: 2, cursor: 'pointer',
+                borderRadius: 8, cursor: 'pointer',
               }}>
               全部
             </button>
@@ -359,7 +359,7 @@ export default function KnowledgePage() {
                   background: selectedCat === cat.slug ? cat.color + '12' : 'transparent',
                   border: `1px solid ${selectedCat === cat.slug ? cat.color + '30' : 'rgba(255,255,255,0.06)'}`,
                   color: selectedCat === cat.slug ? cat.color : '#52525b',
-                  borderRadius: 2, cursor: 'pointer',
+                  borderRadius: 8, cursor: 'pointer',
                 }}>
                 <span>{cat.icon}</span> {cat.name}
               </button>
@@ -369,12 +369,12 @@ export default function KnowledgePage() {
 
         {/* 精选文章 */}
         {featured.length > 0 && !search && !selectedCat && (
-          <div className="mb-16">
-            <div className="flex items-center gap-3 mb-6">
-              <div style={{ width: 32, height: 1, background: 'rgba(255,255,255,0.06)' }} />
+          <div className="mb-20">
+            <div className="flex items-center gap-4 mb-8">
+              <div style={{ width: 34, height: 1, background: 'rgba(255,255,255,0.06)' }} />
               <span className="text-xs tracking-[0.2em] uppercase" style={{ color: 'rgba(212,168,83,0.5)' }}>精选推荐</span>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {featured.map(a => (
                 <ArticleCard key={a.id} article={a} onClick={() => fetchDetail(a.slug)} />
               ))}
@@ -384,17 +384,17 @@ export default function KnowledgePage() {
 
         {/* 文章列表 */}
         <div>
-          <div className="flex items-center gap-3 mb-6">
-            <div style={{ width: 32, height: 1, background: 'rgba(255,255,255,0.06)' }} />
+          <div className="flex items-center gap-4 mb-8">
+            <div style={{ width: 34, height: 1, background: 'rgba(255,255,255,0.06)' }} />
             <span className="text-xs tracking-[0.2em] uppercase" style={{ color: 'rgba(212,168,83,0.5)' }}>
               {selectedCat ? categories.find(c => c.slug === selectedCat)?.name : '全部文章'}
               {articles.length > 0 && ` (${articles.length})`}
             </span>
           </div>
           {loading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {[1,2,3,4].map(i => (
-                <div key={i} className="p-6 animate-pulse" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+                <div key={i} className="p-6 animate-pulse" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
                   <div className="h-5 w-2/3 mb-3" style={{ background: '#ffffff05', borderRadius: 1 }} />
                   <div className="h-4 w-full mb-2" style={{ background: '#ffffff05', borderRadius: 1 }} />
                   <div className="h-4 w-1/2" style={{ background: '#ffffff05', borderRadius: 1 }} />
@@ -409,7 +409,7 @@ export default function KnowledgePage() {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {articles.map(a => (
                 <ArticleCard key={a.id} article={a} onClick={() => fetchDetail(a.slug)} />
               ))}
@@ -425,9 +425,9 @@ function ArticleCard({ article, onClick }: { article: Article; onClick: () => vo
   const badge = EVIDENCE_BADGES[article.evidence_level];
   return (
     <div onClick={onClick}
-      className="p-6 cursor-pointer transition-all hover:translate-y-[-2px]"
-      style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
-      <div className="flex items-center gap-2 mb-3">
+      className="p-7 cursor-pointer transition-all hover:translate-y-[-2px]"
+      style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
+      <div className="flex items-center gap-2 mb-4">
         {article.category && <span>{article.category.icon}</span>}
         {badge && (
           <span className="text-xs px-2 py-0.5" style={{ background: badge.color + '12', border: `1px solid ${badge.color}22`, color: badge.color, borderRadius: 2 }}>
@@ -436,10 +436,10 @@ function ArticleCard({ article, onClick }: { article: Article; onClick: () => vo
         )}
         <span className="text-xs" style={{ color: '#52525b' }}>{article.reading_time} 分钟</span>
       </div>
-      <h3 className="font-bold mb-2" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6', fontSize: 16 }}>
+      <h3 className="font-bold mb-3" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6', fontSize: 18, lineHeight: 1.45 }}>
         {article.title}
       </h3>
-      <p className="text-sm leading-relaxed mb-3" style={{ color: '#71717a', lineHeight: 1.9 }}>
+      <p className="text-sm mb-5" style={{ color: '#71717a', lineHeight: 1.95 }}>
         {article.summary}
       </p>
       {article.key_concepts?.length > 0 && (

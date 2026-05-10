@@ -54,39 +54,39 @@ export default function DreamClient() {
 
   return (
     <div style={{ background: '#0a0a0c', minHeight: '100vh' }}>
-      <div className="max-w-5xl mx-auto px-4 md:px-6 pt-14 md:pt-20 pb-32">
+      <div className="max-w-[1180px] mx-auto px-5 md:px-8 pt-20 md:pt-32 pb-32 md:pb-40">
         
         {/* Hero */}
-        <div className="text-center mb-12">
-          <div className="text-5xl mb-4">🌙</div>
-          <h1 className="font-bold mb-3" style={{
+        <div className="text-center mb-16">
+          <div className="text-5xl md:text-6xl mb-8">🌙</div>
+          <h1 className="font-bold mb-6" style={{
             fontFamily: "'Noto Serif SC', serif",
-            fontSize: 'clamp(32px, 5vw, 52px)',
+            fontSize: 'clamp(42px, 6vw, 72px)',
             color: '#f4f4f6',
           }}>
             梦境工坊
           </h1>
-          <p className="max-w-md mx-auto text-sm leading-relaxed" style={{ color: '#71717a' }}>
+          <p className="max-w-2xl mx-auto text-sm md:text-base leading-8" style={{ color: '#71717a' }}>
             每一个梦都是潜意识的来信——
             <br/>弗洛伊德 · 荣格 · 现代科学 · 东方智慧，四重视角为你解读
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-[0.88fr_1.12fr] gap-6 lg:gap-8">
           
           {/* ── 写作引导 (左侧边栏) ── */}
-          <div className="lg:col-span-1 space-y-4">
+          <div className="space-y-5">
             {/* 写作提示 */}
-            <div style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2, padding: 24 }}>
-              <h3 className="text-sm font-bold mb-4" style={{ color: '#f4f4f6' }}>💡 写作引导</h3>
-              <div className="space-y-3">
+            <div style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8, padding: 28 }}>
+              <h3 className="text-base font-bold mb-5" style={{ color: '#f4f4f6' }}>💡 写作引导</h3>
+              <div className="space-y-4">
                 {WRITING_PROMPTS.map((p, i) => (
-                  <div key={i} className="cursor-pointer p-3 transition-all hover:bg-[#ffffff]/02"
-                    style={{ borderLeft: '2px solid transparent', borderRadius: '0 2px 2px 0' }}
+                  <div key={i} className="cursor-pointer p-4 transition-all hover:bg-[#ffffff]/02"
+                    style={{ borderLeft: '2px solid transparent', borderRadius: '0 8px 8px 0' }}
                     onClick={() => setContent(prev => prev + (prev ? '\n\n' : '') + '· ' + p.q + ' ')}
                     onMouseEnter={e => (e.currentTarget.style.borderLeftColor = '#d4a853')}
                     onMouseLeave={e => (e.currentTarget.style.borderLeftColor = 'transparent')}>
-                    <p className="text-xs mb-1" style={{ color: '#a1a1aa' }}>{p.q}</p>
+                    <p className="text-sm leading-6 mb-1" style={{ color: '#a1a1aa' }}>{p.q}</p>
                     <p className="text-xs" style={{ color: '#52525b' }}>{p.hint}</p>
                   </div>
                 ))}
@@ -94,7 +94,7 @@ export default function DreamClient() {
             </div>
 
             {/* 记录技巧 */}
-            <div style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2, padding: 24 }}>
+            <div style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8, padding: 28 }}>
               <button onClick={() => setShowTips(!showTips)}
                 className="w-full text-left text-sm font-bold mb-3 flex items-center justify-between"
                 style={{ color: '#f4f4f6' }}>
@@ -112,8 +112,8 @@ export default function DreamClient() {
           </div>
 
           {/* ── 主表单 ── */}
-          <div className="lg:col-span-2 space-y-5">
-            <div style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2, padding: 32 }}>
+          <div className="space-y-6">
+            <div style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8, padding: 36 }}>
               {/* 标题 */}
               <div className="mb-5">
                 <label className="block text-xs mb-2 font-medium" style={{ color: '#71717a' }}>梦境标题</label>
@@ -137,11 +137,11 @@ export default function DreamClient() {
                   value={content}
                   onChange={e => setContent(e.target.value)}
                   placeholder="尽可能详细地描述你的梦境…人物、场景、情绪、颜色、声音…"
-                  rows={12}
+                  rows={13}
                   className="w-full resize-none text-sm leading-relaxed"
                   style={{
-                    background: '#0a0a0c', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2,
-                    padding: '16px', color: '#a1a1aa', fontFamily: 'Inter, sans-serif',
+                    background: '#0a0a0c', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8,
+                    padding: '18px 20px', color: '#a1a1aa', fontFamily: 'Inter, sans-serif',
                     outline: 'none', lineHeight: 2.0,
                   }}
                 />
@@ -183,16 +183,16 @@ export default function DreamClient() {
             </div>
 
             {/* 四视角预览 */}
-            <div style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2, padding: 24 }}>
+            <div style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8, padding: 28 }}>
               <p className="text-xs font-bold mb-3" style={{ color: '#f4f4f6' }}>🔬 AI 将从四个维度解读你的梦</p>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[
                   { name: '弗洛伊德视角', desc: '潜意识欲望 · 压抑 · 童年', color: '#c4554d' },
                   { name: '荣格视角', desc: '原型 · 集体无意识 · 补偿', color: '#6b5b8a' },
                   { name: '现代科学', desc: '记忆巩固 · 情绪调节 · REM', color: '#5a7d9a' },
                   { name: '东方智慧', desc: '周公解梦 · 五行 · 庄周梦蝶', color: '#3b8b7a' },
                 ].map(p => (
-                  <div key={p.name} className="p-3" style={{ background: '#0a0a0c', borderRadius: 2 }}>
+                  <div key={p.name} className="p-4" style={{ background: '#0a0a0c', borderRadius: 8 }}>
                     <div className="text-xs font-bold mb-1" style={{ color: p.color }}>{p.name}</div>
                     <div className="text-xs" style={{ color: '#52525b' }}>{p.desc}</div>
                   </div>

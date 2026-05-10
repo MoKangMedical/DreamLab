@@ -51,8 +51,8 @@ export default function ChapterList({ chapters, courseId, progress }: ChapterLis
   return (
     <>
       {/* Progress Bar */}
-      <div className="p-4 mb-6" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
-        <div className="flex items-center justify-between mb-2">
+      <div className="p-6 mb-8" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
+        <div className="flex items-center justify-between mb-3">
           <span className="text-sm" style={{ color: '#a1a1aa' }}>学习进度</span>
           <span className="text-sm font-medium" style={{ color: '#d4a853' }}>{progressPercent}%</span>
         </div>
@@ -60,11 +60,11 @@ export default function ChapterList({ chapters, courseId, progress }: ChapterLis
           <div className="h-full rounded-full transition-all duration-500"
             style={{ width: `${progressPercent}%`, background: 'linear-gradient(90deg, #9B7ED8, #d4a853)' }} />
         </div>
-        <p className="text-xs mt-2" style={{ color: '#52525b' }}>已完成 {completedCount}/{chapters.length} 章节</p>
+        <p className="text-xs mt-3" style={{ color: '#52525b' }}>已完成 {completedCount}/{chapters.length} 章节</p>
       </div>
 
       {/* Chapter List */}
-      <div className="space-y-2">
+      <div className="space-y-4">
         {chapters.map((ch, i) => {
           const isDone = localProgress.some((p) => p.chapter_index === i && p.completed);
           const isActive = activeChapter === i;
@@ -74,15 +74,15 @@ export default function ChapterList({ chapters, courseId, progress }: ChapterLis
           const audioPath = `/DreamLab/audio/courses/course${courseId}_ch${ch.order || (i + 1)}.mp3`;
 
           return (
-            <div key={i} style={{ background: '#111113', border: `1px solid ${isActive ? 'rgba(212,168,83,0.2)' : 'rgba(255,255,255,0.05)'}`, borderRadius: 2, overflow: 'hidden', transition: 'border-color 0.3s' }}>
-              <button className="w-full p-4 flex items-center gap-3 text-left" onClick={() => setActiveChapter(isActive ? null : i)}>
-                <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${isDone ? 'text-white' : ''}`}
+            <div key={i} style={{ background: '#111113', border: `1px solid ${isActive ? 'rgba(212,168,83,0.2)' : 'rgba(255,255,255,0.05)'}`, borderRadius: 8, overflow: 'hidden', transition: 'border-color 0.3s' }}>
+              <button className="w-full p-5 flex items-center gap-4 text-left" onClick={() => setActiveChapter(isActive ? null : i)}>
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${isDone ? 'text-white' : ''}`}
                   style={isDone ? { background: 'linear-gradient(135deg, #9B7ED8, #d4a853)' } : { background: 'rgba(255,255,255,0.06)', color: '#71717a' }}>
                   {isDone ? '✓' : i + 1}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-sm font-medium truncate" style={{ color: isActive ? '#f4f4f6' : '#a1a1aa' }}>{ch.title}</h3>
-                  <div className="flex items-center gap-2 mt-0.5">
+                  <h3 className="text-base font-medium truncate" style={{ color: isActive ? '#f4f4f6' : '#a1a1aa' }}>{ch.title}</h3>
+                  <div className="flex items-center gap-2 mt-1">
                     <span className="text-xs" style={{ color: '#52525b' }}>{wordCount.toLocaleString()}字</span>
                     {hasAudio && <span className="text-xs" style={{ color: '#d4a853' }}>🎙️ 音频</span>}
                   </div>
@@ -91,10 +91,10 @@ export default function ChapterList({ chapters, courseId, progress }: ChapterLis
               </button>
 
               {isActive && (
-                <div className="px-4 pb-4 border-t" style={{ borderColor: 'rgba(255,255,255,0.05)' }}>
+                <div className="px-5 md:px-6 pb-6 border-t" style={{ borderColor: 'rgba(255,255,255,0.05)' }}>
                   {/* Audio Player */}
                   {hasAudio && (
-                    <div className="mt-4 p-3 flex items-center gap-3" style={{ background: 'rgba(212,168,83,0.05)', border: '1px solid rgba(212,168,83,0.12)', borderRadius: 2 }}>
+                    <div className="mt-5 p-4 flex items-center gap-4" style={{ background: 'rgba(212,168,83,0.05)', border: '1px solid rgba(212,168,83,0.12)', borderRadius: 8 }}>
                       <button
                         onClick={() => setPlayingAudio(playingAudio === i ? null : i)}
                         className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 transition-colors"
@@ -115,13 +115,13 @@ export default function ChapterList({ chapters, courseId, progress }: ChapterLis
                   )}
 
                   {/* Content */}
-                  <div className="mt-4 pt-4 border-t" style={{ borderColor: 'rgba(255,255,255,0.05)' }}>
-                    <div className="text-sm leading-[1.85] whitespace-pre-wrap" style={{ color: '#c8c8d0', fontFamily: "'Noto Serif SC', 'Inter', serif" }}>
+                  <div className="mt-6 pt-6 border-t" style={{ borderColor: 'rgba(255,255,255,0.05)' }}>
+                    <div className="text-[15px] leading-[2.05] whitespace-pre-wrap" style={{ color: '#c8c8d0', fontFamily: "'Noto Serif SC', 'Inter', serif" }}>
                       {content || '章节内容加载中…'}
                     </div>
                     {/* Mark Complete */}
                     <button
-                      className={`mt-5 text-xs px-4 py-1.5 rounded-full transition-colors ${isDone ? '' : 'hover:opacity-80'}`}
+                      className={`mt-7 text-xs px-4 py-2 rounded-full transition-colors ${isDone ? '' : 'hover:opacity-80'}`}
                       style={isDone
                         ? { background: 'rgba(155,126,216,0.1)', border: '1px solid rgba(155,126,216,0.3)', color: '#9B7ED8' }
                         : { background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', color: '#a1a1aa' }}

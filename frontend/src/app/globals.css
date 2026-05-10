@@ -110,7 +110,7 @@ body::before {
 /* Desktop: 3-column grid. Mobile: single column */
 .app-grid {
   display: grid;
-  grid-template-columns: 1fr min(100% - 2rem, 1100px) 1fr;
+  grid-template-columns: 1fr min(100% - 2rem, 1180px) 1fr;
   min-height: 100dvh;
 }
 .margin-col { position: relative; overflow: hidden; pointer-events: none; z-index: 0; }

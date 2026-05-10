@@ -69,7 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {/* Desktop Navigation — Glass */}
         <nav className="hidden md:block glass-nav">
-          <div className="max-w-[1100px] mx-auto px-6 h-14 flex items-center justify-between">
+          <div className="max-w-[1180px] mx-auto px-8 h-16 flex items-center justify-between">
             <a href="/" className="flex items-center gap-2 group">
               <span
                 className="font-bold text-lg tracking-tight"
@@ -83,7 +83,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <a
                   key={item.href}
                   href={item.href}
-                  className="px-3 py-2 text-[13px] font-medium transition-colors duration-200 hover:text-[#f4f4f6]"
+                  className="px-3.5 py-2 text-[13px] font-medium transition-colors duration-200 hover:text-[#f4f4f6]"
                   style={{ color: '#71717a', fontFamily: 'Inter, sans-serif' }}
                 >
                   {item.label}
@@ -102,7 +102,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
           {/* Content */}
           <div className="content-col">
-            <main style={{ minHeight: '100dvh', paddingTop: '56px', paddingBottom: '80px' }}>
+            <main style={{ minHeight: '100dvh', paddingTop: '64px', paddingBottom: '96px' }}>
               <SpiritedInteractions>
                 <div className="page-enter">{children}</div>
               </SpiritedInteractions>
@@ -121,8 +121,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 borderTop: '1px solid rgba(255,255,255,0.04)',
               }}
             >
-              <div className="max-w-6xl mx-auto px-6 py-24">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-16">
+              <div className="max-w-[1180px] mx-auto px-8 py-28">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-20">
                   {/* Brand */}
                   <div className="col-span-2 md:col-span-1">
                     <a

@@ -81,10 +81,10 @@ function AssessmentCard({ a, index }: { a: typeof ASSESSMENTS[0]; index: number 
   return (
     <div ref={ref} className={`transition-all duration-800 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'}`}
       style={{ transitionDelay: `${index * 0.08}s` }}>
-      <div className="p-8 md:p-10 mb-2" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+      <div className="p-8 md:p-10" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
         {/* 头部 */}
-        <div className="flex items-start justify-between mb-6">
-          <div className="flex items-center gap-4">
+        <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-7">
+          <div className="flex items-center gap-5">
             <span className="text-4xl">{a.icon}</span>
             <div>
               <h3 className="text-xl font-bold mb-1" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>
@@ -117,16 +117,16 @@ function AssessmentCard({ a, index }: { a: typeof ASSESSMENTS[0]; index: number 
         </p>
 
         {/* 详细信息 */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div style={{ background: '#0a0a0c', padding: '14px 16px', borderRadius: 2 }}>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-7">
+          <div style={{ background: '#0a0a0c', padding: '18px 20px', borderRadius: 8 }}>
             <div className="text-xs mb-1" style={{ color: '#52525b' }}>适合人群</div>
             <div className="text-xs leading-relaxed" style={{ color: '#a1a1aa' }}>{a.suitable}</div>
           </div>
-          <div style={{ background: '#0a0a0c', padding: '14px 16px', borderRadius: 2 }}>
+          <div style={{ background: '#0a0a0c', padding: '18px 20px', borderRadius: 8 }}>
             <div className="text-xs mb-1" style={{ color: '#52525b' }}>评分方式</div>
             <div className="text-xs leading-relaxed" style={{ color: '#a1a1aa' }}>{a.scoring}</div>
           </div>
-          <div style={{ background: '#0a0a0c', padding: '14px 16px', borderRadius: 2 }}>
+          <div style={{ background: '#0a0a0c', padding: '18px 20px', borderRadius: 8 }}>
             <div className="text-xs mb-1" style={{ color: '#52525b' }}>学术来源</div>
             <div className="text-xs leading-relaxed" style={{ color: '#71717a', fontStyle: 'italic' }}>{a.source}</div>
           </div>
@@ -148,22 +148,22 @@ export default function AssessmentsPage() {
   return (
     <div style={{ background: '#0a0a0c', minHeight: '100vh' }}>
       {/* Hero */}
-      <div className="relative pt-14 md:pt-20 pb-16 md:pb-24">
-        <div className="max-w-5xl mx-auto px-6 text-center">
+      <div className="relative pt-20 md:pt-32 pb-20 md:pb-24">
+        <div className="max-w-[1180px] mx-auto px-6 md:px-8 text-center">
           <div className={`transition-all duration-1000 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="text-5xl md:text-7xl mb-6">镜</div>
-            <h1 className="font-bold mb-4" style={{
+            <div className="text-5xl md:text-7xl mb-8">镜</div>
+            <h1 className="font-bold mb-6" style={{
               fontFamily: "'Noto Serif SC', serif",
-              fontSize: 'clamp(36px, 6vw, 64px)',
+              fontSize: 'clamp(42px, 6vw, 72px)',
               color: '#f4f4f6',
               lineHeight: 1.1,
             }}>
               心理测评
             </h1>
-            <p className="text-lg mb-2" style={{ color: '#a1a1aa' }}>
+            <p className="text-lg md:text-xl mb-3" style={{ color: '#a1a1aa' }}>
               先理解自己的情绪、睡眠、人格和心理韧性
             </p>
-            <p className="max-w-lg mx-auto text-sm leading-relaxed" style={{ color: '#71717a' }}>
+            <p className="max-w-2xl mx-auto text-sm md:text-base leading-8" style={{ color: '#71717a' }}>
               六套标准化量表用于自我观察和课程学习前后的状态对照。
               结果仅用于心理健康参考，不能替代专业诊断。
             </p>
@@ -172,8 +172,8 @@ export default function AssessmentsPage() {
       </div>
 
       {/* 量表列表 */}
-      <div className="max-w-5xl mx-auto px-4 md:px-6 pb-32">
-        <div className="space-y-3">
+      <div className="max-w-[1180px] mx-auto px-5 md:px-8 pb-32 md:pb-40">
+        <div className="space-y-5">
           {ASSESSMENTS.map((a, i) => (
             <AssessmentCard key={a.id} a={a} index={i} />
           ))}

@@ -68,47 +68,47 @@ export default function ReflectClient() {
 
   return (
     <div style={{ background: '#0a0a0c', minHeight: '100vh' }}>
-      <div className="max-w-5xl mx-auto px-4 md:px-6 pt-14 md:pt-20 pb-32">
+      <div className="max-w-[1180px] mx-auto px-5 md:px-8 pt-20 md:pt-32 pb-32 md:pb-40">
 
         {/* ════════════════ Hero ════════════════ */}
-        <div className={`text-center mb-16 transition-all duration-1000 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="text-5xl md:text-6xl mb-6">思</div>
-          <h1 className="font-bold mb-4" style={{
+        <div className={`text-center mb-20 transition-all duration-1000 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="text-5xl md:text-6xl mb-8">思</div>
+          <h1 className="font-bold mb-6" style={{
             fontFamily: "'Noto Serif SC', serif",
-            fontSize: 'clamp(32px, 5vw, 56px)',
+            fontSize: 'clamp(42px, 6vw, 72px)',
             color: '#f4f4f6',
             lineHeight: 1.1,
           }}>
             反思日志
           </h1>
-          <p className="max-w-lg mx-auto text-sm leading-relaxed mb-2" style={{ color: '#a1a1aa' }}>
+          <p className="max-w-2xl mx-auto text-lg md:text-xl leading-8 mb-3" style={{ color: '#a1a1aa' }}>
             把梦境、情绪、想法和行动写成可回看的成长档案
           </p>
-          <p className="max-w-md mx-auto text-sm leading-relaxed" style={{ color: '#71717a' }}>
+          <p className="max-w-2xl mx-auto text-sm md:text-base leading-8" style={{ color: '#71717a' }}>
             每一篇记录都可以连接课程、测评和梦境解析，帮助你更稳定地理解自己。
           </p>
         </div>
 
         {/* ════════════════ 四个阶段 ════════════════ */}
-        <div className="mb-16">
-          <div className="flex items-center gap-3 mb-2">
-            <div style={{ width: 32, height: 1, background: 'rgba(255,255,255,0.06)' }} />
+        <div className="mb-20">
+          <div className="flex items-center gap-4 mb-4">
+            <div style={{ width: 34, height: 1, background: 'rgba(255,255,255,0.06)' }} />
             <span className="text-xs tracking-[0.2em] uppercase" style={{ color: 'rgba(212,168,83,0.5)' }}>四步法</span>
           </div>
-          <h2 className="font-bold mb-2" style={{
+          <h2 className="font-bold mb-4" style={{
             fontFamily: "'Noto Serif SC', serif",
             fontSize: 'clamp(22px, 3vw, 32px)',
             color: '#f4f4f6',
           }}>
             如何写一份可复盘反思
           </h2>
-          <p className="text-sm mb-6" style={{ color: '#71717a' }}>
+          <p className="text-sm md:text-base leading-8 mb-8" style={{ color: '#71717a' }}>
             这是从经验到照护的四个步骤，每一步都要具体到未来可以回看
           </p>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
             {STAGES.map((s, i) => (
-              <div key={s.title} className="p-5" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
+              <div key={s.title} className="p-6" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
                 <div className="flex items-center gap-2 mb-3">
                   <span className="inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold"
                     style={{ background: '#d4a85318', color: '#d4a853' }}>
@@ -119,7 +119,7 @@ export default function ReflectClient() {
                 <h3 className="text-sm font-bold mb-1" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>
                   {s.title}
                 </h3>
-                <p className="text-xs leading-relaxed" style={{ color: '#71717a' }}>
+                <p className="text-sm leading-7" style={{ color: '#71717a' }}>
                   {s.desc}
                 </p>
               </div>
@@ -128,12 +128,12 @@ export default function ReflectClient() {
         </div>
 
         {/* ════════════════ 引导提示 ════════════════ */}
-        <div className="mb-16">
-          <div className="flex items-center gap-3 mb-2">
-            <div style={{ width: 32, height: 1, background: 'rgba(255,255,255,0.06)' }} />
+        <div className="mb-20">
+          <div className="flex items-center gap-4 mb-4">
+            <div style={{ width: 34, height: 1, background: 'rgba(255,255,255,0.06)' }} />
             <span className="text-xs tracking-[0.2em] uppercase" style={{ color: 'rgba(212,168,83,0.5)' }}>引导问题</span>
           </div>
-          <h2 className="font-bold mb-6" style={{
+          <h2 className="font-bold mb-8" style={{
             fontFamily: "'Noto Serif SC', serif",
             fontSize: 'clamp(22px, 3vw, 32px)',
             color: '#f4f4f6',
@@ -141,16 +141,16 @@ export default function ReflectClient() {
             不知怎么开始？试试这些问题
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {REFLECT_PROMPTS.map((p, i) => (
-              <div key={i} className="p-5 cursor-pointer transition-all hover:border-[#d4a85320]"
-                style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}
+              <div key={i} className="p-6 cursor-pointer transition-all hover:border-[#d4a85320]"
+                style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}
                 onClick={() => {
                   setContent(prev => prev + (prev ? '\n\n' : '') + p.q + '\n');
                   setShowForm(true);
                   setTimeout(() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }), 100);
                 }}>
-                <p className="text-sm font-medium mb-1" style={{ color: '#a1a1aa' }}>{p.q}</p>
+                <p className="text-sm font-medium leading-7 mb-2" style={{ color: '#a1a1aa' }}>{p.q}</p>
                 <p className="text-xs" style={{ color: '#52525b' }}>{p.hint}</p>
               </div>
             ))}
@@ -158,11 +158,11 @@ export default function ReflectClient() {
         </div>
 
         {/* ════════════════ 编写反思 ════════════════ */}
-        <div className="mb-12">
-          <div className="flex items-center justify-between mb-6">
+        <div className="mb-16">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 mb-8">
             <div>
-              <div className="flex items-center gap-3 mb-2">
-                <div style={{ width: 32, height: 1, background: 'rgba(255,255,255,0.06)' }} />
+              <div className="flex items-center gap-4 mb-3">
+                <div style={{ width: 34, height: 1, background: 'rgba(255,255,255,0.06)' }} />
                 <span className="text-xs tracking-[0.2em] uppercase" style={{ color: 'rgba(212,168,83,0.5)' }}>我的反思</span>
               </div>
               <h2 className="font-bold" style={{
@@ -185,8 +185,8 @@ export default function ReflectClient() {
           </div>
 
           {showForm && (
-            <div className="p-6 mb-8" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 2 }}>
-              <div className="space-y-5">
+            <div className="p-6 md:p-8 mb-10" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
+              <div className="space-y-6">
                 <div>
                   <label className="block text-xs mb-2 font-medium" style={{ color: '#71717a' }}>标题</label>
                   <input
