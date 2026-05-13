@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { DREAMLAB_COURSES, DREAMLAB_PHASES } from '@/lib/dreamlab-courses';
+import { BUSINESS_STREAMS, USER_LOOP_STEPS } from '@/lib/product-loop';
 
 const CAPABILITIES = [
   {
@@ -81,11 +82,11 @@ export default function HomePage() {
                 从潜意识线索到日常照护动作，把心理学知识放进真实生活。
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/courses" className="btn btn-primary" style={{ padding: '17px 34px' }}>
-                  查看 100 门课程 →
+                <Link href="/journey" className="btn btn-primary" style={{ padding: '17px 34px' }}>
+                  开始 7 天闭环 →
                 </Link>
-                <Link href="/reflect" className="btn btn-ghost" style={{ padding: '17px 34px' }}>
-                  开始反思记录
+                <Link href="/courses" className="btn btn-ghost" style={{ padding: '17px 34px' }}>
+                  查看 100 门课程
                 </Link>
               </div>
             </div>
@@ -105,6 +106,33 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-5 md:px-8 py-20 md:py-24">
+        <div className="max-w-[1180px] mx-auto">
+          <div className="flex items-center justify-between gap-6 mb-10">
+            <div>
+              <div className="flex items-center gap-4 mb-5">
+                <div style={{ width: 34, height: 1, background: 'rgba(212,168,83,0.2)' }} />
+                <span className="text-xs tracking-[0.18em] uppercase" style={{ color: 'rgba(212,168,83,0.62)' }}>用户闭环</span>
+              </div>
+              <h2 className="text-3xl md:text-5xl font-bold" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6', lineHeight: 1.18 }}>
+                第一次访问就知道下一步
+              </h2>
+            </div>
+            <Link href="/journey" className="hidden md:inline-flex text-sm" style={{ color: '#d4a853' }}>查看完整闭环 →</Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-5">
+            {USER_LOOP_STEPS.map((step) => (
+              <Link key={step.index} href={step.href} className="block p-6 transition-all duration-300 hover:translate-y-[-2px]" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
+                <div className="text-sm mb-5" style={{ color: step.color }}>{step.index}</div>
+                <h3 className="text-lg font-bold mb-3 leading-7" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>{step.title}</h3>
+                <p className="text-sm leading-7 mb-5" style={{ color: '#85858e' }}>{step.desc}</p>
+                <span className="text-xs" style={{ color: step.color }}>{step.action} →</span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
@@ -181,6 +209,35 @@ export default function HomePage() {
                   <p className="text-sm leading-7" style={{ color: '#71717a' }}>{phase.subtitle}</p>
                 </div>
               </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-5 md:px-8 py-20 md:py-24">
+        <div className="max-w-[1180px] mx-auto grid grid-cols-1 lg:grid-cols-[0.82fr_1.18fr] gap-12 xl:gap-20">
+          <div>
+            <div className="flex items-center gap-4 mb-6">
+              <div style={{ width: 34, height: 1, background: 'rgba(212,168,83,0.2)' }} />
+              <span className="text-xs tracking-[0.18em] uppercase" style={{ color: 'rgba(212,168,83,0.62)' }}>商业模式</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6', lineHeight: 1.18 }}>
+              从学习系统走向会员服务
+            </h2>
+            <p className="text-base leading-8 mb-8" style={{ color: '#85858e' }}>
+              免费体验负责建立信任，成长会员负责持续复盘，机构方案负责把课程和报告能力规模化。
+            </p>
+            <Link href="/membership" className="btn btn-ghost">
+              查看会员与机构方案 →
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {BUSINESS_STREAMS.slice(0, 4).map((stream) => (
+              <div key={stream.title} className="p-7" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
+                <div className="text-xs mb-4" style={{ color: '#d4a853' }}>{stream.stage}</div>
+                <h3 className="text-lg font-bold mb-3" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>{stream.title}</h3>
+                <p className="text-sm leading-8" style={{ color: '#85858e' }}>{stream.desc}</p>
+              </div>
             ))}
           </div>
         </div>

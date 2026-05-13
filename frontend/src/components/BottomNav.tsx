@@ -5,9 +5,9 @@ import Link from 'next/link';
 
 const TABS = [
   { href: '/', label: '首页', icon: '⌂' },
+  { href: '/journey', label: '闭环', icon: '↻' },
   { href: '/courses', label: '课程', icon: '▣' },
   { href: '/dream', label: '解梦', icon: '◎' },
-  { href: '/knowledge', label: '知识', icon: '◇' },
   { href: '/reflect', label: '反思', icon: '◉' },
   { href: '/profile', label: '我的', icon: '○' },
 ];

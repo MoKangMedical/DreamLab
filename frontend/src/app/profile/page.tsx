@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { MEMBERSHIP_PLANS, USER_LOOP_STEPS } from '@/lib/product-loop';
 
 const STATS = [
   { label: '课程', value: 12, icon: '课', color: '#d4a853' },
@@ -86,6 +87,25 @@ export default function ProfilePage() {
         </div>
       </div>
 
+      <div className="m-card mb-6" style={{ padding: 24 }}>
+        <div className="flex items-center justify-between mb-5">
+          <h3 className="m-subtitle" style={{ fontSize: 16 }}>下一步闭环任务</h3>
+          <Link href="/journey" className="text-xs" style={{ color: '#d4a853' }}>完整路径 →</Link>
+        </div>
+        <div className="space-y-3">
+          {USER_LOOP_STEPS.slice(2, 5).map((step) => (
+            <Link key={step.index} href={step.href} className="flex items-start gap-4 p-4" style={{ background: '#0a0a0c', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 8 }}>
+              <span className="text-xs font-bold shrink-0" style={{ color: step.color }}>{step.index}</span>
+              <span className="flex-1">
+                <span className="block m-subtitle" style={{ fontSize: 14 }}>{step.title}</span>
+                <span className="block m-caption mt-1" style={{ fontSize: 12, lineHeight: 1.7 }}>{step.action}</span>
+              </span>
+              <span style={{ color: '#52525b' }}>→</span>
+            </Link>
+          ))}
+        </div>
+      </div>
+
       {/* Quick Actions */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
         {[
@@ -134,6 +154,22 @@ export default function ProfilePage() {
           <span className="m-subtitle" style={{ fontSize: 15 }}>进入课程体系</span>
           <span style={{ color: '#52525b' }}>→</span>
         </Link>
+      </div>
+
+      <div className="m-card mb-6" style={{ padding: 24, border: '1px solid rgba(212,168,83,0.18)' }}>
+        <div className="text-xs mb-3" style={{ color: '#d4a853' }}>商业化承接</div>
+        <h3 className="m-subtitle mb-3" style={{ fontSize: 18 }}>{MEMBERSHIP_PLANS[1].name}</h3>
+        <p className="m-caption mb-5" style={{ fontSize: 13, lineHeight: 1.8 }}>
+          {MEMBERSHIP_PLANS[1].desc}
+        </p>
+        <div className="flex items-center justify-between gap-4">
+          <span className="font-bold" style={{ fontSize: 24, color: '#d4a853', fontFamily: "'Noto Serif SC', serif" }}>
+            {MEMBERSHIP_PLANS[1].price}
+          </span>
+          <Link href="/membership" className="btn btn-primary btn-sm">
+            查看方案
+          </Link>
+        </div>
       </div>
 
       {/* Quote */}

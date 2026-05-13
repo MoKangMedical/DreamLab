@@ -19,16 +19,18 @@ export const metadata: Metadata = {
 
 const NAV_LINKS = [
   { href: "/", label: "首页" },
-  { href: "/courses", label: "心理课程" },
-  { href: "/assessments", label: "心理测评" },
-  { href: "/dream", label: "梦境解析" },
-  { href: "/knowledge", label: "心理知识库" },
-  { href: "/reflect", label: "反思日志" },
-  { href: "/profile", label: "我的成长" },
+  { href: "/journey", label: "成长闭环" },
+  { href: "/courses", label: "课程" },
+  { href: "/assessments", label: "测评" },
+  { href: "/dream", label: "解梦" },
+  { href: "/knowledge", label: "知识库" },
+  { href: "/membership", label: "会员方案" },
+  { href: "/profile", label: "我的" },
 ];
 
 const FOOTER_COLUMNS = {
   研究能力: [
+    { label: "成长闭环", href: "/journey" },
     { label: "心理课程", href: "/courses" },
     { label: "心理测评", href: "/assessments" },
     { label: "梦境解析", href: "/dream" },
@@ -42,6 +44,7 @@ const FOOTER_COLUMNS = {
     { label: "关系、学习与生活应用", href: "/courses" },
   ],
   项目: [
+    { label: "会员方案", href: "/membership" },
     { label: "心理测评", href: "/assessments" },
     { label: "个人中心", href: "/profile" },
     { label: "GitHub", href: "https://github.com/MoKangMedical/DreamLab" },
