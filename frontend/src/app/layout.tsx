@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 const NAV_LINKS = [
   { href: "/", label: "首页" },
-  { href: "/journey", label: "成长闭环" },
+  { href: "/quest", label: "成长游戏" },
   { href: "/courses", label: "课程" },
   { href: "/assessments", label: "测评" },
   { href: "/dream", label: "解梦" },
@@ -30,6 +30,7 @@ const NAV_LINKS = [
 
 const FOOTER_COLUMNS = {
   研究能力: [
+    { label: "成长游戏", href: "/quest" },
     { label: "成长闭环", href: "/journey" },
     { label: "心理课程", href: "/courses" },
     { label: "心理测评", href: "/assessments" },

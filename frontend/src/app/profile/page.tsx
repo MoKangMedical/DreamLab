@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { QUEST_BADGES, QUEST_PROFILE } from '@/lib/growth-quest';
 import { MEMBERSHIP_PLANS, USER_LOOP_STEPS } from '@/lib/product-loop';
 
 const STATS = [
@@ -49,6 +50,33 @@ export default function ProfilePage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] gap-6 lg:gap-8">
         <div>
+      <div className="m-card mb-6" style={{ padding: 24, border: '1px solid rgba(212,168,83,0.18)' }}>
+        <div className="flex items-start justify-between gap-4 mb-5">
+          <div>
+            <div className="text-xs mb-2" style={{ color: '#d4a853' }}>成长游戏档案</div>
+            <h3 className="m-subtitle" style={{ fontSize: 22 }}>Lv.{QUEST_PROFILE.level} · {QUEST_PROFILE.title}</h3>
+          </div>
+          <Link href="/quest" className="btn btn-primary btn-sm">
+            进入游戏
+          </Link>
+        </div>
+        <div className="h-2 rounded-full overflow-hidden mb-3" style={{ background: 'rgba(255,255,255,0.06)' }}>
+          <div className="h-full rounded-full" style={{ width: `${Math.round((QUEST_PROFILE.xp / QUEST_PROFILE.nextLevelXp) * 100)}%`, background: 'linear-gradient(90deg, #d4a853, #72a66a)' }} />
+        </div>
+        <div className="flex justify-between text-xs mb-5" style={{ color: '#71717a' }}>
+          <span>{QUEST_PROFILE.xp} XP</span>
+          <span>{QUEST_PROFILE.currentAct}</span>
+        </div>
+        <div className="grid grid-cols-3 gap-3">
+          {QUEST_BADGES.slice(0, 3).map((badge) => (
+            <div key={badge.name} className="p-3 text-center" style={{ background: `${badge.color}10`, border: `1px solid ${badge.color}33`, borderRadius: 8 }}>
+              <div className="text-sm font-bold mb-1" style={{ color: badge.color, fontFamily: "'Noto Serif SC', serif" }}>{badge.icon}</div>
+              <div className="text-[10px] leading-4" style={{ color: '#a1a1aa' }}>{badge.name}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Stats Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-6">
         {STATS.map((s, i) => (

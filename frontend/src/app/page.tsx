@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { DREAMLAB_COURSES, DREAMLAB_PHASES } from '@/lib/dreamlab-courses';
+import { QUEST_BADGES, QUEST_PROFILE } from '@/lib/growth-quest';
 import { BUSINESS_STREAMS, USER_LOOP_STEPS } from '@/lib/product-loop';
 
 const CAPABILITIES = [
@@ -82,8 +83,8 @@ export default function HomePage() {
                 从潜意识线索到日常照护动作，把心理学知识放进真实生活。
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/journey" className="btn btn-primary" style={{ padding: '17px 34px' }}>
-                  开始 7 天闭环 →
+                <Link href="/quest" className="btn btn-primary" style={{ padding: '17px 34px' }}>
+                  进入成长游戏 →
                 </Link>
                 <Link href="/courses" className="btn btn-ghost" style={{ padding: '17px 34px' }}>
                   查看 100 门课程
@@ -107,6 +108,53 @@ export default function HomePage() {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="px-5 md:px-8 py-20 md:py-24">
+        <div className="max-w-[1180px] mx-auto grid grid-cols-1 lg:grid-cols-[0.78fr_1.22fr] gap-12 xl:gap-20 items-center">
+          <div>
+            <div className="flex items-center gap-4 mb-6">
+              <div style={{ width: 34, height: 1, background: 'rgba(212,168,83,0.2)' }} />
+              <span className="text-xs tracking-[0.18em] uppercase" style={{ color: 'rgba(212,168,83,0.62)' }}>成长游戏</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6', lineHeight: 1.18 }}>
+              像通关一样完成心理成长
+            </h2>
+            <p className="text-base leading-8 mb-8" style={{ color: '#85858e' }}>
+              用户会看到等级、经验、主线任务、能力树和徽章，但每一次奖励都对应真实行动：
+              做测评、记录梦境、学习课程、写反思、完成复盘。
+            </p>
+            <Link href="/quest" className="btn btn-primary">
+              打开成长地图 →
+            </Link>
+          </div>
+
+          <Link href="/quest" className="block p-7 md:p-8 transition-all duration-300 hover:translate-y-[-2px]" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+              {[
+                { value: `Lv.${QUEST_PROFILE.level}`, label: QUEST_PROFILE.title },
+                { value: `${QUEST_PROFILE.streakDays}天`, label: '连续探索' },
+                { value: `${QUEST_PROFILE.completionRate}%`, label: '完成率' },
+                { value: '6', label: '成长徽章' },
+              ].map((item) => (
+                <div key={item.label} className="p-4" style={{ background: '#0a0a0c', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 8 }}>
+                  <div className="text-2xl font-bold" style={{ fontFamily: "'Noto Serif SC', serif", color: '#d4a853' }}>{item.value}</div>
+                  <div className="text-xs mt-1" style={{ color: '#71717a' }}>{item.label}</div>
+                </div>
+              ))}
+            </div>
+            <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
+              {QUEST_BADGES.map((badge) => (
+                <div key={badge.name} className="text-center p-3" style={{ background: badge.unlocked ? `${badge.color}10` : '#0a0a0c', border: `1px solid ${badge.unlocked ? `${badge.color}33` : 'rgba(255,255,255,0.05)'}`, borderRadius: 8, opacity: badge.unlocked ? 1 : 0.54 }}>
+                  <div className="w-10 h-10 mx-auto mb-2 flex items-center justify-center text-sm font-bold" style={{ color: badge.color, border: `1px solid ${badge.color}44`, borderRadius: '50%', fontFamily: "'Noto Serif SC', serif" }}>
+                    {badge.icon}
+                  </div>
+                  <div className="text-[11px] leading-4" style={{ color: '#a1a1aa' }}>{badge.name}</div>
+                </div>
+              ))}
+            </div>
+          </Link>
         </div>
       </section>
 
