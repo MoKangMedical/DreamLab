@@ -5,6 +5,7 @@ import InteractiveGhibli from "@/components/InteractiveGhibli";
 import { SpiritedInteractions } from "@/components/SpiritedInteractions";
 import GlobalExploreMore from "@/components/GlobalExploreMore";
 import PWAInstallPrompt from "@/components/PWAInstallPrompt";
+import BrandMark from "@/components/BrandMark";
 
 export const metadata: Metadata = {
   title: "DreamLab 心理研究院",
@@ -74,14 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Desktop Navigation — Glass */}
         <nav className="hidden md:block glass-nav">
           <div className="max-w-[1180px] mx-auto px-8 h-16 flex items-center justify-between">
-            <a href="/" className="flex items-center gap-2 group">
-              <span
-                className="font-bold text-lg tracking-tight"
-                style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}
-              >
-                DreamLab
-              </span>
-            </a>
+            <BrandMark compact />
             <div className="flex items-center gap-1">
               {NAV_LINKS.map((item) => (
                 <a
@@ -129,13 +123,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-20">
                   {/* Brand */}
                   <div className="col-span-2 md:col-span-1">
-                    <a
-                      href="/"
-                      className="text-lg font-bold mb-6 block"
-                      style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}
-                    >
-                      DreamLab
-                    </a>
+                    <BrandMark className="mb-6" />
                     <p
                       className="text-sm leading-relaxed mb-8"
                       style={{ color: '#71717a', lineHeight: 1.8 }}

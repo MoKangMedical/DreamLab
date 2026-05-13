@@ -55,7 +55,7 @@ export default function AssessmentTakeClient() {
       // 🎴 浴牌奖励
       setTimeout(() => {
         showBathToken('契约之镜已映照', '🪞', `${assessment?.name || '测评'} · ${res.level}`);
-        showShikigami('汤婆婆收下了你的契约，镜中映出新的自己', 'success');
+        showShikigami('油屋已经收下你的测评契约，镜中映出新的自己', 'success');
       }, 500);
     } catch {
       setError('提交失败，请重试');

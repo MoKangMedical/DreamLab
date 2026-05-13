@@ -41,6 +41,9 @@
   /* Typography */
   --font-serif: 'Noto Serif SC', 'STSong', 'SimSun', serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --hero-xl: 88px;
+  --hero-lg: 76px;
+  --hero-md: 54px;
 }
 
 /* ── CSS Custom Properties (for non-Tailwind usage) ── */
@@ -87,7 +90,7 @@ body {
   font-size: 15px;
   line-height: 1.6;
   min-height: 100dvh;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
 h1, h2, h3, h4 {
@@ -136,7 +139,7 @@ body::before {
   font-weight: 700;
   font-size: clamp(40px, 10vw, 72px);
   line-height: 1.05;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
   color: var(--text-primary);
 }
 .t-display {
@@ -144,7 +147,7 @@ body::before {
   font-weight: 700;
   font-size: clamp(28px, 6vw, 48px);
   line-height: 1.10;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   color: var(--text-primary);
 }
 .t-heading {
@@ -152,7 +155,7 @@ body::before {
   font-weight: 700;
   font-size: clamp(22px, 4vw, 32px);
   line-height: 1.20;
-  letter-spacing: -0.015em;
+  letter-spacing: 0;
   color: var(--text-primary);
 }
 .t-subtitle {
@@ -229,12 +232,403 @@ body::before {
   font-family: var(--font-sans);
   font-size: 15px;
   font-weight: 500;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   border: none;
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
+}
+
+/* ════════════════ DreamLab Brand System ════════════════ */
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+.brand-mark-sigil {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  color: #0a0a0c;
+  background:
+    linear-gradient(145deg, rgba(255, 236, 176, 0.96), rgba(212, 168, 83, 0.92) 58%, rgba(148, 88, 50, 0.88));
+  border: 1px solid rgba(255, 240, 190, 0.35);
+  border-radius: 8px;
+  box-shadow:
+    0 12px 34px rgba(212, 168, 83, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  font-family: var(--font-serif);
+  font-size: 19px;
+  font-weight: 900;
+}
+.brand-mark-sigil::after {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgba(10, 10, 12, 0.22);
+  border-radius: 5px;
+}
+.brand-mark-name {
+  display: block;
+  color: var(--text-primary);
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.05;
+}
+.brand-mark-subtitle {
+  display: block;
+  margin-top: 3px;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+}
+.brand-mark-compact .brand-mark-sigil {
+  width: 34px;
+  height: 34px;
+  font-size: 17px;
+}
+.brand-mark-compact .brand-mark-name {
+  font-size: 17px;
+}
+
+.brand-ribbon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px 18px;
+  background:
+    linear-gradient(90deg, rgba(212, 168, 83, 0.12), rgba(59, 139, 122, 0.07), rgba(196, 85, 77, 0.08));
+  border: 1px solid rgba(212, 168, 83, 0.16);
+  border-radius: 8px;
+}
+.brand-ribbon-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 168, 83, 0.28), transparent);
+}
+.brand-ribbon-text {
+  color: rgba(244, 244, 246, 0.84);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ════════════════ Original Dream Bathhouse Scene ════════════════ */
+.bathhouse-scene {
+  position: relative;
+  min-height: 520px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(17, 17, 19, 0.96), rgba(10, 10, 12, 0.98)),
+    radial-gradient(ellipse at 50% 0%, rgba(212, 168, 83, 0.12), transparent 58%);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 8px;
+  box-shadow:
+    0 28px 90px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  isolation: isolate;
+}
+.bathhouse-scene::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255,255,255,0.014) 1px, transparent 1px);
+  background-size: 34px 34px, 34px 34px;
+  mask-image: linear-gradient(180deg, transparent 0%, #000 26%, #000 80%, transparent 100%);
+}
+.bathhouse-scene::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 42%;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent, rgba(10, 10, 12, 0.72) 52%, #0a0a0c);
+}
+.bathhouse-skyline {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: 96px;
+  height: 58%;
+  z-index: 2;
+  opacity: 0.32;
+  background:
+    linear-gradient(180deg, transparent 0 8%, rgba(59, 139, 122, 0.16) 8% 8.8%, transparent 8.8% 100%),
+    repeating-linear-gradient(90deg, transparent 0 26px, rgba(212, 168, 83, 0.06) 26px 27px, transparent 27px 54px);
+  filter: blur(1px);
+}
+.bathhouse-brand-sign {
+  position: absolute;
+  top: 28px;
+  left: 28px;
+  z-index: 6;
+  padding: 12px 15px;
+  background: rgba(10, 10, 12, 0.72);
+  border: 1px solid rgba(212, 168, 83, 0.22);
+  border-radius: 8px;
+  box-shadow: 0 14px 44px rgba(0, 0, 0, 0.32);
+}
+.bathhouse-brand-sign-main {
+  display: block;
+  color: #f4f4f6;
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1;
+}
+.bathhouse-brand-sign-sub {
+  display: block;
+  margin-top: 5px;
+  color: rgba(212, 168, 83, 0.78);
+  font-size: 11px;
+  line-height: 1;
+}
+.bathhouse-building {
+  position: absolute;
+  z-index: 4;
+  background:
+    linear-gradient(180deg, rgba(58, 40, 34, 0.98), rgba(22, 23, 25, 0.98)),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 58px);
+  border: 1px solid rgba(212, 168, 83, 0.11);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.36);
+}
+.bathhouse-building-back {
+  right: 44px;
+  bottom: 146px;
+  width: 54%;
+  height: 42%;
+  opacity: 0.72;
+}
+.bathhouse-building-front {
+  left: 34px;
+  right: 34px;
+  bottom: 96px;
+  height: 48%;
+}
+.bathhouse-roof {
+  position: absolute;
+  left: -5%;
+  right: -5%;
+  height: 28px;
+  background: linear-gradient(180deg, #7f332e, #3f1f22);
+  border: 1px solid rgba(212, 168, 83, 0.18);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.28);
+}
+.roof-back { top: -28px; }
+.roof-front { top: -34px; height: 34px; }
+.bathhouse-roof::before {
+  content: '';
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: -13px;
+  height: 16px;
+  background: linear-gradient(180deg, #9c4338, #5c2525);
+  clip-path: polygon(7% 100%, 50% 0, 93% 100%);
+}
+.bathhouse-window-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(20px, 1fr));
+  gap: 12px;
+  padding: 34px 26px 0;
+}
+.bathhouse-window-grid.is-front {
+  grid-template-columns: repeat(5, 1fr);
+  padding: 42px 30px 0;
+}
+.bathhouse-window {
+  display: block;
+  height: 24px;
+  background: linear-gradient(180deg, rgba(255, 220, 138, 0.88), rgba(191, 107, 58, 0.36));
+  border: 1px solid rgba(255, 238, 180, 0.25);
+  border-radius: 3px;
+  box-shadow: 0 0 22px rgba(212, 168, 83, 0.22);
+  animation: window-glow 4.8s ease-in-out infinite;
+}
+.bathhouse-window.is-wide { grid-column: span 2; }
+.bathhouse-window.is-dim {
+  opacity: 0.34;
+  animation-delay: 1.4s;
+}
+.bathhouse-door {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 72px;
+  height: 86px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(244, 244, 246, 0.8);
+  background: linear-gradient(180deg, rgba(26, 24, 28, 0.98), rgba(10, 10, 12, 0.98));
+  border: 1px solid rgba(212, 168, 83, 0.18);
+  border-bottom: none;
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 800;
+}
+.bathhouse-bridge {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 78px;
+  height: 32px;
+  z-index: 5;
+  border-top: 8px solid #8e382f;
+  border-bottom: 5px solid rgba(212, 168, 83, 0.22);
+  transform: perspective(360px) rotateX(12deg);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.32);
+}
+.bathhouse-bridge::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -18px;
+  height: 14px;
+  background: repeating-linear-gradient(90deg, rgba(212,168,83,0.42) 0 2px, transparent 2px 44px);
+}
+.bathhouse-lantern {
+  position: absolute;
+  top: -34px;
+  width: 12px;
+  height: 18px;
+  border-radius: 6px 6px 8px 8px;
+  background: linear-gradient(180deg, #ffe2a0, #cc5c3d);
+  box-shadow: 0 0 18px rgba(212, 168, 83, 0.34);
+  animation: lantern-breathe 3.6s ease-in-out infinite;
+}
+.bathhouse-lantern:nth-child(1) { left: 5%; }
+.bathhouse-lantern:nth-child(2) { left: 16%; }
+.bathhouse-lantern:nth-child(3) { left: 27%; }
+.bathhouse-lantern:nth-child(4) { left: 38%; }
+.bathhouse-lantern:nth-child(5) { left: 49%; }
+.bathhouse-lantern:nth-child(6) { left: 60%; }
+.bathhouse-lantern:nth-child(7) { left: 71%; }
+.bathhouse-lantern:nth-child(8) { left: 82%; }
+.bathhouse-lantern:nth-child(9) { left: 93%; }
+.bathhouse-water {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 96px;
+  z-index: 3;
+  background:
+    linear-gradient(180deg, rgba(59, 139, 122, 0.12), rgba(10, 10, 12, 0.92)),
+    repeating-linear-gradient(0deg, transparent 0 14px, rgba(212, 168, 83, 0.045) 14px 15px);
+}
+.bathhouse-water span {
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212,168,83,0.2), transparent);
+  animation: water-drift 7s ease-in-out infinite;
+}
+.bathhouse-water span:nth-child(1) { top: 22px; }
+.bathhouse-water span:nth-child(2) { top: 46px; animation-delay: 1.2s; }
+.bathhouse-water span:nth-child(3) { top: 70px; animation-delay: 2.4s; }
+
+.premium-panel {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(24, 24, 27, 0.98), rgba(17, 17, 19, 0.98));
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 8px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+.premium-panel::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 168, 83, 0.45), transparent);
+}
+
+@media (max-width: 768px) {
+  :root {
+    --hero-xl: 46px;
+    --hero-lg: 44px;
+    --hero-md: 38px;
+  }
+  .brand-mark {
+    gap: 9px;
+  }
+  .brand-mark-sigil {
+    width: 34px;
+    height: 34px;
+    font-size: 17px;
+  }
+  .brand-mark-name {
+    font-size: 16px;
+  }
+  .brand-ribbon {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .brand-ribbon-line {
+    width: 100%;
+    flex: none;
+  }
+  .brand-ribbon-text {
+    white-space: normal;
+    line-height: 1.8;
+  }
+  .bathhouse-scene {
+    min-height: 380px;
+  }
+  .bathhouse-brand-sign {
+    top: 18px;
+    left: 18px;
+  }
+  .bathhouse-building-back {
+    right: 20px;
+    bottom: 122px;
+    width: 58%;
+    height: 38%;
+  }
+  .bathhouse-building-front {
+    left: 18px;
+    right: 18px;
+    bottom: 82px;
+    height: 45%;
+  }
+  .bathhouse-window-grid,
+  .bathhouse-window-grid.is-front {
+    gap: 8px;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+  .bathhouse-window {
+    height: 19px;
+  }
+  .bathhouse-bridge {
+    left: 6%;
+    right: 6%;
+    bottom: 66px;
+  }
 }
 .btn:active { transform: scale(0.97); }
 
@@ -394,6 +788,18 @@ body::before {
 @keyframes cloud-drift {
   0% { transform: translateX(0); }
   100% { transform: translateX(calc(100vw + 400px)); }
+}
+@keyframes window-glow {
+  0%, 100% { opacity: 0.78; filter: saturate(0.92); }
+  50% { opacity: 1; filter: saturate(1.12); }
+}
+@keyframes lantern-breathe {
+  0%, 100% { opacity: 0.72; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-2px); }
+}
+@keyframes water-drift {
+  0%, 100% { transform: translateX(-16px); opacity: 0.25; }
+  50% { transform: translateX(18px); opacity: 0.72; }
 }
 
 /* Utility classes */

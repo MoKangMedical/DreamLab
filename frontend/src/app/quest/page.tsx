@@ -10,7 +10,7 @@ export default function QuestPage() {
           <div>
             <h1
               className="font-bold mb-7"
-              style={{ fontFamily: "'Noto Serif SC', serif", fontSize: 'clamp(48px, 7.4vw, 92px)', lineHeight: 1.04, color: '#f4f4f6' }}
+              style={{ fontFamily: "'Noto Serif SC', serif", fontSize: 'var(--hero-lg)', lineHeight: 1.04, color: '#f4f4f6', letterSpacing: 0 }}
             >
               成长像一场游戏
             </h1>

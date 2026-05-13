@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { updateProgress } from '@/lib/api';
+import { showBathToken, showShikigami } from '@/components/SpiritedInteractions';
 
 interface Chapter {
   title: string;
@@ -25,17 +26,22 @@ export default function ChapterList({ chapters, courseId, progress }: ChapterLis
 
   const toggleChapter = async (index: number) => {
     const existing = localProgress.find((p) => p.chapter_index === index);
+    const nextCompleted = !existing?.completed;
     try {
       await updateProgress(courseId, {
         user_id: 1,
         chapter_index: index,
-        completed: !existing?.completed,
+        completed: nextCompleted,
       });
       setLocalProgress((prev) =>
         existing
-          ? prev.map((p) => (p.chapter_index === index ? { ...p, completed: !p.completed } : p))
+          ? prev.map((p) => (p.chapter_index === index ? { ...p, completed: nextCompleted } : p))
           : [...prev, { chapter_index: index, completed: true }],
       );
+      if (nextCompleted) {
+        showBathToken('获得学习浴牌', '札', `第 ${index + 1} 章已完成`);
+        showShikigami('新的课程进度已写入成长路线', 'success');
+      }
     } catch {}
   };
 
@@ -51,7 +57,7 @@ export default function ChapterList({ chapters, courseId, progress }: ChapterLis
   return (
     <>
       {/* Progress Bar */}
-      <div className="p-6 mb-8" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
+      <div className="premium-panel p-6 mb-8">
         <div className="flex items-center justify-between mb-3">
           <span className="text-sm" style={{ color: '#a1a1aa' }}>学习进度</span>
           <span className="text-sm font-medium" style={{ color: '#d4a853' }}>{progressPercent}%</span>
@@ -74,7 +80,7 @@ export default function ChapterList({ chapters, courseId, progress }: ChapterLis
           const audioPath = `/DreamLab/audio/courses/course${courseId}_ch${ch.order || (i + 1)}.mp3`;
 
           return (
-            <div key={i} style={{ background: '#111113', border: `1px solid ${isActive ? 'rgba(212,168,83,0.2)' : 'rgba(255,255,255,0.05)'}`, borderRadius: 8, overflow: 'hidden', transition: 'border-color 0.3s' }}>
+            <div key={i} className="premium-panel" style={{ borderColor: isActive ? 'rgba(212,168,83,0.2)' : 'rgba(255,255,255,0.05)', overflow: 'hidden', transition: 'border-color 0.3s' }}>
               <button className="w-full p-5 flex items-center gap-4 text-left" onClick={() => setActiveChapter(isActive ? null : i)}>
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${isDone ? 'text-white' : ''}`}
                   style={isDone ? { background: 'linear-gradient(135deg, #9B7ED8, #d4a853)' } : { background: 'rgba(255,255,255,0.06)', color: '#71717a' }}>

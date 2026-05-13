@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { DREAMLAB_COURSES, DREAMLAB_PHASES } from '@/lib/dreamlab-courses';
 import { QUEST_BADGES, QUEST_PROFILE } from '@/lib/growth-quest';
 import { BUSINESS_STREAMS, USER_LOOP_STEPS } from '@/lib/product-loop';
+import BathhouseBrandScene from '@/components/BathhouseBrandScene';
 
 const CAPABILITIES = [
   {
@@ -74,9 +75,10 @@ export default function HomePage() {
             <div>
               <h1
                 className="font-bold mb-7"
-                style={{ fontFamily: "'Noto Serif SC', serif", fontSize: 'clamp(52px, 8vw, 96px)', lineHeight: 1.04, color: '#f4f4f6' }}
+                style={{ fontFamily: "'Noto Serif SC', serif", fontSize: 'var(--hero-xl)', lineHeight: 1.04, color: '#f4f4f6', letterSpacing: 0 }}
               >
-                DreamLab 心理研究院
+                <span className="block">DreamLab</span>
+                <span className="block">心理研究院</span>
               </h1>
               <p className="text-lg md:text-xl leading-10 max-w-2xl mb-10" style={{ color: '#a1a1aa' }}>
                 用梦境解析、心理测评、经典课程、知识库和反思日志，建立一套可学习、可观察、可复盘的心智成长系统。
@@ -92,21 +94,30 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              {[
-                { value: '100', label: '心理课程' },
-                { value: '7', label: '学院体系' },
-                { value: `${Math.round(totalMinutes / 60)}h`, label: '学习时长' },
-                { value: '6', label: '心理量表' },
-                { value: 'AI', label: '梦境解析' },
-                { value: `${totalChapters}`, label: '课程章节' },
-              ].map((item) => (
-                <div key={item.label} className="p-5 md:p-6" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
-                  <div className="text-2xl md:text-3xl font-bold" style={{ fontFamily: "'Noto Serif SC', serif", color: '#d4a853' }}>{item.value}</div>
-                  <div className="text-[11px] mt-1" style={{ color: '#71717a' }}>{item.label}</div>
-                </div>
-              ))}
+            <div className="space-y-5">
+              <BathhouseBrandScene />
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                {[
+                  { value: '100', label: '心理课程' },
+                  { value: '7', label: '学院体系' },
+                  { value: `${Math.round(totalMinutes / 60)}h`, label: '学习时长' },
+                  { value: '6', label: '心理量表' },
+                  { value: 'AI', label: '梦境解析' },
+                  { value: `${totalChapters}`, label: '课程章节' },
+                ].map((item) => (
+                  <div key={item.label} className="premium-panel p-5 md:p-6">
+                    <div className="text-2xl md:text-3xl font-bold" style={{ fontFamily: "'Noto Serif SC', serif", color: '#d4a853' }}>{item.value}</div>
+                    <div className="text-[11px] mt-1" style={{ color: '#71717a' }}>{item.label}</div>
+                  </div>
+                ))}
+              </div>
             </div>
+          </div>
+
+          <div className="brand-ribbon mt-14 md:mt-16">
+            <span className="brand-ribbon-text">DreamLab · 梦境油屋 · 心理成长系统</span>
+            <span className="brand-ribbon-line" />
+            <span className="brand-ribbon-text">MoKangMedical 2026</span>
           </div>
         </div>
       </section>
@@ -130,7 +141,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <Link href="/quest" className="block p-7 md:p-8 transition-all duration-300 hover:translate-y-[-2px]" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
+          <Link href="/quest" className="premium-panel block p-7 md:p-8 transition-all duration-300 hover:translate-y-[-2px]">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
               {[
                 { value: `Lv.${QUEST_PROFILE.level}`, label: QUEST_PROFILE.title },
@@ -174,7 +185,7 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-5 gap-5">
             {USER_LOOP_STEPS.map((step) => (
-              <Link key={step.index} href={step.href} className="block p-6 transition-all duration-300 hover:translate-y-[-2px]" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
+            <Link key={step.index} href={step.href} className="premium-panel block p-6 transition-all duration-300 hover:translate-y-[-2px]">
                 <div className="text-sm mb-5" style={{ color: step.color }}>{step.index}</div>
                 <h3 className="text-lg font-bold mb-3 leading-7" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>{step.title}</h3>
                 <p className="text-sm leading-7 mb-5" style={{ color: '#85858e' }}>{step.desc}</p>
@@ -193,7 +204,7 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {CAPABILITIES.map((item) => (
-              <Link key={item.href} href={item.href} className="group block p-7 md:p-8 transition-all duration-300 hover:translate-y-[-2px]" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
+              <Link key={item.href} href={item.href} className="premium-panel group block p-7 md:p-8 transition-all duration-300 hover:translate-y-[-2px]">
                 <div className="w-9 h-1 mb-6" style={{ background: item.accent, borderRadius: 999 }} />
                 <h2 className="text-xl font-bold mb-3" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>{item.title}</h2>
                 <p className="text-sm leading-8 mb-7" style={{ color: '#85858e' }}>{item.desc}</p>
@@ -224,7 +235,7 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {FRAMEWORK.map((item, index) => (
-              <div key={item.title} className="p-7" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
+              <div key={item.title} className="premium-panel p-7">
                 <div className="text-sm mb-4" style={{ color: '#d4a853' }}>0{index + 1}</div>
                 <h3 className="text-lg font-bold mb-3" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>{item.title}</h3>
                 <p className="text-sm leading-8" style={{ color: '#85858e' }}>{item.desc}</p>
@@ -248,7 +259,7 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {DREAMLAB_PHASES.map((phase) => (
-              <Link key={phase.key} href="/courses" className="p-6 md:p-7 flex gap-5 items-start transition-all duration-300 hover:translate-y-[-2px]" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
+              <Link key={phase.key} href="/courses" className="premium-panel p-6 md:p-7 flex gap-5 items-start transition-all duration-300 hover:translate-y-[-2px]">
                 <div className="w-12 h-12 flex items-center justify-center text-sm font-bold shrink-0" style={{ background: phase.color, color: '#0a0a0c', borderRadius: 8 }}>
                   {phase.icon}
                 </div>
@@ -281,7 +292,7 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {BUSINESS_STREAMS.slice(0, 4).map((stream) => (
-              <div key={stream.title} className="p-7" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
+              <div key={stream.title} className="premium-panel p-7">
                 <div className="text-xs mb-4" style={{ color: '#d4a853' }}>{stream.stage}</div>
                 <h3 className="text-lg font-bold mb-3" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>{stream.title}</h3>
                 <p className="text-sm leading-8" style={{ color: '#85858e' }}>{stream.desc}</p>
@@ -299,7 +310,7 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {featured.map((course) => (
-              <Link key={course.id} href={`/courses/${course.id}`} className="block p-6 md:p-7" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
+              <Link key={course.id} href={`/courses/${course.id}`} className="premium-panel block p-6 md:p-7 transition-all duration-300 hover:translate-y-[-2px]">
                 <div className="text-xs mb-4" style={{ color: '#d4a853' }}>Course {course.id}</div>
                 <h3 className="text-lg font-bold mb-3 leading-7" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>{course.title}</h3>
                 <p className="text-sm leading-7 mb-4" style={{ color: '#85858e' }}>{course.description}</p>

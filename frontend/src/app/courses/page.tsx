@@ -2,6 +2,7 @@ import Link from 'next/link';
 import PageAtmosphere from '@/components/PageAtmosphere';
 import { getCourses } from '@/lib/api';
 import { DREAMLAB_CATEGORIES, DREAMLAB_PHASES } from '@/lib/dreamlab-courses';
+import BathhouseBrandScene from '@/components/BathhouseBrandScene';
 
 const DIFFICULTY_MAP: Record<string, { label: string; color: string }> = {
   beginner: { label: '入门', color: '#a1a1aa' },
@@ -24,17 +25,22 @@ export default async function CoursesPage() {
       <div className="relative z-10">
         <section className="px-5 md:px-8 pt-20 md:pt-32 pb-20 md:pb-24">
           <div className="max-w-[1180px] mx-auto">
-            <div className="max-w-3xl">
-              <h1
-                className="font-bold mb-7"
-                style={{ fontFamily: "'Noto Serif SC', serif", fontSize: 'clamp(44px, 6.8vw, 82px)', lineHeight: 1.08, color: '#f4f4f6' }}
-              >
-                DreamLab 课程体系
-              </h1>
-              <p className="text-base md:text-lg leading-9 max-w-3xl" style={{ color: '#a1a1aa' }}>
-                100 门课程、7 个学院，从梦境解析到 AI 心理学，从临床工具到生活应用，
-                每门课围绕案例、理论和反思展开，形成完整的 DreamLab 心理学学习路径。
-              </p>
+            <div className="grid grid-cols-1 lg:grid-cols-[0.86fr_0.72fr] gap-12 xl:gap-18 items-center">
+              <div className="max-w-3xl">
+                <h1
+                  className="font-bold mb-7"
+                  style={{ fontFamily: "'Noto Serif SC', serif", fontSize: 'var(--hero-lg)', lineHeight: 1.08, color: '#f4f4f6', letterSpacing: 0 }}
+                >
+                  DreamLab 课程体系
+                </h1>
+                <p className="text-base md:text-lg leading-9 max-w-3xl" style={{ color: '#a1a1aa' }}>
+                  100 门课程、7 个学院，从梦境解析到 AI 心理学，从临床工具到生活应用，
+                  每门课围绕案例、理论和反思展开，形成完整的 DreamLab 心理学学习路径。
+                </p>
+              </div>
+              <div className="hidden lg:block">
+                <BathhouseBrandScene />
+              </div>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
@@ -44,7 +50,7 @@ export default async function CoursesPage() {
                 { value: String(totalChapters), label: '课程章节' },
                 { value: `${Math.round(totalWords / 10000)}万`, label: '正文规模' },
               ].map((item) => (
-                <div key={item.label} className="p-6" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
+                <div key={item.label} className="premium-panel p-6">
                   <div className="text-3xl font-bold" style={{ fontFamily: "'Noto Serif SC', serif", color: '#d4a853' }}>{item.value}</div>
                   <div className="text-xs mt-1" style={{ color: '#71717a' }}>{item.label}</div>
                 </div>
@@ -66,7 +72,7 @@ export default async function CoursesPage() {
               {DREAMLAB_PHASES.map((phase) => {
                 const phaseCourses = courses.filter((course: any) => course.phaseKey === phase.key);
                 return (
-                  <div key={phase.key} className="p-6 md:p-7" style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
+                  <div key={phase.key} className="premium-panel p-6 md:p-7">
                     <div className="flex items-start gap-5">
                       <div
                         className="w-12 h-12 flex items-center justify-center text-sm font-bold shrink-0"
@@ -113,8 +119,7 @@ export default async function CoursesPage() {
                         <Link
                           key={course.id}
                           href={`/courses/${course.id}`}
-                          className="group block p-6 md:p-7 transition-all duration-300 hover:translate-y-[-2px]"
-                          style={{ background: '#111113', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}
+                          className="premium-panel group block p-6 md:p-7 transition-all duration-300 hover:translate-y-[-2px]"
                         >
                           <div className="flex items-start gap-4 mb-5">
                             <div
