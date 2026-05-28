@@ -4,4 +4,4 @@
 :HL["/DreamLab/marketing/xhs/d2-anxiety-check-cover.png","image"]
 :HL["/DreamLab/marketing/douyin/dream-chase-storyboard.png","image"]
 :HL["/DreamLab/marketing/digital-human/ep01-opening-storyboard.png","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"marketing","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"c1L_COm8AYB2kPdj3iGF-"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"marketing","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"jYXY0N0AWxRJFnYS2uhNU"}
