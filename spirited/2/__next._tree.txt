@@ -1,3 +1,3 @@
-:HL["/DreamLab/_next/static/chunks/0dxhbrk1hyzwy.css","style"]
+:HL["/DreamLab/_next/static/chunks/0i76dtzlwjo5-.css","style"]
 :HL["https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"spirited","param":null,"prefetchHints":0,"slots":{"children":{"name":"floor","param":{"type":"d","key":"2","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"OE_dVhKGi89KXz1qp2UEM"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"spirited","param":null,"prefetchHints":0,"slots":{"children":{"name":"floor","param":{"type":"d","key":"2","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"c1L_COm8AYB2kPdj3iGF-"}
