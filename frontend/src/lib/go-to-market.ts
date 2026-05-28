@@ -323,3 +323,24 @@ export const MARKETING_ASSET_PACK = [
     href: '/marketing/digital-human/ep01-opening-storyboard.png',
   },
 ] as const;
+
+export const PUBLISHING_KIT_LINKS = [
+  {
+    name: '发布执行包 JSON',
+    href: '/marketing/publishing-kit.json',
+    detail: '账号主页、置顶评论、首批素材路径、合规边界和统一承接链接。',
+    format: 'JSON',
+  },
+  {
+    name: '14 天发布排期',
+    href: '/marketing/social-publishing-calendar.csv',
+    detail: '按 D1-D14 拆分小红书、抖音、数字人任务，含素材、文案、标签和指标。',
+    format: 'CSV',
+  },
+  {
+    name: '社媒数据复盘表',
+    href: '/marketing/social-metrics-tracker.csv',
+    detail: '用于回填曝光、播放、收藏、评论、站内点击和商业转化信号。',
+    format: 'CSV',
+  },
+] as const;

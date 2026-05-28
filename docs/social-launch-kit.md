@@ -20,6 +20,11 @@
 | 抖音分镜 | `frontend/public/marketing/douyin/` | 4 张 1080x1920 分镜图 |
 | 数字人分镜 | `frontend/public/marketing/digital-human/` | 4 张 1080x1920 分镜图 |
 | 资产清单 | `frontend/public/marketing/asset-manifest.json` | 可用于后续页面或自动化读取 |
+| 发布执行包 | `frontend/public/marketing/publishing-kit.json` | 主页文案、置顶评论、素材路径、合规边界 |
+| 14 天排期 | `frontend/public/marketing/social-publishing-calendar.csv` | 小红书、抖音、数字人每日发布任务 |
+| 复盘表 | `frontend/public/marketing/social-metrics-tracker.csv` | 曝光、互动、站内点击和商业转化回填 |
+
+发布 SOP 见 `docs/social-publishing-sop.md`。
 
 重新生成命令：
 

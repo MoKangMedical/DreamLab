@@ -1,0 +1,66 @@
+{
+  "version": "2026-05-28",
+  "defaultStartDate": "2026-05-29",
+  "landingRoutes": {
+    "xhsProfile": "https://MoKangMedical.github.io/DreamLab/start/?utm_source=xhs&utm_medium=profile&utm_campaign=dreamlab_launch",
+    "douyinProfile": "https://MoKangMedical.github.io/DreamLab/start/?utm_source=douyin&utm_medium=profile&utm_campaign=dreamlab_launch",
+    "avatarProfile": "https://MoKangMedical.github.io/DreamLab/start/?utm_source=avatar&utm_medium=profile&utm_campaign=dreamlab_launch"
+  },
+  "accountProfiles": {
+    "xhs": {
+      "nameOptions": ["DreamLab 心理研究院", "DreamLab 心智实验室", "梦境与心智研究所"],
+      "bioOptions": [
+        "梦境解析、心理测评、100 门心理学课程。用一个真实问题，建立你的成长路线。",
+        "一间心理学学习与自我观察实验室。记录梦境、情绪和反思，慢慢看见自己的模式。",
+        "不做诊断，不承诺治疗。用心理学课程、测评和复盘工具，陪你完成一次次自我观察。"
+      ],
+      "pinnedComment": "DreamLab 是心理学教育与自我观察工具，不替代专业诊断或治疗。可以从主页完成一次 3 分钟体验：记录梦境、做轻测评，或进入 100 门心理学课程。"
+    },
+    "douyin": {
+      "nameOptions": ["DreamLab 心理研究员", "DreamLab 梦境心理课", "DreamLab 心理成长实验室"],
+      "bioOptions": [
+        "用 30-60 秒讲清一个心理学工具。梦境、测评、课程和成长复盘，从一个真实问题开始。",
+        "AI 心理研究员口播。心理学教育与自我观察内容，不替代专业诊断或治疗。",
+        "每天一个梦境或情绪问题，带你进入一节心理学课程。"
+      ],
+      "pinnedComment": "DreamLab 的内容用于心理学教育和自我观察，不替代专业咨询、诊断或治疗。主页可以完成梦境记录、轻量测评和课程学习。"
+    },
+    "digitalHuman": {
+      "name": "DreamLab AI 心理研究员",
+      "bio": "AI 数字人口播，心理学教育内容。带你从梦境、测评、课程和反思，建立自己的成长路线。不替代专业诊断或治疗。",
+      "requiredLabel": "AI 数字人口播 · 心理学教育内容"
+    }
+  },
+  "downloadableFiles": [
+    "/marketing/asset-manifest.json",
+    "/marketing/social-publishing-calendar.csv",
+    "/marketing/social-metrics-tracker.csv"
+  ],
+  "firstBatchAssets": {
+    "xhs": [
+      "/marketing/xhs/d1-dream-chase-cover.png",
+      "/marketing/xhs/d2-anxiety-check-cover.png",
+      "/marketing/xhs/d3-course-route-cover.png",
+      "/marketing/xhs/d4-sleep-shutdown-cover.png"
+    ],
+    "douyin": [
+      "/marketing/douyin/dream-chase-storyboard.png",
+      "/marketing/douyin/anxiety-check-storyboard.png",
+      "/marketing/douyin/course-route-storyboard.png",
+      "/marketing/douyin/ai-reflect-storyboard.png"
+    ],
+    "digitalHuman": [
+      "/marketing/digital-human/ep01-opening-storyboard.png",
+      "/marketing/digital-human/ep02-freud-dream-storyboard.png",
+      "/marketing/digital-human/ep03-jung-shadow-storyboard.png",
+      "/marketing/digital-human/ep04-seven-day-quest-storyboard.png"
+    ]
+  },
+  "compliance": [
+    "不使用诊断、治愈、根治、保证改善等表达。",
+    "AI 图文、视频和数字人口播必须显式标识。",
+    "虚拟案例必须标注为改编、虚构或综合案例。",
+    "危机、自伤或他伤风险必须引导用户寻求即时专业帮助。",
+    "所有 CTA 指向教育、记录、测评、课程和复盘，不替代线下专业服务。"
+  ]
+}

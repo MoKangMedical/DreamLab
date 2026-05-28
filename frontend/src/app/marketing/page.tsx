@@ -9,6 +9,7 @@ import {
   GTM_FUNNEL,
   LAUNCH_METRICS,
   MARKETING_ASSET_PACK,
+  PUBLISHING_KIT_LINKS,
   SHORT_VIDEO_SCRIPTS,
   SOCIAL_LANDING_ROUTES,
   XHS_LAUNCH_POSTS,
@@ -82,6 +83,27 @@ export default function MarketingPage() {
                   <p className="text-xs leading-6 mb-2" style={{ color: '#a1a1aa' }}>{asset.type}</p>
                   <p className="text-xs leading-6" style={{ color: '#71717a' }}>{asset.count}</p>
                 </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="academy-section">
+        <div className="academy-container">
+          <div className="academy-section-header">
+            <div className="academy-kicker">发布执行包</div>
+            <h2 className="academy-section-title">把素材变成可执行、可追踪的发布动作</h2>
+            <p className="academy-section-copy">
+              运营可以直接下载排期和复盘表，按账号主页、置顶评论、素材路径和转化指标完成第一轮 14 天验证。
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {PUBLISHING_KIT_LINKS.map((item) => (
+              <a key={item.name} href={`/DreamLab${item.href}`} className="premium-panel block p-8">
+                <div className="text-xs mb-4" style={{ color: '#e2b64f' }}>{item.format}</div>
+                <h3 className="text-xl font-bold mb-4" style={{ color: '#fafafa', fontFamily: "'Noto Serif SC', serif" }}>{item.name}</h3>
+                <p className="text-sm leading-8" style={{ color: '#a1a1aa' }}>{item.detail}</p>
               </a>
             ))}
           </div>

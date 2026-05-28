@@ -74,5 +74,9 @@ DreamLab 的商业化不要从“卖课”开始，而是从用户成长闭环�
 - 内部增长作战室：`/marketing`
 - 首批可发布素材包：`docs/social-launch-kit.md`
 - 数字人制作交付包：`docs/digital-human-production-pack.md`
+- 社媒发布 SOP：`docs/social-publishing-sop.md`
+- 公开发布执行包：`frontend/public/marketing/publishing-kit.json`
+- 14 天发布排期：`frontend/public/marketing/social-publishing-calendar.csv`
+- 数据复盘表：`frontend/public/marketing/social-metrics-tracker.csv`
 - 首批视觉资产：`frontend/public/marketing/`
 - 会员承接页：`/membership`

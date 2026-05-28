@@ -175,3 +175,9 @@ CTA：
 3. 画面保留“AI 数字人口播 · 心理学教育内容”。
 4. 评论区置顶：`DreamLab 是心理学教育与自我观察工具，不替代专业诊断或治疗。`
 5. 主页链接指向 `/start?utm_source=avatar&utm_medium=video&utm_campaign=dreamlab_launch`。
+
+发布排期和数据回填表：
+
+- `frontend/public/marketing/social-publishing-calendar.csv`
+- `frontend/public/marketing/social-metrics-tracker.csv`
+- `docs/social-publishing-sop.md`
