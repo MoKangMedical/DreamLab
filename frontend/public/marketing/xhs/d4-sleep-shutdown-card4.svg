@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1080" height="1440" viewBox="0 0 1080 1440" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1080" height="1440" fill="#0a0a0c"/>
+  <circle cx="0" cy="80" r="2" fill="#d4a853" opacity="0.22"/><circle cx="173" cy="343" r="3" fill="#d4a853" opacity="0.33999999999999997"/><circle cx="346" cy="606" r="2" fill="#d4a853" opacity="0.45999999999999996"/><circle cx="519" cy="869" r="3" fill="#d4a853" opacity="0.58"/><circle cx="692" cy="1132" r="2" fill="#d4a853" opacity="0.7"/><circle cx="865" cy="115" r="3" fill="#d4a853" opacity="0.22"/><circle cx="1038" cy="378" r="2" fill="#d4a853" opacity="0.33999999999999997"/><circle cx="131" cy="641" r="3" fill="#d4a853" opacity="0.45999999999999996"/><circle cx="304" cy="904" r="2" fill="#d4a853" opacity="0.58"/><circle cx="477" cy="1167" r="3" fill="#d4a853" opacity="0.7"/><circle cx="650" cy="150" r="2" fill="#d4a853" opacity="0.22"/><circle cx="823" cy="413" r="3" fill="#d4a853" opacity="0.33999999999999997"/><circle cx="996" cy="676" r="2" fill="#d4a853" opacity="0.45999999999999996"/><circle cx="89" cy="939" r="3" fill="#d4a853" opacity="0.58"/><circle cx="262" cy="1202" r="2" fill="#d4a853" opacity="0.7"/><circle cx="435" cy="185" r="3" fill="#d4a853" opacity="0.22"/><circle cx="608" cy="448" r="2" fill="#d4a853" opacity="0.33999999999999997"/><circle cx="781" cy="711" r="3" fill="#d4a853" opacity="0.45999999999999996"/><circle cx="954" cy="974" r="2" fill="#d4a853" opacity="0.58"/><circle cx="47" cy="1237" r="3" fill="#d4a853" opacity="0.7"/><circle cx="220" cy="220" r="2" fill="#d4a853" opacity="0.22"/><circle cx="393" cy="483" r="3" fill="#d4a853" opacity="0.33999999999999997"/><circle cx="566" cy="746" r="2" fill="#d4a853" opacity="0.45999999999999996"/><circle cx="739" cy="1009" r="3" fill="#d4a853" opacity="0.58"/>
+  <rect x="58" y="58" width="964" height="1324" rx="34" fill="#111113" stroke="rgba(255,255,255,0.08)"/>
+  
+    <circle cx="84" cy="82" r="30" fill="rgba(212,168,83,0.12)" stroke="#d4a853" stroke-opacity="0.7"/>
+    <text x="84" y="93" fill="#d4a853" font-size="24" font-weight="700" text-anchor="middle" font-family="Noto Serif SC, serif">梦</text>
+    <text x="130" y="92" fill="#e8bd55" font-size="30" font-weight="700" font-family="Noto Serif SC, serif">DreamLab</text>
+    <text x="930" y="91" fill="#71717a" font-size="24" text-anchor="end" font-family="Inter, sans-serif">D4.4</text>
+  
+  <text x="104" y="292" fill="#d4a853" font-size="54" font-weight="800" font-family="Inter, sans-serif">04</text>
+  <text x="104" y="430" fill="#f4f4f6" font-size="82" font-weight="800" text-anchor="start" font-family="Noto Serif SC, Songti SC, serif"><tspan x="104" dy="0">写完就停</tspan></text>
+  <rect x="104" y="690" width="872" height="2" fill="rgba(212,168,83,0.28)"/>
+  <text x="104" y="810" fill="#a1a1aa" font-size="54" font-weight="500" text-anchor="start" font-family="Noto Serif SC, Songti SC, serif"><tspan x="104" dy="0">不要把床变成深夜会议室。</tspan></text>
+  <rect x="104" y="1194" width="872" height="102" rx="20" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)"/>
+  <text x="540" y="1258" fill="#e8bd55" font-size="30" font-weight="700" text-anchor="middle" font-family="Noto Serif SC, serif">去 DreamLab 写一条反思日志</text>
+</svg>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import "./globals.css";
 import BottomNav from "@/components/BottomNav";
 import InteractiveGhibli from "@/components/InteractiveGhibli";
@@ -19,13 +20,14 @@ export const metadata: Metadata = {
 };
 
 const NAV_LINKS = [
-  { href: "/", label: "首页" },
-  { href: "/quest", label: "成长游戏" },
-  { href: "/courses", label: "课程" },
-  { href: "/assessments", label: "测评" },
-  { href: "/dream", label: "解梦" },
+  { href: "/", label: "理论体系" },
+  { href: "/courses", label: "核心课程" },
   { href: "/knowledge", label: "知识库" },
-  { href: "/membership", label: "会员方案" },
+  { href: "/assessments", label: "测评工具" },
+  { href: "/dream", label: "梦境工具" },
+  { href: "/quest", label: "成长仪表盘" },
+  { href: "/start", label: "快速开始" },
+  { href: "/membership", label: "开始学习" },
   { href: "/profile", label: "我的" },
 ];
 
@@ -46,12 +48,18 @@ const FOOTER_COLUMNS = {
     { label: "关系、学习与生活应用", href: "/courses" },
   ],
   项目: [
+    { label: "快速开始", href: "/start" },
     { label: "会员方案", href: "/membership" },
+    { label: "增长作战室", href: "/marketing" },
     { label: "心理测评", href: "/assessments" },
     { label: "个人中心", href: "/profile" },
     { label: "GitHub", href: "https://github.com/MoKangMedical/DreamLab" },
   ],
 };
+
+function isExternalLink(href: string) {
+  return href.startsWith('http');
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -64,29 +72,32 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
         <link rel="manifest" href="/DreamLab/manifest.json" />
-        <meta name="theme-color" content="#0a0a0c" />
+        <meta name="theme-color" content="#09090b" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
       </head>
 
-      <body className="overscroll-none" style={{ background: '#0a0a0c' }}>
+      <body className="overscroll-none" style={{ background: '#09090b' }}>
         {/* Atmosphere */}
         <InteractiveGhibli />
 
         {/* Desktop Navigation — Glass */}
         <nav className="hidden md:block glass-nav">
-          <div className="max-w-[1180px] mx-auto px-8 h-16 flex items-center justify-between">
+          <div className="max-w-[1200px] mx-auto px-8 h-16 flex items-center justify-between">
             <BrandMark compact />
             <div className="flex items-center gap-1">
-              {NAV_LINKS.map((item) => (
-                <a
+              {NAV_LINKS.slice(0, -1).map((item) => (
+                <Link
                   key={item.href}
                   href={item.href}
                   className="px-3.5 py-2 text-[13px] font-medium transition-colors duration-200 hover:text-[#f4f4f6]"
                   style={{ color: '#71717a', fontFamily: 'Inter, sans-serif' }}
                 >
                   {item.label}
-                </a>
+                </Link>
               ))}
+              <Link href="/profile" className="btn btn-primary ml-3" style={{ padding: '11px 22px', borderRadius: 8, fontSize: 13 }}>
+                我的学习
+              </Link>
             </div>
           </div>
         </nav>
@@ -100,7 +111,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
           {/* Content */}
           <div className="content-col">
-            <main style={{ minHeight: '100dvh', paddingTop: '64px', paddingBottom: '96px' }}>
+            <main style={{ minHeight: '100dvh', paddingTop: '92px', paddingBottom: '160px' }}>
               <SpiritedInteractions>
                 <div className="page-enter">{children}</div>
               </SpiritedInteractions>
@@ -119,8 +130,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 borderTop: '1px solid rgba(255,255,255,0.04)',
               }}
             >
-              <div className="max-w-[1180px] mx-auto px-8 py-28">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-20">
+              <div className="max-w-[1280px] mx-auto px-8 py-32">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-24">
                   {/* Brand */}
                   <div className="col-span-2 md:col-span-1">
                     <BrandMark className="mb-6" />
@@ -150,13 +161,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                       <ul className="space-y-3">
                         {links.map((link) => (
                           <li key={link.label}>
-                            <a
-                              href={link.href}
-                              className="text-sm transition-colors duration-200 hover:text-[#a1a1aa]"
-                              style={{ color: '#71717a' }}
-                            >
-                              {link.label}
-                            </a>
+                            {isExternalLink(link.href) ? (
+                              <a
+                                href={link.href}
+                                className="text-sm transition-colors duration-200 hover:text-[#a1a1aa]"
+                                style={{ color: '#71717a' }}
+                              >
+                                {link.label}
+                              </a>
+                            ) : (
+                              <Link
+                                href={link.href}
+                                className="text-sm transition-colors duration-200 hover:text-[#a1a1aa]"
+                                style={{ color: '#71717a' }}
+                              >
+                                {link.label}
+                              </Link>
+                            )}
                           </li>
                         ))}
                       </ul>
@@ -171,15 +192,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     © 2026 DreamLab by MoKangMedical. 内容仅用于心理学教育与自我观察，不能替代专业诊断或治疗。
                   </p>
                   <div className="flex gap-6">
-                    <a href="/" className="text-xs" style={{ color: '#52525b' }}>
+                    <Link href="/" className="text-xs" style={{ color: '#52525b' }}>
                       Privacy
-                    </a>
-                    <a href="/" className="text-xs" style={{ color: '#52525b' }}>
+                    </Link>
+                    <Link href="/" className="text-xs" style={{ color: '#52525b' }}>
                       Terms
-                    </a>
-                    <a href="/" className="text-xs" style={{ color: '#52525b' }}>
+                    </Link>
+                    <Link href="/" className="text-xs" style={{ color: '#52525b' }}>
                       Research Ethics
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

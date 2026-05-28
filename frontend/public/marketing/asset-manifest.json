@@ -1,0 +1,201 @@
+{
+  "generatedAt": "2026-05-28T14:48:43.185Z",
+  "xhs": [
+    {
+      "id": "d1-dream-chase",
+      "day": "D1",
+      "title": "总是梦见被追赶，是不是潜意识在提醒你？",
+      "cover": {
+        "svg": "/marketing/xhs/d1-dream-chase-cover.svg",
+        "png": "/marketing/xhs/d1-dream-chase-cover.png"
+      },
+      "cards": [
+        {
+          "svg": "/marketing/xhs/d1-dream-chase-card1.svg",
+          "png": "/marketing/xhs/d1-dream-chase-card1.png"
+        },
+        {
+          "svg": "/marketing/xhs/d1-dream-chase-card2.svg",
+          "png": "/marketing/xhs/d1-dream-chase-card2.png"
+        },
+        {
+          "svg": "/marketing/xhs/d1-dream-chase-card3.svg",
+          "png": "/marketing/xhs/d1-dream-chase-card3.png"
+        },
+        {
+          "svg": "/marketing/xhs/d1-dream-chase-card4.svg",
+          "png": "/marketing/xhs/d1-dream-chase-card4.png"
+        },
+        {
+          "svg": "/marketing/xhs/d1-dream-chase-card5.svg",
+          "png": "/marketing/xhs/d1-dream-chase-card5.png"
+        }
+      ]
+    },
+    {
+      "id": "d2-anxiety-check",
+      "day": "D2",
+      "title": "焦虑不是你太脆弱，可能是系统已经过载",
+      "cover": {
+        "svg": "/marketing/xhs/d2-anxiety-check-cover.svg",
+        "png": "/marketing/xhs/d2-anxiety-check-cover.png"
+      },
+      "cards": [
+        {
+          "svg": "/marketing/xhs/d2-anxiety-check-card1.svg",
+          "png": "/marketing/xhs/d2-anxiety-check-card1.png"
+        },
+        {
+          "svg": "/marketing/xhs/d2-anxiety-check-card2.svg",
+          "png": "/marketing/xhs/d2-anxiety-check-card2.png"
+        },
+        {
+          "svg": "/marketing/xhs/d2-anxiety-check-card3.svg",
+          "png": "/marketing/xhs/d2-anxiety-check-card3.png"
+        },
+        {
+          "svg": "/marketing/xhs/d2-anxiety-check-card4.svg",
+          "png": "/marketing/xhs/d2-anxiety-check-card4.png"
+        },
+        {
+          "svg": "/marketing/xhs/d2-anxiety-check-card5.svg",
+          "png": "/marketing/xhs/d2-anxiety-check-card5.png"
+        }
+      ]
+    },
+    {
+      "id": "d3-course-route",
+      "day": "D3",
+      "title": "心理学入门别硬啃教材，先从一个真实问题开始",
+      "cover": {
+        "svg": "/marketing/xhs/d3-course-route-cover.svg",
+        "png": "/marketing/xhs/d3-course-route-cover.png"
+      },
+      "cards": [
+        {
+          "svg": "/marketing/xhs/d3-course-route-card1.svg",
+          "png": "/marketing/xhs/d3-course-route-card1.png"
+        },
+        {
+          "svg": "/marketing/xhs/d3-course-route-card2.svg",
+          "png": "/marketing/xhs/d3-course-route-card2.png"
+        },
+        {
+          "svg": "/marketing/xhs/d3-course-route-card3.svg",
+          "png": "/marketing/xhs/d3-course-route-card3.png"
+        },
+        {
+          "svg": "/marketing/xhs/d3-course-route-card4.svg",
+          "png": "/marketing/xhs/d3-course-route-card4.png"
+        },
+        {
+          "svg": "/marketing/xhs/d3-course-route-card5.svg",
+          "png": "/marketing/xhs/d3-course-route-card5.png"
+        }
+      ]
+    },
+    {
+      "id": "d4-sleep-shutdown",
+      "day": "D4",
+      "title": "睡前反复想事的人，试试这句关机句式",
+      "cover": {
+        "svg": "/marketing/xhs/d4-sleep-shutdown-cover.svg",
+        "png": "/marketing/xhs/d4-sleep-shutdown-cover.png"
+      },
+      "cards": [
+        {
+          "svg": "/marketing/xhs/d4-sleep-shutdown-card1.svg",
+          "png": "/marketing/xhs/d4-sleep-shutdown-card1.png"
+        },
+        {
+          "svg": "/marketing/xhs/d4-sleep-shutdown-card2.svg",
+          "png": "/marketing/xhs/d4-sleep-shutdown-card2.png"
+        },
+        {
+          "svg": "/marketing/xhs/d4-sleep-shutdown-card3.svg",
+          "png": "/marketing/xhs/d4-sleep-shutdown-card3.png"
+        },
+        {
+          "svg": "/marketing/xhs/d4-sleep-shutdown-card4.svg",
+          "png": "/marketing/xhs/d4-sleep-shutdown-card4.png"
+        },
+        {
+          "svg": "/marketing/xhs/d4-sleep-shutdown-card5.svg",
+          "png": "/marketing/xhs/d4-sleep-shutdown-card5.png"
+        }
+      ]
+    }
+  ],
+  "douyin": [
+    {
+      "id": "dream-chase",
+      "title": "梦见被追赶",
+      "storyboard": {
+        "svg": "/marketing/douyin/dream-chase-storyboard.svg",
+        "png": "/marketing/douyin/dream-chase-storyboard.png"
+      }
+    },
+    {
+      "id": "anxiety-check",
+      "title": "焦虑自查",
+      "storyboard": {
+        "svg": "/marketing/douyin/anxiety-check-storyboard.svg",
+        "png": "/marketing/douyin/anxiety-check-storyboard.png"
+      }
+    },
+    {
+      "id": "course-route",
+      "title": "100 门课入口",
+      "storyboard": {
+        "svg": "/marketing/douyin/course-route-storyboard.svg",
+        "png": "/marketing/douyin/course-route-storyboard.png"
+      }
+    },
+    {
+      "id": "ai-reflect",
+      "title": "AI 陪伴边界",
+      "storyboard": {
+        "svg": "/marketing/douyin/ai-reflect-storyboard.svg",
+        "png": "/marketing/douyin/ai-reflect-storyboard.png"
+      }
+    }
+  ],
+  "digitalHuman": [
+    {
+      "id": "ep01-opening",
+      "episode": "EP01",
+      "title": "DreamLab 心理研究员开场",
+      "storyboard": {
+        "svg": "/marketing/digital-human/ep01-opening-storyboard.svg",
+        "png": "/marketing/digital-human/ep01-opening-storyboard.png"
+      }
+    },
+    {
+      "id": "ep02-freud-dream",
+      "episode": "EP02",
+      "title": "弗洛伊德如何看梦",
+      "storyboard": {
+        "svg": "/marketing/digital-human/ep02-freud-dream-storyboard.svg",
+        "png": "/marketing/digital-human/ep02-freud-dream-storyboard.png"
+      }
+    },
+    {
+      "id": "ep03-jung-shadow",
+      "episode": "EP03",
+      "title": "荣格说的阴影不是缺点",
+      "storyboard": {
+        "svg": "/marketing/digital-human/ep03-jung-shadow-storyboard.svg",
+        "png": "/marketing/digital-human/ep03-jung-shadow-storyboard.png"
+      }
+    },
+    {
+      "id": "ep04-seven-day-quest",
+      "episode": "EP04",
+      "title": "7 天成长任务",
+      "storyboard": {
+        "svg": "/marketing/digital-human/ep04-seven-day-quest-storyboard.svg",
+        "png": "/marketing/digital-human/ep04-seven-day-quest-storyboard.png"
+      }
+    }
+  ]
+}

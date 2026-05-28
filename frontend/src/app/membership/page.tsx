@@ -30,6 +30,9 @@ export default function MembershipPage() {
               <Link href="/profile" className="btn btn-ghost" style={{ padding: '17px 34px' }}>
                 查看个人中心
               </Link>
+              <Link href="/marketing" className="btn btn-ghost" style={{ padding: '17px 34px' }}>
+                增长作战室
+              </Link>
             </div>
           </div>
         </div>

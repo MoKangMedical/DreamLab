@@ -15,7 +15,7 @@ function formatNumber(value: number, digits = 3) {
 
 export default function PageAtmosphere() {
   return (
-    <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 0 }}>
+    <div className="fixed inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 0 }}>
       {/* 灯笼柔光 — 3个大圆，模拟油屋灯光 */}
       {[
         { color: 'rgba(212,168,83,0.03)', top: '8%', left: '15%', size: 350 },

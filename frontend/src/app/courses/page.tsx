@@ -1,8 +1,7 @@
 import Link from 'next/link';
 import PageAtmosphere from '@/components/PageAtmosphere';
 import { getCourses } from '@/lib/api';
-import { DREAMLAB_CATEGORIES, DREAMLAB_PHASES } from '@/lib/dreamlab-courses';
-import BathhouseBrandScene from '@/components/BathhouseBrandScene';
+import { DREAMLAB_CATEGORIES, DREAMLAB_PHASES, type DreamLabCourse } from '@/lib/dreamlab-courses';
 
 const DIFFICULTY_MAP: Record<string, { label: string; color: string }> = {
   beginner: { label: '入门', color: '#a1a1aa' },
@@ -13,37 +12,29 @@ const DIFFICULTY_MAP: Record<string, { label: string; color: string }> = {
 };
 
 export default async function CoursesPage() {
-  const courses = await getCourses();
-  const totalChapters = courses.reduce((sum: number, course: any) => sum + (course.chapter_count || course.chapters?.length || 0), 0);
-  const totalWords = courses.reduce((sum: number, course: any) => (
-    sum + (course.chapters || []).reduce((chapterSum: number, chapter: any) => chapterSum + (chapter.body?.length || 0), 0)
+  const courses = (await getCourses()) as DreamLabCourse[];
+  const totalChapters = courses.reduce((sum, course) => sum + (course.chapter_count || course.chapters?.length || 0), 0);
+  const totalWords = courses.reduce((sum, course) => (
+    sum + (course.chapters || []).reduce((chapterSum, chapter) => chapterSum + (chapter.body?.length || 0), 0)
   ), 0);
 
   return (
-    <div style={{ background: '#0a0a0c', minHeight: '100vh' }}>
+    <div className="academy-shell">
       <PageAtmosphere />
       <div className="relative z-10">
-        <section className="px-5 md:px-8 pt-20 md:pt-32 pb-20 md:pb-24">
-          <div className="max-w-[1180px] mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-[0.86fr_0.72fr] gap-12 xl:gap-18 items-center">
-              <div className="max-w-3xl">
-                <h1
-                  className="font-bold mb-7"
-                  style={{ fontFamily: "'Noto Serif SC', serif", fontSize: 'var(--hero-lg)', lineHeight: 1.08, color: '#f4f4f6', letterSpacing: 0 }}
-                >
-                  DreamLab 课程体系
-                </h1>
-                <p className="text-base md:text-lg leading-9 max-w-3xl" style={{ color: '#a1a1aa' }}>
-                  100 门课程、7 个学院，从梦境解析到 AI 心理学，从临床工具到生活应用，
-                  每门课围绕案例、理论和反思展开，形成完整的 DreamLab 心理学学习路径。
-                </p>
-              </div>
-              <div className="hidden lg:block">
-                <BathhouseBrandScene />
-              </div>
-            </div>
+        <section className="academy-hero" style={{ minHeight: 820 }}>
+          <div className="academy-container relative z-10">
+            <div className="academy-badge">DreamLab 核心课程 · 7 大学院路径</div>
+            <h1 className="academy-hero-title">
+              从梦境到行动，<br className="md:hidden" />
+              <span className="gold">一百节课</span><br className="md:hidden" />
+              建立心理学坐标
+            </h1>
+            <p className="academy-hero-copy">
+              按照学院与阶段组织课程，每门课保留案例、理论、章节、反思产出和音频入口，形成可持续学习的心理成长路线。
+            </p>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mt-20">
               {[
                 { value: String(courses.length), label: '系统课程' },
                 { value: String(DREAMLAB_PHASES.length), label: '学院分类' },
@@ -51,7 +42,7 @@ export default async function CoursesPage() {
                 { value: `${Math.round(totalWords / 10000)}万`, label: '正文规模' },
               ].map((item) => (
                 <div key={item.label} className="premium-panel p-6">
-                  <div className="text-3xl font-bold" style={{ fontFamily: "'Noto Serif SC', serif", color: '#d4a853' }}>{item.value}</div>
+                  <div className="text-3xl font-bold leading-none whitespace-nowrap" style={{ fontFamily: "'Noto Serif SC', serif", color: '#e2b64f' }}>{item.value}</div>
                   <div className="text-xs mt-1" style={{ color: '#71717a' }}>{item.label}</div>
                 </div>
               ))}
@@ -59,21 +50,22 @@ export default async function CoursesPage() {
           </div>
         </section>
 
-        <section className="px-5 md:px-8 pb-24">
-          <div className="max-w-[1180px] mx-auto">
-            <div className="flex items-center gap-4 mb-10">
-              <div style={{ width: 34, height: 1, background: 'rgba(212,168,83,0.22)' }} />
-              <span className="text-xs tracking-[0.18em] uppercase" style={{ color: 'rgba(212,168,83,0.62)' }}>
-                课程地图
-              </span>
+        <section className="academy-section academy-section-muted">
+          <div className="academy-container-wide">
+            <div className="academy-section-header">
+              <div className="academy-kicker">课程地图</div>
+              <h2 className="academy-section-title">先看学院结构，再进入单课学习</h2>
+              <p className="academy-section-copy">
+                课程不再用普通卡片堆叠，而是采用阶段化目录：先理解所在学院，再逐课推进。
+              </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 xl:gap-10">
               {DREAMLAB_PHASES.map((phase) => {
-                const phaseCourses = courses.filter((course: any) => course.phaseKey === phase.key);
+                const phaseCourses = courses.filter((course) => course.phaseKey === phase.key);
                 return (
-                  <div key={phase.key} className="premium-panel p-6 md:p-7">
-                    <div className="flex items-start gap-5">
+                  <div key={phase.key} className="premium-panel p-8 md:p-10">
+                    <div className="flex items-start gap-7">
                       <div
                         className="w-12 h-12 flex items-center justify-center text-sm font-bold shrink-0"
                         style={{ color: '#0a0a0c', background: phase.color, borderRadius: 8 }}
@@ -81,9 +73,9 @@ export default async function CoursesPage() {
                         {phase.icon}
                       </div>
                       <div>
-                        <h2 className="text-xl font-bold mb-2" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>{phase.title}</h2>
-                        <p className="text-sm leading-7" style={{ color: '#71717a' }}>{phase.subtitle}</p>
-                        <div className="mt-4 text-xs" style={{ color: phase.color }}>{phaseCourses.length} 门课程</div>
+                        <h2 className="text-xl font-bold mb-3" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6' }}>{phase.title}</h2>
+                        <p className="text-sm leading-8" style={{ color: '#71717a' }}>{phase.subtitle}</p>
+                        <div className="mt-5 text-xs" style={{ color: phase.color }}>{phaseCourses.length} 门课程</div>
                       </div>
                     </div>
                   </div>
@@ -93,16 +85,16 @@ export default async function CoursesPage() {
           </div>
         </section>
 
-        <section className="px-5 md:px-8 pb-32 md:pb-40">
-          <div className="max-w-[1180px] mx-auto">
+        <section className="academy-section">
+          <div className="academy-container">
             {DREAMLAB_PHASES.map((phase) => {
-              const phaseCourses = courses.filter((course: any) => course.phaseKey === phase.key);
+              const phaseCourses = courses.filter((course) => course.phaseKey === phase.key);
               return (
-                <div key={phase.key} className="mb-20 md:mb-24">
-                  <div className="flex items-end justify-between gap-6 mb-7">
+                <div key={phase.key} className="mb-28 md:mb-36">
+                  <div className="flex items-end justify-between gap-10 mb-10">
                     <div>
-                      <div className="text-xs mb-3" style={{ color: phase.color }}>Phase {phase.index}</div>
-                      <h2 className="text-3xl md:text-4xl font-bold" style={{ fontFamily: "'Noto Serif SC', serif", color: '#f4f4f6', lineHeight: 1.18 }}>
+                      <div className="academy-kicker" style={{ color: phase.color }}>Phase {phase.index}</div>
+                      <h2 className="text-3xl md:text-4xl font-bold" style={{ fontFamily: "'Noto Serif SC', serif", color: '#fafafa', lineHeight: 1.18 }}>
                         {phase.title}
                       </h2>
                     </div>
@@ -111,37 +103,33 @@ export default async function CoursesPage() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                    {phaseCourses.map((course: any) => {
+                  <div className="academy-course-list">
+                    {phaseCourses.map((course) => {
                       const category = DREAMLAB_CATEGORIES[course.category] || { label: course.category, icon: '课', color: phase.color };
                       const difficulty = DIFFICULTY_MAP[course.difficulty] || DIFFICULTY_MAP.beginner;
                       return (
                         <Link
                           key={course.id}
                           href={`/courses/${course.id}`}
-                          className="premium-panel group block p-6 md:p-7 transition-all duration-300 hover:translate-y-[-2px]"
+                          className="academy-course-card"
                         >
-                          <div className="flex items-start gap-4 mb-5">
-                            <div
-                              className="w-11 h-11 flex items-center justify-center text-sm font-bold shrink-0"
-                              style={{ border: `1px solid ${category.color}55`, color: category.color, borderRadius: 8, background: `${category.color}12` }}
-                            >
+                          <div className="academy-course-row">
+                            <div className="academy-course-index">
                               {course.id}
                             </div>
-                            <div className="min-w-0">
-                              <h3 className="text-lg font-bold leading-7 group-hover:text-[#f4f4f6]" style={{ fontFamily: "'Noto Serif SC', serif", color: '#d7d7dc' }}>
+                            <div>
+                              <h3 className="academy-course-title">
                                 {course.title}
                               </h3>
-                              <div className="flex flex-wrap gap-2 mt-3">
-                                <span className="text-[11px] px-2 py-0.5" style={{ color: category.color, border: `1px solid ${category.color}33`, borderRadius: 999 }}>{category.label}</span>
-                                <span className="text-[11px] px-2 py-0.5" style={{ color: difficulty.color, border: '1px solid rgba(255,255,255,0.08)', borderRadius: 999 }}>{difficulty.label}</span>
-                                <span className="text-[11px] px-2 py-0.5" style={{ color: '#71717a', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 999 }}>{course.chapter_count} 章</span>
+                              <p className="academy-course-desc">{course.description}</p>
+                              <div className="academy-course-tags">
+                                <span style={{ color: category.color }}>{category.label}</span>
+                                <span>{difficulty.label}</span>
+                                <span>⏱ {course.minutes || Math.max(20, Math.round((course.chapter_count || 4) * 9))}分钟</span>
+                                <span>含 {course.chapter_count} 章练习</span>
                               </div>
                             </div>
-                          </div>
-                          <p className="text-sm leading-7 mb-5" style={{ color: '#85858e' }}>{course.description}</p>
-                          <div className="text-xs leading-6" style={{ color: '#d4a853' }}>
-                            产出：{course.outcome}
+                            <div className="academy-course-arrow">›</div>
                           </div>
                         </Link>
                       );

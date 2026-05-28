@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useState } from 'react'
-import { ScrollView, Text, View } from '@tarojs/components'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { ScrollView, Slider, Text, View } from '@tarojs/components'
 import Taro, { useRouter } from '@tarojs/taro'
+import { COURSE_AUDIO_BASE_URL } from '../../config/env'
 import { DREAMLAB_CATEGORIES, DreamLabCourse, loadDreamLabCourseDetail } from '../../data/mock-courses'
 import './detail.scss'
 
@@ -22,6 +23,13 @@ function chapterContent(chapter: any, index: number) {
   return `第${index + 1}章内容将在课程资料同步后展示。你可以先阅读课程简介，建立本主题的学习框架。`
 }
 
+function formatTime(value: number) {
+  const total = Math.max(0, Math.floor(value || 0))
+  const minutes = Math.floor(total / 60)
+  const seconds = String(total % 60).padStart(2, '0')
+  return `${minutes}:${seconds}`
+}
+
 export default function CourseDetailPage() {
   const router = useRouter()
   const courseId = Number(router.params.id || 1)
@@ -30,6 +38,77 @@ export default function CourseDetailPage() {
   const [completed, setCompleted] = useState<number[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const audioRef = useRef<ReturnType<typeof Taro.createInnerAudioContext> | null>(null)
+  const [audioState, setAudioState] = useState({
+    chapterIndex: -1,
+    playing: false,
+    loading: false,
+    current: 0,
+    duration: 0,
+    error: '',
+  })
+
+  const destroyAudio = (resetState = true) => {
+    if (audioRef.current) {
+      audioRef.current.stop()
+      audioRef.current.destroy()
+      audioRef.current = null
+    }
+    if (resetState) {
+      setAudioState({ chapterIndex: -1, playing: false, loading: false, current: 0, duration: 0, error: '' })
+    }
+  }
+
+  const playChapterAudio = (index: number, src: string) => {
+    if (audioRef.current && audioState.chapterIndex === index) {
+      if (audioState.playing) {
+        audioRef.current.pause()
+        setAudioState((prev) => ({ ...prev, playing: false }))
+      } else {
+        audioRef.current.play()
+        setAudioState((prev) => ({ ...prev, loading: true, error: '' }))
+      }
+      return
+    }
+
+    destroyAudio()
+    const audio = Taro.createInnerAudioContext()
+    audio.src = src
+    audio.autoplay = false
+    audioRef.current = audio
+    setAudioState({ chapterIndex: index, playing: false, loading: true, current: 0, duration: 0, error: '' })
+
+    audio.onPlay(() => {
+      setAudioState((prev) => ({ ...prev, playing: true, loading: false, error: '' }))
+    })
+    audio.onPause(() => {
+      setAudioState((prev) => ({ ...prev, playing: false, loading: false }))
+    })
+    audio.onEnded(() => {
+      setAudioState((prev) => ({ ...prev, playing: false, loading: false, current: 0 }))
+    })
+    audio.onTimeUpdate(() => {
+      setAudioState((prev) => ({
+        ...prev,
+        current: audio.currentTime || 0,
+        duration: audio.duration || prev.duration,
+      }))
+    })
+    audio.onCanplay(() => {
+      setAudioState((prev) => ({ ...prev, loading: false, duration: audio.duration || prev.duration }))
+    })
+    audio.onError(() => {
+      setAudioState((prev) => ({ ...prev, playing: false, loading: false, error: '音频加载失败，请稍后重试' }))
+      Taro.showToast({ title: '音频加载失败', icon: 'none' })
+    })
+    audio.play()
+  }
+
+  const seekAudio = (value: number) => {
+    if (!audioRef.current) return
+    audioRef.current.seek(value)
+    setAudioState((prev) => ({ ...prev, current: value }))
+  }
 
   const loadCourse = async () => {
     setLoading(true)
@@ -57,7 +136,12 @@ export default function CourseDetailPage() {
 
   useEffect(() => {
     loadCourse()
+    destroyAudio()
   }, [courseId])
+
+  useEffect(() => {
+    return () => destroyAudio(false)
+  }, [])
 
   const fallbackCategory = { label: '心理课程', icon: '课', color: '#d4a853' }
   const category = course ? (DREAMLAB_CATEGORIES[course.category] || { label: course.category, icon: '课', color: '#6b5b8a' }) : fallbackCategory
@@ -140,6 +224,10 @@ export default function CourseDetailPage() {
             const isActive = activeChapter === index
             const isDone = completed.includes(index)
             const content = chapterContent(chapter, index)
+            const chapterOrder = chapter.order ?? index + 1
+            const hasAudio = courseId > 0 && chapterOrder > 0
+            const audioUrl = `${COURSE_AUDIO_BASE_URL}/course${courseId}_ch${chapterOrder}.mp3`
+            const isAudioActive = audioState.chapterIndex === index
 
             return (
               <View key={`${chapter.title}-${index}`} className={`chapter-card ${isActive ? 'chapter-active' : ''}`}>
@@ -149,13 +237,48 @@ export default function CourseDetailPage() {
                   </View>
                   <View className='chapter-title-block'>
                     <Text className='chapter-title'>{chapter.title}</Text>
-                    <Text className='chapter-meta'>{content.length}字</Text>
+                    <Text className='chapter-meta'>{content.length}字{hasAudio ? ' · 音频' : ''}</Text>
                   </View>
                   <Text className='chapter-toggle'>{isActive ? '收起' : '展开'}</Text>
                 </View>
 
                 {isActive && (
                   <View className='chapter-body'>
+                    {hasAudio && (
+                      <View className='audio-card'>
+                        <View className='audio-top'>
+                          <View
+                            className={`audio-play ${isAudioActive && audioState.playing ? 'audio-play-active' : ''}`}
+                            onClick={() => playChapterAudio(index, audioUrl)}
+                          >
+                            <Text>{isAudioActive && audioState.playing ? '暂停' : '播放'}</Text>
+                          </View>
+                          <View className='audio-info'>
+                            <Text className='audio-title'>章节口播导入</Text>
+                            <Text className='audio-subtitle'>
+                              {isAudioActive && audioState.loading ? '正在加载音频' : '云扬男声 · 慢速低音调 · 标准化音频'}
+                            </Text>
+                          </View>
+                        </View>
+                        <View className='audio-progress'>
+                          <Text className='audio-time'>{formatTime(isAudioActive ? audioState.current : 0)}</Text>
+                          <Slider
+                            className='audio-slider'
+                            min={0}
+                            max={Math.max(1, isAudioActive ? audioState.duration || 1 : 1)}
+                            value={isAudioActive ? audioState.current : 0}
+                            activeColor='#d4a853'
+                            backgroundColor='rgba(255,255,255,0.1)'
+                            blockColor='#d4a853'
+                            blockSize={14}
+                            disabled={!isAudioActive}
+                            onChange={(event: { detail: { value: number } }) => seekAudio(event.detail.value)}
+                          />
+                          <Text className='audio-time'>{formatTime(isAudioActive ? audioState.duration : 0)}</Text>
+                        </View>
+                        {isAudioActive && audioState.error && <Text className='audio-error'>{audioState.error}</Text>}
+                      </View>
+                    )}
                     <Text className='chapter-content'>{content}</Text>
                     <View
                       className={`complete-btn ${isDone ? 'complete-active' : ''}`}
